@@ -1,0 +1,72 @@
+@import "../../styles/index";
+
+.wp-block-topbook-block-author {
+	display: flex;
+	align-items: center;
+	padding: 28px;
+	margin-bottom: 20px;
+	background: var(--secondary-block-color);
+
+	.avatar {
+		position: relative;
+
+		&::before,
+		&::after {
+			position: absolute;
+			display: block;
+			border: 5px solid var(--white-block-color);
+			border-radius: 50%;
+			content: "";
+		}
+
+		&::before {
+			top: -5px;
+			left: -5px;
+			width: 70px;
+			height: 70px;
+			opacity: 0.3;
+		}
+
+		&::after {
+			top: -10px;
+			left: -10px;
+			width: 80px;
+			height: 80px;
+			opacity: 0.2;
+		}
+
+		img {
+			width: 60px;
+			max-width: none;
+			height: 60px;
+			border: 5px solid rgb(255 255 255 / 50%);
+			border-radius: 50% !important;
+			background: var(--border-block-color);
+
+			// @use "sass:color";
+			// border: 5px solid color.adjust(var(--white-block-color), $alpha: 0.5);
+		}
+	}
+
+	.description {
+		padding: 0;
+		margin: 0;
+		margin-left: 24px;
+		color: var(--white-block-color);
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+	}
+}
+
+@media screen and (width <= 767px) {
+	.wp-block-topbook-block-author {
+		align-items: flex-start;
+		padding: 16px;
+	}
+
+	.description {
+		margin-left: 20px;
+		font-size: 14px;
+	}
+}

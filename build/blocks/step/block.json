@@ -1,0 +1,19 @@
+{
+  "apiVersion": 2,
+  "name": "topbook-block/step",
+  "version": "0.1.0",
+  "title": "Single Step",
+  "category": "widgets",
+  "description": "Child for Steps Block.",
+  "parent": [
+    "topbook-block/steps"
+  ],
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "textdomain": "steps-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

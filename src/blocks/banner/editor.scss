@@ -1,0 +1,15 @@
+.link-control {
+	width: 300px;
+	box-sizing: border-box;
+	padding: 10px;
+}
+
+.wp-block-topbook-block-banner {
+	.blocks {
+		.block-editor-block-list__layout {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+		}
+	}
+}
