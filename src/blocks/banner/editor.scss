@@ -12,4 +12,18 @@
 			gap: 8px;
 		}
 	}
+
+	.payment {
+		position: relative;
+
+		.edit {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+		}
+
+		.photo img {
+			object-fit: contain;
+		}
+	}
 }

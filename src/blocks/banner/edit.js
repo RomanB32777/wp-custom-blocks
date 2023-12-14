@@ -12,25 +12,23 @@ import { ToolbarGroup, ToolbarButton, Popover } from "@wordpress/components";
 const { Fragment, useState } = wp.element;
 const { __ } = wp.i18n;
 
-import LinkControl from "./components/link-control";
+import { LinkControl, Payment } from "./components";
 
 import appStoreImage from "./assets/appStore.png";
 import googlePlayImage from "./assets/googlePlay.png";
 
 import "./editor.scss";
 
-const allowedBlocks = ["topbook-block/payment"];
-
 export default function Edit({ attributes, setAttributes }) {
 	const {
 		logo,
-		description,
 		bonusLabel,
 		domain,
 		domainLink,
 		bonusLink,
 		appleLink,
 		googleLink,
+		...payments
 	} = attributes;
 
 	const [linkPanel, showLinkPanel] = useState(false);
@@ -137,6 +135,7 @@ export default function Edit({ attributes, setAttributes }) {
 						</span>
 					</div>
 				</div>
+
 				<div className="bonus">
 					<RichText
 						tagName="p"
@@ -145,13 +144,13 @@ export default function Edit({ attributes, setAttributes }) {
 						placeholder={__("Bonus button text..", "top-blocks")}
 					/>
 				</div>
-				<RichText
-					tagName="p"
-					className="description"
-					value={description}
-					onChange={(v) => setAttributes({ description: v })}
-					placeholder={__("Description..", "top-blocks")}
-				/>
+
+				<div className="content">
+					<InnerBlocks
+						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
+					/>
+				</div>
+
 				<div className="additions">
 					<div className="domain">
 						<span>公式ウェブサイト: </span>
@@ -163,12 +162,16 @@ export default function Edit({ attributes, setAttributes }) {
 						/>
 					</div>
 				</div>
+
 				<div className="blocks">
-					<InnerBlocks
-						allowedBlocks={allowedBlocks}
-						template={[allowedBlocks]}
-						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-					/>
+					{Object.entries(payments).map(([name, { photo }], index) => (
+						<Payment
+							key={`${name}-${index}`}
+							name={name}
+							photo={photo}
+							setAttributes={setAttributes}
+						/>
+					))}
 				</div>
 			</div>
 		</Fragment>

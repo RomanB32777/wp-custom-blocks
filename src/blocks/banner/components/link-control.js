@@ -3,7 +3,7 @@ import { __ } from "@wordpress/i18n";
 
 const { Fragment } = wp.element;
 
-const LinkControl = ({ label, link, linkName, setAttributes }) => {
+export const LinkControl = ({ label, link, linkName, setAttributes }) => {
 	const handleChangeLink = (v) => {
 		setAttributes({
 			[linkName]: { ...link, url: v },
@@ -31,5 +31,3 @@ const LinkControl = ({ label, link, linkName, setAttributes }) => {
 		</Fragment>
 	);
 };
-
-export default LinkControl;

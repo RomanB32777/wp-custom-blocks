@@ -17,7 +17,6 @@ function blocks_init() {
 		'step',
 		'steps',
 		'banner',
-		'payment',
 		'author',
 	);
 

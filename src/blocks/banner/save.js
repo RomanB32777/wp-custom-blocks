@@ -12,13 +12,13 @@ import googlePlayImage from "./assets/googlePlay.png";
 export default function save({ attributes }) {
 	const {
 		logo,
-		description,
 		domain,
 		bonusLabel,
 		bonusLink,
 		googleLink,
 		appleLink,
 		domainLink,
+		...payments
 	} = attributes;
 
 	return (
@@ -96,7 +96,7 @@ export default function save({ attributes }) {
 				</a>
 			)}
 
-			{description && <p className="description">{description}</p>}
+			<div className="content">{<InnerBlocks.Content />}</div>
 
 			<div className="additions">
 				{domain && domainLink && (
@@ -119,7 +119,18 @@ export default function save({ attributes }) {
 					</div>
 				)}
 			</div>
-			<div className="blocks">{<InnerBlocks.Content />}</div>
+			<div className="blocks">
+				{payments &&
+					Object.entries(payments)
+						.filter(([, { photo }]) => Boolean(photo))
+						.map(([name, { photo }], index) => (
+							<div className="payment" key={`${name}-${index}`}>
+								<div className="photo">
+									<img src={photo?.url} alt={photo?.alt || name} />
+								</div>
+							</div>
+						))}
+			</div>
 		</div>
 	);
 }
