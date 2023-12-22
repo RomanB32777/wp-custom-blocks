@@ -12,17 +12,29 @@ import googlePlayImage from "./assets/googlePlay.png";
 export default function save({ attributes }) {
 	const {
 		logo,
+		borderColor,
+		backgroundColor,
 		domain,
 		bonusLabel,
 		bonusLink,
+		bonusLabelColor,
+		bonusBackgroundColor,
 		googleLink,
 		appleLink,
 		domainLink,
+		domainLinkColor,
+		paymentBackgroundColor,
 		...payments
 	} = attributes;
 
 	return (
-		<div {...useBlockProps.save()}>
+		<div
+			{...useBlockProps.save()}
+			style={{
+				borderColor,
+				backgroundColor,
+			}}
+		>
 			<div className="banner-header">
 				{logo && (
 					<div className="logo">
@@ -90,8 +102,19 @@ export default function save({ attributes }) {
 							: "noopener"
 					}
 				>
-					<div className="bonus">
-						<RichText.Content tagName="p" value={bonusLabel} />
+					<div
+						className="bonus"
+						style={{
+							backgroundColor: bonusBackgroundColor,
+						}}
+					>
+						<RichText.Content
+							tagName="p"
+							value={bonusLabel}
+							style={{
+								color: bonusLabelColor,
+							}}
+						/>
 					</div>
 				</a>
 			)}
@@ -114,7 +137,11 @@ export default function save({ attributes }) {
 									: "noopener"
 							}
 						>
-							<RichText.Content tagName="span" value={domain} />
+							<RichText.Content
+								tagName="span"
+								value={domain}
+								style={{ color: domainLinkColor }}
+							/>
 						</a>
 					</div>
 				)}
@@ -124,7 +151,13 @@ export default function save({ attributes }) {
 					Object.entries(payments)
 						.filter(([, { photo }]) => Boolean(photo))
 						.map(([name, { photo }], index) => (
-							<div className="payment" key={`${name}-${index}`}>
+							<div
+								className="payment"
+								key={`${name}-${index}`}
+								style={{
+									backgroundColor: paymentBackgroundColor,
+								}}
+							>
 								<div className="photo">
 									<img src={photo?.url} alt={photo?.alt || name} />
 								</div>

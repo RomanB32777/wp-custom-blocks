@@ -7,13 +7,13 @@
 import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 
 export default function save({ attributes }) {
-	const { title } = attributes;
+	const { title, titleColor } = attributes;
 
 	return (
 		<div {...useBlockProps.save()}>
 			{title && (
 				<div className="space-block-title title relative">
-					<span>{title}</span>
+					<span style={{ color: titleColor }}>{title}</span>
 				</div>
 			)}
 			<div className="blocks">{<InnerBlocks.Content />}</div>

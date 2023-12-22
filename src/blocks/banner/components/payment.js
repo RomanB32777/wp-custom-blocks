@@ -4,14 +4,14 @@ import {
 	MediaUploadCheck,
 } from "@wordpress/block-editor";
 import { ToolbarButton } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
 
 const { Fragment } = wp.element;
-const { __ } = wp.i18n;
 
-export const Payment = ({ name, photo, setAttributes }) => {
+export const Payment = ({ name, photo, backgroundColor, setAttributes }) => {
 	return (
 		<Fragment>
-			<div className="payment">
+			<div className="payment" style={{ backgroundColor }}>
 				<div className="photo">
 					{photo ? (
 						<MediaUploadCheck>
@@ -29,7 +29,7 @@ export const Payment = ({ name, photo, setAttributes }) => {
 											<img src={photo.url} alt={photo.alt || name} />
 											<ToolbarButton
 												containerClassName="edit"
-												label={__("Edit Logo", "top-blocks")}
+												label={__("Edit Logo", "wp-custom-blocks")}
 												onClick={open}
 												icon="edit"
 											/>
@@ -48,8 +48,8 @@ export const Payment = ({ name, photo, setAttributes }) => {
 							allowedTypes={["image"]}
 							multiple={false}
 							labels={{
-								title: __("Logo", "top-blocks"),
-								instructions: __("Upload logo", "top-blocks"),
+								title: __("Logo", "wp-custom-blocks"),
+								instructions: __("Upload logo", "wp-custom-blocks"),
 							}}
 							icon="format-image"
 						/>

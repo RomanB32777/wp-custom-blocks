@@ -1,8 +1,6 @@
-@import "../../styles/index";
-
-.wp-block-topbook-block-banner {
+.wp-block-wp-custom-block-banner {
 	padding: 28px;
-	border: 1px solid var(--border-block-color);
+	border: 1px solid;
 	margin-bottom: 20px;
 
 	.link {
@@ -37,13 +35,11 @@
 	.bonus {
 		padding: 24px;
 		margin: 20px 0;
-		background: var(--secondary-block-color);
 		text-align: center;
 
 		p {
 			padding: 0;
 			margin: 0;
-			color: var(--white-block-color);
 			font-size: 44px;
 			font-weight: 700;
 			line-height: 50px;
@@ -56,13 +52,9 @@
 
 	.domain {
 		margin-bottom: 20px;
-
-		&-link {
-			color: var(--secondary-block-color);
-		}
 	}
 
-	.blocks {
+	.payments {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
@@ -71,7 +63,6 @@
 
 	.payment {
 		flex: 1;
-		background-color: var(--primary-light-block-color);
 
 		.photo {
 			max-width: 115px;
@@ -88,7 +79,7 @@
 }
 
 @media screen and (width <= 767px) {
-	.wp-block-topbook-block-banner {
+	.wp-block-wp-custom-block-banner {
 		padding: 16px;
 
 		.banner-header {

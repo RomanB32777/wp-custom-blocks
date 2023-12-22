@@ -24,7 +24,7 @@ export const LinkControl = ({ label, link, linkName, setAttributes }) => {
 				onChange={handleChangeLink}
 			/>
 			<ToggleControl
-				label={__("Open in new tab", "top-blocks")}
+				label={__("Open in new tab", "wp-custom-blocks")}
 				checked={link && link.openInNewTab}
 				onChange={handleChangeToggle}
 			/>

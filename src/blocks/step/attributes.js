@@ -15,6 +15,26 @@ const attributes = {
 	description: {
 		type: "string",
 	},
+	mainColor: {
+		type: "string",
+		default: "#a689ff",
+	},
+	titleColor: {
+		type: "string",
+		default: "#1c1230",
+	},
+	descriptionColor: {
+		type: "string",
+		default: "#343741",
+	},
+	stepColor: {
+		type: "string",
+		default: "#fff",
+	},
+	borderColor: {
+		type: "string",
+		default: "#bdabda",
+	},
 	isOnlyText: {
 		type: "boolean",
 	},

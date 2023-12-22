@@ -1,8 +1,19 @@
 import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 export default function save({ attributes }) {
-	const { uniqueId, step, photo, title, description, isOnlyText } =
-		attributes;
+	const {
+		uniqueId,
+		step,
+		photo,
+		title,
+		description,
+		mainColor,
+		titleColor,
+		descriptionColor,
+		stepColor,
+		borderColor,
+		isOnlyText,
+	} = attributes;
 
 	// Block Props
 	const blockProps = useBlockProps.save({
@@ -21,15 +32,34 @@ export default function save({ attributes }) {
 
 	return (
 		<div {...blockProps}>
-			{step && <span className="step">{step}</span>}
+			<div
+				className="line"
+				style={{
+					backgroundColor: mainColor,
+				}}
+			></div>
+			{step && (
+				<span className="step" style={{ background: mainColor, color: stepColor }}>
+					{step}
+				</span>
+			)}
 			{title && (
-				<RichText.Content tagName="h5" className="title" value={title} />
+				<RichText.Content
+					tagName="h5"
+					className="title"
+					value={title}
+					style={{ color: titleColor }}
+				/>
 			)}
 			{description && (
 				<RichText.Content
 					tagName="p"
 					className={getDescriptionClassNames()}
 					value={description}
+					style={{
+						color: descriptionColor,
+						borderColor: isOnlyText ? borderColor : null,
+					}}
 				/>
 			)}
 			{photo && !isOnlyText && (

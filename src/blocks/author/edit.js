@@ -1,11 +1,20 @@
 import { useBlockProps, RichText } from "@wordpress/block-editor";
+import { __ } from "@wordpress/i18n";
 
-const { useEffect } = wp.element;
+const { Fragment, useEffect } = wp.element;
 const { useSelect } = wp.data;
-const { __ } = wp.i18n;
+
+import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes }) {
-	const { description, author } = attributes;
+	const {
+		description,
+		author,
+		backgroundColor,
+		avatarColor,
+		avatarBorderColor,
+		descriptionColor,
+	} = attributes;
 
 	const authorId = useSelect(
 		(select) => select("core/editor").getCurrentPostAttribute("author"),
@@ -22,19 +31,43 @@ export default function Edit({ attributes, setAttributes }) {
 	}, [authorInfo, setAttributes]);
 
 	return (
-		<div {...useBlockProps()}>
-			{author && (
-				<div className="avatar">
-					<img src={author.avatar_urls?.[48]} alt={author.name} />
-				</div>
-			)}
-			<RichText
-				tagName="p"
-				className="description"
-				value={description}
-				onChange={(v) => setAttributes({ description: v })}
-				placeholder={__("Description..", "top-blocks")}
-			/>
-		</div>
+		<Fragment>
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<div
+				{...useBlockProps()}
+				style={{
+					backgroundColor,
+				}}
+			>
+				{author && (
+					<div className="avatar">
+						<div
+							className="border1"
+							style={{ borderColor: avatarBorderColor }}
+						></div>
+						<div
+							className="border2"
+							style={{ borderColor: avatarBorderColor }}
+						></div>
+						<img
+							src={author.avatar_urls?.[48]}
+							alt={author.name}
+							style={{
+								background: avatarColor,
+								borderColor: avatarBorderColor,
+							}}
+						/>
+					</div>
+				)}
+				<RichText
+					tagName="p"
+					className="description"
+					value={description}
+					onChange={(v) => setAttributes({ description: v })}
+					placeholder={__("Description..", "wp-custom-blocks")}
+					style={{ color: descriptionColor }}
+				/>
+			</div>
+		</Fragment>
 	);
 }

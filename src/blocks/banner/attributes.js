@@ -2,9 +2,6 @@ const attributes = {
 	bonusLabel: {
 		type: "string",
 	},
-	domain: {
-		type: "string",
-	},
 	bonusLink: {
 		type: "object",
 		default: {
@@ -12,12 +9,27 @@ const attributes = {
 			openInNewTab: true,
 		},
 	},
+	bonusBackgroundColor: {
+		type: "string",
+		default: "#a97bff",
+	},
+	bonusLabelColor: {
+		type: "string",
+		default: "#fff",
+	},
+	domain: {
+		type: "string",
+	},
 	domainLink: {
 		type: "object",
 		default: {
 			url: "#",
 			openInNewTab: true,
 		},
+	},
+	domainLinkColor: {
+		type: "string",
+		default: "#a97bff",
 	},
 	googleLink: {
 		type: "object",
@@ -35,6 +47,18 @@ const attributes = {
 	},
 	logo: {
 		type: "object",
+	},
+	backgroundColor: {
+		type: "string",
+		default: "#fff",
+	},
+	borderColor: {
+		type: "string",
+		default: "#bdabda",
+	},
+	paymentBackgroundColor: {
+		type: "string",
+		default: "#f5eeff",
 	},
 	payment1: {
 		type: "object",

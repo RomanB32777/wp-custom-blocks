@@ -7,23 +7,24 @@ import {
 	BlockControls,
 } from "@wordpress/block-editor";
 import { ToolbarGroup, ToolbarButton } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
+
 const { Fragment, useEffect } = wp.element;
 
-const { __ } = wp.i18n;
-
-import Inspector from "./inspector";
-
 export default function Edit({ attributes, setAttributes, clientId }) {
-	const { uniqueId, step, photo, title, description, isOnlyText } = attributes;
-
-	// Unique ID
-	useEffect(() => {
-		if (!uniqueId) {
-			setAttributes({
-				uniqueId: "step-" + clientId.slice(0, 8),
-			});
-		}
-	}, []);
+	const {
+		uniqueId,
+		step,
+		photo,
+		title,
+		description,
+		mainColor,
+		titleColor,
+		descriptionColor,
+		stepColor,
+		borderColor,
+		isOnlyText,
+	} = attributes;
 
 	// Block Props
 	const blockProps = useBlockProps({
@@ -40,9 +41,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		return classNames.join(" ");
 	};
 
+	// Unique ID
+	useEffect(() => {
+		if (!uniqueId) {
+			setAttributes({
+				uniqueId: "step-" + clientId.slice(0, 8),
+			});
+		}
+	}, []);
+
 	return (
 		<Fragment>
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
 			{photo && (
 				<BlockControls>
 					<ToolbarGroup>
@@ -58,7 +67,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								render={({ open }) => {
 									return (
 										<ToolbarButton
-											label={__("Edit Logo", "top-blocks")}
+											label={__("Edit Logo", "wp-custom-blocks")}
 											onClick={open}
 											icon="edit"
 										/>
@@ -70,20 +79,36 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				</BlockControls>
 			)}
 			<div {...blockProps}>
-				<span className="step">{step}</span>
+				<div
+					className="line"
+					style={{
+						backgroundColor: mainColor,
+					}}
+				></div>
+				<span
+					className="step"
+					style={{ background: mainColor, color: stepColor }}
+				>
+					{step}
+				</span>
 				<RichText
 					tagName="h5"
 					className="title"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
-					placeholder={__("step text..", "top-blocks")}
+					placeholder={__("step text..", "wp-custom-blocks")}
+					style={{ color: titleColor }}
 				/>
 				<RichText
 					tagName="p"
 					className={getDescriptionClassNames()}
 					value={description}
 					onChange={(v) => setAttributes({ description: v })}
-					placeholder={__("description..", "top-blocks")}
+					placeholder={__("description..", "wp-custom-blocks")}
+					style={{
+						color: descriptionColor,
+						borderColor: isOnlyText ? borderColor : null,
+					}}
 				/>
 				{!isOnlyText && (
 					<div className="photo">
@@ -99,8 +124,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								allowedTypes={["image"]}
 								multiple={false}
 								labels={{
-									title: __("Logo", "top-blocks"),
-									instructions: __("Upload your company logo", "top-blocks"),
+									title: __("Logo", "wp-custom-blocks"),
+									instructions: __(
+										"Upload your company logo",
+										"wp-custom-blocks"
+									),
 								}}
 								icon={"format-image"}
 							/>

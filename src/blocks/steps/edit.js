@@ -1,14 +1,24 @@
-import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
+import { useBlockProps, InnerBlocks, RichText } from "@wordpress/block-editor";
+import { __ } from "@wordpress/i18n";
 
 const { dispatch, useSelect } = wp.data;
 const { Fragment, useEffect } = wp.element;
 
 import Inspector from "./inspector";
 
-const allowedBlocks = ["topbook-block/step"];
+const allowedBlocks = ["wp-custom-block/step"];
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-	const { isOnlyText } = attributes;
+	const {
+		title,
+		titleColor,
+		stepsMainColor,
+		stepsStepColor,
+		stepsTitleColor,
+		stepsDescriptionColor,
+		stepsBorderColor,
+		isOnlyText,
+	} = attributes;
 
 	const childBlocks = useSelect(
 		(select) => {
@@ -26,11 +36,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	useEffect(() => {
 		childBlocks.forEach((block, index) => {
 			dispatch("core/editor").updateBlockAttributes(block.clientId, {
+				mainColor: stepsMainColor,
+				stepColor: stepsStepColor,
+				titleColor: stepsTitleColor,
+				descriptionColor: stepsDescriptionColor,
+				borderColor: stepsBorderColor,
 				isOnlyText,
 				step: index + 1,
 			});
 		});
-	}, [childBlocks, isOnlyText]);
+	}, [
+		childBlocks,
+		isOnlyText,
+		stepsMainColor,
+		stepsStepColor,
+		stepsTitleColor,
+		stepsDescriptionColor,
+		stepsBorderColor,
+	]);
 
 	return (
 		<Fragment>
@@ -40,6 +63,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				clientId={clientId}
 			/>
 			<div {...useBlockProps()}>
+				<div className="space-block-title title relative">
+					<RichText
+						tagName="span"
+						value={title}
+						onChange={(v) => setAttributes({ title: v })}
+						style={{ color: titleColor }}
+						placeholder={__("Title..", "wp-custom-blocks")}
+					/>
+				</div>
 				<div className="blocks">
 					<InnerBlocks
 						allowedBlocks={allowedBlocks}

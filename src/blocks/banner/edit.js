@@ -8,11 +8,12 @@ import {
 	InnerBlocks,
 } from "@wordpress/block-editor";
 import { ToolbarGroup, ToolbarButton, Popover } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
 
 const { Fragment, useState } = wp.element;
-const { __ } = wp.i18n;
 
 import { LinkControl, Payment } from "./components";
+import Inspector from "./inspector";
 
 import appStoreImage from "./assets/appStore.png";
 import googlePlayImage from "./assets/googlePlay.png";
@@ -22,12 +23,18 @@ import "./editor.scss";
 export default function Edit({ attributes, setAttributes }) {
 	const {
 		logo,
+		borderColor,
+		backgroundColor,
 		bonusLabel,
+		bonusLabelColor,
+		bonusBackgroundColor,
 		domain,
 		domainLink,
+		domainLinkColor,
 		bonusLink,
 		appleLink,
 		googleLink,
+		paymentBackgroundColor,
 		...payments
 	} = attributes;
 
@@ -35,6 +42,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<Fragment>
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
 			{logo && (
 				<BlockControls>
 					<ToolbarGroup>
@@ -50,7 +58,7 @@ export default function Edit({ attributes, setAttributes }) {
 								render={({ open }) => {
 									return (
 										<ToolbarButton
-											label={__("Edit Logo", "top-blocks")}
+											label={__("Edit Logo", "wp-custom-blocks")}
 											onClick={open}
 											icon="edit"
 										/>
@@ -64,7 +72,7 @@ export default function Edit({ attributes, setAttributes }) {
 			<BlockControls>
 				<ToolbarGroup>
 					<ToolbarButton
-						label={__("Add Link", "top-blocks")}
+						label={__("Add Link", "wp-custom-blocks")}
 						onClick={() => showLinkPanel(true)}
 						icon="admin-links"
 					/>
@@ -79,32 +87,38 @@ export default function Edit({ attributes, setAttributes }) {
 							<LinkControl
 								link={appleLink}
 								linkName="appleLink"
-								label={__("AppStore Link", "top-blocks")}
+								label={__("AppStore Link", "wp-custom-blocks")}
 								setAttributes={setAttributes}
 							/>
 							<LinkControl
 								link={googleLink}
 								linkName="googleLink"
-								label={__("Google Link", "top-blocks")}
+								label={__("Google Link", "wp-custom-blocks")}
 								setAttributes={setAttributes}
 							/>
 							<LinkControl
 								link={bonusLink}
 								linkName="bonusLink"
-								label={__("Button Link", "top-blocks")}
+								label={__("Button Link", "wp-custom-blocks")}
 								setAttributes={setAttributes}
 							/>
 							<LinkControl
 								link={domainLink}
 								linkName="domainLink"
-								label={__("Domain Link", "top-blocks")}
+								label={__("Domain Link", "wp-custom-blocks")}
 								setAttributes={setAttributes}
 							/>
 						</div>
 					</Popover>
 				)}
 			</BlockControls>
-			<div {...useBlockProps()}>
+			<div
+				{...useBlockProps()}
+				style={{
+					borderColor,
+					backgroundColor,
+				}}
+			>
 				<div className="banner-header">
 					<div className="logo">
 						{logo ? (
@@ -119,8 +133,8 @@ export default function Edit({ attributes, setAttributes }) {
 								allowedTypes={["image"]}
 								multiple={false}
 								labels={{
-									title: __("Logo", "top-blocks"),
-									instructions: __("Upload logo", "top-blocks"),
+									title: __("Logo", "wp-custom-blocks"),
+									instructions: __("Upload logo", "wp-custom-blocks"),
 								}}
 								icon="format-image"
 							/>
@@ -136,12 +150,20 @@ export default function Edit({ attributes, setAttributes }) {
 					</div>
 				</div>
 
-				<div className="bonus">
+				<div
+					className="bonus"
+					style={{
+						backgroundColor: bonusBackgroundColor,
+					}}
+				>
 					<RichText
 						tagName="p"
 						value={bonusLabel}
 						onChange={(v) => setAttributes({ bonusLabel: v })}
-						placeholder={__("Bonus button text..", "top-blocks")}
+						placeholder={__("Bonus button text..", "wp-custom-blocks")}
+						style={{
+							color: bonusLabelColor,
+						}}
 					/>
 				</div>
 
@@ -158,17 +180,19 @@ export default function Edit({ attributes, setAttributes }) {
 							tagName="span"
 							value={domain}
 							onChange={(v) => setAttributes({ domain: v })}
-							placeholder={__("Domain..", "top-blocks")}
+							placeholder={__("Domain..", "wp-custom-blocks")}
+							style={{ color: domainLinkColor }}
 						/>
 					</div>
 				</div>
 
-				<div className="blocks">
+				<div className="payments">
 					{Object.entries(payments).map(([name, { photo }], index) => (
 						<Payment
 							key={`${name}-${index}`}
 							name={name}
 							photo={photo}
+							backgroundColor={paymentBackgroundColor}
 							setAttributes={setAttributes}
 						/>
 					))}

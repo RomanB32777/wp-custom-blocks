@@ -1,12 +1,12 @@
 {
   "apiVersion": 2,
-  "name": "topbook-block/step",
+  "name": "wp-custom-block/step",
   "version": "0.1.0",
   "title": "Single Step",
   "category": "widgets",
   "description": "Child for Steps Block.",
   "parent": [
-    "topbook-block/steps"
+    "wp-custom-block/steps"
   ],
   "supports": {
     "html": false,
