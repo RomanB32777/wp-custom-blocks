@@ -121,8 +121,8 @@ export default function save({ attributes }) {
 
 			<div className="content">{<InnerBlocks.Content />}</div>
 
-			<div className="additions">
-				{domain && domainLink && (
+			{domain && domainLink && (
+				<div className="additions">
 					<div className="domain">
 						<span>公式ウェブサイト: </span>
 						<a
@@ -144,11 +144,12 @@ export default function save({ attributes }) {
 							/>
 						</a>
 					</div>
-				)}
-			</div>
-			<div className="blocks">
-				{payments &&
-					Object.entries(payments)
+				</div>
+			)}
+
+			{payments && (
+				<div className="blocks">
+					{Object.entries(payments)
 						.filter(([, { photo }]) => Boolean(photo))
 						.map(([name, { photo }], index) => (
 							<div
@@ -163,7 +164,8 @@ export default function save({ attributes }) {
 								</div>
 							</div>
 						))}
-			</div>
+				</div>
+			)}
 		</div>
 	);
 }
