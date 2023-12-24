@@ -13,7 +13,6 @@ const { Fragment } = wp.element;
 const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		isOnlyText,
-		titleColor,
 		stepsMainColor,
 		stepsStepColor,
 		stepsTitleColor,
@@ -36,12 +35,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				title={__("Block settings", "wp-custom-blocks")}
 				initialOpen={true}
 			>
-				<ColorControl
-					label={__("Title Color", "wp-custom-blocks")}
-					color={titleColor}
-					onChange={(v) => setAttributes({ titleColor: v })}
-				/>
-				<CardDivider />
 				<ToggleControl
 					label={__("Only text", "wp-custom-blocks")}
 					checked={isOnlyText}

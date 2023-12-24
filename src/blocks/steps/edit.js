@@ -1,5 +1,4 @@
-import { useBlockProps, InnerBlocks, RichText } from "@wordpress/block-editor";
-import { __ } from "@wordpress/i18n";
+import { useBlockProps, InnerBlocks } from "@wordpress/block-editor";
 
 const { dispatch, useSelect } = wp.data;
 const { Fragment, useEffect } = wp.element;
@@ -10,8 +9,6 @@ const allowedBlocks = ["wp-custom-block/step"];
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
-		title,
-		titleColor,
 		stepsMainColor,
 		stepsStepColor,
 		stepsTitleColor,
@@ -63,15 +60,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				clientId={clientId}
 			/>
 			<div {...useBlockProps()}>
-				<div className="space-block-title title relative">
-					<RichText
-						tagName="span"
-						value={title}
-						onChange={(v) => setAttributes({ title: v })}
-						style={{ color: titleColor }}
-						placeholder={__("Title..", "wp-custom-blocks")}
-					/>
-				</div>
 				<div className="blocks">
 					<InnerBlocks
 						allowedBlocks={allowedBlocks}

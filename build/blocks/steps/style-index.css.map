@@ -1,1 +1,0 @@
-{"version":3,"file":"blocks/steps/style-index.css","mappings":";;;AAAA;EACC;AACD;AACC;EACC;AACF,C","sources":["webpack://wp-custom-blocks/./src/blocks/steps/style.scss"],"sourcesContent":[".wp-block-wp-custom-block-steps {\n\tmargin-bottom: 20px;\n\n\t.title {\n\t\tmargin-bottom: 30px;\n\t}\n}\n"],"names":[],"sourceRoot":""}

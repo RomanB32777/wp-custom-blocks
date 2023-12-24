@@ -1,11 +1,4 @@
 const attributes = {
-	title: {
-		type: "string",
-	},
-	titleColor: {
-		type: "string",
-		default: "#000",
-	},
 	stepsMainColor: {
 		type: "string",
 		default: "#a689ff",
