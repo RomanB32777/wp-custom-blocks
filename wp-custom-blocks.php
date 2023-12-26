@@ -3,7 +3,7 @@
  * Plugin Name:       Wordpress custom blocks
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           0.2.0
+ * Version:           0.2.1
  * Author:            Test
  * License:
  * License URI:
