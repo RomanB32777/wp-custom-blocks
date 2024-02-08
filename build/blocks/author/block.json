@@ -4,7 +4,7 @@
   "name": "wp-custom-block/author",
   "version": "0.1.0",
   "title": "Author",
-  "category": "widgets",
+  "category": "wp-custom-blocks",
   "description": "Author block",
   "supports": {
     "html": false

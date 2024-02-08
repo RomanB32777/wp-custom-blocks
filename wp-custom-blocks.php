@@ -3,7 +3,7 @@
  * Plugin Name:       Wordpress custom blocks
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           0.2.1
+ * Version:           0.2.2
  * Author:            Test
  * License:
  * License URI:
@@ -32,3 +32,23 @@ function blocks_init()
 }
 
 add_action('init', 'blocks_init');
+
+/**
+ * Register Block Category
+ */
+function register_block_category( $block_categories, $editor_context )
+{
+    if (! empty($editor_context->post) ) {
+        array_unshift(
+            $block_categories,
+            array(
+            'slug'  => 'wp-custom-blocks',
+            'title' => __('WP Custom Blocks', 'wp-custom-blocks'),
+            'icon'  => null,
+            )
+        );
+    }
+    return $block_categories;
+}
+
+add_filter('block_categories_all', 'register_block_category', 10, 2);

@@ -148,7 +148,7 @@ export default function save({ attributes }) {
 			)}
 
 			{payments && (
-				<div className="blocks">
+				<div className="payments">
 					{Object.entries(payments)
 						.filter(([, { photo }]) => Boolean(photo))
 						.map(([name, { photo }], index) => (

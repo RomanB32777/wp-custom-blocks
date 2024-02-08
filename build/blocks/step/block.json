@@ -3,7 +3,7 @@
   "name": "wp-custom-block/step",
   "version": "0.1.0",
   "title": "Single Step",
-  "category": "widgets",
+  "category": "wp-custom-blocks",
   "description": "Child for Steps Block.",
   "parent": [
     "wp-custom-block/steps"

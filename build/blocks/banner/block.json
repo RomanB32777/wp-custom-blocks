@@ -4,7 +4,7 @@
   "name": "wp-custom-block/banner",
   "version": "0.1.0",
   "title": "Banner",
-  "category": "widgets",
+  "category": "wp-custom-blocks",
   "description": "Banner block with links and payments",
   "supports": {
     "html": false

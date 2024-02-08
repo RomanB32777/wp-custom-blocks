@@ -69,6 +69,7 @@ export default function Edit({ attributes, setAttributes }) {
 					</ToolbarGroup>
 				</BlockControls>
 			)}
+
 			<BlockControls>
 				<ToolbarGroup>
 					<ToolbarButton
@@ -112,6 +113,7 @@ export default function Edit({ attributes, setAttributes }) {
 					</Popover>
 				)}
 			</BlockControls>
+
 			<div
 				{...useBlockProps()}
 				style={{
