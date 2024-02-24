@@ -68,6 +68,8 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 							className="w-full object-cover object-center"
 							src={image.url}
 							alt={image.alt}
+							width={image.width}
+							height={image.height}
 						/>
 					) : (
 						<MediaPlaceholder

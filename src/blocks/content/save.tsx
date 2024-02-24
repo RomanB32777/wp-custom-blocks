@@ -29,6 +29,8 @@ const Save: FC<BlockSaveProps<IContentBlockAttributes>> = ({ attributes }) => {
 						className="w-full object-cover object-center"
 						src={image.url}
 						alt={image.alt}
+						width={image.width}
+						height={image.height}
 					/>
 				)}
 			</div>
