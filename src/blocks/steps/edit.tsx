@@ -10,7 +10,7 @@ import { minifyCssStrings } from "@/utils/minify-css";
 import Inspector from "./inspector";
 import type { IStepsBlockAttributes } from "./attributes";
 
-const allowedBlocks = ["wp-custom-blocks/step"];
+const allowedBlock = "wp-custom-blocks/step";
 
 const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 	attributes,
@@ -92,7 +92,8 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 			/>
 			<div {...blockProps}>
 				<InnerBlocks
-					allowedBlocks={allowedBlocks}
+					allowedBlocks={[allowedBlock]}
+					template={[[allowedBlock]]}
 					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 				/>
 			</div>

@@ -2,7 +2,7 @@ import { colors } from "@/constants";
 import type { TBlockAttributes } from "@/types";
 
 export const baseSpaceBetween = 24;
-export const defaultItemHeight = 275;
+export const defaultItemHeight = 200;
 
 export interface ICardsBlockAttributes {
 	uniqueId: string;

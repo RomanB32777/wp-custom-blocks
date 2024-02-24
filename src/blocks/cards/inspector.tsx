@@ -67,7 +67,7 @@ const Inspector: FC<IInspectorProps<ICardsBlockAttributes>> = ({
 
 				<CardDivider />
 				<ToggleControl
-					label={__("Parent styles", "wp-landing-blocks")}
+					label={__("Parent styles", "wp-custom-blocks")}
 					checked={isParentStyles}
 					onChange={() => setAttributes({ isParentStyles: !isParentStyles })}
 				/>

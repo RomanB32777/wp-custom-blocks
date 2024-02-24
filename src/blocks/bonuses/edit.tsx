@@ -21,7 +21,7 @@ import Inspector from "./inspector";
 import type { IBonusesBlockAttributes } from "./attributes";
 import type { IBonusElementAttributes } from "./bonus/attributes";
 
-const allowedBlocks = ["wp-custom-blocks/bonus"];
+const allowedBlock = "wp-custom-blocks/bonus";
 
 const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 	attributes,
@@ -89,7 +89,8 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 			className: "inner-wrapper grid",
 		},
 		{
-			allowedBlocks,
+			allowedBlocks: [allowedBlock],
+			template: [[allowedBlock]],
 			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);

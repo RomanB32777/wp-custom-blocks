@@ -18,7 +18,7 @@ import Inspector from "./inspector";
 import type { ICardsBlockAttributes } from "./attributes";
 import type { ICardElementAttributes } from "./card/attributes";
 
-const allowedBlocks = ["wp-custom-blocks/card"];
+const allowedBlock = "wp-custom-blocks/card";
 
 const Edit: FC<BlockEditProps<ICardsBlockAttributes>> = ({
 	attributes,
@@ -68,7 +68,8 @@ const Edit: FC<BlockEditProps<ICardsBlockAttributes>> = ({
 			className: "inner-wrapper grid",
 		},
 		{
-			allowedBlocks,
+			allowedBlocks: [allowedBlock],
+			template: [[allowedBlock]],
 			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);

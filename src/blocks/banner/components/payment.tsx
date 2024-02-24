@@ -22,10 +22,10 @@ export const Payment: FC<IPayment> = ({ image, onChange, onDelete }) => {
 			<div className="absolute top-2 right-2 z-10">
 				<ToolbarButton
 					variant="primary"
-					label={__("Delete payment", "wp-landing-blocks")}
+					label={__("Delete payment", "wp-custom-blocks")}
 					onClick={onDelete}
 					icon="trash"
-					placeholder={__("Delete payment", "wp-landing-blocks")}
+					placeholder={__("Delete payment", "wp-custom-blocks")}
 				/>
 			</div>
 			<div className="photo h-full mx-auto max-w-28">
@@ -46,10 +46,10 @@ export const Payment: FC<IPayment> = ({ image, onChange, onDelete }) => {
 										<div className="absolute bottom-2 right-2">
 											<ToolbarButton
 												variant="primary"
-												label={__("Edit logo", "wp-landing-blocks")}
+												label={__("Edit logo", "wp-custom-blocks")}
 												onClick={open}
 												icon="format-image"
-												placeholder={__("Edit logo", "wp-landing-blocks")}
+												placeholder={__("Edit logo", "wp-custom-blocks")}
 											/>
 										</div>
 									</Fragment>

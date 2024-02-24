@@ -17,7 +17,7 @@ import Inspector from "./inspector";
 import type { IFaqBlockAttributes } from "./attributes";
 import type { IFaqItemElementAttributes } from "./faq-item/attributes";
 
-const allowedBlocks = ["wp-custom-blocks/faq-item"];
+const allowedBlock = "wp-custom-blocks/faq-item";
 
 const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 	attributes,
@@ -50,7 +50,8 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 			className: "flex flex-col gap-y-3",
 		},
 		{
-			allowedBlocks,
+			allowedBlocks: [allowedBlock],
+			template: [[allowedBlock]],
 			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);

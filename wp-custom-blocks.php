@@ -17,6 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function fonts_plugin() {
+	wp_enqueue_style( 'googlefonts', '//fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap', array(), null );
+}
+add_action( 'enqueue_block_editor_assets', 'fonts_plugin' );
+
 function enqueue_plugin_versioned_style( $handle, $path = '', $deps = array(), $media = 'all' ) {
 	$style_url = plugin_dir_url( __FILE__ ) . $path;
 
@@ -39,7 +44,17 @@ add_action( 'wp_enqueue_scripts', 'enqueued_front_style_plugin', 999 );
 function enqueue_plugin_versioned_script( $handle, $path = '' ) {
 	$main_path = plugin_dir_url( __FILE__ ) . $path;
 
-	wp_register_script( $handle, $main_path, array(), @filemtime( $main_path ), true );
+	wp_register_script(
+		$handle,
+		$main_path,
+		array(),
+		@filemtime( $main_path ),
+		array(
+			'in_footer' => true,
+			'strategy'  => 'async',
+
+		)
+	);
 	wp_enqueue_script( $handle );
 }
 

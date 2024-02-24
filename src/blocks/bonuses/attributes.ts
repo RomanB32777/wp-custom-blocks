@@ -2,7 +2,7 @@ import { colors } from "@/constants";
 import type { ILinkAttributes, TBlockAttributes } from "@/types";
 
 export const baseSpaceBetween = 24;
-export const defaultItemHeight = 275;
+export const defaultItemHeight = 350;
 
 export interface IBonusesBlockAttributes {
 	uniqueId: string;
@@ -90,7 +90,7 @@ export const attributes: TBlockAttributes<IBonusesBlockAttributes> = {
 	},
 	desktopItemsPerView: {
 		type: "number",
-		default: 3,
+		default: 2,
 	},
 	mobileSpaceBetween: {
 		type: "number",

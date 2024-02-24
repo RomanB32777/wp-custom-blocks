@@ -13,7 +13,7 @@ import { minifyCssStrings } from "@/utils/minify-css";
 import Inspector from "./inspector";
 import type { IImagesBlockAttributes } from "./attributes";
 
-const allowedBlocks = ["wp-custom-blocks/image"];
+const allowedBlock = "wp-custom-blocks/image";
 
 const Edit: FC<BlockEditProps<IImagesBlockAttributes>> = ({
 	attributes,
@@ -55,7 +55,8 @@ const Edit: FC<BlockEditProps<IImagesBlockAttributes>> = ({
 			className: "inner-wrapper grid",
 		},
 		{
-			allowedBlocks,
+			allowedBlocks: [allowedBlock],
+			template: [[allowedBlock]],
 			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);

@@ -3,9 +3,9 @@
   "apiVersion": 3,
   "name": "wp-custom-blocks/faq-item",
   "version": "0.1.0",
-  "title": "Landing faq item block",
+  "title": "Faq item block",
   "category": "wp-custom-blocks",
-  "description": "Landing faq item block",
+  "description": "Faq item block",
   "parent": [
     "wp-custom-blocks/faq"
   ],

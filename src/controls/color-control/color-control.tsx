@@ -52,7 +52,7 @@ export const ColorControl = withInstanceId(
 					<Button
 						icon="image-rotate"
 						iconSize={14}
-						label={__("Reset", "wp-landing-block")}
+						label={__("Reset", "wp-custom-blocks")}
 						disabled={disabled}
 						size="small"
 						onClick={() => onChange("")}
@@ -86,7 +86,7 @@ export const ColorControl = withInstanceId(
 									className="label inline-block mb-2"
 									htmlFor="colors-palette"
 								>
-									{__("Colors Palette", "wp-landing-block")}
+									{__("Colors Palette", "wp-custom-blocks")}
 								</label>
 								<div
 									id="colors-palette"
