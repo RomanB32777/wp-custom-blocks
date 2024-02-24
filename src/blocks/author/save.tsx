@@ -36,6 +36,8 @@ const Save: FC<BlockSaveProps<IAuthorBlockAttributes>> = ({ attributes }) => {
 				<img
 					src={author.avatar_urls?.["48"]}
 					alt={author.name}
+					width="48"
+					height="48"
 					className="rounded-full"
 					style={{
 						borderColor: avatarBorderColor,

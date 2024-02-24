@@ -48,6 +48,8 @@ const Save: FC<BlockSaveProps<IStepElementAttributes>> = ({ attributes }) => {
 						className="max-w-48 md:!max-w-96"
 						src={photo.url}
 						alt={photo.alt || title}
+						width={photo.width}
+						height={photo.height}
 					/>
 				</div>
 			)}

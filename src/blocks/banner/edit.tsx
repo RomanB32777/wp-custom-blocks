@@ -221,6 +221,8 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 								className="max-w-64 max-h-20"
 								src={logo.url}
 								alt={logo.alt}
+								width={logo.width}
+								height={logo.height}
 							/>
 						) : (
 							<MediaPlaceholder
@@ -241,8 +243,20 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 						)}
 					</div>
 					<div className="flex justify-between mt-5 gap-2 md:!mt-0">
-						<img className="max-h-14" src={googlePlayImage} alt="GooglePlay" />
-						<img className="max-h-14" src={appStoreImage} alt="AppStore" />
+						<img
+							className="max-h-14"
+							src={googlePlayImage}
+							alt="Google Play"
+							width="190"
+							height="57"
+						/>
+						<img
+							className="max-h-14"
+							src={appStoreImage}
+							alt="App Store"
+							width="169"
+							height="57"
+						/>
 					</div>
 				</div>
 

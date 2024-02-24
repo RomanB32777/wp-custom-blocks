@@ -42,6 +42,8 @@ export const Payment: FC<IPayment> = ({ image, onChange, onDelete }) => {
 											className="w-full !h-full object-contain"
 											src={image.url}
 											alt={image.alt}
+											width={image.width}
+											height={image.height}
 										/>
 										<div className="absolute bottom-2 right-2">
 											<ToolbarButton

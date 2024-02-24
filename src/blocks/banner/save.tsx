@@ -51,6 +51,8 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 							className="max-w-64 max-h-20"
 							src={logo.url}
 							alt={logo.alt || domain}
+							width={logo.width}
+							height={logo.height}
 						/>
 					</a>
 				)}
@@ -61,7 +63,13 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 						target={googleLink.openInNewTab ? "_blank" : "_self"}
 						rel={googleLink.openInNewTab ? "noopener noreferrer" : "noopener"}
 					>
-						<img className="max-h-14" src={googlePlayImage} alt="GooglePlay" />
+						<img
+							className="max-h-14"
+							src={googlePlayImage}
+							alt="Google Play"
+							width="190"
+							height="57"
+						/>
 					</a>
 					<a
 						className="no-underline"
@@ -69,7 +77,13 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 						target={appleLink.openInNewTab ? "_blank" : "_self"}
 						rel={appleLink.openInNewTab ? "noopener noreferrer" : "noopener"}
 					>
-						<img className="max-h-14" src={appStoreImage} alt="AppStore" />
+						<img
+							className="max-h-14"
+							src={appStoreImage}
+							alt="App Store"
+							width="169"
+							height="57"
+						/>
 					</a>
 				</div>
 			</div>
@@ -124,6 +138,8 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 										className="w-full h-full object-cover"
 										src={image.url}
 										alt={image.alt}
+										width={image.width}
+										height={image.height}
 									/>
 								</div>
 							</div>

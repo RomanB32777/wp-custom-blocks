@@ -116,6 +116,8 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 								className="!h-full w-full object-cover object-center"
 								src={image.url}
 								alt={image.alt}
+								width={image.width}
+								height={image.height}
 							/>
 						)}
 					</div>
