@@ -20,7 +20,7 @@ const Save: FC<BlockSaveProps<IBonusesBlockAttributes>> = ({ attributes }) => {
 
 	return (
 		<div {...blockProps}>
-			<div className="inner-wrapper grid">
+			<div className="inner-wrapper !grid">
 				<InnerBlocks.Content />
 			</div>
 			{Boolean(buttonText?.length) && (

@@ -65,7 +65,7 @@ const Edit: FC<BlockEditProps<ICardsBlockAttributes>> = ({
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: "inner-wrapper grid",
+			className: "inner-wrapper !grid",
 		},
 		{
 			allowedBlocks: [allowedBlock],

@@ -26,7 +26,7 @@ const Save: FC<BlockSaveProps<ICardsBlockAttributes>> = ({ attributes }) => {
 				value={title}
 				style={{ color: titleColor }}
 			/>
-			<div className="inner-wrapper grid">
+			<div className="inner-wrapper !grid">
 				<InnerBlocks.Content />
 			</div>
 		</div>
