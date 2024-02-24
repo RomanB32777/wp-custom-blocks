@@ -1,0 +1,14 @@
+// tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// We need to have a .editor-style-wrapper or .wp-block selector inside the css file so
+// the file will be enqueued inside the iframe - fucking wordpress
+.wp-block {
+	opacity: 1;
+}
+
+.editor-styles-wrapper {
+	background-color: #a0a0a0;
+}

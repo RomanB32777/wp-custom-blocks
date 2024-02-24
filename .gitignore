@@ -35,6 +35,7 @@ draft/
 .DS_Store
 
 composer.phar
+.phpcs-cache
 /vendor/
 
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control

@@ -1,66 +1,28 @@
-.wp-block-wp-custom-block-author {
-	display: flex;
-	align-items: center;
-	padding: 28px;
-	margin-bottom: 20px;
+@import "@/assets/styles";
 
+.wp-block-wp-custom-blocks-author {
 	.avatar {
-		position: relative;
-
-		.border1,
-		.border2 {
-			position: absolute;
-			display: block;
-			border: 5px solid;
-			border-radius: 50%;
-		}
-
-		.border1 {
-			top: -5px;
-			left: -5px;
-			width: 70px;
-			height: 70px;
-			opacity: 0.3;
-		}
-
-		.border2 {
-			top: -10px;
-			left: -10px;
-			width: 80px;
-			height: 80px;
-			opacity: 0.2;
-		}
-
 		img {
 			width: 60px;
 			max-width: none;
 			height: 60px;
 			border: 5px solid;
-			border-radius: 50% !important;
-
-			// @use "sass:color";
-			// border: 5px solid color.adjust(var(--white-block-color), $alpha: 0.5);
 		}
 	}
 
-	.description {
-		padding: 0;
-		margin: 0;
-		margin-left: 24px;
-		font-size: 16px;
-		font-weight: 400;
-		line-height: 24px;
-	}
-}
-
-@media screen and (width <= 767px) {
-	.wp-block-wp-custom-block-author {
-		align-items: flex-start;
-		padding: 16px;
+	.border1 {
+		top: -5px;
+		left: -5px;
+		width: 70px;
+		height: 70px;
+		border: 5px solid;
 	}
 
-	.description {
-		margin-left: 20px;
-		font-size: 14px;
+	.border2 {
+		top: -10px;
+		left: -10px;
+		width: 80px;
+		height: 80px;
+		border: 5px solid;
 	}
 }

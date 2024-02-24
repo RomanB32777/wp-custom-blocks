@@ -1,6 +1,6 @@
 {
 	"name": "wp-custom-blocks",
-	"version": "0.2.2",
+	"version": "0.2.0",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -9,8 +9,13 @@
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
+		"lint:php": "./vendor/bin/phpcs",
+		"lint:php:fix": "./vendor/bin/phpcbf",
 		"packages-update": "wp-scripts packages-update",
-		"plugin-zip": "wp-scripts plugin-zip"
+		"plugin-zip": "wp-scripts plugin-zip",
+		"composer:install": "composer install",
+		"lint:ts": "eslint \"src/**/*.{ts,tsx}\" --color",
+		"lint:ts:fix": "npm run lint:ts -- --fix"
 	},
 	"repository": {
 		"type": "git",
@@ -23,17 +28,49 @@
 	},
 	"homepage": "https://github.com/RomanB32777/wp-blocks#readme",
 	"devDependencies": {
+		"@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+		"@types/wordpress__block-editor": "^11.5.10",
+		"@types/wordpress__blocks": "^12.5.13",
+		"@types/wordpress__components": "^23.0.11",
+		"@types/wordpress__editor": "^13.6.7",
+		"@types/wordpress__element": "^2.14.1",
+		"@typescript-eslint/eslint-plugin": "^6.21.0",
+		"@typescript-eslint/parser": "^6.21.0",
+		"@wordpress/block-editor": "^12.19.1",
+		"@wordpress/blocks": "^12.28.0",
+		"@wordpress/components": "^26.0.0",
+		"@wordpress/core-data": "^6.28.1",
+		"@wordpress/data": "^9.21.0",
+		"@wordpress/editor": "^13.28.1",
+		"@wordpress/element": "^5.28.0",
 		"@wordpress/eslint-plugin": "^17.4.0",
+		"@wordpress/i18n": "^4.51.0",
 		"@wordpress/prettier-config": "^3.4.0",
 		"@wordpress/scripts": "^26.18.0",
 		"autoprefixer": "^10.4.16",
+		"css-minimizer-webpack-plugin": "^6.0.0",
+		"dotenv-webpack": "^8.0.1",
 		"eslint-config-prettier": "^9.1.0",
+		"eslint-import-resolver-typescript": "^3.6.1",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-prettier": "^5.1.3",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"fork-ts-checker-webpack-plugin": "^9.0.2",
 		"postcss": "^8.4.32",
 		"postcss-loader": "^7.3.3",
 		"postcss-preset-env": "^9.3.0",
 		"stylelint": "^15.11.0",
 		"stylelint-config-idiomatic-order": "^10.0.0",
 		"stylelint-config-standard-scss": "^11.1.0",
-		"stylelint-order": "^6.0.4"
+		"stylelint-order": "^6.0.4",
+		"tailwindcss": "^3.4.1",
+		"ts-node": "^10.9.2",
+		"typescript-plugin-css-modules": "^5.1.0"
+	},
+	"dependencies": {
+		"classnames": "^2.5.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-scripts": "^5.0.1"
 	}
 }
