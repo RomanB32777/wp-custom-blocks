@@ -16,6 +16,7 @@ import {
 	ToolbarButton,
 	ToolbarGroup,
 } from "@wordpress/components";
+import { select } from "@wordpress/data";
 import { Fragment, useEffect, useRef, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
@@ -56,10 +57,13 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 	const uniqKeys = useRef(new Set(payments.map((payment) => payment.id)));
 
+	const childBlocks =
+		select("core/block-editor").getBlocksByClientId(clientId)?.[0]?.innerBlocks;
+
 	const blockProps = useBlockProps({
 		className: classNames(
 			uniqueId,
-			"wp-custom-blocks-banner border rounded-lg px-4 pt-4 [&>*]:mb-5 md:!px-7 md:!pt-7"
+			"wp-custom-blocks-banner border rounded-lg p-4 [&>*:not(:last-child)]:mb-5 md:!py-7"
 		),
 		style: {
 			backgroundColor,
@@ -73,6 +77,12 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 			});
 		}
 	}, [clientId, uniqueId, setAttributes]);
+
+	useEffect(() => {
+		setAttributes({
+			childCount: childBlocks.length,
+		});
+	}, [childBlocks, setAttributes]);
 
 	const handleAddPayment = () => {
 		const newKey = String(Math.random());
@@ -302,7 +312,6 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 				</div>
 
 				<Button
-					className="!mb-0"
 					aria-pressed="mixed"
 					variant="tertiary"
 					label="Add new payment"

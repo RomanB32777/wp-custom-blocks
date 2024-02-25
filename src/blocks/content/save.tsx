@@ -35,7 +35,7 @@ const Save: FC<BlockSaveProps<IContentBlockAttributes>> = ({ attributes }) => {
 				)}
 			</div>
 
-			<div className="basis-full w-full md:!basis-1/2 md:!w-auto [&>*]:my-7">
+			<div className="basis-full w-full md:!basis-1/2 md:!w-auto [&>*:not(:last-child)]:mb-7">
 				{<InnerBlocks.Content />}
 			</div>
 		</div>

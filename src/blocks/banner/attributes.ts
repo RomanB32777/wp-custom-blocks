@@ -27,6 +27,7 @@ export interface IBannerBlockAttributes {
 	borderColor: string;
 	paymentBackgroundColor: string;
 	payments: IPaymentAttributes[];
+	childCount: number;
 }
 
 export const attributes: TBlockAttributes<IBannerBlockAttributes> = {
@@ -101,6 +102,9 @@ export const attributes: TBlockAttributes<IBannerBlockAttributes> = {
 	payments: {
 		type: "array",
 		default: [],
+	},
+	childCount: {
+		type: "number",
 	},
 };
 

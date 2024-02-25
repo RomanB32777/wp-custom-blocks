@@ -25,13 +25,14 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 		googleLink,
 		appleLink,
 		domainLink,
+		childCount,
 		payments,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: classNames(
 			uniqueId,
-			"wp-custom-blocks-banner border rounded-lg px-4 pt-4 [&>*]:mb-5 md:!px-7 md:!pt-7"
+			"wp-custom-blocks-banner border rounded-lg p-4 [&>*:not(:last-child)]:mb-5 md:!p-7"
 		),
 		style: {
 			backgroundColor,
@@ -108,7 +109,11 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 				</a>
 			)}
 
-			<div className="[&>*]:my-7">{<InnerBlocks.Content />}</div>
+			{Boolean(childCount) && (
+				<div className="[&>*:not(:last-child)]:mb-7">
+					{<InnerBlocks.Content />}
+				</div>
+			)}
 
 			{domain && (
 				<div>
@@ -127,25 +132,30 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 				</div>
 			)}
 
-			<div className="flex flex-wrap justify-between gap-2">
-				{payments
-					.filter(({ image }) => Boolean(image.url))
-					.map(({ id, image }) => {
-						return (
-							<div className="payment rounded-lg flex-auto md:!flex-1" key={id}>
-								<div className="h-full mx-auto max-w-28">
-									<img
-										className="w-full h-full object-cover"
-										src={image.url}
-										alt={image.alt}
-										width={image.width}
-										height={image.height}
-									/>
+			{Boolean(payments.length) && (
+				<div className="flex flex-wrap justify-between gap-2">
+					{payments
+						.filter(({ image }) => Boolean(image.url))
+						.map(({ id, image }) => {
+							return (
+								<div
+									className="payment rounded-lg flex-auto md:!flex-1"
+									key={id}
+								>
+									<div className="h-full mx-auto max-w-28">
+										<img
+											className="w-full h-full object-cover"
+											src={image.url}
+											alt={image.alt}
+											width={image.width}
+											height={image.height}
+										/>
+									</div>
 								</div>
-							</div>
-						);
-					})}
-			</div>
+							);
+						})}
+				</div>
+			)}
 		</div>
 	);
 };
