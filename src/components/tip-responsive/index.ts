@@ -1,1 +1,1 @@
-export * from "./tip-responsive";
+export * from "./tip-responsive"
