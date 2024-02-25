@@ -20,7 +20,7 @@
 	},
 	"lint-staged": {
 		"*.{ts,tsx}": [
-			"npm run lint:ts"
+			"npm run lint:ts:fix"
 		]
 	},
 	"repository": {
