@@ -14,6 +14,7 @@ export interface IImageAttributes {
 	alt?: string;
 	width?: number;
 	height?: number;
+	test?: string;
 }
 
 export interface IInspectorProps<T extends Record<keyof T, unknown>>
