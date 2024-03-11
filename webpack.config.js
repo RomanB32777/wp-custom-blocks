@@ -4,6 +4,7 @@ const { DefinePlugin } = require("webpack");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
+const { getWebpackEntryPoints } = require("@wordpress/scripts/utils");
 
 require("dotenv").config({ path: "./.env" });
 
@@ -29,6 +30,7 @@ const {
 	WHITE_COLOR,
 	WHITE_LIGHT_COLOR,
 	WHITE_OPACITY_COLOR,
+	WHITE_STANDARD_COLOR,
 
 	// GRIZZLY
 	GRIZZLY_COLOR,
@@ -37,6 +39,10 @@ const {
 
 	// RED
 	RED_COLOR,
+
+	// YELLOW
+	YELLOW_COLOR,
+	YELLOW_LIGHT_COLOR,
 } = process.env;
 
 const colors = {
@@ -59,6 +65,7 @@ const colors = {
 	WHITE_COLOR,
 	WHITE_LIGHT_COLOR,
 	WHITE_OPACITY_COLOR,
+	WHITE_STANDARD_COLOR,
 
 	// GRIZZLY
 	GRIZZLY_COLOR,
@@ -67,6 +74,10 @@ const colors = {
 
 	// RED
 	RED_COLOR,
+
+	// YELLOW
+	YELLOW_COLOR,
+	YELLOW_LIGHT_COLOR,
 };
 
 const isProduction = NODE_ENV === "production";
@@ -90,6 +101,11 @@ if (isProduction) {
 				name: "style",
 				test: /style(\.module)?\.s[ac]ss$/i,
 			},
+			swiper: {
+				chunks: "all",
+				test: /[\\/]node_modules[\\/]swiper[\\/]/,
+				name: "swiper",
+			},
 		},
 	};
 } else {
@@ -108,6 +124,17 @@ plugins.push(
 
 module.exports = {
 	...defaultConfig,
+	entry: {
+		...getWebpackEntryPoints(),
+		fonts: path.resolve(__dirname, "src", "assets", "styles", "fonts.scss"),
+		["swiper-styles"]: path.resolve(
+			__dirname,
+			"src",
+			"assets",
+			"styles",
+			"swiper.scss"
+		),
+	},
 	resolve: {
 		...defaultConfig.resolve,
 		alias: {

@@ -35,14 +35,14 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 					<div className="flex items-start justify-between">
 						<RichText
 							tagName="p"
-							className="question-title font-roboto text-base basis-5/6"
+							className="question-title font-notoSans text-base basis-5/6"
 							value={question}
 							onChange={(v) => setAttributes({ question: v })}
 							placeholder={__("Question..", "wp-custom-blocks")}
 							style={{ color: !isParentStyles ? questionColor : undefined }}
 						/>
 						<div className="flex justify-end basis-1/6">
-							<div className="arrow-wrapper duration-200 rotate-0">
+							<div className="arrow-wrapper rotate-90 duration-200 lg:!rotate-0">
 								<div className="flex items-center cursor-pointer">
 									<div className="more-arrow w-6 h-6 rounded-full flex items-center justify-center">
 										<svg
@@ -64,7 +64,7 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 					</div>
 					<RichText
 						tagName="p"
-						className="question-content font-roboto text-base mt-4"
+						className="question-content font-notoSans text-base mt-4"
 						value={answer}
 						onChange={(v) => setAttributes({ answer: v })}
 						placeholder={__("Answer..", "wp-custom-blocks")}

@@ -1,11 +1,15 @@
 import { colors } from "@/constants";
-import type { TBlockAttributes } from "@/types";
+import type { IImageAttributes, TBlockAttributes } from "@/types";
 
 export interface IFaqBlockAttributes {
 	uniqueId: string;
 	blockStyle: string;
+	backgroundColor: string;
+	backgroundImage: IImageAttributes;
 	title: string;
 	titleColor: string;
+	description: string;
+	descriptionColor: string;
 	isParentStyles: boolean;
 	questionColor: string;
 	answerColor: string;
@@ -13,6 +17,7 @@ export interface IFaqBlockAttributes {
 	borderColor: string;
 	arrowBackgroundColor: string;
 	arrowColor: string;
+	activeArrowColor: string;
 }
 
 export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
@@ -22,12 +27,27 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 	blockStyle: {
 		type: "object",
 	},
+	backgroundColor: {
+		type: "string",
+		default: colors.white.standard,
+	},
+	backgroundImage: {
+		type: "object",
+		default: {},
+	},
 	title: {
 		type: "string",
 	},
 	titleColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
+	},
+	description: {
+		type: "string",
+	},
+	descriptionColor: {
+		type: "string",
+		default: colors.dark.DEFAULT,
 	},
 	isParentStyles: {
 		type: "boolean",
@@ -35,11 +55,11 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 	},
 	questionColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	answerColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	activeColor: {
 		type: "string",
@@ -56,5 +76,9 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 	arrowColor: {
 		type: "string",
 		default: colors.grizzly.dark,
+	},
+	activeArrowColor: {
+		type: "string",
+		default: colors.white.DEFAULT,
 	},
 };

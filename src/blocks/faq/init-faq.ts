@@ -7,6 +7,11 @@ export const initFaq = () => {
 
 	const questions = wrapper.querySelectorAll<HTMLDivElement>(".question");
 	const questionContents = wrapper.querySelectorAll(".question-content");
+	const questionDesktopContent = wrapper.querySelector(
+		".question-desktop-content"
+	);
+	const questionDesktopTitle = questionDesktopContent?.querySelector("h5");
+	const questionDesktopText = questionDesktopContent?.querySelector("p");
 
 	const changeStateOfQuestion = (questionEl: HTMLDivElement | null) => {
 		if (!questionEl) {
@@ -20,7 +25,7 @@ export const initFaq = () => {
 		if (arrowWrapper) {
 			arrowWrapper.classList.toggle("text-grizzly-dark");
 			arrowWrapper.classList.toggle("text-white");
-			arrowWrapper.classList.toggle("rotate-0");
+			arrowWrapper.classList.toggle("rotate-90");
 			arrowWrapper.classList.toggle("-rotate-90");
 
 			const arrow = arrowWrapper.querySelector(".more-arrow");
@@ -33,9 +38,18 @@ export const initFaq = () => {
 
 	const itemHandler = (questionEl: HTMLDivElement | null) => {
 		const questionContent = questionEl.querySelector(".question-content");
+		const questionTitle = questionEl.querySelector(".question-title");
 
 		changeStateOfQuestion(questionEl);
 		questionEl.classList.toggle("active");
+
+		if (questionEl.classList.contains("active")) {
+			questionDesktopTitle.innerHTML = questionTitle.innerHTML;
+			questionDesktopText.innerHTML = questionContent.innerHTML;
+		} else {
+			questionDesktopTitle.innerHTML = "";
+			questionDesktopText.innerHTML = "";
+		}
 
 		questions.forEach((el) => {
 			if (el !== questionEl && el.classList.contains("active")) {

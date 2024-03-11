@@ -27,10 +27,10 @@ export const attributes: TBlockAttributes<IFaqItemElementAttributes> = {
 	},
 	questionColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	answerColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 };

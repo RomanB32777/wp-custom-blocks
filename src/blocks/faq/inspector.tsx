@@ -18,7 +18,9 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 	setAttributes,
 }) => {
 	const {
+		backgroundColor,
 		titleColor,
+		descriptionColor,
 		isParentStyles,
 		questionColor,
 		answerColor,
@@ -26,6 +28,7 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 		borderColor,
 		arrowBackgroundColor,
 		arrowColor,
+		activeArrowColor,
 	} = attributes;
 
 	const [itemStyles, showItemStylesPanel] = useState(isParentStyles);
@@ -40,9 +43,23 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					label={__("Background Color", "wp-custom-blocks")}
+					color={backgroundColor}
+					onChange={(v) => setAttributes({ backgroundColor: v })}
+				/>
+
+				<CardDivider />
+				<ColorControl
 					label={__("Title Color", "wp-custom-blocks")}
 					color={titleColor}
 					onChange={(v) => setAttributes({ titleColor: v })}
+				/>
+
+				<CardDivider />
+				<ColorControl
+					label={__("Description Color", "wp-custom-blocks")}
+					color={descriptionColor}
+					onChange={(v) => setAttributes({ descriptionColor: v })}
 				/>
 
 				<CardDivider />
@@ -97,6 +114,13 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 					label={__("Arrow color", "wp-custom-blocks")}
 					color={arrowColor}
 					onChange={(v) => setAttributes({ arrowColor: v })}
+				/>
+
+				<CardDivider />
+				<ColorControl
+					label={__("Active arrow Color", "wp-custom-blocks")}
+					color={activeArrowColor}
+					onChange={(v) => setAttributes({ activeArrowColor: v })}
 				/>
 			</PanelBody>
 		</InspectorControls>

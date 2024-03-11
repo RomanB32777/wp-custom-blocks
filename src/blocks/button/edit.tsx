@@ -18,18 +18,12 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const {
-		link,
-
-		buttonText,
-		buttonTextColor,
-		buttonColor,
-	} = attributes;
+	const { link, buttonText, buttonTextColor, buttonColor } = attributes;
 
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: "item-button w-full text-center",
+		className: "item-button",
 	});
 
 	return (
@@ -65,14 +59,17 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 
 			<div {...blockProps}>
 				<button
-					className="relative rounded-lg py-4 px-7"
+					className="relative flex text-base italic font-black w-fit mx-auto"
 					type="button"
 					aria-expanded="false"
-					style={{ backgroundColor: buttonColor }}
 				>
+					<div
+						className="absolute w-full h-full rounded-lg transform -skew-x-12"
+						style={{ backgroundColor: buttonColor }}
+					></div>
 					<RichText
 						tagName="span"
-						className="font-roboto text-base font-medium mx-auto"
+						className="font-notoSans relative py-5 px-8 mx-auto"
 						value={buttonText}
 						onChange={(v) => setAttributes({ buttonText: v })}
 						placeholder={__("Button text..", "wp-custom-blocks")}

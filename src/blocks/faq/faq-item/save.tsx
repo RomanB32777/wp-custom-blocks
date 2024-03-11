@@ -31,12 +31,12 @@ const Save: FC<BlockSaveProps<IFaqItemElementAttributes>> = ({
 				<div className="flex items-start justify-between">
 					<RichText.Content
 						tagName="p"
-						className="question-title font-roboto text-base basis-5/6"
+						className="question-title font-notoSans text-base basis-5/6"
 						value={question}
 						style={{ color: !isParentStyles ? questionColor : undefined }}
 					/>
 					<div className="flex justify-end basis-1/6">
-						<div className="arrow-wrapper duration-200 rotate-0">
+						<div className="arrow-wrapper rotate-90 duration-200 lg:!rotate-0">
 							<div className="flex items-center cursor-pointer">
 								<div className="more-arrow w-6 h-6 rounded-full flex items-center justify-center">
 									<svg
@@ -56,12 +56,14 @@ const Save: FC<BlockSaveProps<IFaqItemElementAttributes>> = ({
 						</div>
 					</div>
 				</div>
-				<RichText.Content
-					tagName="p"
-					className="question-content font-roboto text-base mt-4 hidden"
-					value={answer}
-					style={{ color: !isParentStyles ? answerColor : undefined }}
-				/>
+				<div className="lg:hidden">
+					<RichText.Content
+						tagName="p"
+						className="question-content font-notoSans text-base mt-4 hidden"
+						value={answer}
+						style={{ color: !isParentStyles ? answerColor : undefined }}
+					/>
+				</div>
 			</div>
 		</div>
 	);

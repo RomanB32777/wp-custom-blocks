@@ -1,11 +1,15 @@
 import React, { type FC } from "react";
 import {
+	BlockControls,
 	InnerBlocks,
+	MediaUpload,
+	MediaUploadCheck,
 	RichText,
 	useBlockProps,
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
+import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import { dispatch, select } from "@wordpress/data";
 import { Fragment, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -27,8 +31,12 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 	const {
 		uniqueId,
 		blockStyle,
+		backgroundColor,
+		backgroundImage,
 		title,
 		titleColor,
+		description,
+		descriptionColor,
 		isParentStyles,
 		questionColor,
 		answerColor,
@@ -36,10 +44,15 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 		borderColor,
 		arrowBackgroundColor,
 		arrowColor,
+		activeArrowColor,
 	} = attributes;
 
 	const blockProps = useBlockProps({
 		className: uniqueId,
+		style: {
+			maxWidth: "none",
+			margin: 0,
+		},
 	});
 
 	const childBlocks =
@@ -110,6 +123,10 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 		.${uniqueId} .question .more-arrow.active {
 			background-color: ${activeColor};
 		}
+
+		.${uniqueId} .question .more-arrow.active {
+			color: ${activeArrowColor};
+		}
 	`;
 
 	useEffect(() => {
@@ -124,18 +141,77 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 
-			<div {...blockProps}>
-				<RichText
-					tagName="h2"
-					className="font-roboto text-2xl font-black mb-4 md:text-3xl"
-					value={title}
-					onChange={(v) => setAttributes({ title: v })}
-					placeholder={__("Faq title..", "wp-custom-blocks")}
-					style={{ color: titleColor }}
-				/>
+			<BlockControls controls={[]}>
+				<ToolbarGroup>
+					<MediaUploadCheck>
+						<MediaUpload
+							onSelect={(media) =>
+								setAttributes({
+									backgroundImage: media,
+								})
+							}
+							allowedTypes={["image"]}
+							value={backgroundImage.id}
+							render={({ open }) => {
+								return (
+									<ToolbarButton
+										label={__("Edit background image", "wp-custom-blocks")}
+										onClick={open}
+										icon="format-image"
+										placeholder={__(
+											"Edit background image",
+											"wp-custom-blocks"
+										)}
+									/>
+								);
+							}}
+						/>
+					</MediaUploadCheck>
+				</ToolbarGroup>
+			</BlockControls>
 
-				<div className="wp-custom-blocks-questions questions">
-					<div {...innerBlocksProps} />
+			<div {...blockProps}>
+				<div
+					className="relative isolate overflow-hidden pt-36 pb-0 sm:py-24 lg:py-32"
+					style={{ backgroundColor }}
+				>
+					{backgroundImage.url && (
+						<img
+							className="absolute inset-0 -z-10 h-36 w-full object-cover sm:object-center sm:!h-full"
+							src={backgroundImage.url}
+							alt={backgroundImage.alt}
+							width={backgroundImage.width}
+							height={backgroundImage.height}
+						/>
+					)}
+
+					<div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+						<div
+							className="rounded-none p-4 sm:p-10 sm:rounded-lg"
+							style={{ backgroundColor }}
+						>
+							<RichText
+								tagName="h5"
+								className="font-notoSans text-xl font-black italic uppercase mb-6 md:!text-2xl"
+								value={title}
+								onChange={(v) => setAttributes({ title: v })}
+								placeholder={__("Faq title..", "wp-landing-blocks")}
+								style={{ color: titleColor }}
+							/>
+							<RichText
+								tagName="p"
+								className="font-notoSans text-sm font-normal mb-6 md:mb-11"
+								value={description}
+								onChange={(v) => setAttributes({ description: v })}
+								placeholder={__("Faq description..", "wp-landing-blocks")}
+								style={{ color: descriptionColor }}
+							/>
+
+							<div className="wp-custom-blocks-questions questions pb-10 border-b border-primary-light sm:pb-0 sm:border-none">
+								<div {...innerBlocksProps} />
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</Fragment>
