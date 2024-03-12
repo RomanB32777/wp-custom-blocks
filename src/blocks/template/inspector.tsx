@@ -13,7 +13,10 @@ import { __ } from "@wordpress/i18n";
 import { TemplateWrapperInspector } from "@/components";
 import type { IInspectorProps } from "@/types";
 
-import type { ITemplateBlockAttributes } from "./attributes";
+import {
+	blockAttributes as defaultAttributes,
+	type ITemplateBlockAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 	attributes,
@@ -40,6 +43,7 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 	return (
 		<TemplateWrapperInspector
 			attributes={attributes}
+			defaultAttributes={defaultAttributes}
 			setAttributes={setAttributes}
 			blockSettings={
 				<>

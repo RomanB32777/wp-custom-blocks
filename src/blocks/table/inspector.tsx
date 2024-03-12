@@ -16,20 +16,17 @@ import { TemplateWrapperInspector } from "@/components";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { ICellValues, ITableBlockAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type ICellValues,
+	type ITableBlockAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<ITableBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const {
-		columns,
-		rows,
-		backgroundColor,
-		columnColor,
-		rowColor,
-		isPreviewIcons,
-	} = attributes;
+	const { columns, rows, isPreviewIcons } = attributes;
 	const [uniqKeys, setUniqKeys] = useState(() => new Set(Object.keys(columns)));
 
 	// const handleDeleteColumn = (column) => {
@@ -86,9 +83,16 @@ const Inspector: FC<IInspectorProps<ITableBlockAttributes>> = ({
 		setAttributes({ rows: Object.fromEntries(updatedRows) });
 	};
 
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<TemplateWrapperInspector
 			attributes={attributes}
+			defaultAttributes={defaultAttributes}
 			setAttributes={setAttributes}
 			blockSettings={
 				<ToggleControl
@@ -121,23 +125,23 @@ const Inspector: FC<IInspectorProps<ITableBlockAttributes>> = ({
 				initialOpen={true}
 			>
 				<ColorControl
+					name="backgroundColor"
 					label={__("Background color", "wp-custom-blocks")}
-					color={backgroundColor}
-					onChange={(v) => setAttributes({ backgroundColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="columnColor"
 					label={__("Column color", "wp-custom-blocks")}
-					color={columnColor}
-					onChange={(v) => setAttributes({ columnColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="rowColor"
 					label={__("Row color", "wp-custom-blocks")}
-					color={rowColor}
-					onChange={(v) => setAttributes({ rowColor: v })}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 		</TemplateWrapperInspector>

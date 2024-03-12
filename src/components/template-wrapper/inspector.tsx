@@ -19,7 +19,7 @@ import { __ } from "@wordpress/i18n";
 
 import { fontSizes, tags, transforms } from "@/constants";
 import { ColorControl } from "@/controls";
-import type { IInspectorProps } from "@/types";
+import type { IInspectorProps, TBlockAttributes } from "@/types";
 
 import { TipResponsive } from "../tip-responsive";
 import {
@@ -30,6 +30,7 @@ import {
 
 interface ITemplateWrapperInspector
 	extends IInspectorProps<IBaseTemplateAttributes> {
+	defaultAttributes: TBlockAttributes<IBaseTemplateAttributes>;
 	blockSettings?: React.ReactNode;
 	blockSlidesPerView?: React.ReactNode;
 	blockBetweenSlides?: React.ReactNode;
@@ -41,8 +42,19 @@ interface ITemplateWrapperInspector
 }
 
 export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
-	attributes: {
-		titleColor,
+	attributes,
+	setAttributes,
+	defaultAttributes,
+	blockSettings,
+	blockSlidesPerView,
+	blockBetweenSlides,
+	blockSliderSettings,
+	blockItemsCount,
+	blockItemsSpaceBetween,
+	blockItemsSettings,
+	children,
+}) => {
+	const {
 		titleTag,
 		titleSize,
 		titleLineHeight,
@@ -50,11 +62,7 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 		titleMobileLineHeight,
 		titleWeight,
 		titleTransform,
-		descriptionColor,
 		isWithLinkBlock,
-		linkTextColor,
-		linkBtnArrowColor,
-		linkBackgroundBtnColor,
 		isEnableSlider,
 		isLoopSlider,
 		isDisableAutoplay,
@@ -71,17 +79,8 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 		mobileSpaceBetween,
 		tabletSpaceBetween,
 		laptopSpaceBetween,
-	},
-	setAttributes,
-	blockSettings,
-	blockSlidesPerView,
-	blockBetweenSlides,
-	blockSliderSettings,
-	blockItemsCount,
-	blockItemsSpaceBetween,
-	blockItemsSettings,
-	children,
-}) => {
+	} = attributes;
+
 	const [linkPanel, showLinkPanel] = useState(isWithLinkBlock);
 	const [sliderPanel, showSliderPanel] = useState(isEnableSlider);
 	const [withoutSliderPanel, showWithoutSliderPanel] =
@@ -95,6 +94,12 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 		showWithoutSliderPanel(!isEnableSlider);
 		showSliderPanel(isEnableSlider);
 	}, [isEnableSlider]);
+
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
 
 	return (
 		<InspectorControls>
@@ -130,9 +135,9 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 				initialOpen={false}
 			>
 				<ColorControl
+					name="descriptionColor"
 					label={__("Description color", "wp-custom-blocks")}
-					color={descriptionColor}
-					onChange={(v) => setAttributes({ descriptionColor: v })}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 
@@ -141,9 +146,9 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 				initialOpen={false}
 			>
 				<ColorControl
+					name="titleColor"
 					label={__("Title Color", "wp-custom-blocks")}
-					color={titleColor}
-					onChange={(v) => setAttributes({ titleColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
@@ -260,26 +265,26 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 				onToggle={() => showLinkPanel(!linkPanel)}
 			>
 				<ColorControl
+					name="linkTextColor"
 					label={__("Link text color", "wp-custom-blocks")}
-					color={linkTextColor}
 					disabled={!isWithLinkBlock}
-					onChange={(v) => setAttributes({ linkTextColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="linkBtnArrowColor"
 					label={__("Link button arrow color", "wp-custom-blocks")}
-					color={linkBtnArrowColor}
 					disabled={!isWithLinkBlock}
-					onChange={(v) => setAttributes({ linkBtnArrowColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="linkBackgroundBtnColor"
 					label={__("Link background button color", "wp-custom-blocks")}
-					color={linkBackgroundBtnColor}
 					disabled={!isWithLinkBlock}
-					onChange={(v) => setAttributes({ linkBackgroundBtnColor: v })}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 

@@ -23,7 +23,6 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 	setAttributes,
 }) => {
 	const {
-		itemsTitleColor,
 		mobileItemsPerView,
 		tabletItemsPerView,
 		laptopItemsPerView,
@@ -38,15 +37,21 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 		desktopHeight,
 	} = attributes;
 
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<TipResponsive />
 
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="itemsTitleColor"
 					label={__("Items title color", "wp-custom-blocks")}
-					color={itemsTitleColor}
-					onChange={(v) => setAttributes({ itemsTitleColor: v })}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 
@@ -68,7 +73,7 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 					allowReset
 					resetFallbackValue={Number(
 						(defaultAttributes.mobileItemsPerView as AttributeSource.Attribute)
-							?.default
+							.default
 					)}
 				/>
 
@@ -87,7 +92,7 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 					allowReset
 					resetFallbackValue={Number(
 						(defaultAttributes.tabletItemsPerView as AttributeSource.Attribute)
-							?.default
+							.default
 					)}
 				/>
 
@@ -106,7 +111,7 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 					allowReset
 					resetFallbackValue={Number(
 						(defaultAttributes.laptopItemsPerView as AttributeSource.Attribute)
-							?.default
+							.default
 					)}
 				/>
 
@@ -125,7 +130,7 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 					allowReset
 					resetFallbackValue={Number(
 						(defaultAttributes.desktopItemsPerView as AttributeSource.Attribute)
-							?.default
+							.default
 					)}
 				/>
 			</PanelBody>

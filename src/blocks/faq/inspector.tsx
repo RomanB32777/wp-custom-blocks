@@ -11,25 +11,16 @@ import { TipResponsive } from "@/components";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import { type IFaqBlockAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type IFaqBlockAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const {
-		backgroundColor,
-		titleColor,
-		descriptionColor,
-		isParentStyles,
-		questionColor,
-		answerColor,
-		activeColor,
-		borderColor,
-		arrowBackgroundColor,
-		arrowColor,
-		activeArrowColor,
-	} = attributes;
+	const { isParentStyles } = attributes;
 
 	const [itemStyles, showItemStylesPanel] = useState(isParentStyles);
 
@@ -37,29 +28,35 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 		showItemStylesPanel(isParentStyles);
 	}, [isParentStyles]);
 
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<TipResponsive />
 
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="backgroundColor"
 					label={__("Background Color", "wp-custom-blocks")}
-					color={backgroundColor}
-					onChange={(v) => setAttributes({ backgroundColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="titleColor"
 					label={__("Title Color", "wp-custom-blocks")}
-					color={titleColor}
-					onChange={(v) => setAttributes({ titleColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="descriptionColor"
 					label={__("Description Color", "wp-custom-blocks")}
-					color={descriptionColor}
-					onChange={(v) => setAttributes({ descriptionColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
@@ -76,51 +73,51 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 				onToggle={() => showItemStylesPanel(!itemStyles)}
 			>
 				<ColorControl
+					name="questionColor"
 					label={__("Question Color", "wp-custom-blocks")}
-					color={questionColor}
-					onChange={(v) => setAttributes({ questionColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="answerColor"
 					label={__("Answer Color", "wp-custom-blocks")}
-					color={answerColor}
-					onChange={(v) => setAttributes({ answerColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="activeColor"
 					label={__("Active Color", "wp-custom-blocks")}
-					color={activeColor}
-					onChange={(v) => setAttributes({ activeColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="borderColor"
 					label={__("Border Color", "wp-custom-blocks")}
-					color={borderColor}
-					onChange={(v) => setAttributes({ borderColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="arrowBackgroundColor"
 					label={__("Arrow background color", "wp-custom-blocks")}
-					color={arrowBackgroundColor}
-					onChange={(v) => setAttributes({ arrowBackgroundColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="arrowColor"
 					label={__("Arrow color", "wp-custom-blocks")}
-					color={arrowColor}
-					onChange={(v) => setAttributes({ arrowColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
-					label={__("Active arrow Color", "wp-custom-blocks")}
-					color={activeArrowColor}
-					onChange={(v) => setAttributes({ activeArrowColor: v })}
+					name="activeArrowColor"
+					label={__("Active arrow color", "wp-custom-blocks")}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 		</InspectorControls>

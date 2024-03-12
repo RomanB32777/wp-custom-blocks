@@ -9,13 +9,22 @@ import { __ } from "@wordpress/i18n";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { ISportCardElementAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type ISportCardElementAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<ISportCardElementAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const { nameColor, arrowColor, linkText, linkColor } = attributes;
+	const { linkText } = attributes;
+
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
 
 	return (
 		<InspectorControls>
@@ -24,16 +33,16 @@ const Inspector: FC<IInspectorProps<ISportCardElementAttributes>> = ({
 				initialOpen={true}
 			>
 				<ColorControl
+					name="nameColor"
 					label={__("Name Color", "wp-custom-blocks")}
-					color={nameColor}
-					onChange={(v) => setAttributes({ nameColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="arrowColor"
 					label={__("Arrow Color", "wp-custom-blocks")}
-					color={arrowColor}
-					onChange={(v) => setAttributes({ arrowColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
@@ -49,9 +58,9 @@ const Inspector: FC<IInspectorProps<ISportCardElementAttributes>> = ({
 					<>
 						<CardDivider />
 						<ColorControl
+							name="linkColor"
 							label={__("Link Color", "wp-custom-blocks")}
-							color={linkColor}
-							onChange={(v) => setAttributes({ linkColor: v })}
+							{...colorControlProps}
 						/>
 					</>
 				)}

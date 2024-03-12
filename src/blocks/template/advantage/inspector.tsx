@@ -9,13 +9,20 @@ import { __ } from "@wordpress/i18n";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { IAdvantageElementAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type IAdvantageElementAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<IAdvantageElementAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const { titleColor, backgroundColor } = attributes;
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
 
 	return (
 		<InspectorControls>
@@ -24,16 +31,16 @@ const Inspector: FC<IInspectorProps<IAdvantageElementAttributes>> = ({
 				initialOpen={true}
 			>
 				<ColorControl
+					name="backgroundColor"
 					label={__("Background Color", "wp-custom-blocks")}
-					color={backgroundColor}
-					onChange={(v) => setAttributes({ backgroundColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="titleColor"
 					label={__("Title color", "wp-custom-blocks")}
-					color={titleColor}
-					onChange={(v) => setAttributes({ titleColor: v })}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 		</InspectorControls>

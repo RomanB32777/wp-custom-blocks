@@ -9,19 +9,20 @@ import { __ } from "@wordpress/i18n";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { ICardElementAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type ICardElementAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<ICardElementAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const {
-		titleColor,
-		categoryColor,
-		buttonTextColor,
-		buttonColor,
-		reviewColor,
-	} = attributes;
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
 
 	return (
 		<InspectorControls>
@@ -30,37 +31,37 @@ const Inspector: FC<IInspectorProps<ICardElementAttributes>> = ({
 				initialOpen={true}
 			>
 				<ColorControl
+					name="titleColor"
 					label={__("Title color", "wp-custom-blocks")}
-					color={titleColor}
-					onChange={(v) => setAttributes({ titleColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="categoryColor"
 					label={__("Category color", "wp-custom-blocks")}
-					color={categoryColor}
-					onChange={(v) => setAttributes({ categoryColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="buttonColor"
 					label={__("Button color", "wp-custom-blocks")}
-					color={buttonColor}
-					onChange={(v) => setAttributes({ buttonColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="buttonTextColor"
 					label={__("Button text color", "wp-custom-blocks")}
-					color={buttonTextColor}
-					onChange={(v) => setAttributes({ buttonTextColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="reviewColor"
 					label={__("Review color", "wp-custom-blocks")}
-					color={reviewColor}
-					onChange={(v) => setAttributes({ reviewColor: v })}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 		</InspectorControls>

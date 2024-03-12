@@ -15,20 +15,16 @@ import { TipResponsive } from "@/components";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { IBannerBlockAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type IBannerBlockAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
 	const {
-		backgroundColor,
-		titleColor,
-		descriptionColor,
-		buttonTextColor,
-		buttonColor,
-		sportsTitleColor,
-		sportsDescriptionColor,
 		desktopItemsCount,
 		desktopSpaceBetweenItems,
 		isLoopSlider,
@@ -40,10 +36,13 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 		sliderMobileSpaceBetween,
 		sliderTabletSpaceBetween,
 		sliderLaptopSpaceBetween,
-		adviceBackgroundColor,
-		adviceTitleColor,
-		adviceDescriptionColor,
 	} = attributes;
+
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
 
 	return (
 		<InspectorControls>
@@ -54,44 +53,44 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 				initialOpen={true}
 			>
 				<ColorControl
+					name="backgroundColor"
 					label={__("Background Color", "wp-custom-blocks")}
-					color={backgroundColor}
-					onChange={(v) => setAttributes({ backgroundColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="titleColor"
 					label={__("Title Color", "wp-custom-blocks")}
-					color={titleColor}
-					onChange={(v) => setAttributes({ titleColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="descriptionColor"
 					label={__("Description color", "wp-custom-blocks")}
-					color={descriptionColor}
-					onChange={(v) => setAttributes({ descriptionColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="sportsTitleColor"
 					label={__("Sports title color", "wp-custom-blocks")}
-					color={sportsTitleColor}
-					onChange={(v) => setAttributes({ sportsTitleColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="buttonColor"
 					label={__("Button color", "wp-custom-blocks")}
-					color={buttonColor}
-					onChange={(v) => setAttributes({ buttonColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="buttonTextColor"
 					label={__("Button text color", "wp-custom-blocks")}
-					color={buttonTextColor}
-					onChange={(v) => setAttributes({ buttonTextColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
@@ -130,30 +129,30 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 
 				<CardDivider />
 				<ColorControl
+					name="sportsDescriptionColor"
 					label={__("Sports description color", "wp-custom-blocks")}
-					color={sportsDescriptionColor}
-					onChange={(v) => setAttributes({ sportsDescriptionColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="adviceBackgroundColor"
 					label={__("Advice background color", "wp-custom-blocks")}
-					color={adviceBackgroundColor}
-					onChange={(v) => setAttributes({ adviceBackgroundColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="adviceTitleColor"
 					label={__("Advice title color", "wp-custom-blocks")}
-					color={adviceTitleColor}
-					onChange={(v) => setAttributes({ adviceTitleColor: v })}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="adviceDescriptionColor"
 					label={__("Advice description color", "wp-custom-blocks")}
-					color={adviceDescriptionColor}
-					onChange={(v) => setAttributes({ adviceDescriptionColor: v })}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 
