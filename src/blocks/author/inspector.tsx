@@ -9,35 +9,42 @@ import { __ } from "@wordpress/i18n";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { IAuthorBlockAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type IAuthorBlockAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<IAuthorBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const { backgroundColor, avatarBorderColor, descriptionColor } = attributes;
-
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Colors", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="backgroundColor"
 					label={__("Background Color", "wp-custom-blocks")}
-					color={backgroundColor}
-					onChange={(v) => setAttributes({ backgroundColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="avatarBorderColor"
 					label={__("Avatar Border Color", "wp-custom-blocks")}
-					color={avatarBorderColor}
-					onChange={(v) => setAttributes({ avatarBorderColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="descriptionColor"
 					label={__("Description Color", "wp-custom-blocks")}
-					color={descriptionColor}
-					onChange={(v) => setAttributes({ descriptionColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 			</PanelBody>
 		</InspectorControls>

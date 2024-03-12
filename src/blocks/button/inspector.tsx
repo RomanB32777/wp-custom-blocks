@@ -9,28 +9,33 @@ import { __ } from "@wordpress/i18n";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { IButtonBlockAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type IButtonBlockAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<IButtonBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const { buttonTextColor, buttonColor } = attributes;
-
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="buttonColor"
 					label={__("Button color", "wp-custom-blocks")}
-					color={buttonColor}
-					onChange={(v) => setAttributes({ buttonColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="buttonTextColor"
 					label={__("Button text color", "wp-custom-blocks")}
-					color={buttonTextColor}
-					onChange={(v) => setAttributes({ buttonTextColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 			</PanelBody>
 		</InspectorControls>

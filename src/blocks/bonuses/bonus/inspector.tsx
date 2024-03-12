@@ -9,52 +9,57 @@ import { __ } from "@wordpress/i18n";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { IBonusElementAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type IBonusElementAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<IBonusElementAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const {
-		isParentStyles,
-		backgroundColor,
-		titleColor,
-		buttonTextColor,
-		buttonColor,
-	} = attributes;
+	const { isParentStyles } = attributes;
 
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="backgroundColor"
 					label={__("Background color", "wp-custom-blocks")}
-					color={backgroundColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					onChange={(v) => setAttributes({ backgroundColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="titleColor"
 					label={__("Title color", "wp-custom-blocks")}
-					color={titleColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					onChange={(v) => setAttributes({ titleColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="buttonColor"
 					label={__("Button color", "wp-custom-blocks")}
-					color={buttonColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					onChange={(v) => setAttributes({ buttonColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="buttonTextColor"
 					label={__("Button text color", "wp-custom-blocks")}
-					color={buttonTextColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					onChange={(v) => setAttributes({ buttonTextColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 			</PanelBody>
 		</InspectorControls>

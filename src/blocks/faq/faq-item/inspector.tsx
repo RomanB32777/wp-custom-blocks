@@ -9,30 +9,37 @@ import { __ } from "@wordpress/i18n";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { IFaqItemElementAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type IFaqItemElementAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<IFaqItemElementAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const { isParentStyles, questionColor, answerColor } = attributes;
+	const { isParentStyles } = attributes;
 
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="questionColor"
 					label={__("Question Color", "wp-custom-blocks")}
-					color={questionColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					onChange={(v) => setAttributes({ questionColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="answerColor"
 					label={__("Answer color", "wp-custom-blocks")}
-					color={answerColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					onChange={(v) => setAttributes({ answerColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 			</PanelBody>
 		</InspectorControls>

@@ -29,11 +29,7 @@ const Inspector: FC<IInspectorProps<ICardsBlockAttributes>> = ({
 	setAttributes,
 }) => {
 	const {
-		titleColor,
 		isParentStyles,
-		itemsTitleColor,
-		itemsButtonTextColor,
-		itemsButtonColor,
 		mobileItemsPerView,
 		tabletItemsPerView,
 		laptopItemsPerView,
@@ -60,9 +56,11 @@ const Inspector: FC<IInspectorProps<ICardsBlockAttributes>> = ({
 
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="titleColor"
 					label={__("Title Color", "wp-custom-blocks")}
-					color={titleColor}
-					onChange={(v) => setAttributes({ titleColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
@@ -80,26 +78,32 @@ const Inspector: FC<IInspectorProps<ICardsBlockAttributes>> = ({
 				onToggle={() => showItemStylesPanel(!itemStyles)}
 			>
 				<ColorControl
+					name="itemsTitleColor"
 					label={__("Items title color", "wp-custom-blocks")}
-					color={itemsTitleColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={!isParentStyles}
-					onChange={(v) => setAttributes({ itemsTitleColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="itemsButtonColor"
 					label={__("Items button color", "wp-custom-blocks")}
-					color={itemsButtonColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={!isParentStyles}
-					onChange={(v) => setAttributes({ itemsButtonColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="itemsButtonTextColor"
 					label={__("Items button text color", "wp-custom-blocks")}
-					color={itemsButtonTextColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={!isParentStyles}
-					onChange={(v) => setAttributes({ itemsButtonTextColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 			</PanelBody>
 
@@ -121,7 +125,7 @@ const Inspector: FC<IInspectorProps<ICardsBlockAttributes>> = ({
 					allowReset
 					resetFallbackValue={Number(
 						(defaultAttributes.mobileItemsPerView as AttributeSource.Attribute)
-							?.default
+							.default
 					)}
 				/>
 
@@ -140,7 +144,7 @@ const Inspector: FC<IInspectorProps<ICardsBlockAttributes>> = ({
 					allowReset
 					resetFallbackValue={Number(
 						(defaultAttributes.tabletItemsPerView as AttributeSource.Attribute)
-							?.default
+							.default
 					)}
 				/>
 
@@ -159,7 +163,7 @@ const Inspector: FC<IInspectorProps<ICardsBlockAttributes>> = ({
 					allowReset
 					resetFallbackValue={Number(
 						(defaultAttributes.laptopItemsPerView as AttributeSource.Attribute)
-							?.default
+							.default
 					)}
 				/>
 
@@ -178,7 +182,7 @@ const Inspector: FC<IInspectorProps<ICardsBlockAttributes>> = ({
 					allowReset
 					resetFallbackValue={Number(
 						(defaultAttributes.desktopItemsPerView as AttributeSource.Attribute)
-							?.default
+							.default
 					)}
 				/>
 			</PanelBody>

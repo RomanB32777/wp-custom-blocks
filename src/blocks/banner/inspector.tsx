@@ -9,58 +9,69 @@ import { __ } from "@wordpress/i18n";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { IBannerBlockAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type IBannerBlockAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const {
-		borderColor,
-		backgroundColor,
-		bonusLabelColor,
-		bonusBackgroundColor,
-		domainLinkColor,
-		paymentBackgroundColor,
-	} = attributes;
-
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Colors", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="backgroundColor"
 					label={__("Background Color", "wp-custom-blocks")}
-					color={backgroundColor}
-					onChange={(v) => setAttributes({ backgroundColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
+
 				<CardDivider />
 				<ColorControl
+					name="borderColor"
 					label={__("Border Color", "wp-custom-blocks")}
-					color={borderColor}
-					onChange={(v) => setAttributes({ borderColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
+
 				<CardDivider />
 				<ColorControl
+					name="bonusLabelColor"
 					label={__("Bonus Label Color", "wp-custom-blocks")}
-					color={bonusLabelColor}
-					onChange={(v) => setAttributes({ bonusLabelColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
+
 				<CardDivider />
 				<ColorControl
+					name="bonusBackgroundColor"
 					label={__("Bonus Background Color", "wp-custom-blocks")}
-					color={bonusBackgroundColor}
-					onChange={(v) => setAttributes({ bonusBackgroundColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
+
 				<CardDivider />
 				<ColorControl
+					name="domainLinkColor"
 					label={__("Domain Link Color", "wp-custom-blocks")}
-					color={domainLinkColor}
-					onChange={(v) => setAttributes({ domainLinkColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
+
 				<CardDivider />
 				<ColorControl
+					name="paymentBackgroundColor"
 					label={__("Payment Background Color", "wp-custom-blocks")}
-					color={paymentBackgroundColor}
-					onChange={(v) => setAttributes({ paymentBackgroundColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 			</PanelBody>
 		</InspectorControls>

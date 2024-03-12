@@ -3,7 +3,6 @@ import React, { type FC } from "react";
  * WordPress dependencies
  */
 import { InspectorControls } from "@wordpress/block-editor";
-import type { AttributeSource } from "@wordpress/blocks";
 import {
 	CardDivider,
 	PanelBody,
@@ -16,6 +15,7 @@ import { __ } from "@wordpress/i18n";
 import { TipResponsive } from "@/components";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
+import { getDefaultAttributeValue } from "@/utils/default-attribute-value";
 
 import {
 	baseSpaceBetween,
@@ -29,13 +29,7 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 	setAttributes,
 }) => {
 	const {
-		buttonTextColor,
-		buttonColor,
 		isParentStyles,
-		itemsBackgroundColor,
-		itemsTitleColor,
-		itemsButtonTextColor,
-		itemsButtonColor,
 		mobileItemsPerView,
 		tabletItemsPerView,
 		laptopItemsPerView,
@@ -62,16 +56,20 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="buttonColor"
 					label={__("Button color", "wp-custom-blocks")}
-					color={buttonColor}
-					onChange={(v) => setAttributes({ buttonColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="buttonTextColor"
 					label={__("Button text color", "wp-custom-blocks")}
-					color={buttonTextColor}
-					onChange={(v) => setAttributes({ buttonTextColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
@@ -89,34 +87,42 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 				onToggle={() => showItemStylesPanel(!itemStyles)}
 			>
 				<ColorControl
+					name="itemsBackgroundColor"
 					label={__("Items background color", "wp-custom-blocks")}
-					color={itemsBackgroundColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={!isParentStyles}
-					onChange={(v) => setAttributes({ itemsBackgroundColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="itemsTitleColor"
 					label={__("Items title color", "wp-custom-blocks")}
-					color={itemsTitleColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={!isParentStyles}
-					onChange={(v) => setAttributes({ itemsTitleColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="itemsButtonColor"
 					label={__("Items button color", "wp-custom-blocks")}
-					color={itemsButtonColor}
 					disabled={!isParentStyles}
-					onChange={(v) => setAttributes({ itemsButtonColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
 
 				<CardDivider />
 				<ColorControl
+					name="itemsButtonTextColor"
 					label={__("Items button text color", "wp-custom-blocks")}
-					color={itemsButtonTextColor}
+					attributes={attributes}
+					setAttributes={setAttributes}
 					disabled={!isParentStyles}
-					onChange={(v) => setAttributes({ itemsButtonTextColor: v })}
+					defaultAttributes={defaultAttributes}
 				/>
 			</PanelBody>
 
@@ -137,8 +143,7 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 					max={10}
 					allowReset
 					resetFallbackValue={Number(
-						(defaultAttributes.mobileItemsPerView as AttributeSource.Attribute)
-							?.default
+						getDefaultAttributeValue(defaultAttributes, "mobileItemsPerView")
 					)}
 				/>
 
@@ -156,8 +161,7 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 					max={10}
 					allowReset
 					resetFallbackValue={Number(
-						(defaultAttributes.tabletItemsPerView as AttributeSource.Attribute)
-							?.default
+						getDefaultAttributeValue(defaultAttributes, "tabletItemsPerView")
 					)}
 				/>
 
@@ -175,8 +179,7 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 					max={10}
 					allowReset
 					resetFallbackValue={Number(
-						(defaultAttributes.laptopItemsPerView as AttributeSource.Attribute)
-							?.default
+						getDefaultAttributeValue(defaultAttributes, "laptopItemsPerView")
 					)}
 				/>
 
@@ -194,8 +197,7 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 					max={10}
 					allowReset
 					resetFallbackValue={Number(
-						(defaultAttributes.desktopItemsPerView as AttributeSource.Attribute)
-							?.default
+						getDefaultAttributeValue(defaultAttributes, "desktopItemsPerView")
 					)}
 				/>
 			</PanelBody>

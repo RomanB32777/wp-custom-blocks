@@ -11,21 +11,17 @@ import { __ } from "@wordpress/i18n";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
-import type { IStepsBlockAttributes } from "./attributes";
+import {
+	attributes as defaultAttributes,
+	type IStepsBlockAttributes,
+} from "./attributes";
 
 const Inspector: FC<IInspectorProps<IStepsBlockAttributes>> = ({
 	attributes,
 	clientId,
 	setAttributes,
 }) => {
-	const {
-		isOnlyText,
-		mainColor,
-		stepColor,
-		titleColor,
-		descriptionColor,
-		borderColor,
-	} = attributes;
+	const { isOnlyText } = attributes;
 
 	const toggleHandler = () => {
 		const newStatus = !isOnlyText;
@@ -50,35 +46,49 @@ const Inspector: FC<IInspectorProps<IStepsBlockAttributes>> = ({
 			</PanelBody>
 			<PanelBody title={__("Step settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
+					name="mainColor"
 					label={__("Main Color", "wp-custom-blocks")}
-					color={mainColor}
-					onChange={(v) => setAttributes({ mainColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
+
 				<CardDivider />
 				<ColorControl
+					name="stepColor"
 					label={__("Step Color", "wp-custom-blocks")}
-					color={stepColor}
-					onChange={(v) => setAttributes({ stepColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
+
 				<CardDivider />
 				<ColorControl
+					name="titleColor"
 					label={__("Title Color", "wp-custom-blocks")}
-					color={titleColor}
-					onChange={(v) => setAttributes({ titleColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
+
 				<CardDivider />
 				<ColorControl
+					name="descriptionColor"
 					label={__("Description Color", "wp-custom-blocks")}
-					color={descriptionColor}
-					onChange={(v) => setAttributes({ descriptionColor: v })}
+					attributes={attributes}
+					setAttributes={setAttributes}
+					defaultAttributes={defaultAttributes}
 				/>
+
 				{isOnlyText && (
 					<Fragment>
 						<CardDivider />
 						<ColorControl
+							name="borderColor"
 							label={__("Border Color", "wp-custom-blocks")}
-							color={borderColor}
-							onChange={(v) => setAttributes({ borderColor: v })}
+							attributes={attributes}
+							setAttributes={setAttributes}
+							defaultAttributes={defaultAttributes}
 						/>
 					</Fragment>
 				)}
