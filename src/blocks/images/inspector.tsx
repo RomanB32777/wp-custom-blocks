@@ -37,6 +37,12 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 		desktopHeight,
 	} = attributes;
 
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<TipResponsive />
@@ -45,9 +51,7 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 				<ColorControl
 					name="itemsTitleColor"
 					label={__("Items title color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 

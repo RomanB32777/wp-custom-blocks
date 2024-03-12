@@ -20,36 +20,36 @@ const Inspector: FC<IInspectorProps<ICardElementAttributes>> = ({
 }) => {
 	const { isParentStyles } = attributes;
 
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
 					name="titleColor"
 					label={__("Title color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="buttonColor"
 					label={__("Button color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="buttonTextColor"
 					label={__("Button text color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 		</InspectorControls>

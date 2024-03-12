@@ -35,6 +35,12 @@ const Inspector: FC<IInspectorProps<IStepsBlockAttributes>> = ({
 		}
 	};
 
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
@@ -48,36 +54,28 @@ const Inspector: FC<IInspectorProps<IStepsBlockAttributes>> = ({
 				<ColorControl
 					name="mainColor"
 					label={__("Main Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="stepColor"
 					label={__("Step Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="titleColor"
 					label={__("Title Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="descriptionColor"
 					label={__("Description Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				{isOnlyText && (
@@ -86,9 +84,7 @@ const Inspector: FC<IInspectorProps<IStepsBlockAttributes>> = ({
 						<ColorControl
 							name="borderColor"
 							label={__("Border Color", "wp-custom-blocks")}
-							attributes={attributes}
-							setAttributes={setAttributes}
-							defaultAttributes={defaultAttributes}
+							{...colorControlProps}
 						/>
 					</Fragment>
 				)}

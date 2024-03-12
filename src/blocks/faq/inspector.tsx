@@ -28,6 +28,12 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 		showItemStylesPanel(isParentStyles);
 	}, [isParentStyles]);
 
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<TipResponsive />
@@ -36,9 +42,7 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 				<ColorControl
 					name="titleColor"
 					label={__("Title Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
@@ -57,63 +61,49 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 				<ColorControl
 					name="questionColor"
 					label={__("Question Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="answerColor"
 					label={__("Answer Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="activeColor"
 					label={__("Active Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="borderColor"
 					label={__("Border Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="arrowBackgroundColor"
 					label={__("Arrow background color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="arrowColor"
 					label={__("Arrow color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="activeArrowColor"
 					label={__("Active arrow Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 		</InspectorControls>

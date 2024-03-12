@@ -18,33 +18,33 @@ const Inspector: FC<IInspectorProps<IAuthorBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Colors", "wp-custom-blocks")} initialOpen>
 				<ColorControl
 					name="backgroundColor"
 					label={__("Background Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="avatarBorderColor"
 					label={__("Avatar Border Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="descriptionColor"
 					label={__("Description Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 		</InspectorControls>

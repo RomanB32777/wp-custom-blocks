@@ -50,6 +50,12 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 		showItemStylesPanel(isParentStyles);
 	}, [isParentStyles]);
 
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<TipResponsive />
@@ -58,18 +64,14 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 				<ColorControl
 					name="buttonColor"
 					label={__("Button color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="buttonTextColor"
 					label={__("Button text color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
@@ -89,20 +91,16 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 				<ColorControl
 					name="itemsBackgroundColor"
 					label={__("Items background color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
 					disabled={!isParentStyles}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="itemsTitleColor"
 					label={__("Items title color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
 					disabled={!isParentStyles}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
@@ -110,19 +108,15 @@ const Inspector: FC<IInspectorProps<IBonusesBlockAttributes>> = ({
 					name="itemsButtonColor"
 					label={__("Items button color", "wp-custom-blocks")}
 					disabled={!isParentStyles}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="itemsButtonTextColor"
 					label={__("Items button text color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
 					disabled={!isParentStyles}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 

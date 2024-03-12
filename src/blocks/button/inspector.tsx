@@ -18,24 +18,26 @@ const Inspector: FC<IInspectorProps<IButtonBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
 					name="buttonColor"
 					label={__("Button color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="buttonTextColor"
 					label={__("Button text color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 		</InspectorControls>

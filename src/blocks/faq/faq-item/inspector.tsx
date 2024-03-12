@@ -20,26 +20,28 @@ const Inspector: FC<IInspectorProps<IFaqItemElementAttributes>> = ({
 }) => {
 	const { isParentStyles } = attributes;
 
+	const colorControlProps = {
+		attributes,
+		defaultAttributes,
+		setAttributes,
+	};
+
 	return (
 		<InspectorControls>
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
 					name="questionColor"
 					label={__("Question Color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
 				<ColorControl
 					name="answerColor"
 					label={__("Answer color", "wp-custom-blocks")}
-					attributes={attributes}
-					setAttributes={setAttributes}
 					disabled={isParentStyles}
-					defaultAttributes={defaultAttributes}
+					{...colorControlProps}
 				/>
 			</PanelBody>
 		</InspectorControls>
