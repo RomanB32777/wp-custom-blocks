@@ -92,7 +92,6 @@ const Inspector: FC<IInspectorProps<ITableBlockAttributes>> = ({
 	return (
 		<TemplateWrapperInspector
 			attributes={attributes}
-			defaultAttributes={defaultAttributes}
 			setAttributes={setAttributes}
 			blockSettings={
 				<ToggleControl

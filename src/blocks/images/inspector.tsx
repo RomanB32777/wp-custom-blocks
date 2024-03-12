@@ -3,13 +3,13 @@ import React, { type FC } from "react";
  * WordPress dependencies
  */
 import { InspectorControls } from "@wordpress/block-editor";
-import type { AttributeSource } from "@wordpress/blocks";
 import { CardDivider, PanelBody, RangeControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 import { TipResponsive } from "@/components";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
+import { getDefaultAttributeValue } from "@/utils/default-attribute-value";
 
 import {
 	baseSpaceBetween,
@@ -72,8 +72,7 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 					max={10}
 					allowReset
 					resetFallbackValue={Number(
-						(defaultAttributes.mobileItemsPerView as AttributeSource.Attribute)
-							.default
+						getDefaultAttributeValue(defaultAttributes, "mobileItemsPerView")
 					)}
 				/>
 
@@ -91,8 +90,7 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 					max={10}
 					allowReset
 					resetFallbackValue={Number(
-						(defaultAttributes.tabletItemsPerView as AttributeSource.Attribute)
-							.default
+						getDefaultAttributeValue(defaultAttributes, "tabletItemsPerView")
 					)}
 				/>
 
@@ -110,8 +108,7 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 					max={10}
 					allowReset
 					resetFallbackValue={Number(
-						(defaultAttributes.laptopItemsPerView as AttributeSource.Attribute)
-							.default
+						getDefaultAttributeValue(defaultAttributes, "laptopItemsPerView")
 					)}
 				/>
 
@@ -129,8 +126,7 @@ const Inspector: FC<IInspectorProps<IImagesBlockAttributes>> = ({
 					max={10}
 					allowReset
 					resetFallbackValue={Number(
-						(defaultAttributes.desktopItemsPerView as AttributeSource.Attribute)
-							.default
+						getDefaultAttributeValue(defaultAttributes, "desktopItemsPerView")
 					)}
 				/>
 			</PanelBody>

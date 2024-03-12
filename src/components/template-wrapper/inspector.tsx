@@ -5,7 +5,6 @@ import React, { type FC } from "react";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { InspectorControls, LineHeightControl } from "@wordpress/block-editor";
-import type { AttributeSource } from "@wordpress/blocks";
 import {
 	CardDivider,
 	FontSizePicker,
@@ -19,7 +18,8 @@ import { __ } from "@wordpress/i18n";
 
 import { fontSizes, tags, transforms } from "@/constants";
 import { ColorControl } from "@/controls";
-import type { IInspectorProps, TBlockAttributes } from "@/types";
+import type { IInspectorProps } from "@/types";
+import { getDefaultAttributeValue } from "@/utils/default-attribute-value";
 
 import { TipResponsive } from "../tip-responsive";
 import {
@@ -30,7 +30,6 @@ import {
 
 interface ITemplateWrapperInspector
 	extends IInspectorProps<IBaseTemplateAttributes> {
-	defaultAttributes: TBlockAttributes<IBaseTemplateAttributes>;
 	blockSettings?: React.ReactNode;
 	blockSlidesPerView?: React.ReactNode;
 	blockBetweenSlides?: React.ReactNode;
@@ -44,7 +43,6 @@ interface ITemplateWrapperInspector
 export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 	attributes,
 	setAttributes,
-	defaultAttributes,
 	blockSettings,
 	blockSlidesPerView,
 	blockBetweenSlides,
@@ -97,7 +95,7 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 
 	const colorControlProps = {
 		attributes,
-		defaultAttributes,
+		defaultAttributes: templateAttributes,
 		setAttributes,
 	};
 
@@ -172,8 +170,7 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 							titleSize:
 								Number(v) ||
 								Number(
-									(templateAttributes.titleSize as AttributeSource.Attribute)
-										?.default
+									getDefaultAttributeValue(templateAttributes, "titleSize")
 								),
 						});
 					}}
@@ -235,9 +232,10 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 								titleMobileSize:
 									Number(v) ||
 									Number(
-										(
-											templateAttributes.titleMobileSize as AttributeSource.Attribute
-										)?.default
+										getDefaultAttributeValue(
+											templateAttributes,
+											"titleMobileSize"
+										)
 									),
 							});
 						}}
