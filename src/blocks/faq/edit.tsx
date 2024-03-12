@@ -36,6 +36,7 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 		borderColor,
 		arrowBackgroundColor,
 		arrowColor,
+		activeArrowColor,
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -109,6 +110,7 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 
 		.${uniqueId} .question .more-arrow.active {
 			background-color: ${activeColor};
+			color: ${activeArrowColor};
 		}
 	`;
 

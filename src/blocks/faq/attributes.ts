@@ -13,6 +13,7 @@ export interface IFaqBlockAttributes {
 	borderColor: string;
 	arrowBackgroundColor: string;
 	arrowColor: string;
+	activeArrowColor: string;
 }
 
 export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
@@ -56,5 +57,9 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 	arrowColor: {
 		type: "string",
 		default: colors.grizzly.dark,
+	},
+	activeArrowColor: {
+		type: "string",
+		default: colors.white.DEFAULT,
 	},
 };

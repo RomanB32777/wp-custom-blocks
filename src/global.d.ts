@@ -35,3 +35,6 @@ declare const GRIZZLY_LIGHT_COLOR: string;
 declare const GRIZZLY_DARK_COLOR: string;
 
 declare const RED_COLOR: string;
+
+declare const YELLOW_COLOR: string;
+declare const YELLOW_LIGHT_COLOR: string;

@@ -27,4 +27,8 @@ export const colors = {
 	red: {
 		DEFAULT: RED_COLOR || "#d63031",
 	},
+	yellow: {
+		DEFAULT: YELLOW_COLOR || "#f9b002",
+		light: YELLOW_LIGHT_COLOR || "#e3ae6f",
+	},
 };
