@@ -183,8 +183,8 @@ const Edit: FC<BlockEditProps<ICardsBlockAttributes>> = ({
 
 			<div {...blockProps}>
 				<RichText
-					tagName="h2"
-					className="font-roboto text-2xl font-black mb-4 md:text-3xl"
+					tagName="h5"
+					className="block-title font-lineSeedJp mb-6 md:text-2xl"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
 					placeholder={__("Cards title..", "wp-custom-blocks")}

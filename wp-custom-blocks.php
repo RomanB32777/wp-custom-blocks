@@ -17,11 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function fonts_plugin() {
-	wp_enqueue_style( 'googlefonts', '//fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;900&display=swap', array(), null );
-}
-add_action( 'enqueue_block_editor_assets', 'fonts_plugin' );
-
 function enqueue_plugin_versioned_style( $handle, $path = '', $deps = array(), $media = 'all' ) {
 	$style_url = plugin_dir_url( __FILE__ ) . $path;
 
@@ -30,6 +25,7 @@ function enqueue_plugin_versioned_style( $handle, $path = '', $deps = array(), $
 }
 
 function style_plugin() {
+	enqueue_plugin_versioned_style( 'wp_custom_blocks_fonts', 'build/fonts.css' );
 	enqueue_plugin_versioned_style( 'wp_custom_blocks_style', 'build/style.css' );
 }
 add_action( 'enqueue_block_editor_assets', 'style_plugin' );

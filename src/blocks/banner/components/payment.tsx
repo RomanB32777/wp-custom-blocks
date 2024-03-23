@@ -18,7 +18,7 @@ interface IPayment {
 
 export const Payment: FC<IPayment> = ({ image, onChange, onDelete }) => {
 	return (
-		<div className="payment min-h-24 rounded-lg flex-auto relative md:!flex-1">
+		<div className="payment min-h-24 flex-auto relative md:!flex-1">
 			<div className="absolute top-2 right-2 z-10">
 				<ToolbarButton
 					variant="primary"

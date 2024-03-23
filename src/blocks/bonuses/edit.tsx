@@ -229,13 +229,13 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 
 				<div className="mt-6 text-center">
 					<button
-						className="link-button relative rounded-lg py-5 px-10"
+						className="link-button relative py-5 px-10"
 						type="button"
 						aria-expanded="false"
 					>
 						<RichText
 							tagName="span"
-							className="font-roboto text-4xl font-black mx-auto"
+							className="font-lineSeedJp text-4xl font-black mx-auto"
 							value={buttonText}
 							onChange={(v) => setAttributes({ buttonText: v })}
 							placeholder={__("Button text..", "wp-custom-blocks")}

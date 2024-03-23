@@ -62,7 +62,7 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				roboto: ['"Roboto"', "Arial", "sans-serif"],
+				lineSeedJp: ['"LINESeedJP"', "Arial", "sans-serif"],
 			},
 			letterSpacing: {
 				wide: "0.75rem",

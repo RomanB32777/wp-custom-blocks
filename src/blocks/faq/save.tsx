@@ -20,8 +20,8 @@ const Save: FC<BlockSaveProps<IFaqBlockAttributes>> = ({ attributes }) => {
 	return (
 		<div {...blockProps}>
 			<RichText.Content
-				tagName="h2"
-				className="font-roboto text-2xl font-black mb-4 md:text-3xl"
+				tagName="h5"
+				className="block-title font-lineSeedJp mb-6 md:text-2xl"
 				value={title}
 				style={{ color: titleColor }}
 			/>

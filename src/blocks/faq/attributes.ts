@@ -28,7 +28,7 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 	},
 	titleColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	isParentStyles: {
 		type: "boolean",
@@ -36,11 +36,11 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 	},
 	questionColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	answerColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	activeColor: {
 		type: "string",
@@ -56,7 +56,7 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 	},
 	arrowColor: {
 		type: "string",
-		default: colors.grizzly.dark,
+		default: colors.white.DEFAULT,
 	},
 	activeArrowColor: {
 		type: "string",

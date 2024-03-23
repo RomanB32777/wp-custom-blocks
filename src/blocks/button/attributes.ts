@@ -25,6 +25,6 @@ export const attributes: TBlockAttributes<IButtonBlockAttributes> = {
 	},
 	buttonColor: {
 		type: "string",
-		default: colors.secondary.DEFAULT,
+		default: colors.primary.DEFAULT,
 	},
 };

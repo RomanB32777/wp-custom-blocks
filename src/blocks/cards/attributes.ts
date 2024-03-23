@@ -39,7 +39,7 @@ export const attributes: TBlockAttributes<ICardsBlockAttributes> = {
 	},
 	titleColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	isParentStyles: {
 		type: "boolean",

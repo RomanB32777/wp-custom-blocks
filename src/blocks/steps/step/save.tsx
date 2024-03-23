@@ -37,7 +37,7 @@ const Save: FC<BlockSaveProps<IStepElementAttributes>> = ({ attributes }) => {
 				<RichText.Content
 					tagName="p"
 					className={classNames("description pb-6 text-sm md:!text-base", {
-						"border rounded-lg p-4": isOnlyText,
+						"border p-4": isOnlyText,
 					})}
 					value={description}
 				/>

@@ -5,7 +5,6 @@ import type { TBlockAttributes } from "@/types";
 
 export interface IAuthorBlockAttributes {
 	uniqueId: string;
-	blockStyle: string;
 	description: string;
 	author: User;
 	backgroundColor: string;
@@ -16,9 +15,6 @@ export interface IAuthorBlockAttributes {
 export const attributes: TBlockAttributes<IAuthorBlockAttributes> = {
 	uniqueId: {
 		type: "string",
-	},
-	blockStyle: {
-		type: "object",
 	},
 	description: {
 		type: "string",

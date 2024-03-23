@@ -32,7 +32,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: classNames(
 			uniqueId,
-			"wp-custom-blocks-banner border rounded-lg p-4 [&>*:not(:last-child)]:mb-5 md:!p-7"
+			"wp-custom-blocks-banner border p-4 [&>*:not(:last-child)]:mb-5 md:!p-7"
 		),
 		style: {
 			backgroundColor,
@@ -96,7 +96,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 					target={bonusLink.openInNewTab ? "_blank" : "_self"}
 					rel={bonusLink.openInNewTab ? "noopener noreferrer" : "noopener"}
 				>
-					<div className="bonus-button p-4 text-center rounded-lg md:!p-6">
+					<div className="bonus-button p-4 text-center md:!p-6">
 						<RichText.Content
 							tagName="p"
 							className="text-3xl font-bold md:!text-5xl"
@@ -138,10 +138,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 						.filter(({ image }) => Boolean(image.url))
 						.map(({ id, image }) => {
 							return (
-								<div
-									className="payment rounded-lg flex-auto md:!flex-1"
-									key={id}
-								>
+								<div className="payment flex-auto md:!flex-1" key={id}>
 									<div className="h-full mx-auto max-w-28">
 										<img
 											className="w-full h-full object-cover"

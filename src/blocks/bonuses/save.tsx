@@ -32,13 +32,13 @@ const Save: FC<BlockSaveProps<IBonusesBlockAttributes>> = ({ attributes }) => {
 						className="no-underline"
 					>
 						<button
-							className="link-button relative rounded-lg py-5 px-10"
+							className="link-button relative py-5 px-10"
 							type="button"
 							aria-expanded="false"
 						>
 							<RichText.Content
 								tagName="span"
-								className="font-roboto text-4xl font-black mx-auto"
+								className="font-lineSeedJp text-4xl font-black mx-auto"
 								value={buttonText}
 								style={{ color: buttonTextColor }}
 							/>

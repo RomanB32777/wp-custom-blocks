@@ -4,6 +4,7 @@ const { DefinePlugin } = require("webpack");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
+const { getWebpackEntryPoints } = require("@wordpress/scripts/utils");
 
 require("dotenv").config({ path: "./.env" });
 
@@ -114,13 +115,19 @@ plugins.push(
 	)
 );
 
+const srcPath = path.resolve(__dirname, "src");
+
 module.exports = {
 	...defaultConfig,
+	entry: {
+		...getWebpackEntryPoints(),
+		fonts: path.resolve(srcPath, "assets", "styles", "fonts.scss"),
+	},
 	resolve: {
 		...defaultConfig.resolve,
 		alias: {
 			...defaultConfig.resolve.alias,
-			"@": path.resolve(__dirname, "src"),
+			"@": srcPath,
 		},
 		extensions: [".tsx", ".ts", ".js", ".jsx"],
 	},

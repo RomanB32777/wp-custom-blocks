@@ -39,7 +39,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "bonus w-full p-2 rounded-lg"),
+		className: classNames(uniqueId, "bonus w-full p-2"),
 		style: {
 			backgroundColor: !isParentStyles ? backgroundColor : undefined,
 			margin: 0,
@@ -116,7 +116,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 			<div {...blockProps}>
 				<div className="relative h-full flex flex-col items-center justify-between">
 					{image.url ? (
-						<div className="overflow-hidden max-h-48 w-full rounded-lg">
+						<div className="overflow-hidden max-h-48 w-full">
 							<img
 								className="!h-full w-full object-cover object-center"
 								src={image.url}
@@ -145,7 +145,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 
 					<RichText
 						tagName="p"
-						className="title font-roboto m-0 text-3xl font-semibold text-center"
+						className="title font-lineSeedJp m-0 text-3xl font-semibold text-center"
 						value={title}
 						onChange={(v) => setAttributes({ title: v })}
 						placeholder={__("Title name..", "wp-custom-blocks")}
@@ -153,7 +153,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 					/>
 
 					<button
-						className="bonus-button relative rounded-lg py-5 px-10"
+						className="bonus-button relative py-5 px-10"
 						type="button"
 						aria-expanded="false"
 						style={{
@@ -162,7 +162,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 					>
 						<RichText
 							tagName="span"
-							className="button-text font-roboto text-4xl font-black mx-auto"
+							className="button-text font-lineSeedJp text-4xl font-black mx-auto"
 							value={buttonText}
 							onChange={(v) => setAttributes({ buttonText: v })}
 							placeholder={__("Button text..", "wp-custom-blocks")}

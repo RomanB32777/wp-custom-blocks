@@ -29,13 +29,13 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 			<div {...blockProps}>
 				<div
-					className="question group border px-6 py-4 rounded-lg duration-200 cursor-pointer"
+					className="question group border px-6 py-4 duration-200 cursor-pointer"
 					data-question={index}
 				>
 					<div className="flex items-start justify-between">
 						<RichText
 							tagName="p"
-							className="question-title font-roboto text-base basis-5/6"
+							className="question-title font-lineSeedJp text-base basis-5/6"
 							value={question}
 							onChange={(v) => setAttributes({ question: v })}
 							placeholder={__("Question..", "wp-custom-blocks")}
@@ -64,7 +64,7 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 					</div>
 					<RichText
 						tagName="p"
-						className="question-content font-roboto text-base mt-4"
+						className="question-content font-lineSeedJp text-base mt-4"
 						value={answer}
 						onChange={(v) => setAttributes({ answer: v })}
 						placeholder={__("Answer..", "wp-custom-blocks")}

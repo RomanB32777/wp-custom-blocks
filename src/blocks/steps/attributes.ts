@@ -29,11 +29,11 @@ export const attributes: TBlockAttributes<IStepsBlockAttributes> = {
 	},
 	titleColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	descriptionColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	borderColor: {
 		type: "string",
