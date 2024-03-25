@@ -190,7 +190,7 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 
 			<div {...blockProps}>
 				<RichText
-					tagName="p"
+					tagName="h5"
 					className="font-roboto text-2xl font-bold md:!text-4xl my-7"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
