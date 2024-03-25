@@ -65,10 +65,12 @@ function blocks_init() {
 		'bonuses' => 'bonus',
 		'cards'   => 'card',
 		'images'  => 'image',
+		'socials' => 'social-network',
 		'button',
 		'content',
 		'banner',
 		'author',
+		'pros-cons',
 	);
 
 	foreach ( $blocks as $block => $sub_blocks ) {

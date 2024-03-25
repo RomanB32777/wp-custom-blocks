@@ -10,8 +10,11 @@ import { __ } from "@wordpress/i18n";
 
 import type { IImageAttributes } from "@/types";
 
-interface IPayment {
-	image: IImageAttributes;
+import type { IPaymentAttributes } from "../attributes";
+
+type TPaymentSave = Omit<IPaymentAttributes, "id">;
+
+interface IPayment extends TPaymentSave {
 	onChange: (media: IImageAttributes) => void;
 	onDelete: () => void;
 }
@@ -72,6 +75,22 @@ export const Payment: FC<IPayment> = ({ image, onChange, onDelete }) => {
 						onHTMLDrop={undefined}
 					/>
 				)}
+			</div>
+		</div>
+	);
+};
+
+export const PaymentSave: FC<TPaymentSave> = ({ image }) => {
+	return (
+		<div className="payment rounded-lg flex-auto md:!flex-1">
+			<div className="h-full mx-auto max-w-28">
+				<img
+					className="w-full h-full object-cover"
+					src={image.url}
+					alt={image.alt}
+					width={image.width}
+					height={image.height}
+				/>
 			</div>
 		</div>
 	);

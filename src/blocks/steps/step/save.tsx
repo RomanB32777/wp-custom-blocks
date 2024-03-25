@@ -12,7 +12,8 @@ import type { BlockSaveProps } from "@wordpress/blocks";
 import type { IStepElementAttributes } from "./attributes";
 
 const Save: FC<BlockSaveProps<IStepElementAttributes>> = ({ attributes }) => {
-	const { uniqueId, step, photo, title, description, isOnlyText } = attributes;
+	const { uniqueId, step, photo, icon, title, description, isOnlyText } =
+		attributes;
 
 	const blockProps = useBlockProps.save({
 		className: classNames(uniqueId, "step relative pb-7 pl-10 md:!pl-16"),
@@ -23,20 +24,29 @@ const Save: FC<BlockSaveProps<IStepElementAttributes>> = ({ attributes }) => {
 			<div className="line absolute top-0 h-full"></div>
 			{step && (
 				<span className="number absolute text-base top-0 left-0 inline-block w-8 h-8 rounded-full p-1 font-semibold text-center">
-					{step}
+					{icon.url ? (
+						<img
+							src={icon.url}
+							alt={icon.alt}
+							width={icon.width}
+							height={icon.height}
+						/>
+					) : (
+						step
+					)}
 				</span>
 			)}
 			{title && (
 				<RichText.Content
 					tagName="h5"
-					className="title mb-6 font-bold text-base md:!text-xl"
+					className="title font-bold text-base md:!text-xl"
 					value={title}
 				/>
 			)}
 			{description && (
 				<RichText.Content
 					tagName="p"
-					className={classNames("description pb-6 text-sm md:!text-base", {
+					className={classNames("description py-6 text-sm md:!text-base", {
 						"border rounded-lg p-4": isOnlyText,
 					})}
 					value={description}
