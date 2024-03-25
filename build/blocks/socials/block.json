@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wp-custom-blocks/socials",
+  "version": "0.1.0",
+  "title": "Socials block",
+  "category": "wp-custom-blocks",
+  "description": "Socials block",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "socials-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
