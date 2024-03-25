@@ -12,14 +12,21 @@ import type { BlockSaveProps } from "@wordpress/blocks";
 import type { IAuthorBlockAttributes } from "./attributes";
 
 const Save: FC<BlockSaveProps<IAuthorBlockAttributes>> = ({ attributes }) => {
-	const { uniqueId, description, author, avatarBorderColor, descriptionColor } =
-		attributes;
+	const {
+		uniqueId,
+		description,
+		author,
+		backgroundColor,
+		avatarBorderColor,
+		descriptionColor,
+	} = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: classNames(
 			uniqueId,
 			"wp-custom-blocks-author flex items-center p-4 rounded-lg md:!p-7"
 		),
+		style: { backgroundColor },
 	});
 
 	return (
@@ -38,7 +45,7 @@ const Save: FC<BlockSaveProps<IAuthorBlockAttributes>> = ({ attributes }) => {
 					alt={author.name}
 					width="48"
 					height="48"
-					className="rounded-full"
+					className="w-[60px] !h-[60px] !max-w-none object-cover border-[5px] rounded-full"
 					style={{
 						borderColor: avatarBorderColor,
 					}}

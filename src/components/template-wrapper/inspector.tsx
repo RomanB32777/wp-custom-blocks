@@ -202,7 +202,9 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 					min={100}
 					max={900}
 					allowReset
-					resetFallbackValue={100}
+					resetFallbackValue={Number(
+						getDefaultAttributeValue(templateAttributes, "titleWeight")
+					)}
 				/>
 
 				<CardDivider />
@@ -323,7 +325,9 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 					min={0}
 					max={30000}
 					allowReset
-					resetFallbackValue={5000}
+					resetFallbackValue={Number(
+						getDefaultAttributeValue(templateAttributes, "sliderAutoplayDelay")
+					)}
 				/>
 
 				<PanelBody
@@ -343,7 +347,12 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 						min={1}
 						max={10}
 						allowReset
-						resetFallbackValue={1}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(
+								templateAttributes,
+								"sliderMobileSlidesPerView"
+							)
+						)}
 					/>
 
 					<CardDivider />
@@ -360,7 +369,12 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 						min={1}
 						max={10}
 						allowReset
-						resetFallbackValue={1}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(
+								templateAttributes,
+								"sliderTabletSlidesPerView"
+							)
+						)}
 					/>
 
 					<CardDivider />
@@ -377,7 +391,12 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 						min={1}
 						max={10}
 						allowReset
-						resetFallbackValue={1}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(
+								templateAttributes,
+								"sliderLaptopSlidesPerView"
+							)
+						)}
 					/>
 
 					{blockSlidesPerView && (
@@ -476,7 +495,9 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 						min={1}
 						max={12}
 						allowReset
-						resetFallbackValue={3}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(templateAttributes, "mobileItemsCount")
+						)}
 					/>
 
 					<CardDivider />
@@ -493,7 +514,9 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 						min={1}
 						max={12}
 						allowReset
-						resetFallbackValue={3}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(templateAttributes, "tabletItemsCount")
+						)}
 					/>
 
 					<CardDivider />
@@ -510,7 +533,9 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 						min={1}
 						max={12}
 						allowReset
-						resetFallbackValue={4}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(templateAttributes, "laptopItemsCount")
+						)}
 					/>
 
 					{blockItemsCount && (

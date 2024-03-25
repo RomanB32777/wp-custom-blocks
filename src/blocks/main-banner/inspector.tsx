@@ -14,8 +14,10 @@ import { __ } from "@wordpress/i18n";
 import { TipResponsive } from "@/components";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
+import { getDefaultAttributeValue } from "@/utils/default-attribute-value";
 
 import {
+	baseSpaceBetween,
 	attributes as defaultAttributes,
 	type IBannerBlockAttributes,
 } from "./attributes";
@@ -108,7 +110,9 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 					min={1}
 					max={12}
 					allowReset
-					resetFallbackValue={3}
+					resetFallbackValue={Number(
+						getDefaultAttributeValue(defaultAttributes, "desktopItemsCount")
+					)}
 				/>
 
 				<CardDivider />
@@ -124,7 +128,7 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 					min={4}
 					max={64}
 					allowReset
-					resetFallbackValue={24}
+					resetFallbackValue={baseSpaceBetween}
 				/>
 
 				<CardDivider />
@@ -189,7 +193,9 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 					min={0}
 					max={30000}
 					allowReset
-					resetFallbackValue={5000}
+					resetFallbackValue={Number(
+						getDefaultAttributeValue(defaultAttributes, "sliderAutoplayDelay")
+					)}
 				/>
 
 				<PanelBody
@@ -208,7 +214,12 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 						min={1}
 						max={10}
 						allowReset
-						resetFallbackValue={1}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(
+								defaultAttributes,
+								"sliderMobileSlidesPerView"
+							)
+						)}
 					/>
 
 					<CardDivider />
@@ -224,7 +235,12 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 						min={1}
 						max={10}
 						allowReset
-						resetFallbackValue={1}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(
+								defaultAttributes,
+								"sliderTabletSlidesPerView"
+							)
+						)}
 					/>
 
 					<CardDivider />
@@ -240,7 +256,12 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 						min={1}
 						max={10}
 						allowReset
-						resetFallbackValue={1}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(
+								defaultAttributes,
+								"sliderLaptopSlidesPerView"
+							)
+						)}
 					/>
 				</PanelBody>
 
@@ -260,7 +281,7 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 						min={4}
 						max={64}
 						allowReset
-						resetFallbackValue={24}
+						resetFallbackValue={baseSpaceBetween}
 					/>
 
 					<CardDivider />
@@ -276,7 +297,7 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 						min={4}
 						max={64}
 						allowReset
-						resetFallbackValue={24}
+						resetFallbackValue={baseSpaceBetween}
 					/>
 
 					<CardDivider />
@@ -292,7 +313,7 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 						min={4}
 						max={64}
 						allowReset
-						resetFallbackValue={24}
+						resetFallbackValue={baseSpaceBetween}
 					/>
 				</PanelBody>
 			</PanelBody>

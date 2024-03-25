@@ -7,8 +7,6 @@ import { select, useSelect } from "@wordpress/data";
 import { Fragment, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
-import { minifyCssStrings } from "@/utils/minify-css";
-
 import Inspector from "./inspector";
 import type { IAuthorBlockAttributes } from "./attributes";
 
@@ -19,7 +17,6 @@ const Edit: FC<BlockEditProps<IAuthorBlockAttributes>> = ({
 }) => {
 	const {
 		uniqueId,
-		blockStyle,
 		author,
 		description,
 		backgroundColor,
@@ -32,6 +29,7 @@ const Edit: FC<BlockEditProps<IAuthorBlockAttributes>> = ({
 			uniqueId,
 			"wp-custom-blocks-author flex items-center p-4 rounded-lg md:!p-7"
 		),
+		style: { backgroundColor },
 	});
 
 	const authorId = select("core/editor").getCurrentPostAttribute("author");
@@ -60,25 +58,8 @@ const Edit: FC<BlockEditProps<IAuthorBlockAttributes>> = ({
 		}
 	}, [clientId, uniqueId, setAttributes]);
 
-	/**
-	 * Block All Styles
-	 */
-	const blockStyleCss = `
-		.${uniqueId} {
-			background-color: ${backgroundColor};
-		}
-	`;
-
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({ blockStyle: blockStyleCss });
-		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
-
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
-
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 
 			<div {...blockProps}>
@@ -96,7 +77,7 @@ const Edit: FC<BlockEditProps<IAuthorBlockAttributes>> = ({
 						alt={author.name}
 						width="48"
 						height="48"
-						className="rounded-full"
+						className="w-[60px] !h-[60px] !max-w-none object-cover border-[5px] rounded-full"
 						style={{
 							borderColor: avatarBorderColor,
 						}}

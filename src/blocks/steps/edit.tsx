@@ -25,6 +25,7 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 		titleColor,
 		descriptionColor,
 		borderColor,
+		lineType,
 		isOnlyText,
 	} = attributes;
 
@@ -56,9 +57,12 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 	 * Block All Styles
 	 */
 	const blockStyleCss = `
-		.${uniqueId} .step .line,
 		.${uniqueId} .step .number {
 			background-color: ${mainColor};
+		}
+
+		.${uniqueId} .step .line {
+			border: 2px ${lineType} ${mainColor};
 		}
 
 		.${uniqueId} .step .number {

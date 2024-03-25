@@ -10,10 +10,11 @@ import {
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
-import { TemplateWrapperInspector } from "@/components";
+import { baseSpaceBetween, TemplateWrapperInspector } from "@/components";
 import type { IInspectorProps } from "@/types";
+import { getDefaultAttributeValue } from "@/utils/default-attribute-value";
 
-import { type ITemplateBlockAttributes } from "./attributes";
+import { blockAttributes, type ITemplateBlockAttributes } from "./attributes";
 
 const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 	attributes,
@@ -83,7 +84,12 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 					min={1}
 					max={10}
 					allowReset
-					resetFallbackValue={1}
+					resetFallbackValue={Number(
+						getDefaultAttributeValue(
+							blockAttributes,
+							"sliderDesktopSlidesPerView"
+						)
+					)}
 				/>
 			}
 			blockBetweenSlides={
@@ -100,7 +106,7 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 					min={4}
 					max={64}
 					allowReset
-					resetFallbackValue={24}
+					resetFallbackValue={baseSpaceBetween}
 				/>
 			}
 			blockSliderSettings={
@@ -121,7 +127,9 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 						min={2}
 						max={1000}
 						allowReset
-						resetFallbackValue={384}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(blockAttributes, "mobileHeight")
+						)}
 					/>
 
 					<CardDivider />
@@ -138,7 +146,9 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 						min={2}
 						max={1000}
 						allowReset
-						resetFallbackValue={384}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(blockAttributes, "tabletHeight")
+						)}
 					/>
 
 					<CardDivider />
@@ -155,7 +165,9 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 						min={2}
 						max={1000}
 						allowReset
-						resetFallbackValue={384}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(blockAttributes, "laptopHeight")
+						)}
 					/>
 
 					<CardDivider />
@@ -172,7 +184,9 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 						min={2}
 						max={1000}
 						allowReset
-						resetFallbackValue={384}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(blockAttributes, "desktopHeight")
+						)}
 					/>
 				</PanelBody>
 			}
@@ -190,7 +204,9 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 					min={1}
 					max={12}
 					allowReset
-					resetFallbackValue={4}
+					resetFallbackValue={Number(
+						getDefaultAttributeValue(blockAttributes, "desktopItemsCount")
+					)}
 				/>
 			}
 			blockItemsSpaceBetween={
@@ -207,7 +223,7 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 					min={4}
 					max={64}
 					allowReset
-					resetFallbackValue={24}
+					resetFallbackValue={baseSpaceBetween}
 				/>
 			}
 			blockItemsSettings={
@@ -228,7 +244,9 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 						min={2}
 						max={1000}
 						allowReset
-						resetFallbackValue={384}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(blockAttributes, "mobileItemHeight")
+						)}
 					/>
 
 					<CardDivider />
@@ -245,7 +263,9 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 						min={2}
 						max={1000}
 						allowReset
-						resetFallbackValue={384}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(blockAttributes, "tabletItemHeight")
+						)}
 					/>
 
 					<CardDivider />
@@ -262,7 +282,9 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 						min={2}
 						max={1000}
 						allowReset
-						resetFallbackValue={384}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(blockAttributes, "laptopItemHeight")
+						)}
 					/>
 
 					<CardDivider />
@@ -279,7 +301,9 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 						min={2}
 						max={1000}
 						allowReset
-						resetFallbackValue={384}
+						resetFallbackValue={Number(
+							getDefaultAttributeValue(blockAttributes, "desktopItemHeight")
+						)}
 					/>
 				</PanelBody>
 			}

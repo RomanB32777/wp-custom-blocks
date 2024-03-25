@@ -65,6 +65,7 @@ function blocks_init() {
 		'steps'       => 'step',
 		'main-banner' => 'sport-card',
 		'faq'         => 'faq-item',
+		'socials'     => 'social-network',
 		'template'    => array(
 			'advantage',
 			'card',
@@ -73,6 +74,7 @@ function blocks_init() {
 		'table',
 		'wrapper',
 		'button',
+		'pros-cons',
 		'content',
 		'author',
 	);

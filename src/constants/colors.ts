@@ -32,4 +32,7 @@ export const colors = {
 		DEFAULT: YELLOW_COLOR || "#f9b15c",
 		light: YELLOW_LIGHT_COLOR || "#e3ae6f",
 	},
+	green: {
+		DEFAULT: GREEN_COLOR || "#5ec169",
+	},
 };

@@ -2,7 +2,7 @@ import {
 	baseSpaceBetween,
 	templateAttributes,
 	type IBaseTemplateAttributes,
-} from "@/components/template-wrapper";
+} from "@/components";
 import type { TBlockAttributes } from "@/types";
 
 export interface ITemplateBlockAttributes extends IBaseTemplateAttributes {

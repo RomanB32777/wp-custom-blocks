@@ -5,7 +5,7 @@ import type {
 	TBlockAttributes,
 } from "@/types";
 
-const baseSpaceBetween = 24;
+export const baseSpaceBetween = 24;
 
 export interface IBannerBlockAttributes {
 	uniqueId: string;

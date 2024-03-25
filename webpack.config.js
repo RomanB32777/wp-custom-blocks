@@ -43,6 +43,9 @@ const {
 	// YELLOW
 	YELLOW_COLOR,
 	YELLOW_LIGHT_COLOR,
+
+	// GREEN
+	GREEN_COLOR,
 } = process.env;
 
 const colors = {
@@ -78,6 +81,9 @@ const colors = {
 	// YELLOW
 	YELLOW_COLOR,
 	YELLOW_LIGHT_COLOR,
+
+	// GREEN
+	GREEN_COLOR,
 };
 
 const isProduction = NODE_ENV === "production";
@@ -122,6 +128,8 @@ plugins.push(
 	)
 );
 
+const srcPath = path.resolve(__dirname, "src");
+
 module.exports = {
 	...defaultConfig,
 	entry: {
@@ -139,7 +147,7 @@ module.exports = {
 		...defaultConfig.resolve,
 		alias: {
 			...defaultConfig.resolve.alias,
-			"@": path.resolve(__dirname, "src"),
+			"@": srcPath,
 		},
 		extensions: [".tsx", ".ts", ".js", ".jsx"],
 	},

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 declare module "*.png";
 declare module "*.jpg";
 declare module "*.jpeg";
@@ -39,3 +38,5 @@ declare const RED_COLOR: string;
 
 declare const YELLOW_COLOR: string;
 declare const YELLOW_LIGHT_COLOR: string;
+
+declare const GREEN_COLOR: string;
