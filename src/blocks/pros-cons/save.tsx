@@ -22,14 +22,16 @@ const Save: FC<BlockSaveProps<IProsConsBlockAttributes>> = ({ attributes }) => {
 
 	return (
 		<div {...blockProps}>
-			<RichText.Content
-				tagName="h5"
-				className="block-title font-lineSeedJp mb-6 md:text-2xl"
-				value={title}
-				style={{
-					color: titleColor,
-				}}
-			/>
+			{title && (
+				<RichText.Content
+					tagName="h5"
+					className="block-title font-lineSeedJp mb-6 md:text-2xl"
+					value={title}
+					style={{
+						color: titleColor,
+					}}
+				/>
+			)}
 
 			<div className="flex flex-col gap-x-8 gap-y-4 md:!flex-row">
 				<div className="flex flex-1 flex-col gap-4">
