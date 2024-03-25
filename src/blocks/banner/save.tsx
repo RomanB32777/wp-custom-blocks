@@ -12,6 +12,7 @@ import type { BlockSaveProps } from "@wordpress/blocks";
 import appStoreImage from "./assets/appStore.png";
 import googlePlayImage from "./assets/googlePlay.png";
 import type { IBannerBlockAttributes } from "./attributes";
+import { PaymentSave } from "./components";
 
 const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 	const {
@@ -137,19 +138,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 					{payments
 						.filter(({ image }) => Boolean(image.url))
 						.map(({ id, image }) => {
-							return (
-								<div className="payment flex-auto md:!flex-1" key={id}>
-									<div className="h-full mx-auto max-w-28">
-										<img
-											className="w-full h-full object-cover"
-											src={image.url}
-											alt={image.alt}
-											width={image.width}
-											height={image.height}
-										/>
-									</div>
-								</div>
-							);
+							return <PaymentSave key={id} image={image} />;
 						})}
 				</div>
 			)}

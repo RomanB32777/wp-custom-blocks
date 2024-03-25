@@ -3,7 +3,12 @@ import React, { type FC } from "react";
  * WordPress dependencies
  */
 import { InspectorControls } from "@wordpress/block-editor";
-import { CardDivider, PanelBody, ToggleControl } from "@wordpress/components";
+import {
+	CardDivider,
+	PanelBody,
+	SelectControl,
+	ToggleControl,
+} from "@wordpress/components";
 import { dispatch } from "@wordpress/data";
 import { Fragment } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
@@ -13,6 +18,7 @@ import type { IInspectorProps } from "@/types";
 
 import {
 	attributes as defaultAttributes,
+	ELineTypes,
 	type IStepsBlockAttributes,
 } from "./attributes";
 
@@ -21,7 +27,7 @@ const Inspector: FC<IInspectorProps<IStepsBlockAttributes>> = ({
 	clientId,
 	setAttributes,
 }) => {
-	const { isOnlyText } = attributes;
+	const { isOnlyText, lineType } = attributes;
 
 	const toggleHandler = () => {
 		const newStatus = !isOnlyText;
@@ -76,6 +82,21 @@ const Inspector: FC<IInspectorProps<IStepsBlockAttributes>> = ({
 					name="descriptionColor"
 					label={__("Description Color", "wp-custom-blocks")}
 					{...colorControlProps}
+				/>
+
+				<CardDivider />
+				<SelectControl
+					label={__("Select Line type", "wp-custom-blocks")}
+					value={lineType}
+					options={Object.entries(ELineTypes).map(([key, value]) => ({
+						label: key,
+						value,
+					}))}
+					onChange={(v: ELineTypes) => {
+						setAttributes({
+							lineType: v,
+						});
+					}}
 				/>
 
 				{isOnlyText && (

@@ -4,6 +4,7 @@ export interface IStepElementAttributes {
 	uniqueId: string;
 	step: number;
 	photo: IImageAttributes;
+	icon: IImageAttributes;
 	title: string;
 	description: string;
 	isOnlyText: boolean;
@@ -18,6 +19,10 @@ export const attributes: TBlockAttributes<IStepElementAttributes> = {
 		default: 1,
 	},
 	photo: {
+		type: "object",
+		default: {},
+	},
+	icon: {
 		type: "object",
 		default: {},
 	},

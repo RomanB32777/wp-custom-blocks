@@ -42,6 +42,9 @@ const {
 	// YELLOW
 	YELLOW_COLOR,
 	YELLOW_LIGHT_COLOR,
+
+	// GREEN
+	GREEN_COLOR,
 } = process.env;
 
 const colors = {
@@ -76,6 +79,9 @@ const colors = {
 	// YELLOW
 	YELLOW_COLOR,
 	YELLOW_LIGHT_COLOR,
+
+	// GREEN
+	GREEN_COLOR,
 };
 
 const isProduction = NODE_ENV === "production";

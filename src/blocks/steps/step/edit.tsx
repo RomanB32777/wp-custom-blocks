@@ -20,7 +20,8 @@ const Edit: FC<BlockEditProps<IStepElementAttributes>> = ({
 	setAttributes,
 	clientId,
 }) => {
-	const { uniqueId, step, photo, title, description, isOnlyText } = attributes;
+	const { uniqueId, step, photo, icon, title, description, isOnlyText } =
+		attributes;
 
 	const blockProps = useBlockProps({
 		className: classNames(uniqueId, "step relative pb-7 pl-10 md:!pl-16"),
@@ -36,9 +37,9 @@ const Edit: FC<BlockEditProps<IStepElementAttributes>> = ({
 
 	return (
 		<Fragment>
-			{photo.id && (
-				<BlockControls controls={[]}>
-					<ToolbarGroup>
+			<BlockControls controls={[]}>
+				<ToolbarGroup>
+					{photo.id && (
 						<MediaUploadCheck>
 							<MediaUpload
 								onSelect={(media) =>
@@ -60,24 +61,56 @@ const Edit: FC<BlockEditProps<IStepElementAttributes>> = ({
 								}}
 							/>
 						</MediaUploadCheck>
-					</ToolbarGroup>
-				</BlockControls>
-			)}
+					)}
+
+					<MediaUploadCheck>
+						<MediaUpload
+							onSelect={(media) =>
+								setAttributes({
+									icon: media,
+								})
+							}
+							allowedTypes={["image"]}
+							value={icon.id}
+							render={({ open }) => {
+								return (
+									<ToolbarButton
+										label={__("Edit Icon", "wp-custom-blocks")}
+										placeholder={__("Edit Icon", "wp-custom-blocks")}
+										onClick={open}
+										icon="star-empty"
+									/>
+								);
+							}}
+						/>
+					</MediaUploadCheck>
+				</ToolbarGroup>
+			</BlockControls>
+
 			<div {...blockProps}>
 				<div className="line absolute top-0 h-full"></div>
 				<span className="number absolute text-base top-0 left-0 inline-block w-8 h-8 rounded-full p-1 font-semibold text-center">
-					{step}
+					{icon.url ? (
+						<img
+							src={icon.url}
+							alt={icon.alt}
+							width={icon.width}
+							height={icon.height}
+						/>
+					) : (
+						step
+					)}
 				</span>
 				<RichText
 					tagName="h5"
-					className="title mb-6 font-bold text-base md:!text-xl"
+					className="title font-bold text-base md:!text-xl"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
 					placeholder={__("step text..", "wp-custom-blocks")}
 				/>
 				<RichText
 					tagName="p"
-					className={classNames("description pb-6 text-sm md:!text-base", {
+					className={classNames("description py-6 text-sm md:!text-base", {
 						"border p-4": isOnlyText,
 					})}
 					value={description}

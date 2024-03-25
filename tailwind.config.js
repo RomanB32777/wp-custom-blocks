@@ -21,6 +21,7 @@ const {
 	RED_COLOR,
 	YELLOW_COLOR,
 	YELLOW_LIGHT_COLOR,
+	GREEN_COLOR,
 } = process.env;
 
 module.exports = {
@@ -59,6 +60,9 @@ module.exports = {
 				yellow: {
 					DEFAULT: YELLOW_COLOR || "#f9b002",
 					light: YELLOW_LIGHT_COLOR || "#e3ae6f",
+				},
+				green: {
+					DEFAULT: GREEN_COLOR || "#5ec169",
 				},
 			},
 			fontFamily: {

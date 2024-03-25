@@ -1,6 +1,17 @@
 import { colors } from "@/constants";
 import type { TBlockAttributes } from "@/types";
 
+export enum ELineTypes {
+	Solid = "solid",
+	Dotted = "dotted",
+	Dashed = "dashed",
+	Double = "double",
+	Groove = "groove",
+	Ridge = "ridge",
+	Inset = "inset",
+	Outset = "outset",
+}
+
 export interface IStepsBlockAttributes {
 	uniqueId: string;
 	blockStyle: string;
@@ -9,6 +20,7 @@ export interface IStepsBlockAttributes {
 	titleColor: string;
 	descriptionColor: string;
 	borderColor: string;
+	lineType: ELineTypes;
 	isOnlyText: boolean;
 }
 
@@ -38,6 +50,10 @@ export const attributes: TBlockAttributes<IStepsBlockAttributes> = {
 	borderColor: {
 		type: "string",
 		default: colors.primary.grizzly,
+	},
+	lineType: {
+		type: "string",
+		default: ELineTypes.Solid,
 	},
 	isOnlyText: {
 		type: "boolean",

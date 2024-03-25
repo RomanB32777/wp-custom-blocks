@@ -1,5 +1,3 @@
-// const path = require("path");
-
 module.exports = {
 	extends: [
 		"eslint:recommended",
@@ -15,7 +13,8 @@ module.exports = {
 	plugins: ["import", "@typescript-eslint", "react-hooks"],
 	parser: "@typescript-eslint/parser",
 	rules: {
-		"no-shadow": [2, { allow: ["done"] }],
+		"no-shadow": "off",
+		"@typescript-eslint/no-shadow": "warn",
 		"react/display-name": "off",
 		"prettier/prettier": ["warn"],
 
@@ -77,7 +76,7 @@ module.exports = {
 			},
 			{
 				selector: "variable",
-				format: ["camelCase", "PascalCase"],
+				format: ["camelCase", "PascalCase", "UPPER_CASE"],
 			},
 			{
 				selector: "enumMember",
