@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "wp-custom-blocks/image",
+  "name": "wp-custom-blocks/template-image",
   "version": "0.1.0",
   "title": "Image item block",
   "category": "wp-custom-blocks",
@@ -12,7 +12,7 @@
   "supports": {
     "html": false
   },
-  "textdomain": "image-item-block",
+  "textdomain": "image-template-item-block",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css"
