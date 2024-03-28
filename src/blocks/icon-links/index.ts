@@ -20,7 +20,7 @@ const { name, ...metadataSettings } = metadata;
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-export const socialsBlock = registerBlockType(name, {
+export const iconLinksBlock = registerBlockType(name, {
 	...metadataSettings,
 	icon: "share",
 	attributes,

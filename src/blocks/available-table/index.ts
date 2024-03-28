@@ -20,9 +20,9 @@ const { name, ...metadataSettings } = metadata;
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-export const socialNetworkBlock = registerBlockType(name, {
+export const availableTableBlock = registerBlockType(name, {
 	...metadataSettings,
-	icon: "twitter",
+	icon: "editor-table",
 	attributes,
 	edit: Edit,
 	save: Save,

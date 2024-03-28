@@ -7,7 +7,6 @@ import { CardDivider, PanelBody, ToggleControl } from "@wordpress/components";
 import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
-import { TipResponsive } from "@/components";
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
 
@@ -36,8 +35,6 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 
 	return (
 		<InspectorControls>
-			<TipResponsive />
-
 			<PanelBody title={__("Block settings", "wp-custom-blocks")} initialOpen>
 				<ColorControl
 					name="titleColor"

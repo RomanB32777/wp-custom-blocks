@@ -14,9 +14,9 @@ import { __ } from "@wordpress/i18n";
 
 import { LinkControl } from "@/controls";
 
-import type { ISocialNetworkElementAttributes } from "./attributes";
+import type { IIconLinkElementAttributes } from "./attributes";
 
-const Edit: FC<BlockEditProps<ISocialNetworkElementAttributes>> = ({
+const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 	attributes,
 	setAttributes,
 	clientId,
@@ -27,7 +27,7 @@ const Edit: FC<BlockEditProps<ISocialNetworkElementAttributes>> = ({
 	const blockProps = useBlockProps({
 		className: classNames(
 			uniqueId,
-			"social-network flex items-center justify-center rounded-full"
+			"icon-link flex items-center justify-center rounded-full cursor-pointer"
 		),
 		style: {
 			margin: 0,
@@ -37,7 +37,7 @@ const Edit: FC<BlockEditProps<ISocialNetworkElementAttributes>> = ({
 	useEffect(() => {
 		if (!uniqueId) {
 			setAttributes({
-				uniqueId: "social-network-" + clientId.slice(0, 8),
+				uniqueId: "icon-link-" + clientId.slice(0, 8),
 			});
 		}
 	}, [clientId, setAttributes, uniqueId]);
@@ -100,7 +100,7 @@ const Edit: FC<BlockEditProps<ISocialNetworkElementAttributes>> = ({
 			<div {...blockProps}>
 				{image.url ? (
 					<img
-						className="!h-full w-full object-cover cursor-pointer"
+						className="!h-full w-full object-cover"
 						src={image.url}
 						alt={image.alt}
 						width={image.width}

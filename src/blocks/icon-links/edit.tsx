@@ -7,14 +7,15 @@ import {
 import type { BlockEditProps } from "@wordpress/blocks";
 import { Fragment, useEffect } from "@wordpress/element";
 
+import { breakpoints } from "@/constants";
 import { minifyCssStrings } from "@/utils/minify-css";
 
 import Inspector from "./inspector";
-import type { ISocialsBlockAttributes } from "./attributes";
+import type { IIconLinksBlockAttributes } from "./attributes";
 
-const allowedBlock = "wp-custom-blocks/social-network";
+const allowedBlock = "wp-custom-blocks/icon-link";
 
-const Edit: FC<BlockEditProps<ISocialsBlockAttributes>> = ({
+const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 	attributes,
 	clientId,
 	setAttributes,
@@ -22,20 +23,33 @@ const Edit: FC<BlockEditProps<ISocialsBlockAttributes>> = ({
 	const {
 		uniqueId,
 		blockStyle,
+		backgroundColor,
+		paddingX,
+		paddingY,
+		mobilePaddingX,
+		mobilePaddingY,
+		borderRadius,
 		itemsColor,
-		itemsSize,
-		itemsPadding,
+		itemsWidth,
+		itemsHeight,
+		itemsPaddingX,
+		itemsPaddingY,
+		itemsBorderRadius,
 		spaceBetween,
 	} = attributes;
 
 	const blockProps = useBlockProps({
 		className: uniqueId,
+		style: {
+			borderRadius,
+			backgroundColor,
+		},
 	});
 
 	useEffect(() => {
 		if (!uniqueId) {
 			setAttributes({
-				uniqueId: "socials-" + clientId.slice(0, 8),
+				uniqueId: "icon-links-" + clientId.slice(0, 8),
 			});
 		}
 	}, [clientId, uniqueId, setAttributes]);
@@ -57,12 +71,34 @@ const Edit: FC<BlockEditProps<ISocialsBlockAttributes>> = ({
 	/**
 	 * Block Styles
 	 */
-	const blockStyleCss = `
-		.${uniqueId} .social-network {
+	const mobileStyles = `
+		.${uniqueId} {
+			padding: ${mobilePaddingY}px ${mobilePaddingX}px;
+		}
+
+		.${uniqueId} .icon-link {
 			background-color: ${itemsColor};
-			padding: ${itemsPadding}px;
-			width: ${itemsSize}px;
-			height: ${itemsSize}px;
+			padding: ${itemsPaddingY}px ${itemsPaddingX}px;
+			width: ${itemsWidth}px;
+			height: ${itemsHeight}px;
+			border-radius: ${itemsBorderRadius}px;
+		}
+	`;
+
+	const tabletStyles = `
+		.${uniqueId} {
+			padding: ${paddingY}px ${paddingX}px;
+		}
+	`;
+
+	/**
+	 * Block All Styles
+	 */
+	const blockStyleCss = `
+		${mobileStyles}
+
+		@media (min-width: ${breakpoints.sm}px) {
+			${tabletStyles}
 		}
 	`;
 

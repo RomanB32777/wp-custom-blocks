@@ -8,13 +8,19 @@ import React, { type FC } from "react";
 import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
 import type { BlockSaveProps } from "@wordpress/blocks";
 
-import type { ISocialsBlockAttributes } from "./attributes";
+import type { IIconLinksBlockAttributes } from "./attributes";
 
-const Save: FC<BlockSaveProps<ISocialsBlockAttributes>> = ({ attributes }) => {
-	const { uniqueId, spaceBetween } = attributes;
+const Save: FC<BlockSaveProps<IIconLinksBlockAttributes>> = ({
+	attributes,
+}) => {
+	const { uniqueId, backgroundColor, borderRadius, spaceBetween } = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: uniqueId,
+		style: {
+			borderRadius,
+			backgroundColor,
+		},
 	});
 
 	return (

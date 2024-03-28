@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "wp-custom-blocks/cards",
 	"version": "0.1.0",
-	"title": "Cards block",
+	"title": "Cards",
 	"category": "wp-custom-blocks",
 	"description": "Cards block",
 	"supports": {

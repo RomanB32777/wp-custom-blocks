@@ -4,13 +4,13 @@ import type {
 	TBlockAttributes,
 } from "@/types";
 
-export interface ISocialNetworkElementAttributes {
+export interface IIconLinkElementAttributes {
 	uniqueId: string;
 	image: IImageAttributes;
 	link: ILinkAttributes;
 }
 
-export const attributes: TBlockAttributes<ISocialNetworkElementAttributes> = {
+export const attributes: TBlockAttributes<IIconLinkElementAttributes> = {
 	uniqueId: {
 		type: "string",
 	},

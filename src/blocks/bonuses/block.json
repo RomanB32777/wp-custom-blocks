@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "wp-custom-blocks/bonuses",
 	"version": "0.1.0",
-	"title": "Bonuses block",
+	"title": "Bonuses",
 	"category": "wp-custom-blocks",
 	"description": "Bonuses block",
 	"supports": {

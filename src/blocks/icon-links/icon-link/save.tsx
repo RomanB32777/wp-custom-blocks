@@ -9,39 +9,40 @@ import classNames from "classnames";
 import { useBlockProps } from "@wordpress/block-editor";
 import type { BlockSaveProps } from "@wordpress/blocks";
 
-import type { ISocialNetworkElementAttributes } from "./attributes";
+import type { IIconLinkElementAttributes } from "./attributes";
 
-const Save: FC<BlockSaveProps<ISocialNetworkElementAttributes>> = ({
+const Save: FC<BlockSaveProps<IIconLinkElementAttributes>> = ({
 	attributes,
 }) => {
 	const { uniqueId, image, link } = attributes;
 
+	if (!image.url) {
+		return null;
+	}
+
 	const blockProps = useBlockProps.save({
 		className: classNames(
 			uniqueId,
-			"social-network flex items-center justify-center rounded-full"
+			"icon-link flex items-center justify-center rounded-full"
 		),
 	});
 
 	return (
-		<div {...blockProps}>
-			{image.url && (
-				<a
-					href={link.url}
-					target={link.openInNewTab ? "_blank" : "_self"}
-					rel={link.openInNewTab ? "noopener noreferrer" : "noopener"}
-					className="h-full w-full no-underline"
-				>
-					<img
-						className="!h-full w-full object-cover"
-						src={image.url}
-						alt={image.alt}
-						width={image.width}
-						height={image.height}
-					/>
-				</a>
-			)}
-		</div>
+		<a
+			href={link.url}
+			target={link.openInNewTab ? "_blank" : "_self"}
+			rel={link.openInNewTab ? "noopener noreferrer" : "noopener"}
+			className="h-full w-full no-underline"
+			{...blockProps}
+		>
+			<img
+				className="!h-full w-full object-cover"
+				src={image.url}
+				alt={image.alt}
+				width={image.width}
+				height={image.height}
+			/>
+		</a>
 	);
 };
 
