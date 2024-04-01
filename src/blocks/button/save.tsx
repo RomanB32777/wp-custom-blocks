@@ -33,7 +33,7 @@ const Save: FC<BlockSaveProps<IButtonBlockAttributes>> = ({ attributes }) => {
 				>
 					<RichText.Content
 						tagName="span"
-						className="font-roboto text-base font-medium mx-auto"
+						className="text-base font-medium mx-auto"
 						value={buttonText}
 						style={{ color: buttonTextColor }}
 					/>

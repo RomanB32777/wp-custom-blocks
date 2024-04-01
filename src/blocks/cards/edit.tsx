@@ -49,7 +49,7 @@ const Edit: FC<BlockEditProps<ICardsBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "wp-custom-blocks-cards"),
+		className: classNames(uniqueId, "wp-custom-blocks-cards font-roboto"),
 	});
 
 	const childBlocks =
@@ -184,7 +184,7 @@ const Edit: FC<BlockEditProps<ICardsBlockAttributes>> = ({
 			<div {...blockProps}>
 				<RichText
 					tagName="h2"
-					className="font-roboto text-2xl font-black mb-4 md:text-3xl"
+					className="text-2xl font-black mb-4 md:text-3xl"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
 					placeholder={__("Cards title..", "wp-custom-blocks")}

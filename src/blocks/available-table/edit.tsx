@@ -51,7 +51,7 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: uniqueId,
+		className: classNames(uniqueId, "font-roboto"),
 	});
 
 	const [uniqRowKeys, setUniqRowKeys] = useState(
@@ -283,7 +283,7 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 									<th
 										key={column}
 										className={classNames(
-											"p-2 font-roboto",
+											"p-2",
 											index > 0 ? "text-center" : "text-left"
 										)}
 										scope="col"
@@ -326,13 +326,10 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 												const isLastCell = index === arr.length - 1;
 
 												const cellAttributes: TCellHTMLAttributes = {
-													className: classNames(
-														"p-2 font-roboto text-left relative",
-														{
-															"border-x-4 border-red":
-																selectedCeil?.colId === columnKey,
-														}
-													),
+													className: classNames("p-2 text-left relative", {
+														"border-x-4 border-red":
+															selectedCeil?.colId === columnKey,
+													}),
 												};
 
 												if (isFirstCell) {

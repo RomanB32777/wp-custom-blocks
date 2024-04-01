@@ -23,10 +23,13 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 	const { isReverse, image } = attributes;
 
 	const blockProps = useBlockProps({
-		className: classNames("flex flex-col items-center gap-6 md:!flex-row", {
-			"flex-col-reverse": isReverse,
-			"md:!flex-row-reverse": isReverse,
-		}),
+		className: classNames(
+			"font-roboto flex flex-col items-center gap-6 md:!flex-row",
+			{
+				"flex-col-reverse": isReverse,
+				"md:!flex-row-reverse": isReverse,
+			}
+		),
 	});
 
 	return (

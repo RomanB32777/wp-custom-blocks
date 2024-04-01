@@ -1,4 +1,5 @@
 import React, { type FC } from "react";
+import classNames from "classnames";
 import {
 	InnerBlocks,
 	useBlockProps,
@@ -30,16 +31,20 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 		mobilePaddingY,
 		borderRadius,
 		itemsColor,
+		itemsTitleColor,
 		itemsWidth,
 		itemsHeight,
 		itemsPaddingX,
 		itemsPaddingY,
+		itemsBorderWidth,
 		itemsBorderRadius,
+		itemsBorderColor,
 		spaceBetween,
+		isFillItemsWidth,
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: uniqueId,
+		className: classNames(uniqueId, "font-roboto"),
 		style: {
 			borderRadius,
 			backgroundColor,
@@ -64,7 +69,7 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 		{
 			allowedBlocks: [allowedBlock],
 			template: [[allowedBlock]],
-			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
+			renderAppender: () => <InnerBlocks.DefaultBlockAppender />,
 		}
 	);
 
@@ -78,10 +83,17 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 
 		.${uniqueId} .icon-link {
 			background-color: ${itemsColor};
+			color: ${itemsTitleColor} !important;
 			padding: ${itemsPaddingY}px ${itemsPaddingX}px;
+			border-width: ${itemsBorderWidth}px;
+			border-radius: ${itemsBorderRadius}px;
+			border-color: ${itemsBorderColor};
+			flex: ${isFillItemsWidth ? "1 1 0%" : "none"};
+		}
+
+		.${uniqueId} .icon-link .icon-image {
 			width: ${itemsWidth}px;
 			height: ${itemsHeight}px;
-			border-radius: ${itemsBorderRadius}px;
 		}
 	`;
 

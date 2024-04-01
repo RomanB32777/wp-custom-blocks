@@ -133,7 +133,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 						>
 							<RichText
 								tagName="span"
-								className="font-roboto text-base font-black mx-auto"
+								className="text-base font-black mx-auto"
 								value={buttonText}
 								onChange={(v) => setAttributes({ buttonText: v })}
 								placeholder={__("Button text..", "wp-custom-blocks")}
@@ -145,7 +145,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 					<div className="absolute inset-x-0 bottom-0">
 						<RichText
 							tagName="p"
-							className="title font-roboto m-0 px-3 pb-1 text-base font-semibold"
+							className="title m-0 px-3 pb-1 text-base font-semibold"
 							value={title}
 							onChange={(v) => setAttributes({ title: v })}
 							placeholder={__("Title name..", "wp-custom-blocks")}

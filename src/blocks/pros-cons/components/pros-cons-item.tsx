@@ -53,7 +53,7 @@ export const ProsConsItem: FC<IProsConsItem> = ({
 			</div>
 			<RichText
 				tagName="p"
-				className="content font-roboto text-base"
+				className="content text-base"
 				value={text}
 				onChange={onChange}
 				placeholder={__("Text..", "wp-custom-blocks")}
@@ -88,7 +88,7 @@ export const ProsConsItemSave: FC<IProsConsItemSave> = ({
 
 			<RichText.Content
 				tagName="p"
-				className="content font-roboto text-base"
+				className="content text-base"
 				value={text}
 			/>
 		</div>

@@ -2,7 +2,6 @@ import React, { type FC } from "react";
 import classNames from "classnames";
 import {
 	BlockControls,
-	MediaPlaceholder,
 	MediaUpload,
 	MediaUploadCheck,
 	useBlockProps,
@@ -14,6 +13,7 @@ import { __ } from "@wordpress/i18n";
 
 import { LinkControl } from "@/controls";
 
+import Inspector from "./inspector";
 import type { IIconLinkElementAttributes } from "./attributes";
 
 const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
@@ -21,13 +21,13 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 	setAttributes,
 	clientId,
 }) => {
-	const { uniqueId, image, link } = attributes;
+	const { uniqueId, image, link, title } = attributes;
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
 		className: classNames(
 			uniqueId,
-			"icon-link flex items-center justify-center rounded-full cursor-pointer"
+			"icon-link flex flex-col items-center justify-center rounded-full cursor-pointer"
 		),
 		style: {
 			margin: 0,
@@ -44,6 +44,8 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 
 	return (
 		<Fragment>
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
+
 			<BlockControls controls={undefined}>
 				<ToolbarGroup>
 					<MediaUploadCheck>
@@ -98,30 +100,20 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 			</BlockControls>
 
 			<div {...blockProps}>
-				{image.url ? (
+				<div className="icon-image flex items-center justify-center">
 					<img
-						className="!h-full w-full object-cover"
+						className={classNames(
+							"!h-full w-auto object-cover",
+							image.url ? "w-auto" : "w-full bg-gray-200"
+						)}
 						src={image.url}
 						alt={image.alt}
 						width={image.width}
 						height={image.height}
 					/>
-				) : (
-					<MediaPlaceholder
-						onSelect={(media) =>
-							setAttributes({
-								image: media,
-							})
-						}
-						allowedTypes={["image"]}
-						multiple={false}
-						labels={{
-							title: __("Image", "wp-custom-blocks"),
-							instructions: __("Upload image", "wp-custom-blocks"),
-						}}
-						icon="format-image"
-						onHTMLDrop={undefined}
-					/>
+				</div>
+				{title && (
+					<p className="text-base font-medium mt-3 text-center">{title}</p>
 				)}
 			</div>
 		</Fragment>

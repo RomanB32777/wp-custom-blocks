@@ -24,6 +24,8 @@ const {
 	GREEN_COLOR,
 } = process.env;
 
+const alternativeFonts = ["Arial", "sans-serif"];
+
 module.exports = {
 	content: ["./src/**/*.{php,js,ts,tsx}", "./wp-custom-blocks.php"],
 	theme: {
@@ -66,7 +68,10 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				roboto: ['"Roboto"', "Arial", "sans-serif"],
+				roboto: ['"Roboto"', ...alternativeFonts],
+				notoSans: ['"NotoSans"', ...alternativeFonts],
+				lineSeedJp: ['"LINESeedJP"', ...alternativeFonts],
+				inter: ['"Inter"', ...alternativeFonts],
 			},
 			letterSpacing: {
 				wide: "0.75rem",

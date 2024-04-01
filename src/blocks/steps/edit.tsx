@@ -30,7 +30,7 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "wp-custom-blocks-steps"),
+		className: classNames(uniqueId, "wp-custom-blocks-steps font-roboto"),
 	});
 
 	const childBlocks =

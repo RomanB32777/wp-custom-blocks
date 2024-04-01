@@ -1,4 +1,5 @@
 import React, { type FC } from "react";
+import classNames from "classnames";
 import {
 	InnerBlocks,
 	RichText,
@@ -40,7 +41,7 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: uniqueId,
+		className: classNames(uniqueId, "font-roboto"),
 	});
 
 	const childBlocks =
@@ -129,7 +130,7 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 			<div {...blockProps}>
 				<RichText
 					tagName="h2"
-					className="font-roboto text-2xl font-black mb-4 md:text-3xl"
+					className="text-2xl font-black mb-4 md:text-3xl"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
 					placeholder={__("Faq title..", "wp-custom-blocks")}

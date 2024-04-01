@@ -1,4 +1,5 @@
 import React, { type FC } from "react";
+import classNames from "classnames";
 import {
 	InnerBlocks,
 	useBlockProps,
@@ -39,7 +40,7 @@ const Edit: FC<BlockEditProps<IImagesBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: uniqueId,
+		className: classNames(uniqueId, "font-roboto"),
 	});
 
 	useEffect(() => {

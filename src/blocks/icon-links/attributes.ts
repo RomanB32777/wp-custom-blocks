@@ -11,12 +11,16 @@ export interface IIconLinksBlockAttributes {
 	mobilePaddingY: number;
 	borderRadius: number;
 	itemsColor: string;
+	itemsTitleColor: string;
 	itemsWidth: number;
 	itemsHeight: number;
 	itemsPaddingX: number;
 	itemsPaddingY: number;
+	itemsBorderWidth: number;
 	itemsBorderRadius: number;
+	itemsBorderColor: number;
 	spaceBetween: number;
+	isFillItemsWidth: boolean;
 }
 
 export const attributes: TBlockAttributes<IIconLinksBlockAttributes> = {
@@ -54,6 +58,10 @@ export const attributes: TBlockAttributes<IIconLinksBlockAttributes> = {
 		type: "string",
 		default: colors.white.DEFAULT,
 	},
+	itemsTitleColor: {
+		type: "string",
+		default: colors.dark.DEFAULT,
+	},
 	itemsWidth: {
 		type: "number",
 		default: 32,
@@ -70,12 +78,24 @@ export const attributes: TBlockAttributes<IIconLinksBlockAttributes> = {
 		type: "number",
 		default: 0,
 	},
+	itemsBorderWidth: {
+		type: "number",
+		default: 0,
+	},
 	itemsBorderRadius: {
 		type: "number",
 		default: 100,
 	},
+	itemsBorderColor: {
+		type: "string",
+		default: colors.white.DEFAULT,
+	},
 	spaceBetween: {
 		type: "number",
 		default: 24,
+	},
+	isFillItemsWidth: {
+		type: "boolean",
+		default: false,
 	},
 };

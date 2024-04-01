@@ -38,7 +38,7 @@ const Save: FC<BlockSaveProps<IBonusesBlockAttributes>> = ({ attributes }) => {
 						>
 							<RichText.Content
 								tagName="span"
-								className="font-roboto text-4xl font-black mx-auto"
+								className="text-4xl font-black mx-auto"
 								value={buttonText}
 								style={{ color: buttonTextColor }}
 							/>

@@ -77,7 +77,7 @@ const Edit: FC<BlockEditProps<IImageElementAttributes>> = ({
 							height={image.height}
 						/>
 						<div className="absolute inset-x-0 bottom-0">
-							<p className="title font-roboto m-0 px-3 pb-1 text-base font-semibold">
+							<p className="title m-0 px-3 pb-1 text-base font-semibold">
 								{image.alt}
 							</p>
 						</div>

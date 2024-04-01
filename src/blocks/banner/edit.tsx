@@ -63,7 +63,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 	const blockProps = useBlockProps({
 		className: classNames(
 			uniqueId,
-			"wp-custom-blocks-banner border rounded-lg p-4 [&>*:not(:last-child)]:mb-5 md:!py-7"
+			"wp-custom-blocks-banner font-roboto border rounded-lg p-4 [&>*:not(:last-child)]:mb-5 md:!py-7"
 		),
 		style: {
 			backgroundColor,
@@ -292,7 +292,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 					<RichText
 						tagName="span"
 						value={domain}
-						className="domain font-roboto"
+						className="domain"
 						onChange={(v) => setAttributes({ domain: v })}
 						placeholder={__("Domain..", "wp-custom-blocks")}
 					/>

@@ -145,7 +145,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 
 					<RichText
 						tagName="p"
-						className="title font-roboto m-0 text-3xl font-semibold text-center"
+						className="title m-0 text-3xl font-semibold text-center"
 						value={title}
 						onChange={(v) => setAttributes({ title: v })}
 						placeholder={__("Title name..", "wp-custom-blocks")}
@@ -162,7 +162,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 					>
 						<RichText
 							tagName="span"
-							className="button-text font-roboto text-4xl font-black mx-auto"
+							className="button-text text-4xl font-black mx-auto"
 							value={buttonText}
 							onChange={(v) => setAttributes({ buttonText: v })}
 							placeholder={__("Button text..", "wp-custom-blocks")}

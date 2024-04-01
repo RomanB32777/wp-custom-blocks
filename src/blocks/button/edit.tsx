@@ -29,7 +29,7 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: "item-button w-full text-center",
+		className: "item-button font-roboto w-full text-center",
 	});
 
 	return (
@@ -72,7 +72,7 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 				>
 					<RichText
 						tagName="span"
-						className="font-roboto text-base font-medium mx-auto"
+						className="text-base font-medium mx-auto"
 						value={buttonText}
 						onChange={(v) => setAttributes({ buttonText: v })}
 						placeholder={__("Button text..", "wp-custom-blocks")}

@@ -3,7 +3,12 @@ import React, { type FC } from "react";
  * WordPress dependencies
  */
 import { InspectorControls } from "@wordpress/block-editor";
-import { CardDivider, PanelBody, RangeControl } from "@wordpress/components";
+import {
+	CardDivider,
+	PanelBody,
+	RangeControl,
+	ToggleControl,
+} from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 import { TipResponsive } from "@/components";
@@ -31,7 +36,9 @@ const Inspector: FC<IInspectorProps<IIconLinksBlockAttributes>> = ({
 		itemsPaddingX,
 		itemsPaddingY,
 		itemsBorderRadius,
+		itemsBorderWidth,
 		spaceBetween,
+		isFillItemsWidth,
 	} = attributes;
 
 	const colorControlProps = {
@@ -150,6 +157,13 @@ const Inspector: FC<IInspectorProps<IIconLinksBlockAttributes>> = ({
 				/>
 
 				<CardDivider />
+				<ColorControl
+					name="itemsTitleColor"
+					label={__("Items title color", "wp-custom-blocks")}
+					{...colorControlProps}
+				/>
+
+				<CardDivider />
 				<RangeControl
 					label={__("Items width", "wp-custom-blocks")}
 					value={itemsWidth}
@@ -223,6 +237,24 @@ const Inspector: FC<IInspectorProps<IIconLinksBlockAttributes>> = ({
 
 				<CardDivider />
 				<RangeControl
+					label={__("Items border width", "wp-custom-blocks")}
+					value={itemsBorderWidth}
+					onChange={(v) =>
+						setAttributes({
+							itemsBorderWidth: v,
+						})
+					}
+					step={1}
+					min={0}
+					max={100}
+					allowReset
+					resetFallbackValue={Number(
+						getDefaultAttributeValue(defaultAttributes, "itemsBorderWidth")
+					)}
+				/>
+
+				<CardDivider />
+				<RangeControl
 					label={__("Items border radius", "wp-custom-blocks")}
 					value={itemsBorderRadius}
 					onChange={(v) =>
@@ -237,6 +269,13 @@ const Inspector: FC<IInspectorProps<IIconLinksBlockAttributes>> = ({
 					resetFallbackValue={Number(
 						getDefaultAttributeValue(defaultAttributes, "itemsBorderRadius")
 					)}
+				/>
+
+				<CardDivider />
+				<ColorControl
+					name="itemsBorderColor"
+					label={__("Items border color", "wp-custom-blocks")}
+					{...colorControlProps}
 				/>
 
 				<CardDivider />
@@ -255,6 +294,15 @@ const Inspector: FC<IInspectorProps<IIconLinksBlockAttributes>> = ({
 					resetFallbackValue={Number(
 						getDefaultAttributeValue(defaultAttributes, "spaceBetween")
 					)}
+				/>
+
+				<CardDivider />
+				<ToggleControl
+					label={__("Fill items width", "wp-custom-blocks")}
+					checked={isFillItemsWidth}
+					onChange={() =>
+						setAttributes({ isFillItemsWidth: !isFillItemsWidth })
+					}
 				/>
 			</PanelBody>
 		</InspectorControls>

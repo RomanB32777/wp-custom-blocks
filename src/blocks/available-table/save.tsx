@@ -45,7 +45,7 @@ const Save: FC<BlockSaveProps<IAvailableTableBlockAttributes>> = ({
 								<th
 									key={column}
 									className={classNames(
-										"p-2 font-roboto",
+										"p-2",
 										index > 0 ? "text-center" : "text-left"
 									)}
 									scope="col"
@@ -65,7 +65,7 @@ const Save: FC<BlockSaveProps<IAvailableTableBlockAttributes>> = ({
 											const isLastCell = index === arr.length - 1;
 
 											const cellAttributes: TCellHTMLAttributes = {
-												className: "p-2 font-roboto",
+												className: "p-2",
 												style: { color: rowColor },
 											};
 

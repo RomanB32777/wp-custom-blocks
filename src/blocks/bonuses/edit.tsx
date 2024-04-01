@@ -57,7 +57,7 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "wp-custom-blocks-bonuses"),
+		className: classNames(uniqueId, "wp-custom-blocks-bonuses font-roboto"),
 	});
 
 	const childBlocks =
@@ -235,7 +235,7 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 					>
 						<RichText
 							tagName="span"
-							className="font-roboto text-4xl font-black mx-auto"
+							className="text-4xl font-black mx-auto"
 							value={buttonText}
 							onChange={(v) => setAttributes({ buttonText: v })}
 							placeholder={__("Button text..", "wp-custom-blocks")}

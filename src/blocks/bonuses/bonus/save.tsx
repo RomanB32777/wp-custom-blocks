@@ -56,7 +56,7 @@ const Save: FC<BlockSaveProps<IBonusElementAttributes>> = ({ attributes }) => {
 
 				<RichText.Content
 					tagName="p"
-					className="title font-roboto m-0 text-3xl font-semibold text-center"
+					className="title m-0 text-3xl font-semibold text-center"
 					value={title}
 					style={{ color: !isParentStyles ? titleColor : undefined }}
 				/>
@@ -77,7 +77,7 @@ const Save: FC<BlockSaveProps<IBonusElementAttributes>> = ({ attributes }) => {
 					>
 						<RichText.Content
 							tagName="span"
-							className="button-text font-roboto text-4xl font-black mx-auto"
+							className="button-text text-4xl font-black mx-auto"
 							value={buttonText}
 							style={{ color: !isParentStyles ? buttonTextColor : undefined }}
 						/>

@@ -14,7 +14,7 @@ import type { IIconLinkElementAttributes } from "./attributes";
 const Save: FC<BlockSaveProps<IIconLinkElementAttributes>> = ({
 	attributes,
 }) => {
-	const { uniqueId, image, link } = attributes;
+	const { uniqueId, image, link, title } = attributes;
 
 	if (!image.url) {
 		return null;
@@ -23,7 +23,7 @@ const Save: FC<BlockSaveProps<IIconLinkElementAttributes>> = ({
 	const blockProps = useBlockProps.save({
 		className: classNames(
 			uniqueId,
-			"icon-link flex items-center justify-center rounded-full"
+			"icon-link flex flex-col items-center justify-center rounded-full no-underline"
 		),
 	});
 
@@ -32,16 +32,20 @@ const Save: FC<BlockSaveProps<IIconLinkElementAttributes>> = ({
 			href={link.url}
 			target={link.openInNewTab ? "_blank" : "_self"}
 			rel={link.openInNewTab ? "noopener noreferrer" : "noopener"}
-			className="h-full w-full no-underline"
 			{...blockProps}
 		>
-			<img
-				className="!h-full w-full object-cover"
-				src={image.url}
-				alt={image.alt}
-				width={image.width}
-				height={image.height}
-			/>
+			<div className="icon-image flex items-center justify-center">
+				<img
+					className="!h-full w-auto object-cover"
+					src={image.url}
+					alt={image.alt}
+					width={image.width}
+					height={image.height}
+				/>
+			</div>
+			{title && (
+				<p className="text-base font-medium mt-3 text-center">{title}</p>
+			)}
 		</a>
 	);
 };

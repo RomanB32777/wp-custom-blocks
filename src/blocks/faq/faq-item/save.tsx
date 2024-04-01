@@ -31,7 +31,7 @@ const Save: FC<BlockSaveProps<IFaqItemElementAttributes>> = ({
 				<div className="flex items-start justify-between">
 					<RichText.Content
 						tagName="p"
-						className="question-title font-roboto text-base basis-5/6"
+						className="question-title text-base basis-5/6"
 						value={question}
 						style={{ color: !isParentStyles ? questionColor : undefined }}
 					/>
@@ -58,7 +58,7 @@ const Save: FC<BlockSaveProps<IFaqItemElementAttributes>> = ({
 				</div>
 				<RichText.Content
 					tagName="p"
-					className="question-content font-roboto text-base mt-4 hidden"
+					className="question-content text-base mt-4 hidden"
 					value={answer}
 					style={{ color: !isParentStyles ? answerColor : undefined }}
 				/>

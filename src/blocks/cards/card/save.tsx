@@ -46,7 +46,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 				<div className="absolute inset-x-0 bottom-0">
 					<RichText.Content
 						tagName="p"
-						className="title font-roboto m-0 px-3 pb-1 text-base font-semibold"
+						className="title m-0 px-3 pb-1 text-base font-semibold"
 						value={title}
 						style={{ color: !isParentStyles ? titleColor : undefined }}
 					/>
@@ -69,7 +69,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 						>
 							<RichText.Content
 								tagName="span"
-								className="font-roboto text-base font-black mx-auto"
+								className="text-base font-black mx-auto"
 								value={buttonText}
 								style={{ color: !isParentStyles ? buttonTextColor : undefined }}
 							/>
