@@ -27,9 +27,14 @@ const Edit: FC<BlockEditProps<IAuthorBlockAttributes>> = ({
 	const blockProps = useBlockProps({
 		className: classNames(
 			uniqueId,
-			"wp-custom-blocks-author font-roboto flex items-center p-4 rounded-lg md:!p-7"
+			"wp-custom-blocks-author font-inter flex items-center p-4 rounded-xl md:!rounded-3xl md:!p-7"
 		),
-		style: { backgroundColor },
+		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
+			backgroundColor,
+		},
 	});
 
 	const authorId = select("core/editor").getCurrentPostAttribute("author");

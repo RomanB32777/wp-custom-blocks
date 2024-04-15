@@ -1,9 +1,10 @@
 import React, { type FC } from "react";
 import classNames from "classnames";
-import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
+import { InnerBlocks, RichText, useBlockProps } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
 import { dispatch, select } from "@wordpress/data";
 import { Fragment, useEffect } from "@wordpress/element";
+import { __ } from "@wordpress/i18n";
 
 import { minifyCssStrings } from "@/utils/minify-css";
 
@@ -20,6 +21,7 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 	const {
 		uniqueId,
 		blockStyle,
+		description,
 		mainColor,
 		stepColor,
 		titleColor,
@@ -30,7 +32,15 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "wp-custom-blocks-steps font-roboto"),
+		className: classNames(
+			uniqueId,
+			"wp-custom-blocks-steps font-inter bg-white rounded-xl py-6 px-4 md:!p-8 md:!rounded-3xl"
+		),
+		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
+		},
 	});
 
 	const childBlocks =
@@ -94,12 +104,23 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 				setAttributes={setAttributes}
 				clientId={clientId}
 			/>
+
 			<div {...blockProps}>
-				<InnerBlocks
-					allowedBlocks={[allowedBlock]}
-					template={[[allowedBlock]]}
-					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-				/>
+				<div className="divide-y divide-primary flex flex-col gap-4 md:!gap-6">
+					<RichText
+						tagName="p"
+						className="text-base md:!text-lg"
+						value={description}
+						onChange={(v) => setAttributes({ description: v })}
+						placeholder={__("Description text..", "wp-custom-blocks")}
+						style={{ color: descriptionColor }}
+					/>
+
+					<InnerBlocks
+						allowedBlocks={[allowedBlock]}
+						template={[[allowedBlock]]}
+					/>
+				</div>
 			</div>
 		</Fragment>
 	);

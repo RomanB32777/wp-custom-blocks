@@ -45,7 +45,15 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 	const uniqKeys = useRef(new Set(pros.concat(cons).map(({ id }) => id)));
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "wp-custom-blocks-pros-cons font-roboto"),
+		className: classNames(
+			uniqueId,
+			"wp-custom-blocks-pros-cons font-inter bg-white rounded-xl py-6 px-4 md:!p-8 md:!rounded-3xl"
+		),
+		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
+		},
 	});
 
 	useEffect(() => {
@@ -191,7 +199,7 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 			<div {...blockProps}>
 				<RichText
 					tagName="h5"
-					className="text-2xl font-bold md:!text-4xl my-7"
+					className="text-2xl font-bold mb-4 md:!mb-8"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
 					placeholder={__("Title text..", "wp-custom-blocks")}

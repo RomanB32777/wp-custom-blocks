@@ -21,7 +21,11 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		style: { margin: 0 },
+		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
+		},
 	});
 
 	return (
@@ -29,13 +33,13 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 			<div {...blockProps}>
 				<div
-					className="question group border px-6 py-4 rounded-lg duration-200 cursor-pointer"
+					className="question group px-8 py-4 bg-white rounded-xl duration-200 cursor-pointer md:!px-4"
 					data-question={index}
 				>
 					<div className="flex items-start justify-between">
 						<RichText
 							tagName="p"
-							className="question-title text-base basis-5/6"
+							className="question-title text-lg font-medium basis-5/6 md:!text-2xl"
 							value={question}
 							onChange={(v) => setAttributes({ question: v })}
 							placeholder={__("Question..", "wp-custom-blocks")}
@@ -43,17 +47,17 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 						/>
 						<div className="flex justify-end basis-1/6">
 							<div className="arrow-wrapper duration-200 rotate-0">
-								<div className="flex items-center cursor-pointer">
-									<div className="more-arrow w-6 h-6 rounded-full flex items-center justify-center">
+								<div className="flex items-center p-2">
+									<div className="more-arrow">
 										<svg
-											width="6"
-											height="8"
-											viewBox="0 0 6 8"
+											width="18"
+											height="18"
+											viewBox="0 0 18 18"
 											fill="none"
 											xmlns="http://www.w3.org/2000/svg"
 										>
 											<path
-												d="M5.25557 4.39741L2.06807 7.58491C1.84775 7.80523 1.4915 7.80523 1.27354 7.58491L0.743848 7.05523C0.523535 6.83491 0.523535 6.47866 0.743848 6.26069L3.00322 4.00132L0.743848 1.74194C0.523535 1.52163 0.523535 1.16538 0.743848 0.947412L1.27119 0.413037C1.4915 0.192725 1.84775 0.192725 2.06572 0.413037L5.25322 3.60054C5.47588 3.82085 5.47588 4.1771 5.25557 4.39741Z"
+												d="M7.71429 7.71429V0H10.2857V7.71429H18V10.2857H10.2857V18H7.71429V10.2857H0V7.71429H7.71429Z"
 												fill="currentColor"
 											></path>
 										</svg>
@@ -64,7 +68,7 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 					</div>
 					<RichText
 						tagName="p"
-						className="question-content text-base mt-4"
+						className="question-content text-base mt-3 md:!text-lg mt:mb-6"
 						value={answer}
 						onChange={(v) => setAttributes({ answer: v })}
 						placeholder={__("Answer..", "wp-custom-blocks")}

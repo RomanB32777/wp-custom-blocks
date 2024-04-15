@@ -32,7 +32,7 @@ const Save: FC<BlockSaveProps<IBonusesBlockAttributes>> = ({ attributes }) => {
 						className="no-underline"
 					>
 						<button
-							className="link-button relative rounded-lg py-5 px-10"
+							className="link-button relative rounded-xl py-5 px-10 md:!rounded-3xl"
 							type="button"
 							aria-expanded="false"
 						>

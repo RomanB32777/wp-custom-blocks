@@ -15,6 +15,7 @@ export enum ELineTypes {
 export interface IStepsBlockAttributes {
 	uniqueId: string;
 	blockStyle: string;
+	description: string;
 	mainColor: string;
 	stepColor: string;
 	titleColor: string;
@@ -35,17 +36,20 @@ export const attributes: TBlockAttributes<IStepsBlockAttributes> = {
 		type: "string",
 		default: colors.primary.DEFAULT,
 	},
+	description: {
+		type: "string",
+	},
 	stepColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	titleColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	descriptionColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	borderColor: {
 		type: "string",

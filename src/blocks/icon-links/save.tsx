@@ -26,7 +26,7 @@ const Save: FC<BlockSaveProps<IIconLinksBlockAttributes>> = ({
 	return (
 		<div {...blockProps}>
 			<div
-				className="flex flex-wrap items-center"
+				className="flex flex-wrap items-stretch"
 				style={{ gap: spaceBetween }}
 			>
 				<InnerBlocks.Content />

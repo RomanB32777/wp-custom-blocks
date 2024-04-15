@@ -44,8 +44,11 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "font-roboto"),
+		className: classNames(uniqueId, "font-inter"),
 		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
 			borderRadius,
 			backgroundColor,
 		},
@@ -61,7 +64,7 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: "flex flex-wrap items-center",
+			className: "flex flex-wrap items-stretch",
 			style: {
 				gap: spaceBetween,
 			},

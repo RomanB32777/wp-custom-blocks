@@ -46,7 +46,7 @@ const Save: FC<BlockSaveProps<IStepElementAttributes>> = ({ attributes }) => {
 			{description && (
 				<RichText.Content
 					tagName="p"
-					className={classNames("description py-6 text-sm md:!text-base", {
+					className={classNames("description py-6 text-sm md:!text-lg", {
 						"border rounded-lg p-4": isOnlyText,
 					})}
 					value={description}

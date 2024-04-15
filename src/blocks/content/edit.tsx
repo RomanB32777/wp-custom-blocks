@@ -24,12 +24,17 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 
 	const blockProps = useBlockProps({
 		className: classNames(
-			"font-roboto flex flex-col items-center gap-6 md:!flex-row",
+			"font-inter flex flex-col items-center gap-6 md:!flex-row",
 			{
 				"flex-col-reverse": isReverse,
 				"md:!flex-row-reverse": isReverse,
 			}
 		),
+		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
+		},
 	});
 
 	return (
@@ -68,7 +73,7 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 				<div className="overflow-hidden basis-full w-full md:!basis-1/2 md:!w-auto">
 					{image.url ? (
 						<img
-							className="w-full object-cover object-center"
+							className="w-full object-cover object-center rounded-xl md:!rounded-3xl"
 							src={image.url}
 							alt={image.alt}
 							width={image.width}
@@ -94,9 +99,7 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 				</div>
 
 				<div className="basis-full w-full md:!basis-1/2 md:!w-auto">
-					<InnerBlocks
-						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-					/>
+					<InnerBlocks />
 				</div>
 			</div>
 		</Fragment>

@@ -39,7 +39,10 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "bonus w-full p-2 rounded-lg"),
+		className: classNames(
+			uniqueId,
+			"bonus w-full p-2 rounded-xl md:!rounded-3xl"
+		),
 		style: {
 			backgroundColor: !isParentStyles ? backgroundColor : undefined,
 			margin: 0,
@@ -116,7 +119,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 			<div {...blockProps}>
 				<div className="relative h-full flex flex-col items-center justify-between">
 					{image.url ? (
-						<div className="overflow-hidden max-h-48 w-full rounded-lg">
+						<div className="overflow-hidden max-h-48 w-full rounded-xl">
 							<img
 								className="!h-full w-full object-cover object-center"
 								src={image.url}
@@ -153,7 +156,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 					/>
 
 					<button
-						className="bonus-button relative rounded-lg py-5 px-10"
+						className="bonus-button relative rounded-xl py-5 px-10"
 						type="button"
 						aria-expanded="false"
 						style={{

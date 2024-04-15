@@ -63,9 +63,12 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 	const blockProps = useBlockProps({
 		className: classNames(
 			uniqueId,
-			"wp-custom-blocks-banner font-roboto border rounded-lg p-4 [&>*:not(:last-child)]:mb-5 md:!py-7"
+			"wp-custom-blocks-banner font-inter border rounded-xl p-4 [&>*:not(:last-child)]:mb-5 md:!py-7 md:!rounded-3xl"
 		),
 		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
 			backgroundColor,
 		},
 	});
@@ -270,7 +273,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 					</div>
 				</div>
 
-				<div className="bonus-button p-4 text-center rounded-lg md:!p-6">
+				<div className="bonus-button p-4 text-center rounded-xl md:!p-6">
 					<RichText
 						tagName="p"
 						className="p-0 m-0 text-5xl font-bold md:!text-3xl"
@@ -283,9 +286,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 					/>
 				</div>
 
-				<InnerBlocks
-					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-				/>
+				<InnerBlocks />
 
 				<div>
 					<span>Official website: </span>

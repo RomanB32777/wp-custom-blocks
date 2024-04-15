@@ -70,7 +70,7 @@ const Edit: FC<BlockEditProps<IImageElementAttributes>> = ({
 				{image.url ? (
 					<Fragment>
 						<img
-							className="!h-full w-full object-cover rounded-lg"
+							className="!h-full w-full object-cover rounded-xl"
 							src={image.url}
 							alt={image.alt}
 							width={image.width}

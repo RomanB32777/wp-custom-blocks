@@ -71,6 +71,9 @@ function blocks_init() {
 		'banner',
 		'author',
 		'pros-cons',
+		'wrapper',
+		'join',
+		'main-banner',
 		'available-table',
 	);
 

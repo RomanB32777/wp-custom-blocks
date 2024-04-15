@@ -110,7 +110,7 @@ const Edit: FC<BlockEditProps<IStepElementAttributes>> = ({
 				/>
 				<RichText
 					tagName="p"
-					className={classNames("description py-6 text-sm md:!text-base", {
+					className={classNames("description py-6 text-sm md:!text-lg", {
 						"border rounded-lg p-4": isOnlyText,
 					})}
 					value={description}

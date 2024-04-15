@@ -29,7 +29,12 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: "item-button font-roboto w-full text-center",
+		className: "item-button font-inter w-full text-center",
+		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
+		},
 	});
 
 	return (
@@ -65,7 +70,7 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 
 			<div {...blockProps}>
 				<button
-					className="relative rounded-lg py-4 px-7"
+					className="relative rounded-xl py-4 px-7"
 					type="button"
 					aria-expanded="false"
 					style={{ backgroundColor: buttonColor }}

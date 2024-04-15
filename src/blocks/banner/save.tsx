@@ -33,7 +33,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: classNames(
 			uniqueId,
-			"wp-custom-blocks-banner border rounded-lg p-4 [&>*:not(:last-child)]:mb-5 md:!p-7"
+			"wp-custom-blocks-banner border rounded-xl p-4 [&>*:not(:last-child)]:mb-5 md:!p-7 md:!rounded-3xl"
 		),
 		style: {
 			backgroundColor,
@@ -97,7 +97,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 					target={bonusLink.openInNewTab ? "_blank" : "_self"}
 					rel={bonusLink.openInNewTab ? "noopener noreferrer" : "noopener"}
 				>
-					<div className="bonus-button p-4 text-center rounded-lg md:!p-6">
+					<div className="bonus-button p-4 text-center rounded-xl md:!p-6">
 						<RichText.Content
 							tagName="p"
 							className="text-3xl font-bold md:!text-5xl"

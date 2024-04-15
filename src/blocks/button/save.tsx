@@ -26,7 +26,7 @@ const Save: FC<BlockSaveProps<IButtonBlockAttributes>> = ({ attributes }) => {
 				className="no-underline"
 			>
 				<button
-					className="relative rounded-lg py-4 px-7"
+					className="relative rounded-xl py-4 px-7"
 					type="button"
 					aria-expanded="false"
 					style={{ backgroundColor: buttonColor }}

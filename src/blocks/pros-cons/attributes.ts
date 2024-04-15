@@ -36,7 +36,7 @@ export const attributes: TBlockAttributes<IProsConsBlockAttributes> = {
 	},
 	titleColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	pros: {
 		type: "array",
@@ -48,7 +48,7 @@ export const attributes: TBlockAttributes<IProsConsBlockAttributes> = {
 	},
 	contentColor: {
 		type: "string",
-		default: colors.white.DEFAULT,
+		default: colors.dark.DEFAULT,
 	},
 	prosColor: {
 		type: "string",

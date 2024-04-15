@@ -31,7 +31,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 	return (
 		<div {...blockProps}>
 			<div className="group relative h-full">
-				<div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 h-full lg:aspect-none">
+				<div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-xl bg-gray-200 h-full md:!rounded-3xl lg:aspect-none">
 					{image.url && (
 						<img
 							className="!h-full w-full object-cover object-center"
@@ -52,7 +52,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 					/>
 				</div>
 
-				<div className="absolute inset-0 rounded-lg flex justify-center items-center invisible opacity-0 group-hover:visible group-hover:opacity-100 bg-dark-opacity duration-200">
+				<div className="absolute inset-0 rounded-xl flex justify-center items-center invisible opacity-0 group-hover:visible group-hover:opacity-100 bg-dark-opacity duration-200">
 					<a
 						href={link.url}
 						target={link.openInNewTab ? "_blank" : "_self"}
@@ -60,7 +60,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 						className="no-underline"
 					>
 						<button
-							className="relative rounded-lg p-3 mx-3 min-w-28"
+							className="relative rounded-xl p-3 mx-3 min-w-28"
 							type="button"
 							aria-expanded="false"
 							style={{

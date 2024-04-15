@@ -27,7 +27,7 @@ export const ProsConsItem: FC<IProsConsItem> = ({
 	return (
 		<div
 			className={classNames(
-				"item flex items-center gap-3 border rounded-lg px-6 py-5 relative",
+				"item flex items-center gap-3 border rounded-xl px-6 py-5 relative",
 				type
 			)}
 		>
@@ -70,7 +70,7 @@ export const ProsConsItemSave: FC<IProsConsItemSave> = ({
 	return (
 		<div
 			className={classNames(
-				"item flex items-center gap-3 border rounded-lg px-6 py-5 relative",
+				"item flex items-center gap-3 border rounded-xl px-6 py-5 relative",
 				type
 			)}
 		>

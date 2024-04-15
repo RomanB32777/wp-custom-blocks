@@ -18,10 +18,7 @@ export const initFaq = () => {
 		const questionContent = questionEl.querySelector(".question-content");
 
 		if (arrowWrapper) {
-			arrowWrapper.classList.toggle("text-grizzly-dark");
-			arrowWrapper.classList.toggle("text-white");
-			arrowWrapper.classList.toggle("rotate-0");
-			arrowWrapper.classList.toggle("-rotate-90");
+			arrowWrapper.classList.toggle("rotate-45");
 
 			const arrow = arrowWrapper.querySelector(".more-arrow");
 			arrow?.classList.toggle("active");
@@ -51,10 +48,6 @@ export const initFaq = () => {
 			}
 		});
 	};
-
-	if (questions.length) {
-		itemHandler(questions[0]);
-	}
 
 	questions.forEach((question) => {
 		question.addEventListener("click", () => itemHandler(question));

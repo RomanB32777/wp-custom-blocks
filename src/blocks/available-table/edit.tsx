@@ -51,7 +51,12 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "font-roboto"),
+		className: classNames(uniqueId, "font-inter"),
+		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
+		},
 	});
 
 	const [uniqRowKeys, setUniqRowKeys] = useState(

@@ -2,7 +2,6 @@ import React, { type FC } from "react";
 import classNames from "classnames";
 import {
 	BlockControls,
-	InnerBlocks,
 	RichText,
 	useBlockProps,
 	useInnerBlocksProps,
@@ -57,7 +56,12 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "wp-custom-blocks-bonuses font-roboto"),
+		className: classNames(uniqueId, "wp-custom-blocks-bonuses font-inter"),
+		style: {
+			marginRight: 0,
+			marginLeft: 0,
+			maxWidth: "none",
+		},
 	});
 
 	const childBlocks =
@@ -91,7 +95,6 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 		{
 			allowedBlocks: [allowedBlock],
 			template: [[allowedBlock]],
-			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);
 
@@ -229,7 +232,7 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 
 				<div className="mt-6 text-center">
 					<button
-						className="link-button relative rounded-lg py-5 px-10"
+						className="link-button relative rounded-xl py-5 px-10 md:!rounded-3xl"
 						type="button"
 						aria-expanded="false"
 					>

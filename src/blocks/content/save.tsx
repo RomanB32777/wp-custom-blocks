@@ -26,7 +26,7 @@ const Save: FC<BlockSaveProps<IContentBlockAttributes>> = ({ attributes }) => {
 			<div className="overflow-hidden basis-full w-full md:!basis-1/2 md:!w-auto">
 				{image.url && (
 					<img
-						className="w-full object-cover object-center"
+						className="w-full object-cover object-center rounded-xl md:!rounded-3xl"
 						src={image.url}
 						alt={image.alt}
 						width={image.width}

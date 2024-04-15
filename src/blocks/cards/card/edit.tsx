@@ -110,7 +110,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 
 			<div {...blockProps}>
 				<div className="group relative h-full">
-					<div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 h-full lg:aspect-none">
+					<div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-xl bg-gray-200 h-full md:!rounded-3xl lg:aspect-none">
 						{image.url && (
 							<img
 								className="!h-full w-full object-cover object-center"
@@ -122,9 +122,9 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 						)}
 					</div>
 
-					<div className="absolute inset-0 rounded-lg flex justify-center items-center">
+					<div className="absolute inset-0 rounded-xl flex justify-center items-center">
 						<button
-							className="relative rounded-lg p-3 mx-3 min-w-28"
+							className="relative rounded-xl p-3 mx-3 min-w-28"
 							type="button"
 							aria-expanded="false"
 							style={{
