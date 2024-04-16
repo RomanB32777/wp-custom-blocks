@@ -98,7 +98,6 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 				<InnerBlocks
 					allowedBlocks={[allowedBlock]}
 					template={[[allowedBlock]]}
-					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 				/>
 			</div>
 		</Fragment>

@@ -283,9 +283,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 					/>
 				</div>
 
-				<InnerBlocks
-					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-				/>
+				<InnerBlocks />
 
 				<div>
 					<span>Official website: </span>

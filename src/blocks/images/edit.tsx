@@ -1,10 +1,6 @@
 import React, { type FC } from "react";
 import classNames from "classnames";
-import {
-	InnerBlocks,
-	useBlockProps,
-	useInnerBlocksProps,
-} from "@wordpress/block-editor";
+import { useBlockProps, useInnerBlocksProps } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
 import { Fragment, useEffect } from "@wordpress/element";
 
@@ -58,7 +54,6 @@ const Edit: FC<BlockEditProps<IImagesBlockAttributes>> = ({
 		{
 			allowedBlocks: [allowedBlock],
 			template: [[allowedBlock]],
-			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);
 

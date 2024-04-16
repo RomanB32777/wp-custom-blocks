@@ -1,7 +1,6 @@
 import React, { type FC } from "react";
 import classNames from "classnames";
 import {
-	InnerBlocks,
 	RichText,
 	useBlockProps,
 	useInnerBlocksProps,
@@ -54,7 +53,6 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 		{
 			allowedBlocks: [allowedBlock],
 			template: [[allowedBlock]],
-			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);
 

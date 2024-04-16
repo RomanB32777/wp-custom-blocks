@@ -61,7 +61,7 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: "flex flex-wrap items-center",
+			className: "flex flex-wrap items-stretch",
 			style: {
 				gap: spaceBetween,
 			},

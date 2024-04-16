@@ -23,7 +23,7 @@ const Save: FC<BlockSaveProps<IIconLinkElementAttributes>> = ({
 	const blockProps = useBlockProps.save({
 		className: classNames(
 			uniqueId,
-			"icon-link flex flex-col items-center justify-center rounded-full no-underline"
+			"icon-link h-auto flex flex-col items-center justify-center rounded-full no-underline"
 		),
 	});
 

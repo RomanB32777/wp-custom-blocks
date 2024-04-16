@@ -94,9 +94,7 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 				</div>
 
 				<div className="basis-full w-full md:!basis-1/2 md:!w-auto">
-					<InnerBlocks
-						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-					/>
+					<InnerBlocks />
 				</div>
 			</div>
 		</Fragment>
