@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "wp-custom-block/banner",
+	"name": "wp-custom-blocks/banner",
 	"version": "0.1.0",
 	"title": "Banner",
 	"category": "wp-custom-blocks",

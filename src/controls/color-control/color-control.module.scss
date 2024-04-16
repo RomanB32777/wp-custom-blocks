@@ -1,0 +1,12 @@
+.label label {
+	margin-bottom: 0;
+}
+
+.reset,
+.indicator {
+	&:disabled,
+	&.disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}

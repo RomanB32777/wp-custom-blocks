@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Small",
+		"slug": "small",
+		"size": 14
+	},
+	{
+		"name": "Medium",
+		"slug": "medium",
+		"size": 16
+	},
+	{
+		"name": "Large",
+		"slug": "large",
+		"size": 18
+	},
+	{
+		"name": "Big",
+		"slug": "big",
+		"size": 24
+	}
+]

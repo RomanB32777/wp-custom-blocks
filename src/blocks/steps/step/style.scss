@@ -1,0 +1,12 @@
+.wp-block-wp-custom-blocks-step {
+	.line {
+		left: 14.5px;
+		width: 2px;
+	}
+
+	&:last-child {
+		.line {
+			display: none;
+		}
+	}
+}

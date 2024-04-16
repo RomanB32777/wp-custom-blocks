@@ -1,7 +1,7 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "wp-custom-block/author",
+  "name": "wp-custom-blocks/author",
   "version": "0.1.0",
   "title": "Author",
   "category": "wp-custom-blocks",
