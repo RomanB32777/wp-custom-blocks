@@ -6,7 +6,7 @@ import classNames from "classnames";
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from "@wordpress/block-editor";
+import { RichText, useBlockProps } from "@wordpress/block-editor";
 import type { BlockSaveProps } from "@wordpress/blocks";
 
 import type { IIconLinkElementAttributes } from "./attributes";
@@ -43,8 +43,13 @@ const Save: FC<BlockSaveProps<IIconLinkElementAttributes>> = ({
 					height={image.height}
 				/>
 			</div>
+
 			{title && (
-				<p className="text-base font-medium mt-3 text-center">{title}</p>
+				<RichText.Content
+					tagName="p"
+					className="text-base font-medium mt-3 text-center"
+					value={title}
+				/>
 			)}
 		</a>
 	);
