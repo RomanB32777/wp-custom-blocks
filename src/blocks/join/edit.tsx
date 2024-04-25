@@ -12,7 +12,7 @@ export default function Edit() {
 	});
 
 	const innerBlocksProps = useInnerBlocksProps({
-		className: "[&>*]:my-7 [&>*]:!mx-0 [&>*]:!max-w-none [&>*]:md:!my-14",
+		className: "[&>*]:!mx-0 [&>*]:!max-w-none [&>*]:my-7 [&>*]:md:!my-14",
 	});
 
 	return (

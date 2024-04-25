@@ -10,7 +10,7 @@ import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
 
 export default function save() {
 	const blockProps = useBlockProps.save({
-		className: "[&>*]:my-7 [&>*]:!mx-0 [&>*]:!max-w-none [&>*]:md:!my-14",
+		className: "[&>*]:!mx-0 [&>*]:!max-w-none [&>*]:my-7 [&>*]:md:!my-14",
 	});
 
 	return (

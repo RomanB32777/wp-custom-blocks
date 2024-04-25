@@ -7,7 +7,7 @@ export default function Edit() {
 	});
 
 	const innerBlocksProps = useInnerBlocksProps({
-		className: "[&>*]:my-14 [&>*]:!mx-0 [&>*]:!max-w-none [&>*]:md:!my-36",
+		className: "[&>*]:!mx-0 [&>*]:!max-w-none [&>*]:my-14 [&>*]:md:!my-24",
 	});
 
 	return (
