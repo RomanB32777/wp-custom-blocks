@@ -17,9 +17,12 @@ const Save: FC<BlockSaveProps<IMainBannerBlockAttributes>> = ({
 	const { uniqueId, backgroundColor, backgroundImage, logoImage } = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: classNames(uniqueId, "wp-custom-blocks-main-banner"),
+		className: classNames(
+			uniqueId,
+			"wp-custom-blocks-main-banner relative left-1/2 w-screen -translate-x-2/4"
+		),
 		style: {
-			marginTop: 0,
+			marginTop: "0 !important",
 		},
 	});
 
