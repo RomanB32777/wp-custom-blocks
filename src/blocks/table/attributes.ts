@@ -3,9 +3,14 @@ import { colors } from "@/constants";
 import type { IImageAttributes, TBlockAttributes } from "@/types";
 
 export interface ICellValues {
-	column: string;
 	value: string;
-	icon: IImageAttributes;
+	icon?: IImageAttributes;
+	isReverse?: boolean;
+}
+
+export interface ISelectedCeil {
+	colId: string | undefined;
+	rowId: string | undefined;
 }
 
 export interface ITableBlockAttributes extends IBaseTemplateAttributes {
@@ -14,18 +19,32 @@ export interface ITableBlockAttributes extends IBaseTemplateAttributes {
 	backgroundColor: string;
 	columnColor: string;
 	rowColor: string;
-	isPreviewIcons: boolean;
+	borderRadius: number;
 }
+
+const columKey = String(Math.random());
+const defaultColumns: ITableBlockAttributes["columns"] = {
+	[columKey]: "",
+};
+
+const rowKey = String(Math.random());
+const defaultRows: ITableBlockAttributes["rows"] = {
+	[rowKey]: {
+		[columKey]: {
+			value: "",
+		},
+	},
+};
 
 export const attributes: TBlockAttributes<ITableBlockAttributes> = {
 	...templateAttributes,
 	columns: {
 		type: "object",
-		default: {},
+		default: defaultColumns,
 	},
 	rows: {
 		type: "object",
-		default: {},
+		default: defaultRows,
 	},
 	backgroundColor: {
 		type: "string",
@@ -39,9 +58,9 @@ export const attributes: TBlockAttributes<ITableBlockAttributes> = {
 		type: "string",
 		default: colors.dark.DEFAULT,
 	},
-	isPreviewIcons: {
-		type: "boolean",
-		default: false,
+	borderRadius: {
+		type: "number",
+		default: 8,
 	},
 };
 

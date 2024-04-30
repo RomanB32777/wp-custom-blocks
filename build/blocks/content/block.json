@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "wp-custom-blocks/content",
   "version": "0.1.0",
-  "title": "Content block",
+  "title": "Content",
   "category": "wp-custom-blocks",
   "description": "Content block",
   "supports": {

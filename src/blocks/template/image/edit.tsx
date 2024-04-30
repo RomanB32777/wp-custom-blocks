@@ -29,9 +29,7 @@ const Edit: FC<BlockEditProps<IImageElementAttributes>> = ({
 			"w-full": !isSlideItem,
 			[uniqueId]: !isSlideItem,
 		}),
-		style: {
-			margin: 0,
-		},
+		style: { margin: 0 },
 	});
 
 	useEffect(() => {

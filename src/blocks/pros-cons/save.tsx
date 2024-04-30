@@ -17,7 +17,7 @@ const Save: FC<BlockSaveProps<IProsConsBlockAttributes>> = ({ attributes }) => {
 		attributes;
 
 	const blockProps = useBlockProps.save({
-		className: classNames(uniqueId, "wp-custom-blocks-pros-cons"),
+		className: classNames(uniqueId, "wp-custom-blocks-pros-cons font-notoSans"),
 	});
 
 	return (
@@ -25,7 +25,7 @@ const Save: FC<BlockSaveProps<IProsConsBlockAttributes>> = ({ attributes }) => {
 			{title && (
 				<RichText.Content
 					tagName="h5"
-					className="font-notoSans text-xl font-black italic uppercase mb-6 md:!text-2xl"
+					className="text-xl font-black italic uppercase mb-6 md:!text-2xl"
 					value={title}
 					style={{
 						color: titleColor,

@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "wp-custom-blocks/images",
   "version": "0.1.0",
-  "title": "Images block",
+  "title": "Images",
   "category": "wp-custom-blocks",
   "description": "Images block",
   "supports": {

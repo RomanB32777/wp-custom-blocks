@@ -85,7 +85,7 @@ export const TemplateWrapperEdit = <T,>({
 						<div className="flex justify-between items-center mb-8">
 							<RichText
 								tagName={titleTag}
-								className="title font-notoSans italic"
+								className="title italic"
 								value={title}
 								onChange={(v) => setAttributes({ title: v })}
 								placeholder={__("Block title..", "wp-custom-blocks")}
@@ -95,7 +95,7 @@ export const TemplateWrapperEdit = <T,>({
 								<div className="flex items-center cursor-pointer">
 									<RichText
 										tagName="span"
-										className="font-notoSans hidden text-sm font-bold italic uppercase md:inline-block md:mr-3"
+										className="hidden text-sm font-bold italic uppercase md:inline-block md:mr-3"
 										value={linkText}
 										onChange={(v) => setAttributes({ linkText: v })}
 										placeholder={__("Link text..", "wp-custom-blocks")}
@@ -126,7 +126,7 @@ export const TemplateWrapperEdit = <T,>({
 						</div>
 						<RichText
 							tagName="p"
-							className="font-notoSans max-w-3xl text-base"
+							className="max-w-3xl text-base mb-6 md:mb-11"
 							value={description}
 							onChange={(v) => setAttributes({ description: v })}
 							placeholder={__("Block description..", "wp-custom-blocks")}
@@ -164,7 +164,7 @@ export const TemplateWrapperSave: FC<ITemplateWrapperSave> = ({
 					<div className="flex justify-between items-center mb-8">
 						<RichText.Content
 							tagName={titleTag}
-							className="title font-notoSans italic"
+							className="title italic"
 							value={title}
 							style={{ color: titleColor }}
 						/>
@@ -178,7 +178,7 @@ export const TemplateWrapperSave: FC<ITemplateWrapperSave> = ({
 								<div className="flex items-center cursor-pointer">
 									<RichText.Content
 										tagName="span"
-										className="font-notoSans hidden text-sm font-bold italic uppercase md:inline-block md:mr-3"
+										className="hidden text-sm font-bold italic uppercase md:inline-block md:mr-3"
 										value={linkText}
 										style={{ color: linkTextColor }}
 									/>
@@ -208,7 +208,7 @@ export const TemplateWrapperSave: FC<ITemplateWrapperSave> = ({
 					</div>
 					<RichText.Content
 						tagName="p"
-						className="font-notoSans max-w-3xl text-base"
+						className="max-w-3xl text-base mb-6 md:mb-11"
 						value={description}
 						style={{ color: descriptionColor }}
 					/>

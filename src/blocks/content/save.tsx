@@ -15,10 +15,13 @@ const Save: FC<BlockSaveProps<IContentBlockAttributes>> = ({ attributes }) => {
 	const { image, isReverse } = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: classNames("flex flex-col items-center gap-6 md:!flex-row", {
-			"flex-col-reverse": isReverse,
-			"md:!flex-row-reverse": isReverse,
-		}),
+		className: classNames(
+			"font-notoSans flex flex-col items-center gap-6 md:!flex-row",
+			{
+				"flex-col-reverse": isReverse,
+				"md:!flex-row-reverse": isReverse,
+			}
+		),
 	});
 
 	return (

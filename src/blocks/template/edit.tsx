@@ -1,10 +1,6 @@
 import React, { type FC } from "react";
 import classNames from "classnames";
-import {
-	InnerBlocks,
-	useBlockProps,
-	useInnerBlocksProps,
-} from "@wordpress/block-editor";
+import { useBlockProps, useInnerBlocksProps } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
 import { dispatch, select } from "@wordpress/data";
 import { Fragment, useEffect } from "@wordpress/element";
@@ -110,11 +106,7 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 	}, [childBlocks, isEnableSlider]);
 
 	const blockProps = useBlockProps({
-		className: uniqueId,
-		style: {
-			maxWidth: "none",
-			margin: 0,
-		},
+		className: classNames(uniqueId, "font-notoSans"),
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(
@@ -125,7 +117,6 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 		},
 		{
 			allowedBlocks,
-			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);
 

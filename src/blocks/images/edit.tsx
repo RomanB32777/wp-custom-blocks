@@ -1,9 +1,6 @@
 import React, { type FC } from "react";
-import {
-	InnerBlocks,
-	useBlockProps,
-	useInnerBlocksProps,
-} from "@wordpress/block-editor";
+import classNames from "classnames";
+import { useBlockProps, useInnerBlocksProps } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
 import { Fragment, useEffect } from "@wordpress/element";
 
@@ -39,7 +36,7 @@ const Edit: FC<BlockEditProps<IImagesBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: uniqueId,
+		className: classNames(uniqueId, "font-notoSans"),
 	});
 
 	useEffect(() => {
@@ -57,7 +54,6 @@ const Edit: FC<BlockEditProps<IImagesBlockAttributes>> = ({
 		{
 			allowedBlocks: [allowedBlock],
 			template: [[allowedBlock]],
-			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);
 

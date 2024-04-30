@@ -147,7 +147,7 @@ const Edit: FC<BlockEditProps<ISportCardElementAttributes>> = ({
 						<div className="absolute inset-0 flex items-center">
 							<RichText
 								tagName="span"
-								className="font-notoSans mx-auto text-primary font-black italic text-base uppercase no-underline"
+								className="mx-auto text-primary font-black italic text-base uppercase no-underline"
 								value={linkText}
 								onChange={(v) => setAttributes({ linkText: v })}
 								placeholder={__("Link text..", "wp-custom-blocks")}
@@ -169,7 +169,7 @@ const Edit: FC<BlockEditProps<ISportCardElementAttributes>> = ({
 									</div>
 									<RichText
 										tagName="p"
-										className="font-notoSans ml-3 text-sm font-semibold italic lg:text-lg"
+										className="ml-3 text-sm font-semibold italic lg:text-lg"
 										value={name}
 										onChange={(v) => setAttributes({ name: v })}
 										placeholder={__("Sport name..", "wp-custom-blocks")}

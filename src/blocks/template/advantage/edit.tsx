@@ -38,9 +38,7 @@ const Edit: FC<BlockEditProps<IAdvantageElementAttributes>> = ({
 			"w-full": !isSlideItem,
 			[uniqueId]: !isSlideItem,
 		}),
-		style: {
-			margin: 0,
-		},
+		style: { margin: 0 },
 	});
 
 	useEffect(() => {
@@ -117,7 +115,7 @@ const Edit: FC<BlockEditProps<IAdvantageElementAttributes>> = ({
 					</div>
 					<RichText
 						tagName="p"
-						className="font-notoSans font-bold text-base text-center italic uppercase px-6"
+						className="font-bold text-base text-center italic uppercase px-6"
 						value={title}
 						onChange={(v) => setAttributes({ title: v })}
 						placeholder={__("Title..", "wp-custom-blocks")}

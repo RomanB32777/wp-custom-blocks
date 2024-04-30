@@ -14,7 +14,7 @@ import { Popover, ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import { Fragment, useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
-import { breakpoints, colors } from "@/constants";
+import { breakpoints } from "@/constants";
 import { LinkControl } from "@/controls";
 import { minifyCssStrings } from "@/utils/minify-css";
 
@@ -65,7 +65,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "bg-white-standard"),
+		className: classNames(uniqueId, "bg-white-standard font-notoSans"),
 		style: {
 			maxWidth: "none",
 			margin: 0,
@@ -79,11 +79,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 		{
 			allowedBlocks: [allowedBlock],
 			template: [[allowedBlock, { linkText: "See more" }]],
-			renderAppender: () => (
-				<div style={{ background: colors.white.light }}>
-					<InnerBlocks.ButtonBlockAppender />
-				</div>
-			),
+			renderAppender: () => <InnerBlocks.DefaultBlockAppender />,
 		}
 	);
 
@@ -276,7 +272,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 
 						<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 							<div className="mx-auto mb-10 lg:mx-0">
-								<h1 className="font-notoSans font-black uppercase">
+								<h1 className="font-black uppercase">
 									<span className="text-base italic  text-white tracking-wide lg:text-2xl lg:tracking-widest">
 										Welcome to
 									</span>
@@ -291,7 +287,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 								</h1>
 								<RichText
 									tagName="p"
-									className="font-notoSans text-base max-w-2xl mb-10"
+									className="text-base max-w-2xl mb-10"
 									value={description}
 									onChange={(v) => setAttributes({ description: v })}
 									placeholder={__("Description title..", "wp-custom-blocks")}
@@ -308,7 +304,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 									></div>
 									<RichText
 										tagName="span"
-										className="font-notoSans relative uppercase py-5 px-8 mx-auto"
+										className="relative uppercase py-5 px-8 mx-auto"
 										value={buttonText}
 										onChange={(v) => setAttributes({ buttonText: v })}
 										placeholder={__("Button text..", "wp-custom-blocks")}
@@ -319,7 +315,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 							<div className="mx-auto mb-11 lg:mx-0">
 								<RichText
 									tagName="h4"
-									className="font-notoSans mb-6 text-base font-black text-white uppercase italic lg:text-2xl"
+									className="mb-6 text-base font-black text-white uppercase italic lg:text-2xl"
 									value={sportsTitle}
 									onChange={(v) => setAttributes({ sportsTitle: v })}
 									placeholder={__("Title sports title..", "wp-custom-blocks")}
@@ -327,7 +323,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 								/>
 								<RichText
 									tagName="p"
-									className="font-notoSans text-base text-white max-w-2xl lg:mb-10"
+									className="text-base text-white max-w-2xl lg:mb-10"
 									value={sportsDescription}
 									onChange={(v) => setAttributes({ sportsDescription: v })}
 									placeholder={__(
@@ -372,7 +368,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 								<div className="max-w-3xl p-6 md:py-12 md:px-24">
 									<RichText
 										tagName="h5"
-										className="font-notoSans mb-6 text-base font-black italic md:text-2xl"
+										className="mb-6 text-base font-black italic md:text-2xl"
 										value={adviceTitle}
 										onChange={(v) => setAttributes({ adviceTitle: v })}
 										placeholder={__("Advice title..", "wp-custom-blocks")}
@@ -380,7 +376,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 									/>
 									<RichText
 										tagName="p"
-										className="font-notoSans text-base mb-1.5 md:mb-0"
+										className="text-base mb-1.5 md:mb-0"
 										value={adviceDescription}
 										onChange={(v) => setAttributes({ adviceDescription: v })}
 										placeholder={__("Advice description..", "wp-custom-blocks")}

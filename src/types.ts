@@ -1,3 +1,4 @@
+import type { TdHTMLAttributes, ThHTMLAttributes } from "react";
 import type { Block, BlockEditProps } from "@wordpress/blocks";
 
 export type TBlockAttributes<T extends Record<keyof T, unknown>> =
@@ -20,3 +21,7 @@ export interface IInspectorProps<T extends Record<keyof T, unknown>>
 	extends Pick<BlockEditProps<T>, "attributes" | "setAttributes"> {
 	clientId?: string;
 }
+
+export type TCellHTMLAttributes =
+	| ThHTMLAttributes<HTMLTableCellElement>
+	| TdHTMLAttributes<HTMLTableCellElement>;

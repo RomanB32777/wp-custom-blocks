@@ -1,26 +1,34 @@
-import React, {
-	type FC,
-	type TdHTMLAttributes,
-	type ThHTMLAttributes,
-} from "react";
+import React, { type FC } from "react";
 import classNames from "classnames";
 import {
 	BlockControls,
-	MediaPlaceholder,
 	RichText,
 	useBlockProps,
 } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
-import { Button, DropdownMenu, ToolbarGroup } from "@wordpress/components";
+import {
+	DropdownMenu,
+	ToolbarButton,
+	ToolbarGroup,
+} from "@wordpress/components";
+import type { DropdownOption } from "@wordpress/components/build-types/dropdown-menu/types";
+import { useViewportMatch } from "@wordpress/compose";
+import { select } from "@wordpress/data";
 import { Fragment, useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 import { TemplateWrapperEdit } from "@/components";
 import { breakpoints } from "@/constants";
+import type { TCellHTMLAttributes } from "@/types";
 import { minifyCssStrings } from "@/utils/minify-css";
 
 import Inspector from "./inspector";
-import type { ICellValues, ITableBlockAttributes } from "./attributes";
+import type {
+	ICellValues,
+	ISelectedCeil,
+	ITableBlockAttributes,
+} from "./attributes";
+import { UploadTableCeilIcon } from "./components";
 import { tableSliderElementName } from "./constants";
 
 const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
@@ -55,45 +63,41 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 		backgroundColor,
 		columnColor,
 		rowColor,
-		isPreviewIcons,
+		borderRadius,
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: uniqueId,
-		style: {
-			margin: 0,
-			maxWidth: "none",
-		},
+		className: classNames(uniqueId, "font-notoSans"),
 	});
 
-	const [uniqKeys, setUniqKeys] = useState(() => new Set(Object.keys(rows)));
+	const previewDeviceType =
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		select("core/edit-post").__experimentalGetPreviewDeviceType();
 
-	const handleDeleteRow = (deletedRow: string) => () => {
-		setUniqKeys((keys) => {
-			keys.delete(deletedRow);
+	const isDesktopDevice = previewDeviceType === "Desktop";
+	const isDesktopViewport = useViewportMatch("large", ">=");
 
-			return keys;
-		});
-
-		setAttributes({
-			rows: Object.fromEntries(
-				Object.entries(rows).filter(([rowKey]) => rowKey !== deletedRow)
-			),
-		});
-	};
+	const [uniqRowKeys, setUniqRowKeys] = useState(
+		() => new Set(Object.keys(rows))
+	);
+	const [uniqColKeys, setUniqColKeys] = useState(
+		() => new Set(Object.keys(columns))
+	);
+	const [selectedCeil, setSelectedCeil] = useState<ISelectedCeil | undefined>();
 
 	const handleAddRow = () => {
 		const newKey = String(Math.random());
 
-		if (!uniqKeys.has(newKey)) {
-			setUniqKeys(uniqKeys.add(newKey));
+		if (!uniqRowKeys.has(newKey)) {
+			setUniqRowKeys(uniqRowKeys.add(newKey));
+
 			setAttributes({
 				rows: {
 					...rows,
 					[newKey]: Object.fromEntries(
-						Object.entries(columns).map(([columnKey, columnName]) => {
+						Object.keys(columns).map((columnKey) => {
 							const cell: ICellValues = {
-								column: columnName,
 								value: "",
 								icon: {},
 							};
@@ -105,6 +109,128 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 			});
 		}
 	};
+
+	const handleDeleteRow = () => {
+		if (!selectedCeil?.rowId) {
+			return;
+		}
+
+		setUniqRowKeys((keys) => {
+			keys.delete(selectedCeil.rowId);
+
+			return keys;
+		});
+
+		setAttributes({
+			rows: Object.fromEntries(
+				Object.entries(rows).filter(([rowKey]) => rowKey !== selectedCeil.rowId)
+			),
+		});
+
+		setSelectedCeil(undefined);
+	};
+
+	const handleAddColumn = () => {
+		const newKey = String(Math.random());
+
+		if (!uniqColKeys.has(newKey)) {
+			setUniqColKeys(uniqColKeys.add(newKey));
+
+			const updatedRows = Object.entries(rows).map(([key, values]) => {
+				const cell: ICellValues = {
+					value: "",
+					icon: {},
+				};
+
+				return [
+					key,
+					{
+						...values,
+						[newKey]: cell,
+					},
+				];
+			});
+
+			setAttributes({ rows: Object.fromEntries(updatedRows) });
+			setAttributes({ columns: { ...columns, [newKey]: "" } });
+		}
+	};
+
+	const handleDeleteCol = () => {
+		if (!selectedCeil?.colId) {
+			return;
+		}
+
+		setUniqColKeys((keys) => {
+			keys.delete(selectedCeil.colId);
+
+			return keys;
+		});
+
+		setAttributes({
+			columns: Object.fromEntries(
+				Object.entries(columns).filter(
+					([colKey]) => colKey !== selectedCeil.colId
+				)
+			),
+			rows: Object.fromEntries(
+				Object.entries(rows).map(([rowKey, values]) => [
+					rowKey,
+					Object.fromEntries(
+						Object.entries(values).filter(
+							([colKey]) => colKey !== selectedCeil.colId
+						)
+					),
+				])
+			),
+		});
+
+		setSelectedCeil(undefined);
+	};
+
+	const handleReverseCeil = () => {
+		if (!selectedCeil) {
+			return;
+		}
+
+		const { rowId, colId } = selectedCeil;
+		const currentRow = rows[rowId];
+		const currentCell = currentRow?.[colId];
+
+		currentCell.isReverse = !currentCell.isReverse;
+
+		setAttributes({
+			rows: {
+				...rows,
+				[rowId]: currentRow,
+			},
+		});
+	};
+
+	const dropdownOptions: DropdownOption[] = [
+		{
+			icon: "table-row-after",
+			title: __("Insert row", "wp-custom-blocks"),
+			onClick: handleAddRow,
+		},
+		{
+			icon: "table-row-delete",
+			title: __("Delete row", "wp-custom-blocks"),
+			isDisabled: !selectedCeil?.rowId,
+			onClick: handleDeleteRow,
+		},
+		{
+			icon: "table-col-after",
+			title: __("Insert column", "wp-custom-blocks"),
+			onClick: handleAddColumn,
+		},
+		{
+			icon: "table-col-delete",
+			title: __("Delete column", "wp-custom-blocks"),
+			isDisabled: !selectedCeil?.colId,
+			onClick: handleDeleteCol,
+		},
+	];
 
 	/**
 	 * Edit Styles
@@ -244,90 +370,131 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 
-			<BlockControls
-				controls={undefined}
-				children={
+			{isDesktopDevice && isDesktopViewport && (
+				<BlockControls controls={undefined}>
 					<ToolbarGroup>
 						<DropdownMenu
-							controls={[
-								{
-									icon: "grid-view",
-									onClick: function noRefCheck() {},
-									title: "First Menu Item Label",
-								},
-								{
-									icon: "grid-view",
-									onClick: function noRefCheck() {},
-									title: "Second Menu Item Label",
-								},
-							]}
+							controls={dropdownOptions}
 							icon="grid-view"
 							label="Select a direction."
 						/>
+
+						{selectedCeil && (
+							<>
+								<UploadTableCeilIcon
+									selectedCeil={selectedCeil}
+									attributes={attributes}
+									setAttributes={setAttributes}
+								/>
+
+								<ToolbarButton
+									label={__("Reverse", "wp-custom-blocks")}
+									onClick={handleReverseCeil}
+									icon="update"
+									placeholder={__("Reverse", "wp-custom-blocks")}
+								/>
+							</>
+						)}
 					</ToolbarGroup>
-				}
-			/>
+				</BlockControls>
+			)}
 
 			<TemplateWrapperEdit
 				attributes={attributes}
 				setAttributes={setAttributes}
 				blockProps={blockProps}
 			>
-				<div className="relative overflow-x-auto hidden lg:block">
+				<div className="relative overflow-x-auto hidden lg:!block">
 					<table className="payments-table w-full text-sm text-left rtl:text-right">
 						<thead
 							className="text-sm font-medium"
 							style={{ color: columnColor }}
 						>
 							<tr>
-								{Object.entries(columns).map(([column, value]) => (
+								{Object.entries(columns).map(([column, value], index) => (
 									<th
 										key={column}
-										className="px-3 py-2 font-notoSans"
+										className="px-3 py-2"
 										scope="col"
+										onClick={() =>
+											setSelectedCeil({
+												colId: index > 0 ? column : undefined,
+												rowId: undefined,
+											})
+										}
 									>
-										{value}
+										<RichText
+											tagName="span"
+											value={value}
+											onChange={(v) => {
+												setAttributes({ columns: { ...columns, [column]: v } });
+											}}
+											placeholder={__("Column text..", "wp-custom-blocks")}
+											style={{ color: columnColor }}
+										/>
 									</th>
 								))}
 							</tr>
 						</thead>
 						<tbody>
-							{Array.from(uniqKeys).map((rowKey) => {
+							{Array.from(uniqRowKeys).map((rowKey) => {
 								const rowValues = rows[rowKey];
 
 								return (
-									<tr key={rowKey} className="font-semibold italic text-lg">
+									<tr
+										key={rowKey}
+										className={classNames("font-semibold italic text-lg", {
+											"border-4 border-red": selectedCeil?.rowId === rowKey,
+										})}
+									>
 										{Object.entries(rowValues).map(
-											([columnKey, { value, icon }], index, arr) => {
+											([columnKey, { value, icon, isReverse }], index, arr) => {
 												const currentRow = rows[rowKey];
-												const currentCell = currentRow[columnKey];
+												const currentCell = currentRow?.[columnKey];
 
 												const isFirstCell = index === 0;
 												const isLastCell = index === arr.length - 1;
 
-												const cellAttributes:
-													| ThHTMLAttributes<HTMLTableCellElement>
-													| TdHTMLAttributes<HTMLTableCellElement> = {
-													className: classNames(
-														"px-3 py-6 font-notoSans relative",
-														{
-															"rounded-l-lg": isFirstCell,
-															"rounded-r-lg": isLastCell,
-														}
-													),
-													onClick: () => {},
+												const cellAttributes: TCellHTMLAttributes = {
+													className: classNames("px-3 py-6 relative", {
+														"border-x-4 border-red":
+															selectedCeil?.colId === columnKey,
+													}),
+													onClick: () =>
+														setSelectedCeil({
+															colId: columnKey,
+															rowId: rowKey,
+														}),
 												};
 
 												if (isFirstCell) {
 													cellAttributes.scope = "row";
+
+													cellAttributes.style = {
+														...cellAttributes.style,
+														borderTopLeftRadius: borderRadius,
+														borderBottomLeftRadius: borderRadius,
+													};
+												}
+
+												if (isLastCell) {
+													cellAttributes.style = {
+														...cellAttributes.style,
+														borderTopRightRadius: borderRadius,
+														borderBottomRightRadius: borderRadius,
+													};
 												}
 
 												const CellTag = isFirstCell ? "th" : "td";
 
 												return (
 													<CellTag key={index} {...cellAttributes}>
-														<div className="flex items-center whitespace-nowrap gap-x-6">
-															{/* gap-x-3 */}
+														<div
+															className={classNames(
+																"flex items-center whitespace-nowrap w-fit gap-x-3",
+																{ "flex-row-reverse": isReverse }
+															)}
+														>
 															<RichText
 																tagName="span"
 																value={value}
@@ -347,61 +514,18 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 																)}
 																style={{ color: rowColor }}
 															/>
-															{(isPreviewIcons || icon) && (
+															{icon?.url && (
 																<div className="max-w-2xl">
-																	{icon.url && (
-																		<img
-																			className="w-6 h-6 object-cover"
-																			src={icon.url}
-																			alt={icon.alt}
-																		/>
-																	)}
-																	{isPreviewIcons && (
-																		<MediaPlaceholder
-																			onSelect={(media) => {
-																				currentCell.icon = media;
-
-																				setAttributes({
-																					rows: {
-																						...rows,
-																						[rowKey]: currentRow,
-																					},
-																				});
-																			}}
-																			allowedTypes={["image"]}
-																			multiple={false}
-																			labels={{
-																				title: __("Icon", "wp-custom-blocks"),
-																				instructions: __(
-																					"Upload icon",
-																					"wp-custom-blocks"
-																				),
-																			}}
-																			icon="format-image"
-																			className="w-full h-full"
-																			onHTMLDrop={undefined}
-																		/>
-																	)}
+																	<img
+																		className="w-6 h-6 object-cover"
+																		src={icon.url}
+																		alt={icon.alt}
+																		width={icon.width}
+																		height={icon.height}
+																	/>
 																</div>
 															)}
 														</div>
-
-														{isLastCell && (
-															<div
-																className="absolute"
-																style={{
-																	top: "24px",
-																	right: "12px",
-																}}
-															>
-																<Button
-																	variant="primary"
-																	onClick={handleDeleteRow(rowKey)}
-																>
-																	X
-																</Button>
-															</div>
-														)}
 													</CellTag>
 												);
 											}
@@ -428,49 +552,67 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 										: "inner-wrapper grid"
 								}
 							>
-								{Array.from(uniqKeys).map((rowKey) => {
+								{Array.from(uniqRowKeys).map((rowKey) => {
 									const rowValues = rows[rowKey];
 
 									return (
 										<div
 											key={rowKey}
-											className="slider-item px-4 rounded-lg w-full"
-											style={{ backgroundColor }}
+											className="slider-item px-4 w-full"
+											style={{ backgroundColor, borderRadius }}
 										>
 											<div className="h-full">
 												{Object.entries(rowValues).map(
-													([columnKey, { value }], index) => {
+													([columnKey, { value, icon, isReverse }], index) => {
 														const currentRow = rows[rowKey];
 														const currentCell = currentRow[columnKey];
 
 														return (
 															<div key={index} className="py-4">
 																<p
-																	className="font-notoSans text-sm font-medium mb-2"
+																	className="text-sm font-medium mb-2"
 																	style={{ color: columnColor }}
 																>
 																	{columns[columnKey]}
 																</p>
-																<RichText
-																	tagName="p"
-																	value={value}
-																	className="font-notoSans font-semibold italic text-lg"
-																	onChange={(v) => {
-																		currentCell.value = v;
-
-																		setAttributes({
-																			rows: {
-																				...rows,
-																				[rowKey]: currentRow,
-																			},
-																		});
-																	}}
-																	placeholder={__(
-																		"Value..",
-																		"wp-custom-blocks"
+																<div
+																	className={classNames(
+																		"flex items-center whitespace-nowrap w-fit gap-x-3",
+																		{ "flex-row-reverse": isReverse }
 																	)}
-																	style={{ color: rowColor }}
-																/>
+																>
+																	<RichText
+																		tagName="p"
+																		value={value}
+																		className="font-semibold italic text-lg"
+																		onChange={(v) => {
+																			currentCell.value = v;
+
+																			setAttributes({
+																				rows: {
+																					...rows,
+																					[rowKey]: currentRow,
+																				},
+																			});
+																		}}
+																		placeholder={__(
+																			"Value..",
+																			"wp-custom-blocks"
+																		)}
+																		style={{ color: rowColor }}
+																	/>
+																	{icon?.url && (
+																		<div className="max-w-2xl">
+																			<img
+																				className="w-6 h-6 object-cover"
+																				src={icon.url}
+																				alt={icon.alt}
+																				width={icon.width}
+																				height={icon.height}
+																			/>
+																		</div>
+																	)}
+																</div>
 															</div>
 														);
 													}
@@ -483,14 +625,6 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 						</div>
 					</div>
 				</div>
-
-				{Boolean(Object.keys(columns).length) && (
-					<div className="mt-10">
-						<Button variant="primary" onClick={handleAddRow}>
-							Add new row
-						</Button>
-					</div>
-				)}
 			</TemplateWrapperEdit>
 		</Fragment>
 	);

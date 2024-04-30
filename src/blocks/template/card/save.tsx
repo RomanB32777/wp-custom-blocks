@@ -74,7 +74,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 							<>
 								<img src={flagImage} alt="flag alt" width={52} height={56} />
 								<div className="absolute left-0 bottom-0 flex items-center justify-center -top-1.5 right-1.5">
-									<p className="font-notoSans font-black text-2xl text-white italic">
+									<p className="font-black text-2xl text-white italic">
 										{index + 1}
 									</p>
 								</div>
@@ -88,13 +88,13 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 						<div className="mx-7">
 							<RichText.Content
 								tagName="p"
-								className="font-notoSans mb-2 text-xs font-semibold italic"
+								className="mb-2 text-xs font-semibold italic"
 								value={category}
 								style={{ color: categoryColor }}
 							/>
 							<RichText.Content
 								tagName="p"
-								className="font-notoSans mb-6 text-base font-semibold italic"
+								className="mb-6 text-base font-semibold italic"
 								value={title}
 								style={{ color: titleColor }}
 							/>
@@ -116,7 +116,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 								></div>
 								<RichText.Content
 									tagName="span"
-									className="font-notoSans relative uppercase py-5 mx-auto"
+									className="relative uppercase py-5 mx-auto"
 									value={buttonText}
 									style={{ color: buttonTextColor }}
 								/>
@@ -131,7 +131,6 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 							>
 								<RichText.Content
 									tagName="span"
-									className="font-notoSans"
 									value={review}
 									style={{ color: reviewColor }}
 								/>

@@ -1,7 +1,7 @@
 import React, { type FC } from "react";
+import classNames from "classnames";
 import {
 	BlockControls,
-	InnerBlocks,
 	MediaUpload,
 	MediaUploadCheck,
 	RichText,
@@ -48,7 +48,7 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: uniqueId,
+		className: classNames(uniqueId, "font-notoSans"),
 		style: {
 			maxWidth: "none",
 			margin: 0,
@@ -65,7 +65,6 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 		{
 			allowedBlocks: [allowedBlock],
 			template: [[allowedBlock]],
-			renderAppender: () => <InnerBlocks.ButtonBlockAppender />,
 		}
 	);
 
@@ -192,7 +191,7 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 						>
 							<RichText
 								tagName="h5"
-								className="font-notoSans text-xl font-black italic uppercase mb-6 md:!text-2xl"
+								className="text-xl font-black italic uppercase mb-6 md:!text-2xl"
 								value={title}
 								onChange={(v) => setAttributes({ title: v })}
 								placeholder={__("Faq title..", "wp-landing-blocks")}
@@ -200,7 +199,7 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 							/>
 							<RichText
 								tagName="p"
-								className="font-notoSans text-sm font-normal mb-6 md:mb-11"
+								className="text-sm font-normal mb-6 md:mb-11"
 								value={description}
 								onChange={(v) => setAttributes({ description: v })}
 								placeholder={__("Faq description..", "wp-landing-blocks")}

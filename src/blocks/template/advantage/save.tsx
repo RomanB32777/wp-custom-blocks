@@ -36,7 +36,7 @@ const Save: FC<BlockSaveProps<IAdvantageElementAttributes>> = ({
 				</div>
 				<RichText.Content
 					tagName="p"
-					className="font-notoSans font-bold text-base text-center italic uppercase px-6"
+					className="font-bold text-base text-center italic uppercase px-6"
 					value={title}
 					style={{ color: titleColor }}
 				/>

@@ -1,4 +1,5 @@
 import React, { type FC } from "react";
+import classNames from "classnames";
 /**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
@@ -22,8 +23,10 @@ const Save: FC<BlockSaveProps<IFaqBlockAttributes>> = ({ attributes }) => {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: uniqueId,
-		style: { margin: 0 },
+		className: classNames(
+			uniqueId,
+			"font-notoSans relative left-1/2 w-screen -translate-x-2/4"
+		),
 	});
 
 	return (
@@ -49,13 +52,13 @@ const Save: FC<BlockSaveProps<IFaqBlockAttributes>> = ({ attributes }) => {
 					>
 						<RichText.Content
 							tagName="h5"
-							className="font-notoSans text-xl font-black italic uppercase mb-6 md:!text-2xl"
+							className="text-xl font-black italic uppercase mb-6 md:!text-2xl"
 							value={title}
 							style={{ color: titleColor }}
 						/>
 						<RichText.Content
 							tagName="p"
-							className="font-notoSans text-sm font-normal mb-6 md:mb-11"
+							className="text-sm font-normal mb-6 md:mb-11"
 							value={description}
 							style={{ color: descriptionColor }}
 						/>
@@ -68,8 +71,8 @@ const Save: FC<BlockSaveProps<IFaqBlockAttributes>> = ({ attributes }) => {
 							<div className="col-span-6 hidden relative lg:block">
 								<div className="question-desktop-content absolute inset-0 h-full overflow-y-auto">
 									{/* eslint-disable-next-line jsx-a11y/heading-has-content */}
-									<h5 className="font-notoSans mb-6 text-lg font-semibold italic"></h5>
-									<p className="font-notoSans text-base"></p>
+									<h5 className="mb-6 text-lg font-semibold italic"></h5>
+									<p className="text-base"></p>
 								</div>
 							</div>
 						</div>

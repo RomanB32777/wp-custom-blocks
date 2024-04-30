@@ -23,10 +23,13 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 	const { isReverse, image } = attributes;
 
 	const blockProps = useBlockProps({
-		className: classNames("flex flex-col items-center gap-6 md:!flex-row", {
-			"flex-col-reverse": isReverse,
-			"md:!flex-row-reverse": isReverse,
-		}),
+		className: classNames(
+			"font-notoSans flex flex-col items-center gap-6 md:!flex-row",
+			{
+				"flex-col-reverse": isReverse,
+				"md:!flex-row-reverse": isReverse,
+			}
+		),
 	});
 
 	return (
@@ -91,9 +94,7 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 				</div>
 
 				<div className="basis-full w-full md:!basis-1/2 md:!w-auto">
-					<InnerBlocks
-						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-					/>
+					<InnerBlocks />
 				</div>
 			</div>
 		</Fragment>

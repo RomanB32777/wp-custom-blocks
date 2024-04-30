@@ -45,7 +45,7 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 	const uniqKeys = useRef(new Set(pros.concat(cons).map(({ id }) => id)));
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "wp-custom-blocks-pros-cons"),
+		className: classNames(uniqueId, "wp-custom-blocks-pros-cons font-notoSans"),
 	});
 
 	useEffect(() => {
@@ -191,7 +191,7 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 			<div {...blockProps}>
 				<RichText
 					tagName="h5"
-					className="font-notoSans text-xl font-black italic uppercase mb-6 md:!text-2xl"
+					className="text-xl font-black italic uppercase mb-6 md:!text-2xl"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
 					placeholder={__("Title text..", "wp-custom-blocks")}

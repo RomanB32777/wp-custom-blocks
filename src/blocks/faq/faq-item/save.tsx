@@ -22,8 +22,10 @@ const Save: FC<BlockSaveProps<IFaqItemElementAttributes>> = ({
 		answerColor,
 	} = attributes;
 
+	const blockProps = useBlockProps.save();
+
 	return (
-		<div {...useBlockProps.save()}>
+		<div {...blockProps}>
 			<div
 				className="question group border px-6 py-4 rounded-lg duration-200 cursor-pointer"
 				data-question={index}
@@ -31,7 +33,7 @@ const Save: FC<BlockSaveProps<IFaqItemElementAttributes>> = ({
 				<div className="flex items-start justify-between">
 					<RichText.Content
 						tagName="p"
-						className="question-title font-notoSans text-base basis-5/6"
+						className="question-title text-base basis-5/6"
 						value={question}
 						style={{ color: !isParentStyles ? questionColor : undefined }}
 					/>
@@ -59,7 +61,7 @@ const Save: FC<BlockSaveProps<IFaqItemElementAttributes>> = ({
 				<div className="lg:hidden">
 					<RichText.Content
 						tagName="p"
-						className="question-content font-notoSans text-base mt-4 hidden"
+						className="question-content text-base mt-4 hidden"
 						value={answer}
 						style={{ color: !isParentStyles ? answerColor : undefined }}
 					/>

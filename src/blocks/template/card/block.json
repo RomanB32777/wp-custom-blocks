@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "wp-custom-blocks/card",
 	"version": "0.1.0",
-	"title": "Card item block",
+	"title": "Card item",
 	"category": "wp-custom-blocks",
 	"description": "Card item block",
 	"parent": ["wp-custom-blocks/template"],

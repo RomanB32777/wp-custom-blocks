@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "wp-custom-blocks/advantage",
 	"version": "0.1.0",
-	"title": "Advantage item block",
+	"title": "Advantage item",
 	"category": "wp-custom-blocks",
 	"description": "Advantage item block",
 	"parent": ["wp-custom-blocks/template"],

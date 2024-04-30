@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "wp-custom-blocks/button",
 	"version": "0.1.0",
-	"title": "Button block",
+	"title": "Button",
 	"category": "wp-custom-blocks",
 	"description": "Button block",
 	"supports": {

@@ -3,7 +3,7 @@
  * Plugin Name:       WordPress custom blocks
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           0.2.4
+ * Version:           0.2.5
  * Author:            Test
  * License:
  * License URI:
@@ -65,18 +65,18 @@ function blocks_init() {
 		'steps'       => 'step',
 		'main-banner' => 'sport-card',
 		'faq'         => 'faq-item',
-		'socials'     => 'social-network',
+		'icon-links'  => 'icon-link',
 		'template'    => array(
 			'advantage',
 			'card',
 			'image',
 		),
 		'table',
-		'wrapper',
 		'button',
 		'pros-cons',
 		'content',
 		'author',
+		'available-table',
 	);
 
 	foreach ( $blocks as $block => $sub_blocks ) {
@@ -191,7 +191,7 @@ function add_light_modal( $content ) {
 					class="light-modal-close rounded-md text-white fixed z-90 top-8 right-8"
 					type="button"
 				>
-					<span class="font-notoSans sr-only">Close modal</span
+					<span class="sr-only">Close modal</span
 					><svg
 						class="h-6 w-6"
 						fill="none"

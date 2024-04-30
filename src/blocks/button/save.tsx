@@ -14,7 +14,7 @@ const Save: FC<BlockSaveProps<IButtonBlockAttributes>> = ({ attributes }) => {
 	const { link, buttonText, buttonTextColor, buttonColor } = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: "item-button",
+		className: "item-button font-notoSans",
 	});
 
 	return (
@@ -36,7 +36,7 @@ const Save: FC<BlockSaveProps<IButtonBlockAttributes>> = ({ attributes }) => {
 					></div>
 					<RichText.Content
 						tagName="span"
-						className="font-notoSans relative py-5 px-8 mx-auto"
+						className="relative py-5 px-8 mx-auto"
 						value={buttonText}
 						style={{ color: buttonTextColor }}
 					/>

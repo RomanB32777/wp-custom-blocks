@@ -25,6 +25,7 @@ const Edit: FC<BlockEditProps<IStepElementAttributes>> = ({
 
 	const blockProps = useBlockProps({
 		className: classNames(uniqueId, "step relative pb-7 pl-10 md:!pl-16"),
+		style: { margin: 0 },
 	});
 
 	useEffect(() => {

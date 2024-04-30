@@ -23,7 +23,7 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: "item-button",
+		className: "item-button font-notoSans",
 	});
 
 	return (
@@ -69,7 +69,7 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 					></div>
 					<RichText
 						tagName="span"
-						className="font-notoSans relative py-5 px-8 mx-auto"
+						className="relative py-5 px-8 mx-auto"
 						value={buttonText}
 						onChange={(v) => setAttributes({ buttonText: v })}
 						placeholder={__("Button text..", "wp-custom-blocks")}

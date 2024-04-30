@@ -24,7 +24,7 @@ const Save: FC<BlockSaveProps<IAuthorBlockAttributes>> = ({ attributes }) => {
 	const blockProps = useBlockProps.save({
 		className: classNames(
 			uniqueId,
-			"wp-custom-blocks-author flex items-center p-4 rounded-lg md:!p-7"
+			"wp-custom-blocks-author font-notoSans flex items-center p-4 rounded-lg md:!p-7"
 		),
 		style: { backgroundColor },
 	});

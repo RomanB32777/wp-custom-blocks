@@ -1,4 +1,5 @@
 import React, { type FC } from "react";
+import classNames from "classnames";
 /**
  * React hook that is used to mark the block wrapper element.
  * It provides all the necessary props like the class name.
@@ -14,7 +15,7 @@ const Save: FC<BlockSaveProps<IImagesBlockAttributes>> = ({ attributes }) => {
 	const { uniqueId } = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: uniqueId,
+		className: classNames(uniqueId, "font-notoSans"),
 	});
 
 	return (

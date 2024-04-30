@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "wp-custom-blocks/template",
   "version": "0.1.0",
-  "title": "Template block",
+  "title": "Template",
   "category": "wp-custom-blocks",
   "description": "Template block",
   "supports": {

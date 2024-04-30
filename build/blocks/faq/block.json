@@ -3,9 +3,9 @@
   "apiVersion": 3,
   "name": "wp-custom-blocks/faq",
   "version": "0.1.0",
-  "title": "Faq block",
+  "title": "FAQ",
   "category": "wp-custom-blocks",
-  "description": "Faq block",
+  "description": "FAQ block",
   "supports": {
     "html": false
   },

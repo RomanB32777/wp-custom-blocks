@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "wp-custom-blocks/table",
 	"version": "0.1.0",
-	"title": "Table block",
+	"title": "Table",
 	"category": "wp-custom-blocks",
 	"description": "Table block",
 	"supports": {

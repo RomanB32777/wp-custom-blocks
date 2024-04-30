@@ -26,7 +26,7 @@ const Save: FC<BlockSaveProps<ITemplateBlockAttributes>> = ({ attributes }) => {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: uniqueId,
+		className: classNames(uniqueId, "font-notoSans"),
 	});
 
 	const sliderAttributes = isEnableSlider

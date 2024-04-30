@@ -25,6 +25,8 @@ const {
 	GREEN_COLOR,
 } = process.env;
 
+const alternativeFonts = ["Arial", "sans-serif"];
+
 module.exports = {
 	content: ["./src/**/*.{php,js,ts,tsx}", "./wp-custom-blocks.php"],
 	theme: {
@@ -60,7 +62,7 @@ module.exports = {
 					DEFAULT: RED_COLOR || "#d63031",
 				},
 				yellow: {
-					DEFAULT: YELLOW_COLOR || "#f9b15c",
+					DEFAULT: YELLOW_COLOR || "#f9b002",
 					light: YELLOW_LIGHT_COLOR || "#e3ae6f",
 				},
 				green: {
@@ -68,7 +70,10 @@ module.exports = {
 				},
 			},
 			fontFamily: {
-				notoSans: ['"NotoSans"', "Arial", "sans-serif"],
+				roboto: ['"Roboto"', ...alternativeFonts],
+				notoSans: ['"NotoSans"', ...alternativeFonts],
+				lineSeedJp: ['"LINESeedJP"', ...alternativeFonts],
+				inter: ['"Inter"', ...alternativeFonts],
 			},
 			letterSpacing: {
 				wide: "0.75rem",

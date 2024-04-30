@@ -51,7 +51,7 @@ const Save: FC<BlockSaveProps<ISportCardElementAttributes>> = ({
 							href={link.url}
 							target={link.openInNewTab ? "_blank" : "_self"}
 							rel={link.openInNewTab ? "noopener noreferrer" : "noopener"}
-							className="font-notoSans mx-auto text-primary font-black italic text-base uppercase no-underline"
+							className="mx-auto text-primary font-black italic text-base uppercase no-underline"
 						>
 							<RichText.Content
 								tagName="span"
@@ -83,7 +83,7 @@ const Save: FC<BlockSaveProps<ISportCardElementAttributes>> = ({
 									)}
 									<RichText.Content
 										tagName="p"
-										className="font-notoSans text-sm font-semibold italic lg:text-lg"
+										className="text-sm font-semibold italic lg:text-lg"
 										value={name}
 										style={{ color: nameColor }}
 									/>

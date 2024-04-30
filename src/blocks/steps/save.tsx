@@ -15,7 +15,7 @@ const Save: FC<BlockSaveProps<IStepsBlockAttributes>> = ({
 	attributes: { uniqueId },
 }) => {
 	const blockProps = useBlockProps.save({
-		className: classNames(uniqueId, "wp-custom-blocks-steps"),
+		className: classNames(uniqueId, "wp-custom-blocks-steps font-notoSans"),
 	});
 
 	return <div {...blockProps}>{<InnerBlocks.Content />}</div>;

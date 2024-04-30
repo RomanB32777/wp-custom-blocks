@@ -47,7 +47,10 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: classNames(uniqueId, "!mt-0", "md:!mb-32"),
+		className: classNames(
+			uniqueId,
+			"font-notoSans relative left-1/2 w-screen -translate-x-2/4 !mt-0 md:!mb-32"
+		),
 	});
 
 	const sliderAttributes = {
@@ -81,7 +84,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 
 					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 						<div className="mx-auto mb-10 lg:mx-0">
-							<h1 className="font-notoSans font-black uppercase">
+							<h1 className="font-black uppercase">
 								<span className="text-base italic text-white tracking-wide lg:text-2xl lg:tracking-widest">
 									Welcome to
 								</span>
@@ -94,7 +97,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 							</h1>
 							<RichText.Content
 								tagName="p"
-								className="font-notoSans text-base max-w-2xl mb-10"
+								className="text-base max-w-2xl mb-10"
 								value={description}
 								style={{ color: descriptionColor }}
 							/>
@@ -118,7 +121,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 										></div>
 										<RichText.Content
 											tagName="span"
-											className="font-notoSans relative uppercase py-5 px-8 mx-auto"
+											className="relative uppercase py-5 px-8 mx-auto"
 											value={buttonText}
 											style={{ color: buttonTextColor }}
 										/>
@@ -129,13 +132,13 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 						<div className="mx-auto mb-11 lg:mx-0">
 							<RichText.Content
 								tagName="h4"
-								className="font-notoSans mb-6 text-base font-black text-white uppercase italic lg:text-2xl"
+								className="mb-6 text-base font-black text-white uppercase italic lg:text-2xl"
 								value={sportsTitle}
 								style={{ color: sportsTitleColor }}
 							/>
 							<RichText.Content
 								tagName="p"
-								className="font-notoSans text-base text-white max-w-2xl lg:mb-10"
+								className="text-base text-white max-w-2xl lg:mb-10"
 								value={sportsDescription}
 								style={{ color: sportsDescriptionColor }}
 							/>
@@ -180,13 +183,13 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 								<div className="max-w-3xl p-6 md:!py-12 md:!px-24">
 									<RichText.Content
 										tagName="h5"
-										className="font-notoSans mb-6 text-base font-black italic md:!text-2xl"
+										className="mb-6 text-base font-black italic md:!text-2xl"
 										value={adviceTitle}
 										style={{ color: adviceTitleColor }}
 									/>
 									<RichText.Content
 										tagName="p"
-										className="font-notoSans text-base mb-1.5 md:!mb-0"
+										className="text-base mb-1.5 md:!mb-0"
 										value={adviceDescription}
 										style={{ color: adviceDescriptionColor }}
 									/>

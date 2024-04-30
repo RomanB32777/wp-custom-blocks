@@ -30,7 +30,7 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "wp-custom-blocks-steps"),
+		className: classNames(uniqueId, "wp-custom-blocks-steps font-notoSans"),
 	});
 
 	const childBlocks =
@@ -98,7 +98,6 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 				<InnerBlocks
 					allowedBlocks={[allowedBlock]}
 					template={[[allowedBlock]]}
-					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 				/>
 			</div>
 		</Fragment>

@@ -53,9 +53,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 			"w-full": !isSlideItem,
 			[uniqueId]: !isSlideItem,
 		}),
-		style: {
-			margin: 0,
-		},
+		style: { margin: 0 },
 	});
 
 	useEffect(() => {
@@ -155,7 +153,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 								<>
 									<img src={flagImage} alt="flag alt" width={52} height={56} />
 									<div className="absolute left-0 bottom-0 flex items-center justify-center -top-1.5 right-1.5">
-										<p className="font-notoSans font-black text-2xl text-white italic">
+										<p className="font-black text-2xl text-white italic">
 											{index + 1}
 										</p>
 									</div>
@@ -169,7 +167,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 							<div className="mx-7">
 								<RichText
 									tagName="p"
-									className="font-notoSans mb-2 text-xs font-semibold italic"
+									className="mb-2 text-xs font-semibold italic"
 									value={category}
 									onChange={(v) => setAttributes({ category: v })}
 									placeholder={__("Category name..", "wp-custom-blocks")}
@@ -177,7 +175,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 								/>
 								<RichText
 									tagName="p"
-									className="font-notoSans mb-6 text-base font-semibold italic"
+									className="mb-6 text-base font-semibold italic"
 									value={title}
 									onChange={(v) => setAttributes({ title: v })}
 									placeholder={__("Title name..", "wp-custom-blocks")}
@@ -195,7 +193,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 								></div>
 								<RichText
 									tagName="span"
-									className="font-notoSans relative uppercase py-5 mx-auto"
+									className="relative uppercase py-5 mx-auto"
 									value={buttonText}
 									onChange={(v) => setAttributes({ buttonText: v })}
 									placeholder={__("Button text..", "wp-custom-blocks")}
@@ -206,7 +204,6 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 								<div className="text-sm font-medium no-underline">
 									<RichText
 										tagName="span"
-										className="font-notoSans"
 										value={review}
 										onChange={(v) => setAttributes({ review: v })}
 										placeholder={__("Review text..", "wp-custom-blocks")}
