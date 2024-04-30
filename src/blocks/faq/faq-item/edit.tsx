@@ -22,8 +22,7 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 
 	const blockProps = useBlockProps({
 		style: {
-			marginRight: 0,
-			marginLeft: 0,
+			margin: 0,
 			maxWidth: "none",
 		},
 	});

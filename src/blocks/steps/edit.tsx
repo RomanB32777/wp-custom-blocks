@@ -36,11 +36,6 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 			uniqueId,
 			"wp-custom-blocks-steps font-inter bg-white rounded-xl py-6 px-4 md:!p-8 md:!rounded-3xl"
 		),
-		style: {
-			marginRight: 0,
-			marginLeft: 0,
-			maxWidth: "none",
-		},
 	});
 
 	const childBlocks =

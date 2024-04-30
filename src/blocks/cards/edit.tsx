@@ -49,11 +49,6 @@ const Edit: FC<BlockEditProps<ICardsBlockAttributes>> = ({
 
 	const blockProps = useBlockProps({
 		className: classNames(uniqueId, "wp-custom-blocks-cards font-inter"),
-		style: {
-			marginRight: 0,
-			marginLeft: 0,
-			maxWidth: "none",
-		},
 	});
 
 	const childBlocks =

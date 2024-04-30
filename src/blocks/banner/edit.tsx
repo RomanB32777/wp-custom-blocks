@@ -66,9 +66,6 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 			"wp-custom-blocks-banner font-inter border rounded-xl p-4 [&>*:not(:last-child)]:mb-5 md:!py-7 md:!rounded-3xl"
 		),
 		style: {
-			marginRight: 0,
-			marginLeft: 0,
-			maxWidth: "none",
 			backgroundColor,
 		},
 	});

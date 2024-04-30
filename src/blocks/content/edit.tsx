@@ -30,11 +30,6 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 				"md:!flex-row-reverse": isReverse,
 			}
 		),
-		style: {
-			marginRight: 0,
-			marginLeft: 0,
-			maxWidth: "none",
-		},
 	});
 
 	return (

@@ -41,7 +41,7 @@ export const attributes: TBlockAttributes<IStepsBlockAttributes> = {
 	},
 	stepColor: {
 		type: "string",
-		default: colors.dark.DEFAULT,
+		default: colors.white.DEFAULT,
 	},
 	titleColor: {
 		type: "string",

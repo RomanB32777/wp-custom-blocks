@@ -49,11 +49,6 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 			uniqueId,
 			"wp-custom-blocks-pros-cons font-inter bg-white rounded-xl py-6 px-4 md:!p-8 md:!rounded-3xl"
 		),
-		style: {
-			marginRight: 0,
-			marginLeft: 0,
-			maxWidth: "none",
-		},
 	});
 
 	useEffect(() => {

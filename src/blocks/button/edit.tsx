@@ -30,11 +30,6 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 
 	const blockProps = useBlockProps({
 		className: "item-button font-inter w-full text-center",
-		style: {
-			marginRight: 0,
-			marginLeft: 0,
-			maxWidth: "none",
-		},
 	});
 
 	return (

@@ -30,9 +30,6 @@ const Edit: FC<BlockEditProps<IAuthorBlockAttributes>> = ({
 			"wp-custom-blocks-author font-inter flex items-center p-4 rounded-xl md:!rounded-3xl md:!p-7"
 		),
 		style: {
-			marginRight: 0,
-			marginLeft: 0,
-			maxWidth: "none",
 			backgroundColor,
 		},
 	});

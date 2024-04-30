@@ -37,11 +37,6 @@ const Edit: FC<BlockEditProps<IImagesBlockAttributes>> = ({
 
 	const blockProps = useBlockProps({
 		className: classNames(uniqueId, "font-inter"),
-		style: {
-			marginRight: 0,
-			marginLeft: 0,
-			maxWidth: "none",
-		},
 	});
 
 	useEffect(() => {
