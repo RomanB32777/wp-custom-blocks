@@ -1,6 +1,8 @@
 import type { TdHTMLAttributes, ThHTMLAttributes } from "react";
 import type { Block, BlockEditProps } from "@wordpress/blocks";
 
+import type { breakpoints as baseBreakpoints } from "@/constants";
+
 export type TBlockAttributes<T extends Record<keyof T, unknown>> =
 	Block<T>["attributes"];
 
@@ -25,3 +27,5 @@ export interface IInspectorProps<T extends Record<keyof T, unknown>>
 export type TCellHTMLAttributes =
 	| ThHTMLAttributes<HTMLTableCellElement>
 	| TdHTMLAttributes<HTMLTableCellElement>;
+
+export type TBreakpoints = keyof typeof baseBreakpoints;

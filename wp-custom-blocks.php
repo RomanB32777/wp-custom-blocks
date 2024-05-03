@@ -37,11 +37,6 @@ function enqueued_front_style_plugin() {
 }
 add_action( 'wp_enqueue_scripts', 'enqueued_front_style_plugin', 999 );
 
-function script_plugin() {
-	enqueue_plugin_versioned_script( 'wp_custom_blocks_swiper', 'build/swiper.js' );
-}
-add_action( 'wp_enqueue_scripts', 'script_plugin' );
-
 function enqueue_plugin_versioned_script( $handle, $path = '' ) {
 	$main_path = plugin_dir_url( __FILE__ ) . $path;
 
@@ -169,9 +164,9 @@ function render_custom_block( $block_content, $block ) {
 			'table',
 		);
 
-		if ( in_array( $block_name, $swiper_blocks, true ) && ! wp_style_is( 'wp_custom_blocks_swiper', 'enqueued' ) ) {
+		if ( in_array( $block_name, $swiper_blocks, true ) ) {
+			enqueue_plugin_versioned_script( 'wp_custom_blocks_swiper', 'build/swiper.js' );
 			enqueue_plugin_versioned_style( 'wp_custom_blocks_swiper', 'build/swiper-styles.css' );
-
 		}
 	}
 	return $block_content;

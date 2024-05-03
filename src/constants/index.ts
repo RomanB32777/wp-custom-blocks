@@ -9,3 +9,4 @@ export const breakpoints = breakpointsJson;
 export const tags = Array.from(tagsJson);
 export const transforms = Array.from(transformsJson);
 export const fontSizes = Array.from(fontSizesJson);
+export const sliderElementName = "swiper-slider";

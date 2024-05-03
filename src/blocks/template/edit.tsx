@@ -6,17 +6,17 @@ import { dispatch, select } from "@wordpress/data";
 import { Fragment, useEffect } from "@wordpress/element";
 
 import { TemplateWrapperEdit } from "@/components";
-import { breakpoints } from "@/constants";
+import { breakpoints, sliderElementName } from "@/constants";
 import { minifyCssStrings } from "@/utils/minify-css";
 
 import Inspector from "./inspector";
 import type { ITemplateBlockAttributes } from "./attributes";
-import { templateSliderElementName, templateSliderItemName } from "./constants";
+import { templateSliderItemName } from "./constants";
 
 const allowedBlocks = [
 	"wp-custom-blocks/card",
 	"wp-custom-blocks/advantage",
-	"wp-custom-blocks/image",
+	"wp-custom-blocks/template-image",
 ];
 
 const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
@@ -198,25 +198,25 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 	 * Block Save Styles
 	 */
 	const mobileSaveStyles = `
-		.${uniqueId} .${templateSliderElementName} {
+		.${uniqueId} .${sliderElementName} {
 			height: ${mobileHeight}px;
 		}
 	`;
 
 	const tabletSaveStyles = `
-		.${uniqueId} .${templateSliderElementName} {
+		.${uniqueId} .${sliderElementName} {
 			height: ${tabletHeight}px;
 		}
 	`;
 
 	const laptopSaveStyles = `
-		.${uniqueId} .${templateSliderElementName} {
+		.${uniqueId} .${sliderElementName} {
 			height: ${laptopHeight}px;
 		}
 	`;
 
 	const desktopSaveStyles = `
-		.${uniqueId} .${templateSliderElementName} {
+		.${uniqueId} .${sliderElementName} {
 			height: ${desktopHeight}px;
 		}
 	`;
@@ -393,7 +393,7 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 					>
 						<div
 							className={classNames("relative", {
-								[templateSliderElementName]: isEnableSlider,
+								[sliderElementName]: isEnableSlider,
 							})}
 							id={uniqueId}
 						>

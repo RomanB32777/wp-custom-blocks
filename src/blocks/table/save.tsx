@@ -10,10 +10,10 @@ import { RichText, useBlockProps } from "@wordpress/block-editor";
 import type { BlockSaveProps } from "@wordpress/blocks";
 
 import { TemplateWrapperSave } from "@/components";
+import { sliderElementName } from "@/constants";
 import type { TCellHTMLAttributes } from "@/types";
 
 import type { ITableBlockAttributes } from "./attributes";
-import { tableSliderElementName } from "./constants";
 
 const Save: FC<BlockSaveProps<ITableBlockAttributes>> = ({ attributes }) => {
 	const {
@@ -79,12 +79,15 @@ const Save: FC<BlockSaveProps<ITableBlockAttributes>> = ({ attributes }) => {
 											{ "flex-row-reverse": isReverse }
 										)}
 									>
-										<RichText.Content
-											tagName="p"
-											value={value}
-											className="font-semibold italic text-lg"
-											style={{ color: rowColor }}
-										/>
+										{value && (
+											<RichText.Content
+												tagName="p"
+												value={value}
+												className="font-semibold italic text-lg"
+												style={{ color: rowColor }}
+											/>
+										)}
+
 										{icon?.url && (
 											<div className="max-w-2xl">
 												<img
@@ -164,11 +167,14 @@ const Save: FC<BlockSaveProps<ITableBlockAttributes>> = ({ attributes }) => {
 															{ "flex-row-reverse": isReverse }
 														)}
 													>
-														<RichText.Content
-															tagName="span"
-															value={value}
-															style={{ color: rowColor }}
-														/>
+														{value && (
+															<RichText.Content
+																tagName="span"
+																value={value}
+																style={{ color: rowColor }}
+															/>
+														)}
+
 														{icon?.url && (
 															<div className="max-w-2xl">
 																<img
@@ -200,7 +206,7 @@ const Save: FC<BlockSaveProps<ITableBlockAttributes>> = ({ attributes }) => {
 				>
 					<div
 						className={
-							isEnableSlider ? tableSliderElementName : "inner-wrapper grid"
+							isEnableSlider ? sliderElementName : "inner-wrapper grid"
 						}
 						id={uniqueId}
 						{...sliderAttributes}

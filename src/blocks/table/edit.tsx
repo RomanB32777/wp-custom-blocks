@@ -6,11 +6,7 @@ import {
 	useBlockProps,
 } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
-import {
-	DropdownMenu,
-	ToolbarButton,
-	ToolbarGroup,
-} from "@wordpress/components";
+import { DropdownMenu, ToolbarGroup } from "@wordpress/components";
 import type { DropdownOption } from "@wordpress/components/build-types/dropdown-menu/types";
 import { useViewportMatch } from "@wordpress/compose";
 import { select } from "@wordpress/data";
@@ -18,7 +14,7 @@ import { Fragment, useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 import { TemplateWrapperEdit } from "@/components";
-import { breakpoints } from "@/constants";
+import { breakpoints, sliderElementName } from "@/constants";
 import type { TCellHTMLAttributes } from "@/types";
 import { minifyCssStrings } from "@/utils/minify-css";
 
@@ -28,8 +24,7 @@ import type {
 	ISelectedCeil,
 	ITableBlockAttributes,
 } from "./attributes";
-import { UploadTableCeilIcon } from "./components";
-import { tableSliderElementName } from "./constants";
+import { ToolbarCeilActions } from "./components";
 
 const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 	attributes,
@@ -186,25 +181,6 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 		});
 
 		setSelectedCeil(undefined);
-	};
-
-	const handleReverseCeil = () => {
-		if (!selectedCeil) {
-			return;
-		}
-
-		const { rowId, colId } = selectedCeil;
-		const currentRow = rows[rowId];
-		const currentCell = currentRow?.[colId];
-
-		currentCell.isReverse = !currentCell.isReverse;
-
-		setAttributes({
-			rows: {
-				...rows,
-				[rowId]: currentRow,
-			},
-		});
 	};
 
 	const dropdownOptions: DropdownOption[] = [
@@ -380,20 +356,11 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 						/>
 
 						{selectedCeil && (
-							<>
-								<UploadTableCeilIcon
-									selectedCeil={selectedCeil}
-									attributes={attributes}
-									setAttributes={setAttributes}
-								/>
-
-								<ToolbarButton
-									label={__("Reverse", "wp-custom-blocks")}
-									onClick={handleReverseCeil}
-									icon="update"
-									placeholder={__("Reverse", "wp-custom-blocks")}
-								/>
-							</>
+							<ToolbarCeilActions
+								selectedCeil={selectedCeil}
+								attributes={attributes}
+								setAttributes={setAttributes}
+							/>
 						)}
 					</ToolbarGroup>
 				</BlockControls>
@@ -541,7 +508,7 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 					<div className="overflow-hidden pb-14">
 						<div
 							className={classNames("relative", {
-								[tableSliderElementName]: isEnableSlider,
+								[sliderElementName]: isEnableSlider,
 							})}
 							id={uniqueId}
 						>

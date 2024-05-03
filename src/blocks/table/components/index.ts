@@ -1,1 +1,1 @@
-export * from "./upload-icon";
+export * from "./toolbar-ceil-actions";

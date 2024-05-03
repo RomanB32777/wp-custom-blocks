@@ -4,9 +4,9 @@ import { InnerBlocks, useBlockProps } from "@wordpress/block-editor";
 import type { BlockSaveProps } from "@wordpress/blocks";
 
 import { TemplateWrapperSave } from "@/components";
+import { sliderElementName } from "@/constants";
 
 import type { ITemplateBlockAttributes } from "./attributes";
-import { templateSliderElementName } from "./constants";
 
 const Save: FC<BlockSaveProps<ITemplateBlockAttributes>> = ({ attributes }) => {
 	const {
@@ -55,7 +55,7 @@ const Save: FC<BlockSaveProps<ITemplateBlockAttributes>> = ({ attributes }) => {
 				>
 					<div
 						className={
-							isEnableSlider ? templateSliderElementName : "inner-wrapper grid"
+							isEnableSlider ? sliderElementName : "inner-wrapper grid"
 						}
 						id={uniqueId}
 						{...sliderAttributes}

@@ -9,8 +9,9 @@ import classNames from "classnames";
 import { InnerBlocks, RichText, useBlockProps } from "@wordpress/block-editor";
 import type { BlockSaveProps } from "@wordpress/blocks";
 
+import { sliderElementName } from "@/constants";
+
 import type { IBannerBlockAttributes } from "./attributes";
-import { bannerSliderElementName } from "./constants";
 
 const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 	const {
@@ -63,6 +64,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 		"data-slides-space-between-xs": sliderMobileSpaceBetween,
 		"data-slides-space-between-sm": sliderTabletSpaceBetween,
 		"data-slides-space-between-md": sliderLaptopSpaceBetween,
+		"data-slider-destroy-breakpoint": "lg",
 	};
 
 	return (
@@ -146,10 +148,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 						<div className="relative md:mb-28">
 							<div className="overflow-hidden pb-14 lg:pb-0">
 								<div
-									className={classNames(
-										bannerSliderElementName,
-										"w-full h-full"
-									)}
+									className={classNames(sliderElementName, "w-full h-full")}
 									id={uniqueId}
 									{...sliderAttributes}
 								>

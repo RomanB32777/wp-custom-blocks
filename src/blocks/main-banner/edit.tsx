@@ -14,13 +14,12 @@ import { Popover, ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import { Fragment, useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
-import { breakpoints } from "@/constants";
+import { breakpoints, sliderElementName } from "@/constants";
 import { LinkControl } from "@/controls";
 import { minifyCssStrings } from "@/utils/minify-css";
 
 import Inspector from "./inspector";
 import type { IBannerBlockAttributes } from "./attributes";
-import { bannerSliderElementName } from "./constants";
 
 const allowedBlock = "wp-custom-blocks/sport-card";
 
@@ -336,10 +335,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 							<div className="relative md:mb-28">
 								<div className="overflow-hidden pb-14 lg:pb-0">
 									<div
-										className={classNames(
-											bannerSliderElementName,
-											"w-full h-full"
-										)}
+										className={classNames(sliderElementName, "w-full h-full")}
 										id={uniqueId}
 									>
 										<div {...innerBlocksProps} />
