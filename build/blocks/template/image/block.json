@@ -3,9 +3,9 @@
   "apiVersion": 3,
   "name": "wp-custom-blocks/template-image",
   "version": "0.1.0",
-  "title": "Image item",
+  "title": "Template image item",
   "category": "wp-custom-blocks",
-  "description": "Image item block",
+  "description": "Template image item block",
   "parent": [
     "wp-custom-blocks/template"
   ],
