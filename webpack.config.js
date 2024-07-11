@@ -4,6 +4,7 @@ const { DefinePlugin } = require("webpack");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const defaultConfig = require("@wordpress/scripts/config/webpack.config");
+const { getWebpackEntryPoints } = require("@wordpress/scripts/utils");
 
 require("dotenv").config({ path: "./.env" });
 
@@ -104,6 +105,11 @@ if (isProduction) {
 				name: "style",
 				test: /style(\.module)?\.s[ac]ss$/i,
 			},
+			swiper: {
+				chunks: "all",
+				test: /[\\/]node_modules[\\/]swiper[\\/]/,
+				name: "swiper",
+			},
 		},
 	};
 } else {
@@ -124,6 +130,16 @@ const srcPath = path.resolve(__dirname, "src");
 
 module.exports = {
 	...defaultConfig,
+	entry: {
+		...getWebpackEntryPoints(),
+		["swiper-styles"]: path.resolve(
+			__dirname,
+			"src",
+			"assets",
+			"styles",
+			"swiper.scss"
+		),
+	},
 	resolve: {
 		...defaultConfig.resolve,
 		alias: {

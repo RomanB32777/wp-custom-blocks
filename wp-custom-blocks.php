@@ -66,6 +66,11 @@ function blocks_init() {
 		'cards'      => 'card',
 		'images'     => 'image',
 		'icon-links' => 'icon-link',
+		'template'   => array(
+			'advantage',
+			'card',
+			'image',
+		),
 		'button',
 		'content',
 		'banner',
@@ -128,15 +133,21 @@ function register_block_category( $block_categories, $editor_context ) {
 add_filter( 'block_categories_all', 'register_block_category', 10, 2 );
 
 /**
- * Register Inline Style
+ * Render blocks
  */
-function generate_inline_style_on_render_block( $block_content, $block ) {
+function render_custom_block( $block_content, $block ) {
+	$block_name_full                      = $block['blockName'];
+	list($block_name_prefix, $block_name) = explode( '/', $block_name_full );
 
-	if ( isset( $block['blockName'] ) && str_contains( $block['blockName'], 'wp-custom-blocks/' ) ) {
+
+	if ( isset( $block_name_full ) && str_contains( $block_name_full, $block_name_prefix ) ) {
+		/**
+		 * Register Inline Style
+		 */
 		if ( isset( $block['attrs']['blockStyle'] ) ) {
 
 			$style  = $block['attrs']['blockStyle'];
-			$handle = isset( $block['attrs']['uniqueId'] ) ? $block['attrs']['uniqueId'] : 'wp-custom-blocks';
+			$handle = isset( $block['attrs']['uniqueId'] ) ? $block['attrs']['uniqueId'] : $block_name_prefix;
 
 			// convert style array to string
 			if ( is_array( $style ) ) {
@@ -154,10 +165,64 @@ function generate_inline_style_on_render_block( $block_content, $block ) {
 			wp_add_inline_style( $handle, $style );
 
 		}
+
+		$swiper_blocks = array(
+			'template',
+		);
+
+		if ( in_array( $block_name, $swiper_blocks, true ) ) {
+			enqueue_plugin_versioned_script( 'wp_custom_blocks_swiper', 'build/swiper.js' );
+			enqueue_plugin_versioned_style( 'wp_custom_blocks_swiper', 'build/swiper-styles.css' );
+		}
 	}
 	return $block_content;
 }
-add_filter( 'render_block', 'generate_inline_style_on_render_block', 10, 2 );
+add_filter( 'render_block', 'render_custom_block', 10, 2 );
+
+function add_light_modal( $content ) {
+	// Check if we're inside the main loop in a single Post.
+	if ( is_singular() && in_the_loop() && is_main_query() ) {
+		$modal_code = '
+			<div
+				class="fixed inset-0 z-50 hidden w-screen h-screen flex justify-center items-center"
+				id="light-modal"
+			>
+				<div class="light-modal-close fixed inset-0 bg-black/70"></div>
+				<button
+					class="light-modal-close rounded-md text-white fixed z-90 top-8 right-8"
+					type="button"
+				>
+					<span class="sr-only">Close modal</span
+					><svg
+						class="h-6 w-6"
+						fill="none"
+						viewbox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M6 18L18 6M6 6l12 12"
+						></path>
+					</svg>
+				</button>
+				<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+					<img
+						class="relative max-w-full object-cover rounded-lg lg:max-w-[800px] max-h-[600px]"
+						id="light-modal-preview"
+					/>
+				</div>
+			</div>
+		';
+
+		return $content . $modal_code;
+	}
+
+	return $content;
+}
+add_filter( 'the_content', 'add_light_modal', 1 );
 
 function plugin_customizer_setting( $wp_customize ) {
 	$wp_customize->add_section(
