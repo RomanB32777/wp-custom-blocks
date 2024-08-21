@@ -60,26 +60,14 @@ function enqueue_plugin_versioned_script( $handle, $path = '' ) {
 
 function blocks_init() {
 	$blocks = array(
-		'faq'        => 'faq-item',
-		'steps'      => 'step',
-		'bonuses'    => 'bonus',
-		'cards'      => 'card',
-		'images'     => 'image',
 		'icon-links' => 'icon-link',
 		'template'   => array(
 			'advantage',
 			'card',
 			'image',
 		),
+		'border-block',
 		'button',
-		'content',
-		'banner',
-		'author',
-		'pros-cons',
-		'wrapper',
-		'join',
-		'main-banner',
-		'available-table',
 	);
 
 	foreach ( $blocks as $block => $sub_blocks ) {

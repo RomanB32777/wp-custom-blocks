@@ -11,30 +11,45 @@ import {
 } from "../attributes";
 
 export interface ICardElementAttributes extends ITemplateElementAttributes {
-	index: number;
-	isWithIndex: boolean;
-	link: ILinkAttributes;
 	title: string;
 	titleColor: string;
-	category: string;
-	categoryColor: string;
-	buttonText: string;
-	buttonTextColor: string;
-	buttonColor: string;
-	review: string;
-	reviewColor: string;
+	backgroundColor: string;
+	hoverBackgroundColor: string;
 	image: IImageAttributes;
+	link: ILinkAttributes;
+	description: string;
+	descriptionColor: string;
+	horizontalPosition: number;
+	verticalPosition: number;
 }
 
 export const attributes: TBlockAttributes<ICardElementAttributes> = {
 	...elementAttributes,
-	index: {
-		type: "number",
-		default: 0,
+	title: {
+		type: "string",
 	},
-	isWithIndex: {
-		type: "boolean",
-		default: false,
+	titleColor: {
+		type: "string",
+		default: colors.white.DEFAULT,
+	},
+	description: {
+		type: "string",
+	},
+	descriptionColor: {
+		type: "string",
+		default: colors.white.DEFAULT,
+	},
+	backgroundColor: {
+		type: "string",
+		default: colors.primary.DEFAULT,
+	},
+	hoverBackgroundColor: {
+		type: "string",
+		default: colors.primary.dark,
+	},
+	image: {
+		type: "object",
+		default: {},
 	},
 	link: {
 		type: "object",
@@ -43,42 +58,12 @@ export const attributes: TBlockAttributes<ICardElementAttributes> = {
 			openInNewTab: true,
 		},
 	},
-	title: {
-		type: "string",
+	horizontalPosition: {
+		type: "number",
+		default: 0,
 	},
-	titleColor: {
-		type: "string",
-		default: colors.white.DEFAULT,
-	},
-	category: {
-		type: "string",
-	},
-	categoryColor: {
-		type: "string",
-		default: colors.yellow.DEFAULT,
-	},
-	buttonText: {
-		type: "string",
-		default: "Play now",
-	},
-	buttonTextColor: {
-		type: "string",
-		default: colors.white.DEFAULT,
-	},
-	buttonColor: {
-		type: "string",
-		default: colors.primary.DEFAULT,
-	},
-	review: {
-		type: "string",
-		default: "Read Review",
-	},
-	reviewColor: {
-		type: "string",
-		default: colors.grizzly.DEFAULT,
-	},
-	image: {
-		type: "object",
-		default: {},
+	verticalPosition: {
+		type: "number",
+		default: 0,
 	},
 };

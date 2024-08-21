@@ -11,10 +11,14 @@ import type { BlockSaveProps } from "@wordpress/blocks";
 import type { IButtonBlockAttributes } from "./attributes";
 
 const Save: FC<BlockSaveProps<IButtonBlockAttributes>> = ({ attributes }) => {
-	const { link, buttonText, buttonTextColor, buttonColor } = attributes;
+	const { link, buttonText, buttonTextColor, buttonColor, buttonAlign } =
+		attributes;
 
 	const blockProps = useBlockProps.save({
-		className: "item-button w-full text-center",
+		className: "item-button w-full",
+		style: {
+			textAlign: buttonAlign,
+		},
 	});
 
 	return (

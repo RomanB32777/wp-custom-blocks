@@ -13,13 +13,10 @@ import { templateRounded, templateSliderItemName } from "../attributes";
 import type { IImageElementAttributes } from "./attributes";
 
 const Save: FC<BlockSaveProps<IImageElementAttributes>> = ({ attributes }) => {
-	const { uniqueId, image, isEnableOpenInModal, isSlideItem } = attributes;
+	const { uniqueId, image, isEnableOpenInModal } = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: classNames(templateSliderItemName, {
-			"swiper-slide": isSlideItem,
-			[uniqueId]: !isSlideItem,
-		}),
+		className: classNames(templateSliderItemName, uniqueId, "swiper-slide"),
 	});
 
 	return (

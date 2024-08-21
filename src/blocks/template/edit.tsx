@@ -1,19 +1,11 @@
 import React, { type FC } from "react";
 import classNames from "classnames";
-import {
-	BlockControls,
-	RichText,
-	useBlockProps,
-	useInnerBlocksProps,
-} from "@wordpress/block-editor";
+import { useBlockProps, useInnerBlocksProps } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
-import { Popover, ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import { dispatch, select } from "@wordpress/data";
-import { Fragment, useEffect, useState } from "@wordpress/element";
-import { __ } from "@wordpress/i18n";
+import { Fragment, useEffect } from "@wordpress/element";
 
 import { breakpoints, sliderElementName } from "@/constants";
-import { LinkControl } from "@/controls";
 import { minifyCssStrings } from "@/utils/minify-css";
 
 import Inspector from "./inspector";
@@ -37,29 +29,11 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 	const {
 		uniqueId,
 		blockStyle,
-		title,
-		titleColor,
-		titleTag,
-		description,
-		descriptionColor,
-		link,
-		isWithLinkBlock,
-		linkText,
-		linkTextColor,
-		linkBtnArrowColor,
-		linkBackgroundBtnColor,
 		mobileHeight,
 		tabletHeight,
 		laptopHeight,
 		desktopHeight,
-		titleSize,
-		titleLineHeight,
-		titleMobileSize,
-		titleMobileLineHeight,
-		titleWeight,
-		titleTransform,
-		isWithItemIndex,
-		isEnableSlider,
+		disableSliderBreakpoint,
 		sliderMobileSlidesPerView,
 		sliderTabletSlidesPerView,
 		sliderLaptopSlidesPerView,
@@ -84,8 +58,6 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 		desktopSpaceBetween,
 	} = attributes;
 
-	const [linkPanel, showLinkPanel] = useState(false);
-
 	const childBlocks =
 		select("core/block-editor").getBlocksByClientId(clientId)?.[0]?.innerBlocks;
 
@@ -98,17 +70,6 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 	}, [clientId, setAttributes, uniqueId]);
 
 	useEffect(() => {
-		childBlocks?.forEach((block, index) => {
-			if (block.name === "wp-custom-blocks/template-card") {
-				dispatch("core/block-editor").updateBlockAttributes(block.clientId, {
-					index,
-					isWithIndex: isWithItemIndex,
-				});
-			}
-		});
-	}, [childBlocks, isWithItemIndex]);
-
-	useEffect(() => {
 		childBlocks?.forEach((block) => {
 			if (block.name === "wp-custom-blocks/image") {
 				dispatch("core/block-editor").updateBlockAttributes(block.clientId, {
@@ -118,84 +79,122 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 		});
 	}, [childBlocks, isEnableOpenImageInModal]);
 
-	useEffect(() => {
-		childBlocks?.forEach((block) => {
-			dispatch("core/block-editor").updateBlockAttributes(block.clientId, {
-				isSlideItem: isEnableSlider,
-				modificatorClass: classNames({
-					"slider-item": isEnableSlider,
-				}),
-			});
-		});
-	}, [childBlocks, isEnableSlider]);
-
 	const blockProps = useBlockProps({
-		className: classNames(uniqueId, "font-notoSans"),
+		className: classNames(uniqueId, "font-roboto"),
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: isEnableSlider
-				? "flex slider-wrapper h-full flex-wrap"
-				: "inner-wrapper grid",
+			className: "inner-wrapper h-full flex flex-col",
 		},
 		{
 			allowedBlocks,
 		}
 	);
 
+	const disableSliderBreakpointPx =
+		disableSliderBreakpoint && disableSliderBreakpoint !== "none"
+			? breakpoints[disableSliderBreakpoint]
+			: null;
+
+	const isMobileDisableSliderBreakpoint =
+		disableSliderBreakpointPx && disableSliderBreakpointPx <= breakpoints.xs;
+
+	const isTabletDisableSliderBreakpoint =
+		disableSliderBreakpointPx && disableSliderBreakpointPx <= breakpoints.sm;
+
+	const isLaptopDisableSliderBreakpoint =
+		disableSliderBreakpointPx && disableSliderBreakpointPx <= breakpoints.lg;
+
+	const isDesktopDisableSliderBreakpoint =
+		disableSliderBreakpointPx && disableSliderBreakpointPx <= breakpoints.xl;
+
 	/**
 	 * Edit Styles
 	 */
 	const mobileEditStyles = `
-		.${uniqueId} .slider-wrapper {
-			gap: ${sliderMobileSpaceBetween}px;
+		.${uniqueId} .inner-wrapper {
+			gap: ${
+				isMobileDisableSliderBreakpoint
+					? mobileSpaceBetween
+					: sliderMobileSpaceBetween
+			}px;
 		}
 
-		.${uniqueId} .slider-item {
+		.${uniqueId} .${templateSliderItemName} {
 			height: ${mobileHeight}px;
-			flex-basis: calc(${
-				100 / sliderMobileSlidesPerView
-			}% - ${sliderMobileSpaceBetween}px);
+		}
+
+		.${uniqueId} .${templateSliderItemName} {
+			width: ${
+				100 /
+				(isMobileDisableSliderBreakpoint
+					? mobileItemsCount
+					: sliderMobileSlidesPerView)
+			}%;
+			height: ${isMobileDisableSliderBreakpoint ? mobileItemHeight : mobileHeight}px;
 		}
 	`;
 
 	const tabletEditStyles = `
-		.${uniqueId} .slider-wrapper {
-			gap: ${sliderTabletSpaceBetween}px;
+		.${uniqueId} .inner-wrapper {
+			gap: ${
+				isTabletDisableSliderBreakpoint
+					? tabletSpaceBetween
+					: sliderTabletSpaceBetween
+			}px;
 		}
 
-		.${uniqueId} .slider-item {
-			height: ${tabletHeight}px;
-			flex-basis: calc(${
-				100 / sliderTabletSlidesPerView
-			}% - ${sliderTabletSpaceBetween}px);
+		.${uniqueId} .${templateSliderItemName} {
+			width: ${
+				100 /
+				(isTabletDisableSliderBreakpoint
+					? tabletItemsCount
+					: sliderTabletSlidesPerView)
+			}%;
+			height: ${isTabletDisableSliderBreakpoint ? tabletItemHeight : tabletHeight}px;
 		}
 	`;
 
 	const laptopEditStyles = `
-		.${uniqueId} .slider-wrapper {
-			gap: ${sliderLaptopSpaceBetween}px;
+		.${uniqueId} .inner-wrapper {
+			gap: ${
+				isLaptopDisableSliderBreakpoint
+					? laptopSpaceBetween
+					: sliderLaptopSpaceBetween
+			}px;
 		}
 
-		.${uniqueId} .slider-item {
-			height: ${laptopHeight}px;
-			flex-basis: calc(${
-				100 / sliderLaptopSlidesPerView
-			}% - ${sliderLaptopSpaceBetween}px);
+		.${uniqueId} .${templateSliderItemName} {
+			width: ${
+				100 /
+				(isLaptopDisableSliderBreakpoint
+					? laptopItemsCount
+					: sliderLaptopSlidesPerView)
+			}%;
+			height: ${isLaptopDisableSliderBreakpoint ? laptopItemHeight : laptopHeight}px;
 		}
 	`;
 
 	const desktopEditStyles = `
-		.${uniqueId} .slider-wrapper {
-			gap: ${sliderDesktopSpaceBetween}px;
+		.${uniqueId} .inner-wrapper {
+			gap: ${
+				isDesktopDisableSliderBreakpoint
+					? desktopSpaceBetween
+					: sliderDesktopSpaceBetween
+			}px;
 		}
 
-		.${uniqueId} .slider-item {
-			height: ${desktopHeight}px;
-			flex-basis: calc(${
-				100 / sliderDesktopSlidesPerView
-			}% - ${sliderDesktopSpaceBetween}px);
+		.${uniqueId} .${templateSliderItemName} {
+			width: ${
+				100 /
+				(isDesktopDisableSliderBreakpoint
+					? desktopItemsCount
+					: sliderDesktopSlidesPerView)
+			}%;
+			height: ${
+				isDesktopDisableSliderBreakpoint ? desktopItemHeight : desktopHeight
+			}px;
 		}
 	`;
 
@@ -203,13 +202,15 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 	 * Block Edit All Styles
 	 */
 	const blockEditStyleCss = `
-		${mobileEditStyles}
+		@media (max-width: ${breakpoints.sm}px) {
+			${mobileEditStyles}
+		}
 
-		@media (min-width: ${breakpoints.sm}px) {
+		@media (min-width: ${breakpoints.sm}px) and (max-width: ${breakpoints.lg}px) {
 			${tabletEditStyles}
 		}
 
-		@media (min-width: ${breakpoints.md}px) {
+		@media (min-width: ${breakpoints.lg}px) and (max-width: ${breakpoints.xl}px) {
 			${laptopEditStyles}
 		}
 
@@ -225,11 +226,31 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 		.${uniqueId} .${sliderElementName} {
 			height: ${mobileHeight}px;
 		}
+
+		${
+			isMobileDisableSliderBreakpoint
+				? `
+					.${uniqueId} .inner-wrapper {
+						gap: ${mobileSpaceBetween}px;
+					}
+				`
+				: ""
+		}
 	`;
 
 	const tabletSaveStyles = `
 		.${uniqueId} .${sliderElementName} {
 			height: ${tabletHeight}px;
+		}
+
+		${
+			isTabletDisableSliderBreakpoint
+				? `
+					.${uniqueId} .inner-wrapper {
+						gap: ${tabletSpaceBetween}px;
+					}
+				`
+				: ""
 		}
 	`;
 
@@ -237,11 +258,31 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 		.${uniqueId} .${sliderElementName} {
 			height: ${laptopHeight}px;
 		}
+
+		${
+			isLaptopDisableSliderBreakpoint
+				? `
+					.${uniqueId} .inner-wrapper {
+						gap: ${laptopSpaceBetween}px;
+					}
+				`
+				: ""
+		}
 	`;
 
 	const desktopSaveStyles = `
 		.${uniqueId} .${sliderElementName} {
 			height: ${desktopHeight}px;
+		}
+
+		${
+			isDesktopDisableSliderBreakpoint
+				? `
+					.${uniqueId} .inner-wrapper {
+						gap: ${desktopSpaceBetween}px;
+					}
+				`
+				: ""
 		}
 	`;
 
@@ -249,13 +290,15 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 	 * Block Save All Styles
 	 */
 	const blockSaveStyleCss = `
-		${mobileSaveStyles}
+		@media (max-width: ${breakpoints.sm}px) {
+			${mobileSaveStyles}
+		}
 
-		@media (min-width: ${breakpoints.sm}px) {
+		@media (min-width: ${breakpoints.sm}px) and (max-width: ${breakpoints.lg}px) {
 			${tabletSaveStyles}
 		}
 
-		@media (min-width: ${breakpoints.md}px) {
+		@media (min-width: ${breakpoints.lg}px) and (max-width: ${breakpoints.xl}px) {
 			${laptopSaveStyles}
 		}
 
@@ -265,95 +308,62 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 	`;
 
 	/**
-	 * Items Styles
-	 */
-	const mobileItemStyles = `
-		.${uniqueId} .${templateSliderItemName} {
-			height: ${mobileItemHeight}px;
-		}
-	`;
-
-	const tabletItemStyles = `
-		.${uniqueId} .${templateSliderItemName} {
-			height: ${tabletItemHeight}px;
-		}
-	`;
-
-	const laptopItemStyles = `
-		.${uniqueId} .${templateSliderItemName} {
-			height: ${laptopItemHeight}px;
-		}
-	`;
-
-	const desktopItemStyles = `
-		.${uniqueId} .${templateSliderItemName} {
-			height: ${desktopItemHeight}px;
-		}
-	`;
-
-	/**
-	 * Items All Styles
-	 */
-	const itemStyleCss = `
-		${mobileItemStyles}
-
-		@media (min-width: ${breakpoints.sm}px) {
-			${tabletItemStyles}
-		}
-
-		@media (min-width: ${breakpoints.md}px) {
-			${laptopItemStyles}
-		}
-
-		@media (min-width: ${breakpoints.xl}px) {
-			${desktopItemStyles}
-		}
-	`;
-
-	/**
 	 * Block Styles
 	 */
+
 	const mobileStyles = `
-		.${uniqueId} .title {
-			font-size: ${titleMobileSize}px;
-			line-height: ${titleMobileLineHeight}rem;
-			font-weight: ${titleWeight};
-			text-transform: ${titleTransform};
-		}
-
 		.${uniqueId} .inner-wrapper {
-			gap: ${mobileSpaceBetween}px;
-			grid-template-columns: repeat(${mobileItemsCount}, minmax(0, 1fr));
+			grid-template-columns: repeat(${
+				isMobileDisableSliderBreakpoint
+					? mobileItemsCount
+					: sliderMobileSlidesPerView
+			}, minmax(0, 1fr));
 		}
 
-		.${uniqueId} .${templateSliderItemName} .${templateRounded} {
-			border-radius: ${borderRadius}px;
+		.${uniqueId} .${templateSliderItemName} {
+			height: ${isMobileDisableSliderBreakpoint ? `${mobileItemHeight}px` : "auto"};
 		}
 	`;
 
 	const tabletStyles = `
 		.${uniqueId} .inner-wrapper {
-			gap: ${tabletSpaceBetween}px;
-			grid-template-columns: repeat(${tabletItemsCount}, minmax(0, 1fr));
+			grid-template-columns: repeat(${
+				isTabletDisableSliderBreakpoint
+					? tabletItemsCount
+					: sliderTabletSlidesPerView
+			}, minmax(0, 1fr));
+		}
+
+		.${uniqueId} .${templateSliderItemName} {
+			height: ${isTabletDisableSliderBreakpoint ? `${tabletItemHeight}px` : "auto"};
 		}
 	`;
 
 	const laptopStyles = `
-		.${uniqueId} .title {
-			font-size: ${titleSize}px;
-			line-height: ${titleLineHeight}rem;
+		.${uniqueId} .inner-wrapper {
+			grid-template-columns: repeat(${
+				isLaptopDisableSliderBreakpoint
+					? laptopItemsCount
+					: sliderLaptopSlidesPerView
+			}, minmax(0, 1fr));
 		}
 
-		.${uniqueId} .inner-wrapper {
-			gap: ${laptopSpaceBetween}px;
-			grid-template-columns: repeat(${laptopItemsCount}, minmax(0, 1fr));
+		.${uniqueId} .${templateSliderItemName} {
+			height: ${isLaptopDisableSliderBreakpoint ? `${laptopItemHeight}px` : "auto"};
 		}
 	`;
 
 	const desktopStyles = `
 		.${uniqueId} .inner-wrapper {
-			gap: ${desktopSpaceBetween}px;
-			grid-template-columns: repeat(${desktopItemsCount}, minmax(0, 1fr));
+			grid-template-columns: repeat(${
+				isDesktopDisableSliderBreakpoint
+					? desktopItemsCount
+					: sliderDesktopSlidesPerView
+			}, minmax(0, 1fr));
+		}
+
+		.${uniqueId} .${templateSliderItemName} {
+			height: ${isDesktopDisableSliderBreakpoint ? `${desktopItemHeight}px` : "auto"};
 		}
 	`;
 
@@ -361,13 +371,19 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 	 * Block All Styles
 	 */
 	const blockStyleCss = `
-		${mobileStyles}
+		.${uniqueId} .${templateSliderItemName} .${templateRounded} {
+			border-radius: ${borderRadius}px;
+		}
 
-		@media (min-width: ${breakpoints.sm}px) {
+		@media (max-width: ${breakpoints.sm}px) {
+			${mobileStyles}
+		}
+
+		@media (min-width: ${breakpoints.sm}px) and (max-width: ${breakpoints.lg}px) {
 			${tabletStyles}
 		}
 
-		@media (min-width: ${breakpoints.md}px) {
+		@media (min-width: ${breakpoints.lg}px) and (max-width: ${breakpoints.xl}px) {
 			${laptopStyles}
 		}
 
@@ -376,11 +392,25 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		const newStyleCss =
-			blockStyleCss +
+	const sliderResponsiveDisable = disableSliderBreakpointPx
+		? `
+				@media (min-width: ${disableSliderBreakpointPx}px) {
+					.${uniqueId} .${sliderElementName} {
+						height: auto !important;
+					}
+
+					.${uniqueId} .inner-wrapper {
+						display: grid !important;
+					}
+				}
 			`
-			${isEnableSlider ? blockSaveStyleCss : itemStyleCss}
+		: "";
+
+	useEffect(() => {
+		const newStyleCss = `
+			${blockStyleCss}
+			${blockSaveStyleCss}
+			${sliderResponsiveDisable}
 		`;
 
 		if (JSON.stringify(blockStyle) !== JSON.stringify(newStyleCss)) {
@@ -390,8 +420,7 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 		blockStyle,
 		blockStyleCss,
 		blockSaveStyleCss,
-		isEnableSlider,
-		itemStyleCss,
+		sliderResponsiveDisable,
 		setAttributes,
 	]);
 
@@ -400,115 +429,18 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
 			<style>{`${minifyCssStrings(blockEditStyleCss)}`}</style>
 
-			{!isEnableSlider && <style>{`${minifyCssStrings(itemStyleCss)}`}</style>}
-
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 
 			<Fragment>
-				{isWithLinkBlock && (
-					<BlockControls controls={undefined}>
-						<Fragment>
-							<ToolbarGroup>
-								<ToolbarButton
-									label={__("Add Link", "wp-custom-blocks")}
-									onClick={() => showLinkPanel(!linkPanel)}
-									icon="admin-links"
-									placeholder={__("Add Link", "wp-custom-blocks")}
-								/>
-							</ToolbarGroup>
-
-							{linkPanel && (
-								<Popover
-									position="bottom right"
-									onFocusOutside={() => showLinkPanel(false)}
-									offset={5}
-								>
-									<LinkControl
-										link={link}
-										linkName="link"
-										label={__("More link", "wp-custom-blocks")}
-										setAttributes={setAttributes}
-									/>
-								</Popover>
-							)}
-						</Fragment>
-					</BlockControls>
-				)}
-
 				<div {...blockProps}>
-					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-						<div className="my-10 sm:my-20">
-							<div className="flex justify-between items-center mb-8">
-								<RichText
-									tagName={titleTag}
-									className="title"
-									value={title}
-									onChange={(v) => setAttributes({ title: v })}
-									placeholder={__("Block title..", "wp-custom-blocks")}
-									style={{ color: titleColor }}
-								/>
-
-								{isWithLinkBlock && (
-									<div className="flex items-center cursor-pointer">
-										<RichText
-											tagName="span"
-											className="hidden text-sm font-bold uppercase md:!inline-block md:mr-3"
-											value={linkText}
-											onChange={(v) => setAttributes({ linkText: v })}
-											placeholder={__("Link text..", "wp-custom-blocks")}
-											style={{ color: linkTextColor }}
-										/>
-										<div
-											className="more-arrow w-6 h-6 rounded-full flex items-center justify-center"
-											style={{
-												color: linkBtnArrowColor,
-												background: linkBackgroundBtnColor,
-											}}
-										>
-											<svg
-												width="6"
-												height="8"
-												viewBox="0 0 6 8"
-												fill="none"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													d="M5.25557 4.39741L2.06807 7.58491C1.84775 7.80523 1.4915 7.80523 1.27354 7.58491L0.743848 7.05523C0.523535 6.83491 0.523535 6.47866 0.743848 6.26069L3.00322 4.00132L0.743848 1.74194C0.523535 1.52163 0.523535 1.16538 0.743848 0.947412L1.27119 0.413037C1.4915 0.192725 1.84775 0.192725 2.06572 0.413037L5.25322 3.60054C5.47588 3.82085 5.47588 4.1771 5.25557 4.39741Z"
-													fill="currentColor"
-												></path>
-											</svg>
-										</div>
-									</div>
-								)}
-							</div>
-
-							<RichText
-								tagName="p"
-								className="max-w-3xl text-base mb-6 md:mb-11"
-								value={description}
-								onChange={(v) => setAttributes({ description: v })}
-								placeholder={__("Block description..", "wp-custom-blocks")}
-								style={{ color: descriptionColor }}
-							/>
-
-							<div
-								className={classNames("relative", {
-									"mb-6": isEnableSlider,
-								})}
-							>
+					<div className="my-10 sm:my-20">
+						<div className="relative mb-6">
+							<div className="overflow-hidden pt-6 pb-14 lg:pt-11">
 								<div
-									className={classNames("overflow-hidden pt-6 lg:pt-11", {
-										"pb-14": isEnableSlider,
-									})}
+									className={classNames("relative", sliderElementName)}
+									id={uniqueId}
 								>
-									<div
-										className={classNames("relative", {
-											[sliderElementName]: isEnableSlider,
-										})}
-										id={uniqueId}
-									>
-										<div {...innerBlocksProps} />
-									</div>
+									<div {...innerBlocksProps} />
 								</div>
 							</div>
 						</div>

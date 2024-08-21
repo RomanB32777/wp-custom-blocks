@@ -15,28 +15,48 @@ import type { IAdvantageElementAttributes } from "./attributes";
 const Save: FC<BlockSaveProps<IAdvantageElementAttributes>> = ({
 	attributes,
 }) => {
-	const { uniqueId, isSlideItem, title, titleColor, backgroundColor, image } =
-		attributes;
+	const {
+		uniqueId,
+		title,
+		titleColor,
+		backgroundColor,
+		image,
+		horizontalPosition,
+		verticalPosition,
+	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: classNames(templateSliderItemName, {
-			"swiper-slide": isSlideItem,
-			[uniqueId]: !isSlideItem,
-		}),
+		className: classNames(templateSliderItemName, uniqueId, "swiper-slide"),
 	});
 
 	return (
 		<div {...blockProps}>
 			<div
-				className={classNames("w-full h-full overflow-hidden", templateRounded)}
+				className={classNames(
+					"relative w-full h-full overflow-hidden p-8",
+					templateRounded
+				)}
 				style={{ backgroundColor }}
 			>
-				<div className="bg-white overflow-hidden rounded-full w-28 h-28 mx-auto mt-10 mb-6 flex items-center justify-center">
-					{image.url && <img className="w-8" src={image.url} alt={image.alt} />}
-				</div>
+				{image.url && (
+					<div
+						className="absolute w-full overflow-hidden rounded-xl h-full"
+						style={{
+							right: horizontalPosition,
+							bottom: verticalPosition,
+						}}
+					>
+						<img
+							className="h-full !max-w-fit object-cover object-center"
+							src={image.url}
+							alt={image.alt}
+						/>
+					</div>
+				)}
+
 				<RichText.Content
 					tagName="p"
-					className="font-bold text-base text-center uppercase px-6"
+					className="elative font-medium text-xl"
 					value={title}
 					style={{ color: titleColor }}
 				/>

@@ -13,11 +13,9 @@ import { Fragment, useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 import { LinkControl } from "@/controls";
+import { minifyCssStrings } from "@/utils/minify-css";
 
 import { templateRounded, templateSliderItemName } from "../attributes";
-import crownIcon from "./assets/crown.svg";
-import primaryFlagImage from "./assets/flag-primary.png";
-import flagImage from "./assets/flag.png";
 import Inspector from "./inspector";
 import type { ICardElementAttributes } from "./attributes";
 
@@ -28,33 +26,37 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 }) => {
 	const {
 		uniqueId,
-		modificatorClass,
-		index,
-		isWithIndex,
-		isSlideItem,
-		link,
+		blockStyle,
 		title,
 		titleColor,
-		category,
-		categoryColor,
-		buttonText,
-		buttonTextColor,
-		buttonColor,
-		review,
-		reviewColor,
+		description,
+		descriptionColor,
+		backgroundColor,
+		hoverBackgroundColor,
 		image,
+		link,
+		horizontalPosition,
+		verticalPosition,
 	} = attributes;
 
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: classNames(templateSliderItemName, modificatorClass, {
-			"h-96": isSlideItem,
-			"w-full": !isSlideItem,
-			[uniqueId]: !isSlideItem,
-		}),
+		className: classNames(templateSliderItemName, uniqueId, "h-full w-full"),
 		style: { margin: 0 },
 	});
+
+	const blockStyleCss = `
+		.${uniqueId} .hover-block:hover {
+			background-color: ${hoverBackgroundColor} !important;
+		}
+	`;
+
+	useEffect(() => {
+		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
+			setAttributes({ blockStyle: blockStyleCss });
+		}
+	}, [blockStyle, blockStyleCss, setAttributes]);
 
 	useEffect(() => {
 		if (!uniqueId) {
@@ -66,6 +68,8 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 
 	return (
 		<Fragment>
+			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 
 			<BlockControls controls={undefined}>
@@ -122,99 +126,64 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 			</BlockControls>
 
 			<div {...blockProps}>
-				<div className="group relative h-full">
-					<div
-						className={classNames(
-							"aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 h-full lg:aspect-none group-hover:opacity-75",
-							templateRounded
-						)}
-					>
-						{image.url && (
+				<div
+					className={classNames(
+						"hover-block relative w-full h-full overflow-hidden p-8",
+						templateRounded
+					)}
+					style={{ backgroundColor }}
+				>
+					{image.url && (
+						<div
+							className="absolute overflow-hidden rounded-xl"
+							style={{
+								right: horizontalPosition,
+								bottom: verticalPosition,
+							}}
+						>
 							<img
-								className="!h-full w-full object-cover object-center"
+								className="object-cover !h-full w-full xl:object-right"
 								src={image.url}
 								alt={image.alt}
 								width={image.width}
 								height={image.height}
 							/>
-						)}
-					</div>
-
-					{isWithIndex && (
-						<div className="absolute -top-2 left-2.5">
-							{index === 0 ? (
-								<>
-									<img
-										src={primaryFlagImage}
-										alt="flag alt"
-										width={52}
-										height={67}
-									/>
-									<div className="absolute left-0 bottom-0 flex items-center justify-center right-1 -top-1">
-										<img src={crownIcon} alt="crown" width={21} height={18} />
-									</div>
-								</>
-							) : (
-								<>
-									<img src={flagImage} alt="flag alt" width={52} height={56} />
-									<div className="absolute left-0 bottom-0 flex items-center justify-center -top-1.5 right-1.5">
-										<p className="font-black text-2xl text-white">
-											{index + 1}
-										</p>
-									</div>
-								</>
-							)}
 						</div>
 					)}
 
-					<div className="absolute inset-x-0 bottom-0">
-						<div className="mx-4">
-							<div className="mx-7">
-								<RichText
-									tagName="p"
-									className="mb-2 text-xs font-semibold"
-									value={category}
-									onChange={(v) => setAttributes({ category: v })}
-									placeholder={__("Category name..", "wp-custom-blocks")}
-									style={{ color: categoryColor }}
-								/>
-								<RichText
-									tagName="p"
-									className="mb-6 text-base font-semibold"
-									value={title}
-									onChange={(v) => setAttributes({ title: v })}
-									placeholder={__("Title name..", "wp-custom-blocks")}
-									style={{ color: titleColor }}
-								/>
-							</div>
+					<div className="relative flex flex-col h-full gap-y-8 text-white xl:w-4/6 xl:!gap-y-3">
+						<RichText
+							tagName="h4"
+							className="relative font-bold text-xl xl:!text-3xl"
+							value={title}
+							onChange={(v) => setAttributes({ title: v })}
+							placeholder={__("Title..", "wp-custom-blocks")}
+							style={{ color: titleColor }}
+						/>
 
-							<button
-								className="relative rounded-xl py-4 px-7 w-full"
-								type="button"
-								aria-expanded="false"
-								style={{ backgroundColor: buttonColor }}
+						<div className="flex flex-col flex-1 justify-between gap-y-8">
+							<RichText
+								tagName="p"
+								className="hidden text-xl xl:!block"
+								value={description}
+								onChange={(v) => setAttributes({ description: v })}
+								placeholder={__("Description..", "wp-custom-blocks")}
+								style={{ color: descriptionColor }}
+							/>
+
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="28"
+								height="18"
+								viewBox="0 0 28 18"
+								fill="none"
 							>
-								<RichText
-									tagName="span"
-									className="text-base font-medium mx-auto"
-									value={buttonText}
-									onChange={(v) => setAttributes({ buttonText: v })}
-									placeholder={__("Button text..", "wp-custom-blocks")}
-									style={{ color: buttonTextColor }}
-								/>
-							</button>
-
-							<div className="text-center py-5">
-								<div className="text-sm font-medium no-underline">
-									<RichText
-										tagName="span"
-										value={review}
-										onChange={(v) => setAttributes({ review: v })}
-										placeholder={__("Review text..", "wp-custom-blocks")}
-										style={{ color: reviewColor }}
-									/>
-								</div>
-							</div>
+								<path
+									d="M0 9H26M26 9L18.3607 1M26 9L18.3607 17"
+									stroke="white"
+									strokeWidth="2"
+								></path>
+							</svg>
 						</div>
 					</div>
 				</div>

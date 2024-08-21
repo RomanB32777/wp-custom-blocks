@@ -2,12 +2,9 @@ import React, { type FC } from "react";
 /**
  * WordPress dependencies
  */
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { InspectorControls, LineHeightControl } from "@wordpress/block-editor";
+import { InspectorControls } from "@wordpress/block-editor";
 import {
 	CardDivider,
-	FontSizePicker,
 	PanelBody,
 	RangeControl,
 	SelectControl,
@@ -17,33 +14,41 @@ import { useEffect, useState } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
 import { TipResponsive } from "@/components";
-import { fontSizes, tags, transforms } from "@/constants";
-import { ColorControl } from "@/controls";
-import type { IInspectorProps } from "@/types";
+import { breakpointNames, breakpoints } from "@/constants";
+import type { IInspectorProps, TBreakpoints } from "@/types";
 import { getDefaultAttributeValue } from "@/utils/default-attribute-value";
 
 import {
 	baseSpaceBetween,
 	blockAttributes,
 	type ITemplateBlockAttributes,
+	type TDisableSliderBreakpoints,
 } from "./attributes";
+
+const breakpointSelectItems = Object.entries(breakpointNames).reduce(
+	(acc, [key, value]) => {
+		acc.push({
+			label: value,
+			value: key as TDisableSliderBreakpoints,
+		});
+
+		return acc;
+	},
+	[{ label: "-", value: "none" }] as Array<{
+		label: string;
+		value: TDisableSliderBreakpoints;
+	}>
+);
 
 const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
 	const {
-		titleTag,
-		titleSize,
-		titleLineHeight,
-		titleMobileSize,
-		titleMobileLineHeight,
-		titleWeight,
-		titleTransform,
-		isWithLinkBlock,
 		isLoopSlider,
 		isDisableAutoplay,
 		sliderAutoplayDelay,
+		disableSliderBreakpoint,
 		sliderMobileSlidesPerView,
 		sliderTabletSlidesPerView,
 		sliderLaptopSlidesPerView,
@@ -53,20 +58,18 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 		mobileItemsCount,
 		tabletItemsCount,
 		laptopItemsCount,
+		desktopItemsCount,
 		mobileSpaceBetween,
 		tabletSpaceBetween,
+		desktopSpaceBetween,
 		laptopSpaceBetween,
 		mobileHeight,
 		tabletHeight,
 		laptopHeight,
 		desktopHeight,
-		isWithItemIndex,
 		isEnableOpenImageInModal,
-		isEnableSlider,
 		sliderDesktopSlidesPerView,
 		sliderDesktopSpaceBetween,
-		desktopItemsCount,
-		desktopSpaceBetween,
 		mobileItemHeight,
 		tabletItemHeight,
 		laptopItemHeight,
@@ -74,25 +77,32 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 		borderRadius,
 	} = attributes;
 
-	const [linkPanel, showLinkPanel] = useState(isWithLinkBlock);
-	const [sliderPanel, showSliderPanel] = useState(isEnableSlider);
-	const [withoutSliderPanel, showWithoutSliderPanel] =
-		useState(!isEnableSlider);
+	const isExistSliderDisableBreakpoint =
+		disableSliderBreakpoint && disableSliderBreakpoint !== "none";
+
+	const [withoutSliderPanel, showWithoutSliderPanel] = useState(
+		isExistSliderDisableBreakpoint
+	);
 
 	useEffect(() => {
-		showLinkPanel(isWithLinkBlock);
-	}, [isWithLinkBlock]);
+		showWithoutSliderPanel(isExistSliderDisableBreakpoint);
+	}, [isExistSliderDisableBreakpoint]);
 
-	useEffect(() => {
-		showWithoutSliderPanel(!isEnableSlider);
-		showSliderPanel(isEnableSlider);
-	}, [isEnableSlider]);
+	const disableSliderBreakpointPx = isExistSliderDisableBreakpoint
+		? breakpoints[disableSliderBreakpoint]
+		: null;
 
-	const colorControlProps = {
-		attributes,
-		defaultAttributes: blockAttributes,
-		setAttributes,
-	};
+	const isMobileDisableSliderBreakpoint =
+		disableSliderBreakpointPx && disableSliderBreakpointPx <= breakpoints.xs;
+
+	const isTabletDisableSliderBreakpoint =
+		disableSliderBreakpointPx && disableSliderBreakpointPx <= breakpoints.sm;
+
+	const isLaptopDisableSliderBreakpoint =
+		disableSliderBreakpointPx && disableSliderBreakpointPx <= breakpoints.lg;
+
+	const isDesktopDisableSliderBreakpoint =
+		disableSliderBreakpointPx && disableSliderBreakpointPx <= breakpoints.xl;
 
 	return (
 		<InspectorControls>
@@ -102,27 +112,15 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 				title={__("Block settings", "wp-custom-blocks")}
 				initialOpen={true}
 			>
-				<ToggleControl
-					label={__("With link block", "wp-custom-blocks")}
-					checked={isWithLinkBlock}
-					onChange={() => setAttributes({ isWithLinkBlock: !isWithLinkBlock })}
-				/>
-
-				<CardDivider />
-				<ToggleControl
-					label={__("Enable slider", "wp-custom-blocks")}
-					checked={isEnableSlider}
-					onChange={() => setAttributes({ isEnableSlider: !isEnableSlider })}
-				/>
-
-				<CardDivider />
-				<ToggleControl
-					label={__(
-						"With item indexes (only for card blocks)",
-						"wp-custom-blocks"
-					)}
-					checked={isWithItemIndex}
-					onChange={() => setAttributes({ isWithItemIndex: !isWithItemIndex })}
+				<SelectControl
+					label={__("Disable slider breakpoint", "wp-custom-blocks")}
+					value={disableSliderBreakpoint}
+					options={breakpointSelectItems}
+					onChange={(v: TBreakpoints) => {
+						setAttributes({
+							disableSliderBreakpoint: v,
+						});
+					}}
 				/>
 
 				<CardDivider />
@@ -140,171 +138,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 				/>
 			</PanelBody>
 
-			<PanelBody
-				title={__("Description settings", "wp-custom-blocks")}
-				initialOpen={false}
-			>
-				<ColorControl
-					name="descriptionColor"
-					label={__("Description color", "wp-custom-blocks")}
-					{...colorControlProps}
-				/>
-			</PanelBody>
-
-			<PanelBody
-				title={__("Title settings", "wp-custom-blocks")}
-				initialOpen={false}
-			>
-				<ColorControl
-					name="titleColor"
-					label={__("Title Color", "wp-custom-blocks")}
-					{...colorControlProps}
-				/>
-
-				<CardDivider />
-				<SelectControl
-					label={__("Select Tag", "wp-custom-blocks")}
-					value={titleTag}
-					options={tags}
-					onChange={(v: keyof HTMLElementTagNameMap) => {
-						setAttributes({
-							titleTag: v,
-						});
-					}}
-				/>
-
-				<CardDivider />
-				<FontSizePicker
-					fontSizes={fontSizes}
-					value={titleSize}
-					onChange={(v) => {
-						setAttributes({
-							titleSize:
-								Number(v) ||
-								Number(getDefaultAttributeValue(blockAttributes, "titleSize")),
-						});
-					}}
-					__nextHasNoMarginBottom
-				/>
-
-				<CardDivider />
-				<LineHeightControl
-					__unstableInputWidth="120px"
-					value={titleLineHeight}
-					onChange={(v: number) => {
-						setAttributes({
-							titleLineHeight: v,
-						});
-					}}
-					__nextHasNoMarginBottom
-				/>
-
-				<CardDivider />
-				<RangeControl
-					label={__("Title weight", "wp-custom-blocks")}
-					value={titleWeight}
-					onChange={(v) =>
-						setAttributes({
-							titleWeight: v,
-						})
-					}
-					step={100}
-					min={100}
-					max={900}
-					allowReset
-					resetFallbackValue={Number(
-						getDefaultAttributeValue(blockAttributes, "titleWeight")
-					)}
-				/>
-
-				<CardDivider />
-				<SelectControl
-					label={__("Select title transform", "wp-custom-blocks")}
-					value={titleTransform}
-					options={transforms}
-					onChange={(v: string) => {
-						setAttributes({
-							titleTransform: v,
-						});
-					}}
-				/>
-
-				<PanelBody
-					title={__(
-						"Mobile title settings (display width < 769px)",
-						"wp-custom-blocks"
-					)}
-					initialOpen={false}
-				>
-					<FontSizePicker
-						fontSizes={fontSizes}
-						value={titleMobileSize}
-						onChange={(v) => {
-							setAttributes({
-								titleMobileSize:
-									Number(v) ||
-									Number(
-										getDefaultAttributeValue(blockAttributes, "titleMobileSize")
-									),
-							});
-						}}
-						__nextHasNoMarginBottom
-					/>
-
-					<CardDivider />
-					<LineHeightControl
-						__nextHasNoMarginBottom
-						__unstableInputWidth="120px"
-						value={titleMobileLineHeight}
-						onChange={(v: number) => {
-							setAttributes({
-								titleMobileLineHeight: v,
-							});
-						}}
-					/>
-				</PanelBody>
-			</PanelBody>
-
-			<PanelBody
-				title={__("Link settings", "wp-custom-blocks")}
-				initialOpen={linkPanel}
-				opened={linkPanel}
-				onToggle={() => showLinkPanel(!linkPanel)}
-			>
-				<ColorControl
-					name="linkTextColor"
-					label={__("Link text color", "wp-custom-blocks")}
-					disabled={!isWithLinkBlock}
-					{...colorControlProps}
-				/>
-
-				<CardDivider />
-				<ColorControl
-					name="linkBtnArrowColor"
-					label={__("Link button arrow color", "wp-custom-blocks")}
-					disabled={!isWithLinkBlock}
-					{...colorControlProps}
-				/>
-
-				<CardDivider />
-				<ColorControl
-					name="linkBackgroundBtnColor"
-					label={__("Link background button color", "wp-custom-blocks")}
-					disabled={!isWithLinkBlock}
-					{...colorControlProps}
-				/>
-			</PanelBody>
-
-			<PanelBody
-				title={__("Slider settings", "wp-custom-blocks")}
-				initialOpen={sliderPanel}
-				opened={sliderPanel}
-				onToggle={() => showSliderPanel(!sliderPanel)}
-			>
+			<PanelBody title={__("Slider settings", "wp-custom-blocks")} initialOpen>
 				<ToggleControl
 					label={__("Slider loop", "wp-custom-blocks")}
 					checked={isLoopSlider}
-					disabled={!isEnableSlider}
 					onChange={() => setAttributes({ isLoopSlider: !isLoopSlider })}
 				/>
 
@@ -312,7 +149,6 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 				<ToggleControl
 					label={__("Disable slider autoplay", "wp-custom-blocks")}
 					checked={isDisableAutoplay}
-					disabled={!isEnableSlider}
 					onChange={() =>
 						setAttributes({ isDisableAutoplay: !isDisableAutoplay })
 					}
@@ -327,7 +163,7 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 							sliderAutoplayDelay: v,
 						})
 					}
-					disabled={!isEnableSlider || isDisableAutoplay}
+					disabled={isDisableAutoplay}
 					step={500}
 					min={0}
 					max={30000}
@@ -349,10 +185,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								sliderMobileSlidesPerView: v,
 							})
 						}
-						disabled={!isEnableSlider}
-						step={1}
+						step={0.5}
 						min={1}
 						max={10}
+						disabled={Boolean(isMobileDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(
@@ -371,10 +207,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								sliderTabletSlidesPerView: v,
 							})
 						}
-						disabled={!isEnableSlider}
-						step={1}
+						step={0.5}
 						min={1}
 						max={10}
+						disabled={Boolean(isTabletDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(
@@ -393,10 +229,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								sliderLaptopSlidesPerView: v,
 							})
 						}
-						disabled={!isEnableSlider}
-						step={1}
+						step={0.5}
 						min={1}
 						max={10}
+						disabled={Boolean(isLaptopDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(
@@ -415,10 +251,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								sliderDesktopSlidesPerView: v,
 							})
 						}
-						disabled={!isEnableSlider}
-						step={1}
+						step={0.5}
 						min={1}
 						max={10}
+						disabled={Boolean(isDesktopDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(
@@ -441,10 +277,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								sliderMobileSpaceBetween: v,
 							})
 						}
-						disabled={!isEnableSlider}
 						step={2}
 						min={4}
 						max={64}
+						disabled={Boolean(isMobileDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={baseSpaceBetween}
 					/>
@@ -458,10 +294,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								sliderTabletSpaceBetween: v,
 							})
 						}
-						disabled={!isEnableSlider}
 						step={2}
 						min={4}
 						max={64}
+						disabled={Boolean(isTabletDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={baseSpaceBetween}
 					/>
@@ -475,10 +311,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								sliderLaptopSpaceBetween: v,
 							})
 						}
-						disabled={!isEnableSlider}
 						step={2}
 						min={4}
 						max={64}
+						disabled={Boolean(isLaptopDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={baseSpaceBetween}
 					/>
@@ -492,10 +328,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								sliderDesktopSpaceBetween: v,
 							})
 						}
-						disabled={!isEnableSlider}
 						step={2}
 						min={4}
 						max={64}
+						disabled={Boolean(isDesktopDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={baseSpaceBetween}
 					/>
@@ -513,10 +349,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								mobileHeight: v,
 							})
 						}
-						disabled={!isEnableSlider}
 						step={1}
 						min={2}
 						max={1000}
+						disabled={Boolean(isMobileDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "mobileHeight")
@@ -532,10 +368,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								tabletHeight: v,
 							})
 						}
-						disabled={!isEnableSlider}
 						step={1}
 						min={2}
 						max={1000}
+						disabled={Boolean(isTabletDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "tabletHeight")
@@ -551,10 +387,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								laptopHeight: v,
 							})
 						}
-						disabled={!isEnableSlider}
 						step={1}
 						min={2}
 						max={1000}
+						disabled={Boolean(isLaptopDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "laptopHeight")
@@ -570,10 +406,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								desktopHeight: v,
 							})
 						}
-						disabled={!isEnableSlider}
 						step={1}
 						min={2}
 						max={1000}
+						disabled={Boolean(isDesktopDisableSliderBreakpoint)}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "desktopHeight")
@@ -586,7 +422,6 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 				title={__("Without slider settings", "wp-custom-blocks")}
 				initialOpen={withoutSliderPanel}
 				opened={withoutSliderPanel}
-				onToggle={() => showWithoutSliderPanel(!withoutSliderPanel)}
 			>
 				<PanelBody
 					title={__("Items count", "wp-custom-blocks")}
@@ -600,10 +435,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								mobileItemsCount: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={1}
 						min={1}
 						max={12}
+						disabled={!isMobileDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "mobileItemsCount")
@@ -619,10 +454,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								tabletItemsCount: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={1}
 						min={1}
 						max={12}
+						disabled={!isTabletDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "tabletItemsCount")
@@ -638,10 +473,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								laptopItemsCount: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={1}
 						min={1}
 						max={12}
+						disabled={!isLaptopDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "laptopItemsCount")
@@ -657,10 +492,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								desktopItemsCount: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={1}
 						min={1}
 						max={12}
+						disabled={!isDesktopDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "desktopItemsCount")
@@ -680,10 +515,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								mobileSpaceBetween: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={2}
 						min={4}
 						max={64}
+						disabled={!isMobileDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={baseSpaceBetween}
 					/>
@@ -697,10 +532,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								tabletSpaceBetween: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={2}
 						min={4}
 						max={64}
+						disabled={!isTabletDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={baseSpaceBetween}
 					/>
@@ -714,10 +549,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								laptopSpaceBetween: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={2}
 						min={4}
 						max={64}
+						disabled={!isLaptopDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={baseSpaceBetween}
 					/>
@@ -731,10 +566,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								desktopSpaceBetween: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={2}
 						min={4}
 						max={64}
+						disabled={!isDesktopDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={baseSpaceBetween}
 					/>
@@ -749,13 +584,13 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 						value={mobileItemHeight}
 						onChange={(v) =>
 							setAttributes({
-								mobileItemHeight: v,
+								tabletItemHeight: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={1}
 						min={2}
 						max={1000}
+						disabled={!isMobileDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "mobileItemHeight")
@@ -771,10 +606,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								tabletItemHeight: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={1}
 						min={2}
 						max={1000}
+						disabled={!isTabletDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "tabletItemHeight")
@@ -790,10 +625,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								laptopItemHeight: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={1}
 						min={2}
 						max={1000}
+						disabled={!isLaptopDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "laptopItemHeight")
@@ -809,10 +644,10 @@ const Inspector: FC<IInspectorProps<ITemplateBlockAttributes>> = ({
 								desktopItemHeight: v,
 							})
 						}
-						disabled={isEnableSlider}
 						step={1}
 						min={2}
 						max={1000}
+						disabled={!isDesktopDisableSliderBreakpoint}
 						allowReset
 						resetFallbackValue={Number(
 							getDefaultAttributeValue(blockAttributes, "desktopItemHeight")

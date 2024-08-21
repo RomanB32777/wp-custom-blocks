@@ -17,6 +17,7 @@ declare const PRIMARY_COLOR: string;
 declare const PRIMARY_GRIZZLY_COLOR: string;
 declare const PRIMARY_LIGHT_COLOR: string;
 declare const PRIMARY_BRIGHTEST_COLOR: string;
+declare const PRIMARY_DARK_COLOR: string;
 
 declare const SECONDARY_COLOR: string;
 declare const SECONDARY_LIGHT_COLOR: string;

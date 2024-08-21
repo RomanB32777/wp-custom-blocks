@@ -12,6 +12,8 @@ export interface IAdvantageElementAttributes
 	titleColor: string;
 	backgroundColor: string;
 	image: IImageAttributes;
+	horizontalPosition: number;
+	verticalPosition: number;
 }
 
 export const attributes: TBlockAttributes<IAdvantageElementAttributes> = {
@@ -25,10 +27,18 @@ export const attributes: TBlockAttributes<IAdvantageElementAttributes> = {
 	},
 	backgroundColor: {
 		type: "string",
-		default: colors.primary.brightest,
+		default: colors.primary.light,
 	},
 	image: {
 		type: "object",
 		default: {},
+	},
+	horizontalPosition: {
+		type: "number",
+		default: 0,
+	},
+	verticalPosition: {
+		type: "number",
+		default: 0,
 	},
 };

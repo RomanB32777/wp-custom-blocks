@@ -21,14 +21,10 @@ const Edit: FC<BlockEditProps<IImageElementAttributes>> = ({
 	setAttributes,
 	clientId,
 }) => {
-	const { image, uniqueId, isSlideItem, modificatorClass } = attributes;
+	const { image, uniqueId } = attributes;
 
 	const blockProps = useBlockProps({
-		className: classNames(templateSliderItemName, modificatorClass, {
-			"h-full": isSlideItem,
-			"w-full": !isSlideItem,
-			[uniqueId]: !isSlideItem,
-		}),
+		className: classNames(templateSliderItemName, uniqueId, "h-full  w-full"),
 		style: { margin: 0 },
 	});
 

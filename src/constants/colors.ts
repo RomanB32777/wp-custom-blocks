@@ -4,6 +4,8 @@ export const colors = {
 		grizzly: PRIMARY_GRIZZLY_COLOR || "#a5d6c6",
 		light: PRIMARY_LIGHT_COLOR || "#ceede3",
 		brightest: PRIMARY_BRIGHTEST_COLOR || "#f1fbf8",
+		dark: PRIMARY_DARK_COLOR || "#106c77",
+		text: "#324b4f",
 	},
 	secondary: {
 		DEFAULT: SECONDARY_COLOR || "#f9b002",

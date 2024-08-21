@@ -3,11 +3,12 @@ import React, { type FC } from "react";
  * WordPress dependencies
  */
 import { InspectorControls } from "@wordpress/block-editor";
-import { CardDivider, PanelBody } from "@wordpress/components";
+import { CardDivider, PanelBody, RangeControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 import { ColorControl } from "@/controls";
 import type { IInspectorProps } from "@/types";
+import { getDefaultAttributeValue } from "@/utils/default-attribute-value";
 
 import {
 	attributes as defaultAttributes,
@@ -18,6 +19,8 @@ const Inspector: FC<IInspectorProps<ICardElementAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
+	const { horizontalPosition, verticalPosition } = attributes;
+
 	const colorControlProps = {
 		attributes,
 		defaultAttributes,
@@ -31,37 +34,52 @@ const Inspector: FC<IInspectorProps<ICardElementAttributes>> = ({
 				initialOpen={true}
 			>
 				<ColorControl
+					name="backgroundColor"
+					label={__("Background Color", "wp-custom-blocks")}
+					{...colorControlProps}
+				/>
+
+				<CardDivider />
+				<ColorControl
 					name="titleColor"
 					label={__("Title color", "wp-custom-blocks")}
 					{...colorControlProps}
 				/>
 
 				<CardDivider />
-				<ColorControl
-					name="categoryColor"
-					label={__("Category color", "wp-custom-blocks")}
-					{...colorControlProps}
+				<RangeControl
+					label={__("Horizontal position", "wp-custom-blocks")}
+					value={horizontalPosition}
+					onChange={(v) =>
+						setAttributes({
+							horizontalPosition: v,
+						})
+					}
+					step={1}
+					min={-200}
+					max={200}
+					allowReset
+					resetFallbackValue={Number(
+						getDefaultAttributeValue(defaultAttributes, "horizontalPosition")
+					)}
 				/>
 
 				<CardDivider />
-				<ColorControl
-					name="buttonColor"
-					label={__("Button color", "wp-custom-blocks")}
-					{...colorControlProps}
-				/>
-
-				<CardDivider />
-				<ColorControl
-					name="buttonTextColor"
-					label={__("Button text color", "wp-custom-blocks")}
-					{...colorControlProps}
-				/>
-
-				<CardDivider />
-				<ColorControl
-					name="reviewColor"
-					label={__("Review color", "wp-custom-blocks")}
-					{...colorControlProps}
+				<RangeControl
+					label={__("Vertical position", "wp-custom-blocks")}
+					value={verticalPosition}
+					onChange={(v) =>
+						setAttributes({
+							verticalPosition: v,
+						})
+					}
+					step={1}
+					min={-200}
+					max={200}
+					allowReset
+					resetFallbackValue={Number(
+						getDefaultAttributeValue(defaultAttributes, "verticalPosition")
+					)}
 				/>
 			</PanelBody>
 		</InspectorControls>

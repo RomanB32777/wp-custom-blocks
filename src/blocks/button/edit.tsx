@@ -18,18 +18,16 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const {
-		link,
-
-		buttonText,
-		buttonTextColor,
-		buttonColor,
-	} = attributes;
+	const { link, buttonText, buttonTextColor, buttonColor, buttonAlign } =
+		attributes;
 
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
-		className: "item-button font-inter w-full text-center",
+		className: "item-button font-inter w-full",
+		style: {
+			textAlign: buttonAlign,
+		},
 	});
 
 	return (
