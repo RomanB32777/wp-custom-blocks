@@ -20,8 +20,8 @@ const Save: FC<BlockSaveProps<IBorderBlockAttributes>> = ({ attributes }) => {
 		blockHeight,
 		text,
 		textColor,
-		bigText,
-		bigTextColor,
+		bigValue,
+		bigValueColor,
 		icon,
 		horizontalPosition,
 		verticalPosition,
@@ -69,9 +69,9 @@ const Save: FC<BlockSaveProps<IBorderBlockAttributes>> = ({ attributes }) => {
 					<RichText.Content
 						tagName="span"
 						className="big-value stroke-number absolute font-black tracking-[-5px] !leading-[5rem]"
-						value={bigText}
+						value={bigValue}
 						style={{
-							color: bigTextColor,
+							color: bigValueColor,
 							right: horizontalPosition,
 							bottom: verticalPosition,
 						}}

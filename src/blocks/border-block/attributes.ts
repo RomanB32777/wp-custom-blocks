@@ -14,8 +14,8 @@ export interface IBorderBlockAttributes {
 	textColor: string;
 	mobileTextFontSize: number;
 	laptopTextFontSize: number;
-	bigText: string;
-	bigTextColor: string;
+	bigValue: string;
+	bigValueColor: string;
 	mobileBigValueFontSize: number;
 	laptopBigValueFontSize: number;
 	mobileIconWidth: number;
@@ -70,10 +70,10 @@ export const attributes: TBlockAttributes<IBorderBlockAttributes> = {
 		type: "number",
 		default: 20,
 	},
-	bigText: {
+	bigValue: {
 		type: "string",
 	},
-	bigTextColor: {
+	bigValueColor: {
 		type: "string",
 		default: colors.white.DEFAULT,
 	},

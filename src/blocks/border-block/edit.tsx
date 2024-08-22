@@ -34,8 +34,8 @@ const Edit: FC<BlockEditProps<IBorderBlockAttributes>> = ({
 		textColor,
 		mobileTextFontSize,
 		laptopTextFontSize,
-		bigText,
-		bigTextColor,
+		bigValue,
+		bigValueColor,
 		mobileBigValueFontSize,
 		laptopBigValueFontSize,
 		icon,
@@ -185,11 +185,11 @@ const Edit: FC<BlockEditProps<IBorderBlockAttributes>> = ({
 						<RichText
 							tagName="span"
 							className="big-value stroke-number absolute font-black tracking-[-5px] !leading-[5rem]"
-							value={bigText}
-							onChange={(v) => setAttributes({ bigText: v })}
-							placeholder={__("Big text..", "wp-custom-blocks")}
+							value={bigValue}
+							onChange={(v) => setAttributes({ bigValue: v })}
+							placeholder={__("Big value text..", "wp-custom-blocks")}
 							style={{
-								color: bigTextColor,
+								color: bigValueColor,
 								right: horizontalPosition,
 								bottom: verticalPosition,
 							}}

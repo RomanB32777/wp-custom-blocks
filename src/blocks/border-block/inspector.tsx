@@ -31,6 +31,7 @@ const Inspector: FC<IInspectorProps<IBorderBlockAttributes>> = ({
 		laptopIconWidth,
 		horizontalPosition,
 		verticalPosition,
+		icon,
 	} = attributes;
 
 	const colorControlProps = {
@@ -154,8 +155,9 @@ const Inspector: FC<IInspectorProps<IBorderBlockAttributes>> = ({
 
 				<CardDivider />
 				<ColorControl
-					name="bigTextColor"
-					label={__("Big text color", "wp-custom-blocks")}
+					name="bigValueColor"
+					disabled={Boolean(icon.id)}
+					label={__("Big value color", "wp-custom-blocks")}
 					{...colorControlProps}
 				/>
 
@@ -171,6 +173,7 @@ const Inspector: FC<IInspectorProps<IBorderBlockAttributes>> = ({
 					step={1}
 					min={2}
 					max={300}
+					disabled={Boolean(icon.id)}
 					allowReset
 					resetFallbackValue={Number(
 						getDefaultAttributeValue(
@@ -192,6 +195,7 @@ const Inspector: FC<IInspectorProps<IBorderBlockAttributes>> = ({
 					step={1}
 					min={2}
 					max={300}
+					disabled={Boolean(icon.id)}
 					allowReset
 					resetFallbackValue={Number(
 						getDefaultAttributeValue(
@@ -213,6 +217,7 @@ const Inspector: FC<IInspectorProps<IBorderBlockAttributes>> = ({
 					step={1}
 					min={2}
 					max={300}
+					disabled={!icon.id}
 					allowReset
 					resetFallbackValue={Number(
 						getDefaultAttributeValue(defaultAttributes, "mobileIconWidth")
@@ -231,6 +236,7 @@ const Inspector: FC<IInspectorProps<IBorderBlockAttributes>> = ({
 					step={1}
 					min={2}
 					max={300}
+					disabled={!icon.id}
 					allowReset
 					resetFallbackValue={Number(
 						getDefaultAttributeValue(defaultAttributes, "laptopIconWidth")
