@@ -433,15 +433,13 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 
 			<Fragment>
 				<div {...blockProps}>
-					<div className="my-10 sm:my-20">
-						<div className="relative mb-6">
-							<div className="overflow-hidden pt-6 pb-14 lg:pt-11">
-								<div
-									className={classNames("relative", sliderElementName)}
-									id={uniqueId}
-								>
-									<div {...innerBlocksProps} />
-								</div>
+					<div className="relative mb-6">
+						<div className="overflow-hidden">
+							<div
+								className={classNames("relative", sliderElementName)}
+								id={uniqueId}
+							>
+								<div {...innerBlocksProps} />
 							</div>
 						</div>
 					</div>

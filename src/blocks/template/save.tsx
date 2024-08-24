@@ -50,21 +50,19 @@ const Save: FC<BlockSaveProps<ITemplateBlockAttributes>> = ({ attributes }) => {
 
 	return (
 		<div {...blockProps}>
-			<div className="my-10 sm:my-20">
-				<div className="relative">
-					<div className="overflow-hidden pt-6 pb-14 lg:pt-11">
+			<div className="relative">
+				<div className="overflow-hidden">
+					<div
+						className={classNames("relative", sliderElementName)}
+						id={uniqueId}
+						{...sliderAttributes}
+					>
 						<div
-							className={classNames("relative", sliderElementName)}
-							id={uniqueId}
-							{...sliderAttributes}
+							className={classNames("swiper-wrapper", {
+								"inner-wrapper": isExistSliderDisableBreakpoint,
+							})}
 						>
-							<div
-								className={classNames("swiper-wrapper", {
-									"inner-wrapper": isExistSliderDisableBreakpoint,
-								})}
-							>
-								<InnerBlocks.Content />
-							</div>
+							<InnerBlocks.Content />
 						</div>
 					</div>
 				</div>
