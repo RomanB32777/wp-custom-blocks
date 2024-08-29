@@ -35,7 +35,7 @@ const Save: FC<BlockSaveProps<IBorderBlockAttributes>> = ({ attributes }) => {
 		<div {...blockProps}>
 			<div className="relative overflow-hidden" style={{ height: blockHeight }}>
 				<div
-					className="relative p-6 h-full"
+					className="relative p-4 h-full"
 					style={{ backgroundColor, borderColor, borderRadius, borderWidth }}
 				>
 					<RichText.Content

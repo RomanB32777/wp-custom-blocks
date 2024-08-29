@@ -133,19 +133,19 @@ export const blockAttributes: TBlockAttributes<ITemplateBlockAttributes> = {
 	// slider height
 	mobileHeight: {
 		type: "number",
-		default: 384,
+		default: 354,
 	},
 	tabletHeight: {
 		type: "number",
-		default: 384,
+		default: 354,
 	},
 	laptopHeight: {
 		type: "number",
-		default: 384,
+		default: 354,
 	},
 	desktopHeight: {
 		type: "number",
-		default: 384,
+		default: 354,
 	},
 	// slides per view
 	sliderDesktopSlidesPerView: {

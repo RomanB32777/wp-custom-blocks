@@ -1,6 +1,6 @@
 export const colors = {
 	primary: {
-		DEFAULT: PRIMARY_COLOR || "#17946d",
+		DEFAULT: PRIMARY_COLOR || "#1fb1c1",
 		grizzly: PRIMARY_GRIZZLY_COLOR || "#a5d6c6",
 		light: PRIMARY_LIGHT_COLOR || "#ceede3",
 		brightest: PRIMARY_BRIGHTEST_COLOR || "#f1fbf8",

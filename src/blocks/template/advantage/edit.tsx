@@ -77,7 +77,7 @@ const Edit: FC<BlockEditProps<IAdvantageElementAttributes>> = ({
 			<div {...blockProps}>
 				<div
 					className={classNames(
-						"relative w-full h-full overflow-hidden p-8",
+						"relative w-full h-full overflow-hidden p-6",
 						templateRounded
 					)}
 					style={{ backgroundColor }}
@@ -102,7 +102,7 @@ const Edit: FC<BlockEditProps<IAdvantageElementAttributes>> = ({
 
 					<RichText
 						tagName="p"
-						className="relative font-medium text-xl"
+						className="relative font-medium text-lg"
 						value={title}
 						onChange={(v) => setAttributes({ title: v })}
 						placeholder={__("Title..", "wp-custom-blocks")}

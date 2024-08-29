@@ -23,7 +23,7 @@ export const COLORS = [
 	},
 	{
 		name: __("Blue", "wp-custom-blocks"),
-		color: "#3070e8",
+		color: "#1fb1c1",
 	},
 	{
 		name: __("Color", "wp-custom-blocks"),

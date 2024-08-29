@@ -128,7 +128,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 			<div {...blockProps}>
 				<div
 					className={classNames(
-						"hover-block relative w-full h-full overflow-hidden p-8",
+						"hover-block relative w-full h-full overflow-hidden p-6",
 						templateRounded
 					)}
 					style={{ backgroundColor }}
@@ -154,7 +154,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 					<div className="relative flex flex-col h-full gap-y-8 text-white xl:w-4/6 xl:!gap-y-3">
 						<RichText
 							tagName="h4"
-							className="relative font-bold text-xl xl:!text-3xl"
+							className="relative font-bold text-lg xl:!text-xl"
 							value={title}
 							onChange={(v) => setAttributes({ title: v })}
 							placeholder={__("Title..", "wp-custom-blocks")}
@@ -164,7 +164,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 						<div className="flex flex-col flex-1 justify-between gap-y-8">
 							<RichText
 								tagName="p"
-								className="hidden text-xl xl:!block"
+								className="hidden text-lg xl:!block"
 								value={description}
 								onChange={(v) => setAttributes({ description: v })}
 								placeholder={__("Description..", "wp-custom-blocks")}

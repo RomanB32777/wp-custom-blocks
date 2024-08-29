@@ -33,7 +33,7 @@ const Save: FC<BlockSaveProps<IAdvantageElementAttributes>> = ({
 		<div {...blockProps}>
 			<div
 				className={classNames(
-					"relative w-full h-full overflow-hidden p-8",
+					"relative w-full h-full overflow-hidden p-6",
 					templateRounded
 				)}
 				style={{ backgroundColor }}
@@ -56,7 +56,7 @@ const Save: FC<BlockSaveProps<IAdvantageElementAttributes>> = ({
 
 				<RichText.Content
 					tagName="p"
-					className="elative font-medium text-xl"
+					className="elative font-medium text-lg"
 					value={title}
 					style={{ color: titleColor }}
 				/>

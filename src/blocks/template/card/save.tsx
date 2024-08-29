@@ -37,7 +37,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 				target={link.openInNewTab ? "_blank" : "_self"}
 				rel={link.openInNewTab ? "noopener noreferrer" : "noopener"}
 				className={classNames(
-					"hover-block relative overflow-hidden block h-full no-underline rounded-xl p-4 transition xl:!p-8",
+					"hover-block relative overflow-hidden block h-full no-underline rounded-xl p-4 transition xl:!p-6",
 					templateRounded
 				)}
 				style={{ backgroundColor }}
@@ -63,7 +63,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 				<div className="relative flex flex-col h-full gap-y-8 text-white xl:w-4/6 xl:!gap-y-3">
 					<RichText.Content
 						tagName="h4"
-						className="relative font-bold text-xl xl:!text-3xl"
+						className="relative font-bold text-lg xl:!text-xl"
 						value={title}
 						style={{ color: titleColor }}
 					/>
@@ -71,7 +71,7 @@ const Save: FC<BlockSaveProps<ICardElementAttributes>> = ({ attributes }) => {
 					<div className="flex flex-col flex-1 justify-between gap-y-8">
 						<RichText.Content
 							tagName="p"
-							className="hidden text-xl xl:!block"
+							className="hidden text-lg xl:!block"
 							value={description}
 							style={{ color: descriptionColor }}
 						/>

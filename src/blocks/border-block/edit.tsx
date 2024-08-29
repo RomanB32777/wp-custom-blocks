@@ -144,7 +144,7 @@ const Edit: FC<BlockEditProps<IBorderBlockAttributes>> = ({
 					style={{ height: blockHeight }}
 				>
 					<div
-						className="relative p-6 h-full"
+						className="relative p-4 h-full"
 						style={{
 							backgroundColor,
 							borderColor,
