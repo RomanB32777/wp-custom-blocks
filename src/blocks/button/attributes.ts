@@ -1,18 +1,16 @@
 import { colors } from "@/constants";
-import type { ILinkAttributes, TBlockAttributes } from "@/types";
-
-export enum EButtonAlign {
-	Left = "left",
-	Center = "center",
-	Right = "right",
-}
+import {
+	EHorizontalAlign,
+	type ILinkAttributes,
+	type TBlockAttributes,
+} from "@/types";
 
 export interface IButtonBlockAttributes {
 	link: ILinkAttributes;
 	buttonText: string;
 	buttonTextColor: string;
 	buttonColor: string;
-	buttonAlign: EButtonAlign;
+	buttonAlign: EHorizontalAlign;
 }
 
 export const attributes: TBlockAttributes<IButtonBlockAttributes> = {
@@ -36,6 +34,6 @@ export const attributes: TBlockAttributes<IButtonBlockAttributes> = {
 	},
 	buttonAlign: {
 		type: "string",
-		default: EButtonAlign.Center,
+		default: EHorizontalAlign.Center,
 	},
 };

@@ -12,7 +12,7 @@ import { breakpoints } from "@/constants";
 import { minifyCssStrings } from "@/utils/minify-css";
 
 import Inspector from "./inspector";
-import type { IIconLinksBlockAttributes } from "./attributes";
+import { justifyAlign, type IIconLinksBlockAttributes } from "./attributes";
 
 const allowedBlock = "wp-custom-blocks/icon-link";
 
@@ -30,8 +30,8 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 		mobilePaddingX,
 		mobilePaddingY,
 		borderRadius,
+		itemsHorizontalAlign,
 		itemsColor,
-		itemsTitleColor,
 		itemsWidth,
 		itemsHeight,
 		itemsPaddingX,
@@ -61,7 +61,10 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: "flex flex-wrap items-stretch",
+			className: classNames(
+				"flex flex-wrap items-stretch",
+				justifyAlign[itemsHorizontalAlign]
+			),
 			style: {
 				gap: spaceBetween,
 			},
@@ -83,7 +86,6 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 
 		.${uniqueId} .icon-link {
 			background-color: ${itemsColor};
-			color: ${itemsTitleColor} !important;
 			padding: ${itemsPaddingY}px ${itemsPaddingX}px;
 			border-width: ${itemsBorderWidth}px;
 			border-radius: ${itemsBorderRadius}px;

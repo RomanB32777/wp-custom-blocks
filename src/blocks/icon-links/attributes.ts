@@ -1,5 +1,5 @@
 import { colors } from "@/constants";
-import type { TBlockAttributes } from "@/types";
+import { EHorizontalAlign, type TBlockAttributes } from "@/types";
 
 export interface IIconLinksBlockAttributes {
 	uniqueId: string;
@@ -10,8 +10,8 @@ export interface IIconLinksBlockAttributes {
 	mobilePaddingX: number;
 	mobilePaddingY: number;
 	borderRadius: number;
+	itemsHorizontalAlign: EHorizontalAlign;
 	itemsColor: string;
-	itemsTitleColor: string;
 	itemsWidth: number;
 	itemsHeight: number;
 	itemsPaddingX: number;
@@ -22,6 +22,12 @@ export interface IIconLinksBlockAttributes {
 	spaceBetween: number;
 	isFillItemsWidth: boolean;
 }
+
+export const justifyAlign: Record<EHorizontalAlign, string> = {
+	[EHorizontalAlign.Left]: "justify-start",
+	[EHorizontalAlign.Center]: "justify-center",
+	[EHorizontalAlign.Right]: "justify-end",
+};
 
 export const attributes: TBlockAttributes<IIconLinksBlockAttributes> = {
 	uniqueId: {
@@ -54,13 +60,13 @@ export const attributes: TBlockAttributes<IIconLinksBlockAttributes> = {
 		type: "number",
 		default: 0,
 	},
+	itemsHorizontalAlign: {
+		type: "string",
+		default: EHorizontalAlign.Left,
+	},
 	itemsColor: {
 		type: "string",
 		default: colors.white.DEFAULT,
-	},
-	itemsTitleColor: {
-		type: "string",
-		default: colors.dark.DEFAULT,
 	},
 	itemsWidth: {
 		type: "number",

@@ -24,3 +24,9 @@ export interface IInspectorProps<T extends Record<keyof T, unknown>>
 }
 
 export type TBreakpoints = keyof typeof baseBreakpoints;
+
+export enum EHorizontalAlign {
+	Left = "left",
+	Center = "center",
+	Right = "right",
+}

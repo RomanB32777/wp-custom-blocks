@@ -7,13 +7,15 @@ import {
 	CardDivider,
 	PanelBody,
 	RangeControl,
+	SelectControl,
 	ToggleControl,
 } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
 import { TipResponsive } from "@/components";
+import { alignSelectItems } from "@/constants";
 import { ColorControl } from "@/controls";
-import type { IInspectorProps } from "@/types";
+import type { EHorizontalAlign, IInspectorProps } from "@/types";
 import { getDefaultAttributeValue } from "@/utils/default-attribute-value";
 
 import {
@@ -31,6 +33,7 @@ const Inspector: FC<IInspectorProps<IIconLinksBlockAttributes>> = ({
 		mobilePaddingX,
 		mobilePaddingY,
 		borderRadius,
+		itemsHorizontalAlign,
 		itemsWidth,
 		itemsHeight,
 		itemsPaddingX,
@@ -150,16 +153,21 @@ const Inspector: FC<IInspectorProps<IIconLinksBlockAttributes>> = ({
 			</PanelBody>
 
 			<PanelBody title={__("Items settings", "wp-custom-blocks")} initialOpen>
-				<ColorControl
-					name="itemsColor"
-					label={__("Items background color", "wp-custom-blocks")}
-					{...colorControlProps}
+				<SelectControl
+					label={__("Items horizontal align", "wp-custom-blocks")}
+					value={itemsHorizontalAlign}
+					options={alignSelectItems}
+					onChange={(v: EHorizontalAlign) => {
+						setAttributes({
+							itemsHorizontalAlign: v,
+						});
+					}}
 				/>
 
 				<CardDivider />
 				<ColorControl
-					name="itemsTitleColor"
-					label={__("Items title color", "wp-custom-blocks")}
+					name="itemsColor"
+					label={__("Items background color", "wp-custom-blocks")}
 					{...colorControlProps}
 				/>
 

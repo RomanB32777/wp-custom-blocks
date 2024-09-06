@@ -84,14 +84,14 @@ const Edit: FC<BlockEditProps<IAdvantageElementAttributes>> = ({
 				>
 					{image.url && (
 						<div
-							className="absolute w-full overflow-hidden rounded-xl h-full"
+							className="absolute overflow-hidden rounded-xl"
 							style={{
 								right: horizontalPosition,
 								bottom: verticalPosition,
 							}}
 						>
 							<img
-								className="!h-full !w-auto !max-w-fit object-cover object-center"
+								className="!h-full !w-auto !max-w-fit"
 								src={image.url}
 								alt={image.alt}
 								width={image.width}
@@ -102,7 +102,7 @@ const Edit: FC<BlockEditProps<IAdvantageElementAttributes>> = ({
 
 					<RichText
 						tagName="p"
-						className="relative font-medium text-lg"
+						className="relative font-medium text-lg xl:!text-base"
 						value={title}
 						onChange={(v) => setAttributes({ title: v })}
 						placeholder={__("Title..", "wp-custom-blocks")}

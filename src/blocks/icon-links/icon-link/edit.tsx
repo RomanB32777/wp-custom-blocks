@@ -4,7 +4,6 @@ import {
 	BlockControls,
 	MediaUpload,
 	MediaUploadCheck,
-	RichText,
 	useBlockProps,
 } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
@@ -21,7 +20,7 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 	setAttributes,
 	clientId,
 }) => {
-	const { uniqueId, image, link, title } = attributes;
+	const { uniqueId, image, link } = attributes;
 	const [linkPanel, showLinkPanel] = useState(false);
 
 	const blockProps = useBlockProps({
@@ -101,7 +100,7 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 				<div className="icon-image flex items-center justify-center">
 					<img
 						className={classNames(
-							"!h-full w-auto object-cover",
+							"!h-full w-auto object-contain",
 							image.url ? "w-auto" : "w-full bg-gray-200"
 						)}
 						src={image.url}
@@ -110,13 +109,6 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 						height={image.height}
 					/>
 				</div>
-				<RichText
-					tagName="p"
-					className="text-base font-medium mt-3 text-center"
-					value={title}
-					onChange={(v) => setAttributes({ title: v })}
-					placeholder={__("Icon title..", "wp-custom-blocks")}
-				/>
 			</div>
 		</Fragment>
 	);

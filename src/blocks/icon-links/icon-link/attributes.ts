@@ -8,7 +8,6 @@ export interface IIconLinkElementAttributes {
 	uniqueId: string;
 	image: IImageAttributes;
 	link: ILinkAttributes;
-	title: string;
 }
 
 export const attributes: TBlockAttributes<IIconLinkElementAttributes> = {
@@ -25,8 +24,5 @@ export const attributes: TBlockAttributes<IIconLinkElementAttributes> = {
 			url: "#",
 			openInNewTab: true,
 		},
-	},
-	title: {
-		type: "string",
 	},
 };

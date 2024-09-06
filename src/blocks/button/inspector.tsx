@@ -6,19 +6,14 @@ import { InspectorControls } from "@wordpress/block-editor";
 import { CardDivider, PanelBody, SelectControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 
+import { alignSelectItems } from "@/constants";
 import { ColorControl } from "@/controls";
-import type { IInspectorProps } from "@/types";
+import type { EHorizontalAlign, IInspectorProps } from "@/types";
 
 import {
 	attributes as defaultAttributes,
-	EButtonAlign,
 	type IButtonBlockAttributes,
 } from "./attributes";
-
-const alignSelectItems = Object.entries(EButtonAlign).map(([key, value]) => ({
-	value,
-	label: key,
-}));
 
 const Inspector: FC<IInspectorProps<IButtonBlockAttributes>> = ({
 	attributes,
@@ -50,10 +45,10 @@ const Inspector: FC<IInspectorProps<IButtonBlockAttributes>> = ({
 
 				<CardDivider />
 				<SelectControl
-					label={__("Buttom align", "wp-custom-blocks")}
+					label={__("Button align", "wp-custom-blocks")}
 					value={buttonAlign}
 					options={alignSelectItems}
-					onChange={(v: EButtonAlign) => {
+					onChange={(v: EHorizontalAlign) => {
 						setAttributes({
 							buttonAlign: v,
 						});

@@ -40,14 +40,14 @@ const Save: FC<BlockSaveProps<IAdvantageElementAttributes>> = ({
 			>
 				{image.url && (
 					<div
-						className="absolute w-full overflow-hidden rounded-xl h-full"
+						className="absolute overflow-hidden rounded-xl"
 						style={{
 							right: horizontalPosition,
 							bottom: verticalPosition,
 						}}
 					>
 						<img
-							className="h-full !max-w-fit object-cover object-center"
+							className="h-full !max-w-fit"
 							src={image.url}
 							alt={image.alt}
 						/>
@@ -56,7 +56,7 @@ const Save: FC<BlockSaveProps<IAdvantageElementAttributes>> = ({
 
 				<RichText.Content
 					tagName="p"
-					className="elative font-medium text-lg"
+					className="elative font-medium text-lg xl:!text-base"
 					value={title}
 					style={{ color: titleColor }}
 				/>

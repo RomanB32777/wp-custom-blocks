@@ -6,7 +6,7 @@ import classNames from "classnames";
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { RichText, useBlockProps } from "@wordpress/block-editor";
+import { useBlockProps } from "@wordpress/block-editor";
 import type { BlockSaveProps } from "@wordpress/blocks";
 
 import type { IIconLinkElementAttributes } from "./attributes";
@@ -14,7 +14,7 @@ import type { IIconLinkElementAttributes } from "./attributes";
 const Save: FC<BlockSaveProps<IIconLinkElementAttributes>> = ({
 	attributes,
 }) => {
-	const { uniqueId, image, link, title } = attributes;
+	const { uniqueId, image, link } = attributes;
 
 	if (!image.url) {
 		return null;
@@ -27,32 +27,32 @@ const Save: FC<BlockSaveProps<IIconLinkElementAttributes>> = ({
 		),
 	});
 
-	return (
-		<a
-			href={link.url}
-			target={link.openInNewTab ? "_blank" : "_self"}
-			rel={link.openInNewTab ? "noopener noreferrer" : "noopener"}
-			{...blockProps}
-		>
-			<div className="icon-image flex items-center justify-center">
-				<img
-					className="!h-full w-auto object-cover"
-					src={image.url}
-					alt={image.alt}
-					width={image.width}
-					height={image.height}
-				/>
-			</div>
-
-			{title && (
-				<RichText.Content
-					tagName="p"
-					className="text-base font-medium mt-3 text-center"
-					value={title}
-				/>
-			)}
-		</a>
+	const baseComponent = (
+		<div className="icon-image flex items-center justify-center">
+			<img
+				className="!h-full w-auto object-contain"
+				src={image.url}
+				alt={image.alt}
+				width={image.width}
+				height={image.height}
+			/>
+		</div>
 	);
+
+	if (link.url && link.url.length > 1) {
+		return (
+			<a
+				href={link.url}
+				target={link.openInNewTab ? "_blank" : "_self"}
+				rel={link.openInNewTab ? "noopener noreferrer" : "noopener"}
+				{...blockProps}
+			>
+				{baseComponent}
+			</a>
+		);
+	}
+
+	return <span {...blockProps}>{baseComponent}</span>;
 };
 
 export default Save;
