@@ -53,12 +53,6 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 	`;
 
 	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({ blockStyle: blockStyleCss });
-		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
-
-	useEffect(() => {
 		if (!uniqueId) {
 			setAttributes({
 				uniqueId: "card-" + clientId.slice(0, 8),
@@ -66,11 +60,24 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 		}
 	}, [clientId, setAttributes, uniqueId]);
 
+	const handleChangeAttributes = (attrs: Partial<ICardElementAttributes>) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
+		}
+
+		setAttributes(attrs);
+	};
+
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<BlockControls controls={undefined}>
 				<ToolbarGroup>

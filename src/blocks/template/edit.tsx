@@ -406,45 +406,42 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 			`
 		: "";
 
-	useEffect(() => {
-		const newStyleCss = `
+	const handleChangeAttributes = (attrs: Partial<ITemplateBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(`
 			${blockStyleCss}
 			${blockSaveStyleCss}
 			${sliderResponsiveDisable}
-		`;
+		`);
 
-		if (JSON.stringify(blockStyle) !== JSON.stringify(newStyleCss)) {
-			setAttributes({ blockStyle: newStyleCss });
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [
-		blockStyle,
-		blockStyleCss,
-		blockSaveStyleCss,
-		sliderResponsiveDisable,
-		setAttributes,
-	]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
-			<style>{`${minifyCssStrings(blockEditStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
+			<style>{blockEditStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
-			<Fragment>
-				<div {...blockProps}>
-					<div className="relative mb-6">
-						<div className="overflow-hidden">
-							<div
-								className={classNames("relative", sliderElementName)}
-								id={uniqueId}
-							>
-								<div {...innerBlocksProps} />
-							</div>
+			<div {...blockProps}>
+				<div className="relative mb-6">
+					<div className="overflow-hidden">
+						<div
+							className={classNames("relative", sliderElementName)}
+							id={uniqueId}
+						>
+							<div {...innerBlocksProps} />
 						</div>
 					</div>
 				</div>
-			</Fragment>
+			</div>
 		</Fragment>
 	);
 };

@@ -100,17 +100,24 @@ const Edit: FC<BlockEditProps<IBorderBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({ blockStyle: blockStyleCss });
+	const handleChangeAttributes = (attrs: Partial<IBorderBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<BlockControls controls={undefined}>
 				<ToolbarGroup>
@@ -123,16 +130,14 @@ const Edit: FC<BlockEditProps<IBorderBlockAttributes>> = ({
 							}}
 							allowedTypes={["image"]}
 							value={icon.id}
-							render={({ open }) => {
-								return (
-									<ToolbarButton
-										label={__("Edit icon", "wp-custom-blocks")}
-										onClick={open}
-										icon="format-image"
-										placeholder={__("Edit icon", "wp-custom-blocks")}
-									/>
-								);
-							}}
+							render={({ open }) => (
+								<ToolbarButton
+									label={__("Edit icon", "wp-custom-blocks")}
+									onClick={open}
+									icon="format-image"
+									placeholder={__("Edit icon", "wp-custom-blocks")}
+								/>
+							)}
 						/>
 					</MediaUploadCheck>
 				</ToolbarGroup>

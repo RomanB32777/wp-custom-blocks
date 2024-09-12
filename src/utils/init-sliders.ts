@@ -97,7 +97,9 @@ export const initSliders = (swiperPropsOptions: SwiperOptions = {}) => {
 		swipers = swipers.filter((item) => !item.destroyed);
 
 		if (breakpoint.matches) {
-			const currSwiper = swipers.find((swiper) => swiper?.el.id === slider.id);
+			const currSwiper = swipers.find(
+				(swiper) => swiper?.el?.id === slider?.id
+			);
 
 			currSwiper?.destroy();
 		} else {
@@ -108,9 +110,7 @@ export const initSliders = (swiperPropsOptions: SwiperOptions = {}) => {
 	for (let i = 0; i < sliders.length; i++) {
 		const slider = sliders[i];
 
-		const { id } = slider;
-
-		if (!id) {
+		if (!slider?.id) {
 			continue;
 		}
 
