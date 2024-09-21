@@ -29,7 +29,7 @@ export const attributes: TBlockAttributes<IBorderBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	icon: {
 		type: "object",

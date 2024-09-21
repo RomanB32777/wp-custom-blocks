@@ -51,7 +51,7 @@ export const blockAttributes: TBlockAttributes<ITemplateBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	// slider
 	isLoopSlider: {
@@ -191,6 +191,6 @@ export const elementAttributes: TBlockAttributes<ITemplateElementAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 };
