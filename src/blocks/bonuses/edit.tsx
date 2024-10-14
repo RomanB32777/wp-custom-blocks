@@ -56,6 +56,8 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 
 	const [linkPanel, showLinkPanel] = useState(false);
 
+	const handleShowLinkPanel = () => showLinkPanel((prev) => !prev);
+
 	const blockProps = useBlockProps({
 		className: classNames(uniqueId, "wp-custom-blocks-bonuses"),
 	});
@@ -185,24 +187,31 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({ blockStyle: blockStyleCss });
+	const handleChangeAttributes = (attrs: Partial<IBonusesBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<BlockControls controls={undefined}>
 				<Fragment>
 					<ToolbarGroup>
 						<ToolbarButton
 							label={__("Add Link", "wp-custom-blocks")}
-							onClick={() => showLinkPanel(true)}
+							onClick={handleShowLinkPanel}
 							icon="admin-links"
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
@@ -210,7 +219,7 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 					{linkPanel && (
 						<Popover
 							position="bottom right"
-							onFocusOutside={() => showLinkPanel(false)}
+							onFocusOutside={handleShowLinkPanel}
 							offset={5}
 						>
 							<LinkControl

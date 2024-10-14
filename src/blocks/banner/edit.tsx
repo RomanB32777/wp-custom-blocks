@@ -57,6 +57,8 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 	const [linkPanel, showLinkPanel] = useState(false);
 	const uniqKeys = useRef(new Set(payments.map((payment) => payment.id)));
 
+	const handleShowLinkPanel = () => showLinkPanel((prev) => !prev);
+
 	const childBlocks =
 		select("core/block-editor").getBlocksByClientId(clientId)?.[0]?.innerBlocks;
 
@@ -139,17 +141,24 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({ blockStyle: blockStyleCss });
+	const handleChangeAttributes = (attrs: Partial<IBannerBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			{logo.id && (
 				<BlockControls controls={[]}>
@@ -163,16 +172,14 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 								}
 								allowedTypes={["image"]}
 								value={logo.id}
-								render={({ open }) => {
-									return (
-										<ToolbarButton
-											label={__("Edit Logo", "wp-custom-blocks")}
-											placeholder={__("Edit Logo", "wp-custom-blocks")}
-											onClick={open}
-											icon="format-image"
-										/>
-									);
-								}}
+								render={({ open }) => (
+									<ToolbarButton
+										label={__("Edit Logo", "wp-custom-blocks")}
+										placeholder={__("Edit Logo", "wp-custom-blocks")}
+										onClick={open}
+										icon="format-image"
+									/>
+								)}
 							/>
 						</MediaUploadCheck>
 					</ToolbarGroup>
@@ -184,7 +191,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 					<ToolbarButton
 						label={__("Add Link", "wp-custom-blocks")}
 						placeholder={__("Add Link", "wp-custom-blocks")}
-						onClick={() => showLinkPanel(true)}
+						onClick={handleShowLinkPanel}
 						icon="admin-links"
 					/>
 				</ToolbarGroup>
@@ -192,7 +199,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 				{linkPanel && (
 					<Popover
 						position="bottom right"
-						onFocusOutside={() => showLinkPanel(false)}
+						onFocusOutside={handleShowLinkPanel}
 						offset={5}
 					>
 						<LinkControl

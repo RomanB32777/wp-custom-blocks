@@ -35,7 +35,7 @@ export const attributes: TBlockAttributes<IBonusesBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	buttonText: {
 		type: "string",

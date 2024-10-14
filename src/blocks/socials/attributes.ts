@@ -15,7 +15,7 @@ export const attributes: TBlockAttributes<ISocialsBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	itemsColor: {
 		type: "string",

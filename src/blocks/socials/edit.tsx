@@ -66,17 +66,24 @@ const Edit: FC<BlockEditProps<ISocialsBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({ blockStyle: blockStyleCss });
+	const handleChangeAttributes = (attrs: Partial<ISocialsBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<div {...blockProps}>
 				<div {...innerBlocksProps} />

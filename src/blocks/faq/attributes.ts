@@ -7,6 +7,8 @@ export interface IFaqBlockAttributes {
 	title: string;
 	titleColor: string;
 	isParentStyles: boolean;
+	isOpenDefault: boolean;
+	isOpenMultiple: boolean;
 	questionColor: string;
 	answerColor: string;
 	activeColor: string;
@@ -21,7 +23,7 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	title: {
 		type: "string",
@@ -33,6 +35,14 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 	isParentStyles: {
 		type: "boolean",
 		default: true,
+	},
+	isOpenDefault: {
+		type: "boolean",
+		default: true,
+	},
+	isOpenMultiple: {
+		type: "boolean",
+		default: false,
 	},
 	questionColor: {
 		type: "string",

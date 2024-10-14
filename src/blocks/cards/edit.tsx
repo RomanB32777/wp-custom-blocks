@@ -169,17 +169,24 @@ const Edit: FC<BlockEditProps<ICardsBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({ blockStyle: blockStyleCss });
+	const handleChangeAttributes = (attrs: Partial<ICardsBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<div {...blockProps}>
 				<RichText
