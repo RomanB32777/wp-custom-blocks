@@ -69,6 +69,13 @@ const Inspector: FC<IInspectorProps<IBannerBlockAttributes>> = ({
 
 				<CardDivider />
 				<ColorControl
+					name="subTitleColor"
+					label={__("Subtitle Color", "wp-custom-blocks")}
+					{...colorControlProps}
+				/>
+
+				<CardDivider />
+				<ColorControl
 					name="descriptionColor"
 					label={__("Description color", "wp-custom-blocks")}
 					{...colorControlProps}

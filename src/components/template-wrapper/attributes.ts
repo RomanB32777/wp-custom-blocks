@@ -46,7 +46,7 @@ export const templateAttributes: TBlockAttributes<IBaseTemplateAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	title: {
 		type: "string",

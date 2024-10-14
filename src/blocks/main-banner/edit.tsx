@@ -33,6 +33,8 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 		blockStyle,
 		backgroundColor,
 		backgroundImage,
+		subTitle,
+		subTitleColor,
 		title,
 		titleColor,
 		description,
@@ -62,6 +64,8 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 	} = attributes;
 
 	const [linkPanel, showLinkPanel] = useState(false);
+
+	const handleShowLinkPanel = () => showLinkPanel((prev) => !prev);
 
 	const blockProps = useBlockProps({
 		className: classNames(uniqueId, "bg-white-standard font-notoSans"),
@@ -157,18 +161,25 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockLaptopStyles)) {
-			setAttributes({ blockStyle: blockLaptopStyles });
+	const handleChangeAttributes = (attrs: Partial<IBannerBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(blockLaptopStyles);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [blockStyle, blockLaptopStyles, setAttributes]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockEditStyleCss)}`}</style>
-			<style>{`${minifyCssStrings(blockLaptopStyles)}`}</style>
+			<style>{blockEditStyleCss}</style>
+			<style>{blockLaptopStyles}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<BlockControls controls={[]}>
 				<ToolbarGroup>
@@ -181,19 +192,14 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 							}
 							allowedTypes={["image"]}
 							value={backgroundImage.id}
-							render={({ open }) => {
-								return (
-									<ToolbarButton
-										label={__("Edit background image", "wp-custom-blocks")}
-										onClick={open}
-										icon="format-image"
-										placeholder={__(
-											"Edit background image",
-											"wp-custom-blocks"
-										)}
-									/>
-								);
-							}}
+							render={({ open }) => (
+								<ToolbarButton
+									label={__("Edit background image", "wp-custom-blocks")}
+									onClick={open}
+									icon="format-image"
+									placeholder={__("Edit background image", "wp-custom-blocks")}
+								/>
+							)}
 						/>
 					</MediaUploadCheck>
 					<MediaUploadCheck>
@@ -205,22 +211,17 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 							}
 							allowedTypes={["image"]}
 							value={adviceBackgroundImage.id}
-							render={({ open }) => {
-								return (
-									<ToolbarButton
-										label={__(
-											"Edit advice background image",
-											"wp-custom-blocks"
-										)}
-										onClick={open}
-										icon="format-image"
-										placeholder={__(
-											"Edit advice background image",
-											"wp-custom-blocks"
-										)}
-									/>
-								);
-							}}
+							render={({ open }) => (
+								<ToolbarButton
+									label={__("Edit advice background image", "wp-custom-blocks")}
+									onClick={open}
+									icon="format-image"
+									placeholder={__(
+										"Edit advice background image",
+										"wp-custom-blocks"
+									)}
+								/>
+							)}
 						/>
 					</MediaUploadCheck>
 				</ToolbarGroup>
@@ -231,7 +232,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 					<ToolbarGroup>
 						<ToolbarButton
 							label={__("Add Link", "wp-custom-blocks")}
-							onClick={() => showLinkPanel(true)}
+							onClick={handleShowLinkPanel}
 							icon="admin-links"
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
@@ -239,7 +240,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 					{linkPanel && (
 						<Popover
 							position="bottom right"
-							onFocusOutside={() => showLinkPanel(false)}
+							onFocusOutside={handleShowLinkPanel}
 							offset={5}
 						>
 							<LinkControl
@@ -272,9 +273,14 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 						<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 							<div className="mx-auto mb-10 lg:mx-0">
 								<h1 className="font-black uppercase">
-									<span className="text-base italic  text-white tracking-wide lg:text-2xl lg:tracking-widest">
-										Welcome to
-									</span>
+									<RichText
+										tagName="span"
+										className="text-base italic tracking-wide lg:text-2xl lg:tracking-widest"
+										value={subTitle}
+										onChange={(v) => setAttributes({ subTitle: v })}
+										placeholder={__("Subtitle..", "wp-custom-blocks")}
+										style={{ color: subTitleColor }}
+									/>
 									<RichText
 										tagName="span"
 										className="mb-5 text-5xl lg:text-9xl block"
@@ -293,7 +299,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 									style={{ color: descriptionColor }}
 								/>
 								<button
-									className="relative flex text-white text-base italic font-black w-fit"
+									className="relative flex text-base italic font-black w-fit"
 									type="button"
 									aria-expanded="false"
 								>
@@ -314,7 +320,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 							<div className="mx-auto mb-11 lg:mx-0">
 								<RichText
 									tagName="h4"
-									className="mb-6 text-base font-black text-white uppercase italic lg:text-2xl"
+									className="mb-6 text-base font-black uppercase italic lg:text-2xl"
 									value={sportsTitle}
 									onChange={(v) => setAttributes({ sportsTitle: v })}
 									placeholder={__("Title sports title..", "wp-custom-blocks")}
@@ -322,7 +328,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 								/>
 								<RichText
 									tagName="p"
-									className="text-base text-white max-w-2xl lg:mb-10"
+									className="text-base max-w-2xl lg:mb-10"
 									value={sportsDescription}
 									onChange={(v) => setAttributes({ sportsDescription: v })}
 									placeholder={__(

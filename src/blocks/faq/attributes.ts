@@ -11,6 +11,7 @@ export interface IFaqBlockAttributes {
 	description: string;
 	descriptionColor: string;
 	isParentStyles: boolean;
+	isOpenDefault: boolean;
 	questionColor: string;
 	answerColor: string;
 	activeColor: string;
@@ -25,7 +26,7 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	backgroundColor: {
 		type: "string",
@@ -50,6 +51,10 @@ export const attributes: TBlockAttributes<IFaqBlockAttributes> = {
 		default: colors.dark.DEFAULT,
 	},
 	isParentStyles: {
+		type: "boolean",
+		default: true,
+	},
+	isOpenDefault: {
 		type: "boolean",
 		default: true,
 	},

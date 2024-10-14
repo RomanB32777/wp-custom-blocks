@@ -32,7 +32,7 @@ export const attributes: TBlockAttributes<IAvailableTableBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	columns: {
 		type: "object",

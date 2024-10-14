@@ -20,6 +20,7 @@ const Save: FC<BlockSaveProps<IFaqBlockAttributes>> = ({ attributes }) => {
 		description,
 		titleColor,
 		descriptionColor,
+		isOpenDefault,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -28,6 +29,10 @@ const Save: FC<BlockSaveProps<IFaqBlockAttributes>> = ({ attributes }) => {
 			"font-notoSans relative left-1/2 w-screen -translate-x-2/4"
 		),
 	});
+
+	const faqAttributes = {
+		"data-faq-open-default": isOpenDefault,
+	};
 
 	return (
 		<div {...blockProps}>
@@ -62,7 +67,10 @@ const Save: FC<BlockSaveProps<IFaqBlockAttributes>> = ({ attributes }) => {
 							value={description}
 							style={{ color: descriptionColor }}
 						/>
-						<div className="wp-custom-blocks-questions questions grid grid-cols-1 gap-y-4 text-dark pb-10 border-b border-primary-light sm:pb-0 sm:border-none lg:grid-cols-10 lg:gap-y-8 lg:gap-x-6">
+						<div
+							className="wp-custom-blocks-questions questions grid grid-cols-1 gap-y-4 text-dark pb-10 border-b border-primary-light sm:pb-0 sm:border-none lg:grid-cols-10 lg:gap-y-8 lg:gap-x-6"
+							{...faqAttributes}
+						>
 							<div className="col-span-4 col-start-1">
 								<div className="flex flex-col gap-y-3">
 									<InnerBlocks.Content />

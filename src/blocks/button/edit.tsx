@@ -22,6 +22,8 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 
 	const [linkPanel, showLinkPanel] = useState(false);
 
+	const handleShowLinkPanel = () => showLinkPanel((prev) => !prev);
+
 	const blockProps = useBlockProps({
 		className: "item-button font-notoSans",
 	});
@@ -35,7 +37,7 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 					<ToolbarGroup>
 						<ToolbarButton
 							label={__("Add Link", "wp-custom-blocks")}
-							onClick={() => showLinkPanel(true)}
+							onClick={handleShowLinkPanel}
 							icon="admin-links"
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
@@ -43,7 +45,7 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 					{linkPanel && (
 						<Popover
 							position="bottom right"
-							onFocusOutside={() => showLinkPanel(false)}
+							onFocusOutside={handleShowLinkPanel}
 							offset={5}
 						>
 							<LinkControl

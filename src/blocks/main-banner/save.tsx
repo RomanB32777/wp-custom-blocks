@@ -18,6 +18,8 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 		uniqueId,
 		backgroundColor,
 		backgroundImage,
+		subTitle,
+		subTitleColor,
 		title,
 		description,
 		titleColor,
@@ -87,9 +89,12 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 						<div className="mx-auto mb-10 lg:mx-0">
 							<h1 className="font-black uppercase">
-								<span className="text-base italic text-white tracking-wide lg:text-2xl lg:tracking-widest">
-									Welcome to
-								</span>
+								<RichText.Content
+									tagName="span"
+									className="text-base italic tracking-wide lg:text-2xl lg:tracking-widest"
+									value={subTitle}
+									style={{ color: subTitleColor }}
+								/>
 								<RichText.Content
 									tagName="span"
 									className="mb-5 text-5xl lg:text-9xl block"

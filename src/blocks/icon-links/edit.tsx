@@ -109,17 +109,25 @@ const Edit: FC<BlockEditProps<IIconLinksBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({ blockStyle: blockStyleCss });
-		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
+	const handleChangeAttributes = (
+		attrs: Partial<IIconLinksBlockAttributes>
+	) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
 
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
+		}
+
+		setAttributes(attrs);
+	};
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<div {...blockProps}>
 				<div {...innerBlocksProps} />

@@ -128,17 +128,24 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({ blockStyle: blockStyleCss });
+	const handleChangeAttributes = (attrs: Partial<IFaqBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<BlockControls controls={[]}>
 				<ToolbarGroup>
@@ -151,19 +158,14 @@ const Edit: FC<BlockEditProps<IFaqBlockAttributes>> = ({
 							}
 							allowedTypes={["image"]}
 							value={backgroundImage.id}
-							render={({ open }) => {
-								return (
-									<ToolbarButton
-										label={__("Edit background image", "wp-custom-blocks")}
-										onClick={open}
-										icon="format-image"
-										placeholder={__(
-											"Edit background image",
-											"wp-custom-blocks"
-										)}
-									/>
-								);
-							}}
+							render={({ open }) => (
+								<ToolbarButton
+									label={__("Edit background image", "wp-custom-blocks")}
+									onClick={open}
+									icon="format-image"
+									placeholder={__("Edit background image", "wp-custom-blocks")}
+								/>
+							)}
 						/>
 					</MediaUploadCheck>
 				</ToolbarGroup>

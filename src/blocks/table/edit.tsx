@@ -323,13 +323,15 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({
-				blockStyle: blockStyleCss,
-			});
+	const handleChangeAttributes = (attrs: Partial<ITableBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
+
+		setAttributes(attrs);
+	};
 
 	useEffect(() => {
 		if (!uniqueId) {
@@ -341,10 +343,13 @@ const Edit: FC<BlockEditProps<ITableBlockAttributes>> = ({
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
-			<style>{`${minifyCssStrings(blockEditStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
+			<style>{blockEditStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			{isDesktopDevice && isDesktopViewport && (
 				<BlockControls controls={undefined}>

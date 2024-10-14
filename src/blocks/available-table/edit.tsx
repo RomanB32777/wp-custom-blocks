@@ -190,14 +190,6 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 	`;
 
 	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({
-				blockStyle: blockStyleCss,
-			});
-		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
-
-	useEffect(() => {
 		if (!uniqueId) {
 			setAttributes({
 				uniqueId: "available-table-" + clientId.slice(0, 8),
@@ -205,11 +197,26 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 		}
 	}, [clientId, setAttributes, uniqueId]);
 
+	const handleChangeAttributes = (
+		attrs: Partial<IAvailableTableBlockAttributes>
+	) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
+
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
+		}
+
+		setAttributes(attrs);
+	};
+
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<BlockControls controls={[]}>
 				<ToolbarGroup>
@@ -222,16 +229,14 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 							}
 							allowedTypes={["image"]}
 							value={activeIcon.id}
-							render={({ open }) => {
-								return (
-									<ToolbarButton
-										label={__("Edit Active Icon", "wp-custom-blocks")}
-										placeholder={__("Edit Active Icon", "wp-custom-blocks")}
-										onClick={open}
-										icon="yes"
-									/>
-								);
-							}}
+							render={({ open }) => (
+								<ToolbarButton
+									label={__("Edit Active Icon", "wp-custom-blocks")}
+									placeholder={__("Edit Active Icon", "wp-custom-blocks")}
+									onClick={open}
+									icon="yes"
+								/>
+							)}
 						/>
 					</MediaUploadCheck>
 
@@ -244,16 +249,14 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 							}
 							allowedTypes={["image"]}
 							value={inactiveIcon.id}
-							render={({ open }) => {
-								return (
-									<ToolbarButton
-										label={__("Edit Inactive Icon", "wp-custom-blocks")}
-										placeholder={__("Edit Inactive Icon", "wp-custom-blocks")}
-										onClick={open}
-										icon="no"
-									/>
-								);
-							}}
+							render={({ open }) => (
+								<ToolbarButton
+									label={__("Edit Inactive Icon", "wp-custom-blocks")}
+									placeholder={__("Edit Inactive Icon", "wp-custom-blocks")}
+									onClick={open}
+									icon="no"
+								/>
+							)}
 						/>
 					</MediaUploadCheck>
 				</ToolbarGroup>

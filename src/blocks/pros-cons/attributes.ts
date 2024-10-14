@@ -28,7 +28,7 @@ export const attributes: TBlockAttributes<IProsConsBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	title: {
 		type: "string",

@@ -84,6 +84,8 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 	const [withoutSliderPanel, showWithoutSliderPanel] =
 		useState(!isEnableSlider);
 
+	const handleShowLinkPanel = () => showLinkPanel((prev) => !prev);
+
 	useEffect(() => {
 		showLinkPanel(isWithLinkBlock);
 	}, [isWithLinkBlock]);
@@ -262,7 +264,7 @@ export const TemplateWrapperInspector: FC<ITemplateWrapperInspector> = ({
 				title={__("Link settings", "wp-custom-blocks")}
 				initialOpen={linkPanel}
 				opened={linkPanel}
-				onToggle={() => showLinkPanel(!linkPanel)}
+				onToggle={handleShowLinkPanel}
 			>
 				<ColorControl
 					name="linkTextColor"

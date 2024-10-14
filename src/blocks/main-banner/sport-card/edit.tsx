@@ -35,6 +35,8 @@ const Edit: FC<BlockEditProps<ISportCardElementAttributes>> = ({
 
 	const [linkPanel, showLinkPanel] = useState(false);
 
+	const handleShowLinkPanel = () => showLinkPanel((prev) => !prev);
+
 	const blockProps = useBlockProps({
 		className: classNames(bannerSliderItemName, "slider-item w-full"),
 		style: {
@@ -57,19 +59,14 @@ const Edit: FC<BlockEditProps<ISportCardElementAttributes>> = ({
 							}
 							allowedTypes={["image"]}
 							value={backgroundImg.id}
-							render={({ open }) => {
-								return (
-									<ToolbarButton
-										label={__("Edit background image", "wp-custom-blocks")}
-										onClick={open}
-										icon="format-image"
-										placeholder={__(
-											"Edit background image",
-											"wp-custom-blocks"
-										)}
-									/>
-								);
-							}}
+							render={({ open }) => (
+								<ToolbarButton
+									label={__("Edit background image", "wp-custom-blocks")}
+									onClick={open}
+									icon="format-image"
+									placeholder={__("Edit background image", "wp-custom-blocks")}
+								/>
+							)}
 						/>
 					</MediaUploadCheck>
 				</ToolbarGroup>
@@ -87,16 +84,14 @@ const Edit: FC<BlockEditProps<ISportCardElementAttributes>> = ({
 								}
 								allowedTypes={["image"]}
 								value={icon && icon.id}
-								render={({ open }) => {
-									return (
-										<ToolbarButton
-											label={__("Edit icon", "wp-custom-blocks")}
-											onClick={open}
-											icon="info-outline"
-											placeholder={__("Edit icon", "wp-custom-blocks")}
-										/>
-									);
-								}}
+								render={({ open }) => (
+									<ToolbarButton
+										label={__("Edit icon", "wp-custom-blocks")}
+										onClick={open}
+										icon="info-outline"
+										placeholder={__("Edit icon", "wp-custom-blocks")}
+									/>
+								)}
 							/>
 						</MediaUploadCheck>
 					</ToolbarGroup>
@@ -108,7 +103,7 @@ const Edit: FC<BlockEditProps<ISportCardElementAttributes>> = ({
 					<ToolbarGroup>
 						<ToolbarButton
 							label={__("Add Link", "wp-custom-blocks")}
-							onClick={() => showLinkPanel(true)}
+							onClick={handleShowLinkPanel}
 							icon="admin-links"
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
@@ -116,7 +111,7 @@ const Edit: FC<BlockEditProps<ISportCardElementAttributes>> = ({
 					{linkPanel && (
 						<Popover
 							position="bottom right"
-							onFocusOutside={() => showLinkPanel(false)}
+							onFocusOutside={handleShowLinkPanel}
 							offset={5}
 						>
 							<LinkControl
@@ -147,7 +142,7 @@ const Edit: FC<BlockEditProps<ISportCardElementAttributes>> = ({
 						<div className="absolute inset-0 flex items-center">
 							<RichText
 								tagName="span"
-								className="mx-auto text-primary font-black italic text-base uppercase no-underline"
+								className="mx-auto font-black italic text-base uppercase no-underline"
 								value={linkText}
 								onChange={(v) => setAttributes({ linkText: v })}
 								placeholder={__("Link text..", "wp-custom-blocks")}

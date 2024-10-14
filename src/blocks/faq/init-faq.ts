@@ -1,9 +1,10 @@
-export const initFaq = () => {
-	const wrapper = document.querySelector(".questions");
-
+const initFaq = (wrapper: HTMLDivElement) => {
 	if (!wrapper) {
 		return;
 	}
+
+	const isOpenDefault =
+		wrapper.getAttribute("data-faq-open-default") === "true";
 
 	const questions = wrapper.querySelectorAll<HTMLDivElement>(".question");
 	const questionContents = wrapper.querySelectorAll(".question-content");
@@ -66,7 +67,7 @@ export const initFaq = () => {
 		});
 	};
 
-	if (questions.length) {
+	if (questions.length && isOpenDefault) {
 		itemHandler(questions[0]);
 	}
 
@@ -75,4 +76,6 @@ export const initFaq = () => {
 	});
 };
 
-initFaq();
+const faqBlocks = document.querySelectorAll<HTMLDivElement>(".questions");
+
+faqBlocks.forEach(initFaq);

@@ -20,7 +20,7 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 	attributes,
 	setAttributes,
 }) => {
-	const { isParentStyles } = attributes;
+	const { isOpenDefault, isParentStyles } = attributes;
 
 	const [itemStyles, showItemStylesPanel] = useState(isParentStyles);
 
@@ -57,6 +57,13 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 					name="descriptionColor"
 					label={__("Description Color", "wp-custom-blocks")}
 					{...colorControlProps}
+				/>
+
+				<CardDivider />
+				<ToggleControl
+					label={__("First element is open by default", "wp-custom-blocks")}
+					checked={isOpenDefault}
+					onChange={() => setAttributes({ isOpenDefault: !isOpenDefault })}
 				/>
 
 				<CardDivider />

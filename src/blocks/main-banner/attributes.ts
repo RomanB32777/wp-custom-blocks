@@ -12,6 +12,8 @@ export interface IBannerBlockAttributes {
 	blockStyle: string;
 	backgroundColor: string;
 	backgroundImage: IImageAttributes;
+	subTitle: string;
+	subTitleColor: string;
 	title: string;
 	titleColor: string;
 	description: string;
@@ -49,7 +51,7 @@ export const attributes: TBlockAttributes<IBannerBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	backgroundColor: {
 		type: "string",
@@ -58,6 +60,14 @@ export const attributes: TBlockAttributes<IBannerBlockAttributes> = {
 	backgroundImage: {
 		type: "object",
 		default: {},
+	},
+	subTitle: {
+		type: "string",
+		default: "Welcome to",
+	},
+	subTitleColor: {
+		type: "string",
+		default: colors.white.DEFAULT,
 	},
 	title: {
 		type: "string",

@@ -48,6 +48,8 @@ export const TemplateWrapperEdit = <T,>({
 }: ITemplateWrapperEdit<T>) => {
 	const [linkPanel, showLinkPanel] = useState(false);
 
+	const handleShowLinkPanel = () => showLinkPanel((prev) => !prev);
+
 	return (
 		<Fragment>
 			{isWithLinkBlock && (
@@ -56,7 +58,7 @@ export const TemplateWrapperEdit = <T,>({
 						<ToolbarGroup>
 							<ToolbarButton
 								label={__("Add Link", "wp-custom-blocks")}
-								onClick={() => showLinkPanel(!linkPanel)}
+								onClick={handleShowLinkPanel}
 								icon="admin-links"
 								placeholder={__("Add Link", "wp-custom-blocks")}
 							/>
@@ -64,7 +66,7 @@ export const TemplateWrapperEdit = <T,>({
 						{linkPanel && (
 							<Popover
 								position="bottom right"
-								onFocusOutside={() => showLinkPanel(false)}
+								onFocusOutside={handleShowLinkPanel}
 								offset={5}
 							>
 								<LinkControl
