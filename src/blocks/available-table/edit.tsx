@@ -62,6 +62,14 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 	);
 	const [selectedCeil, setSelectedCeil] = useState<ISelectedCeil | undefined>();
 
+	useEffect(() => {
+		if (!uniqueId) {
+			setAttributes({
+				uniqueId: "available-table-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId, setAttributes, uniqueId]);
+
 	const handleAddRow = () => {
 		const newKey = String(Math.random());
 
@@ -191,27 +199,26 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		if (JSON.stringify(blockStyle) !== JSON.stringify(blockStyleCss)) {
-			setAttributes({
-				blockStyle: blockStyleCss,
-			});
-		}
-	}, [blockStyle, blockStyleCss, setAttributes]);
+	const handleChangeAttributes = (
+		attrs: Partial<IAvailableTableBlockAttributes>
+	) => {
+		const newStyleCss = minifyCssStrings(blockStyleCss);
 
-	useEffect(() => {
-		if (!uniqueId) {
-			setAttributes({
-				uniqueId: "available-table-" + clientId.slice(0, 8),
-			});
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [clientId, setAttributes, uniqueId]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<BlockControls controls={[]}>
 				<ToolbarGroup>

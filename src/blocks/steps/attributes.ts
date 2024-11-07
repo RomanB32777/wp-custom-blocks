@@ -30,7 +30,7 @@ export const attributes: TBlockAttributes<IStepsBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	mainColor: {
 		type: "string",

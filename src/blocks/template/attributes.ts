@@ -69,7 +69,7 @@ export const blockAttributes: TBlockAttributes<ITemplateBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	title: {
 		type: "string",

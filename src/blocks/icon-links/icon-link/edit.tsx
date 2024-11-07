@@ -22,7 +22,10 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 	clientId,
 }) => {
 	const { uniqueId, image, link, title } = attributes;
+
 	const [linkPanel, showLinkPanel] = useState(false);
+
+	const handleShowLinkPanel = () => showLinkPanel((prev) => !prev);
 
 	const blockProps = useBlockProps({
 		className: classNames(
@@ -55,16 +58,14 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 							}}
 							allowedTypes={["image"]}
 							value={image.id}
-							render={({ open }) => {
-								return (
-									<ToolbarButton
-										label={__("Edit image", "wp-custom-blocks")}
-										onClick={open}
-										icon="format-image"
-										placeholder={__("Edit image", "wp-custom-blocks")}
-									/>
-								);
-							}}
+							render={({ open }) => (
+								<ToolbarButton
+									label={__("Edit image", "wp-custom-blocks")}
+									onClick={open}
+									icon="format-image"
+									placeholder={__("Edit image", "wp-custom-blocks")}
+								/>
+							)}
 						/>
 					</MediaUploadCheck>
 				</ToolbarGroup>
@@ -75,7 +76,7 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 					<ToolbarGroup>
 						<ToolbarButton
 							label={__("Add Link", "wp-custom-blocks")}
-							onClick={() => showLinkPanel(true)}
+							onClick={handleShowLinkPanel}
 							icon="admin-links"
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
@@ -83,7 +84,7 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 					{linkPanel && (
 						<Popover
 							position="bottom right"
-							onFocusOutside={() => showLinkPanel(false)}
+							onFocusOutside={handleShowLinkPanel}
 							offset={5}
 						>
 							<LinkControl

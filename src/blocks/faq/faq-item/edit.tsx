@@ -37,7 +37,7 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 				>
 					<div className="flex items-start justify-between">
 						<RichText
-							tagName="p"
+							tagName="h3"
 							className="question-title text-lg font-medium basis-5/6 md:!text-2xl"
 							value={question}
 							onChange={(v) => setAttributes({ question: v })}

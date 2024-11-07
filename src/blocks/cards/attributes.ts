@@ -32,7 +32,7 @@ export const attributes: TBlockAttributes<ICardsBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	title: {
 		type: "string",

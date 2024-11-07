@@ -11,15 +11,20 @@ import type { BlockSaveProps } from "@wordpress/blocks";
 import type { IFaqBlockAttributes } from "./attributes";
 
 const Save: FC<BlockSaveProps<IFaqBlockAttributes>> = ({ attributes }) => {
-	const { uniqueId } = attributes;
+	const { uniqueId, isOpenDefault, isOpenMultiple } = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: uniqueId,
 	});
 
+	const faqAttributes = {
+		"data-faq-open-default": isOpenDefault,
+		"data-faq-open-multiple": isOpenMultiple,
+	};
+
 	return (
 		<div {...blockProps}>
-			<div className="wp-custom-blocks-questions questions">
+			<div className="wp-custom-blocks-questions questions" {...faqAttributes}>
 				<div className="flex flex-col gap-y-3">
 					<InnerBlocks.Content />
 				</div>

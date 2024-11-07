@@ -36,6 +36,8 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 
 	const [linkPanel, showLinkPanel] = useState(false);
 
+	const handleShowLinkPanel = () => showLinkPanel((prev) => !prev);
+
 	const blockProps = useBlockProps({
 		className: classNames(uniqueId, "item-card w-full"),
 		style: {
@@ -66,16 +68,14 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 							}
 							allowedTypes={["image"]}
 							value={image.id}
-							render={({ open }) => {
-								return (
-									<ToolbarButton
-										label={__("Edit image", "wp-custom-blocks")}
-										onClick={open}
-										icon="format-image"
-										placeholder={__("Edit image", "wp-custom-blocks")}
-									/>
-								);
-							}}
+							render={({ open }) => (
+								<ToolbarButton
+									label={__("Edit image", "wp-custom-blocks")}
+									onClick={open}
+									icon="format-image"
+									placeholder={__("Edit image", "wp-custom-blocks")}
+								/>
+							)}
 						/>
 					</MediaUploadCheck>
 				</ToolbarGroup>
@@ -86,7 +86,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 					<ToolbarGroup>
 						<ToolbarButton
 							label={__("Add Link", "wp-custom-blocks")}
-							onClick={() => showLinkPanel(true)}
+							onClick={handleShowLinkPanel}
 							icon="admin-links"
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
@@ -94,7 +94,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 					{linkPanel && (
 						<Popover
 							position="bottom right"
-							onFocusOutside={() => showLinkPanel(false)}
+							onFocusOutside={handleShowLinkPanel}
 							offset={5}
 						>
 							<LinkControl

@@ -28,7 +28,7 @@ export const attributes: TBlockAttributes<IIconLinksBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	backgroundColor: {
 		type: "string",

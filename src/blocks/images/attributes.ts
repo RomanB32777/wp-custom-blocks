@@ -27,7 +27,7 @@ export const attributes: TBlockAttributes<IImagesBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	itemsTitleColor: {
 		type: "string",

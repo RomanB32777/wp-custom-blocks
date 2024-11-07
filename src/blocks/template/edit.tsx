@@ -376,33 +376,30 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 		}
 	`;
 
-	useEffect(() => {
-		const newStyleCss =
-			blockStyleCss +
-			`
+	const handleChangeAttributes = (attrs: Partial<ITemplateBlockAttributes>) => {
+		const newStyleCss = minifyCssStrings(`
+			${blockStyleCss}
 			${isEnableSlider ? blockSaveStyleCss : itemStyleCss}
-		`;
+		`);
 
-		if (JSON.stringify(blockStyle) !== JSON.stringify(newStyleCss)) {
-			setAttributes({ blockStyle: newStyleCss });
+		if (blockStyle !== newStyleCss) {
+			attrs.blockStyle = newStyleCss;
 		}
-	}, [
-		blockStyle,
-		blockStyleCss,
-		blockSaveStyleCss,
-		isEnableSlider,
-		itemStyleCss,
-		setAttributes,
-	]);
+
+		setAttributes(attrs);
+	};
 
 	return (
 		<Fragment>
-			<style>{`${minifyCssStrings(blockStyleCss)}`}</style>
-			<style>{`${minifyCssStrings(blockEditStyleCss)}`}</style>
+			<style>{blockStyleCss}</style>
+			<style>{blockEditStyleCss}</style>
 
-			{!isEnableSlider && <style>{`${minifyCssStrings(itemStyleCss)}`}</style>}
+			{!isEnableSlider && <style>{itemStyleCss}</style>}
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			<Inspector
+				attributes={attributes}
+				setAttributes={handleChangeAttributes}
+			/>
 
 			<Fragment>
 				{isWithLinkBlock && (

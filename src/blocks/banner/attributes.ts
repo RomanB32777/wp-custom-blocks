@@ -35,7 +35,7 @@ export const attributes: TBlockAttributes<IBannerBlockAttributes> = {
 		type: "string",
 	},
 	blockStyle: {
-		type: "object",
+		type: "string",
 	},
 	bonusLabel: {
 		type: "string",
