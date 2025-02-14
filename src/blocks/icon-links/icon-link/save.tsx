@@ -47,7 +47,7 @@ const Save: FC<BlockSaveProps<IIconLinkElementAttributes>> = ({
 			{title && (
 				<RichText.Content
 					tagName="p"
-					className="text-base font-medium mt-3 text-center"
+					className="mt-3 text-center text-base font-medium"
 					value={title}
 				/>
 			)}

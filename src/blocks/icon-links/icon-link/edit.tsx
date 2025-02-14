@@ -81,6 +81,7 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
 					</ToolbarGroup>
+
 					{linkPanel && (
 						<Popover
 							position="bottom right"
@@ -111,9 +112,10 @@ const Edit: FC<BlockEditProps<IIconLinkElementAttributes>> = ({
 						height={image.height}
 					/>
 				</div>
+
 				<RichText
 					tagName="p"
-					className="text-base font-medium mt-3 text-center"
+					className="mt-3 text-center text-base font-medium"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
 					placeholder={__("Icon title..", "wp-custom-blocks")}

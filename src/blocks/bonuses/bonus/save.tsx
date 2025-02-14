@@ -37,9 +37,9 @@ const Save: FC<BlockSaveProps<IBonusElementAttributes>> = ({ attributes }) => {
 
 	return (
 		<div {...blockProps}>
-			<div className="relative h-full flex flex-col items-center justify-between">
+			<div className="relative flex h-full flex-col items-center justify-between">
 				{image.url && (
-					<div className="overflow-hidden max-h-48 w-full rounded-xl">
+					<div className="max-h-48 w-full overflow-hidden rounded-xl">
 						<a
 							href={link.url}
 							target={link.openInNewTab ? "_blank" : "_self"}
@@ -59,7 +59,7 @@ const Save: FC<BlockSaveProps<IBonusElementAttributes>> = ({ attributes }) => {
 
 				<RichText.Content
 					tagName="p"
-					className="title m-0 text-3xl font-semibold text-center"
+					className="title m-0 text-center text-3xl font-semibold"
 					value={title}
 					style={{ color: !isParentStyles ? titleColor : undefined }}
 				/>
@@ -71,7 +71,7 @@ const Save: FC<BlockSaveProps<IBonusElementAttributes>> = ({ attributes }) => {
 					className="no-underline"
 				>
 					<button
-						className="bonus-button relative rounded-xl py-5 px-10"
+						className="bonus-button relative rounded-xl px-10 py-5"
 						type="button"
 						aria-expanded="false"
 						style={{
@@ -80,7 +80,7 @@ const Save: FC<BlockSaveProps<IBonusElementAttributes>> = ({ attributes }) => {
 					>
 						<RichText.Content
 							tagName="span"
-							className="button-text text-4xl font-black mx-auto"
+							className="button-text mx-auto text-4xl font-black"
 							value={buttonText}
 							style={{ color: !isParentStyles ? buttonTextColor : undefined }}
 						/>

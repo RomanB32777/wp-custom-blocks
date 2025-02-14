@@ -201,7 +201,7 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 			<div {...blockProps}>
 				<RichText
 					tagName="h5"
-					className="text-2xl font-bold mb-4 md:!mb-8"
+					className="mb-4 text-2xl font-bold md:!mb-8"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
 					placeholder={__("Title text..", "wp-custom-blocks")}
@@ -223,6 +223,7 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 								/>
 							);
 						})}
+
 						<Button
 							aria-pressed="mixed"
 							variant="tertiary"
@@ -245,6 +246,7 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 								/>
 							);
 						})}
+
 						<Button
 							aria-pressed="mixed"
 							variant="tertiary"

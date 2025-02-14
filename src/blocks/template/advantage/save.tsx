@@ -28,15 +28,16 @@ const Save: FC<BlockSaveProps<IAdvantageElementAttributes>> = ({
 	return (
 		<div {...blockProps}>
 			<div
-				className={classNames("w-full h-full overflow-hidden", templateRounded)}
+				className={classNames("h-full w-full overflow-hidden", templateRounded)}
 				style={{ backgroundColor }}
 			>
-				<div className="bg-white overflow-hidden rounded-full w-28 h-28 mx-auto mt-10 mb-6 flex items-center justify-center">
+				<div className="mx-auto mb-6 mt-10 flex h-28 w-28 items-center justify-center overflow-hidden rounded-full bg-white">
 					{image.url && <img className="w-8" src={image.url} alt={image.alt} />}
 				</div>
+
 				<RichText.Content
 					tagName="p"
-					className="font-bold text-base text-center uppercase px-6"
+					className="px-6 text-center text-base font-bold uppercase"
 					value={title}
 					style={{ color: titleColor }}
 				/>

@@ -48,11 +48,12 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
 					</ToolbarGroup>
+
 					{linkPanel && (
 						<Popover
+							offset={5}
 							position="bottom right"
 							onFocusOutside={handleShowLinkPanel}
-							offset={5}
 						>
 							<LinkControl
 								link={link}
@@ -67,18 +68,18 @@ const Edit: FC<BlockEditProps<IButtonBlockAttributes>> = ({
 
 			<div {...blockProps}>
 				<button
-					className="relative rounded-xl py-4 px-7"
+					className="relative rounded-xl px-7 py-4"
 					type="button"
 					aria-expanded="false"
 					style={{ backgroundColor: buttonColor }}
 				>
 					<RichText
 						tagName="span"
-						className="text-base font-medium mx-auto"
 						value={buttonText}
-						onChange={(v) => setAttributes({ buttonText: v })}
-						placeholder={__("Button text..", "wp-custom-blocks")}
 						style={{ color: buttonTextColor }}
+						className="mx-auto text-base font-medium"
+						placeholder={__("Button text..", "wp-custom-blocks")}
+						onChange={(v) => setAttributes({ buttonText: v })}
 					/>
 				</button>
 			</div>

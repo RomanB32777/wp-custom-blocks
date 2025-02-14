@@ -139,7 +139,6 @@ function render_custom_block( $block_content, $block ) {
 	$block_name_full                      = $block['blockName'];
 	list($block_name_prefix, $block_name) = explode( '/', $block_name_full );
 
-
 	if ( isset( $block_name_full ) && str_contains( $block_name_full, $block_name_prefix ) ) {
 		/**
 		 * Register Inline Style
@@ -240,6 +239,7 @@ function plugin_customizer_setting( $wp_customize ) {
 			'capability' => 'edit_theme_options',
 		)
 	);
+
 	$wp_customize->add_control(
 		'is_priority_theme_primary_color',
 		array(

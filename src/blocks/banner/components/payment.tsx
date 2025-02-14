@@ -21,8 +21,8 @@ interface IPayment extends TPaymentSave {
 
 export const Payment: FC<IPayment> = ({ image, onChange, onDelete }) => {
 	return (
-		<div className="payment min-h-24 rounded-xl flex-auto relative md:!flex-1">
-			<div className="absolute top-2 right-2 z-10">
+		<div className="payment relative min-h-24 flex-auto rounded-xl md:!flex-1">
+			<div className="absolute right-2 top-2 z-10">
 				<ToolbarButton
 					variant="primary"
 					label={__("Delete payment", "wp-custom-blocks")}
@@ -31,7 +31,8 @@ export const Payment: FC<IPayment> = ({ image, onChange, onDelete }) => {
 					placeholder={__("Delete payment", "wp-custom-blocks")}
 				/>
 			</div>
-			<div className="photo h-full mx-auto max-w-28">
+
+			<div className="photo mx-auto h-full max-w-28">
 				{image.url ? (
 					<MediaUploadCheck>
 						<MediaUpload
@@ -42,12 +43,13 @@ export const Payment: FC<IPayment> = ({ image, onChange, onDelete }) => {
 								return (
 									<Fragment>
 										<img
-											className="w-full !h-full object-contain"
+											className="!h-full w-full object-contain"
 											src={image.url}
 											alt={image.alt}
 											width={image.width}
 											height={image.height}
 										/>
+
 										<div className="absolute bottom-2 right-2">
 											<ToolbarButton
 												variant="primary"
@@ -82,10 +84,10 @@ export const Payment: FC<IPayment> = ({ image, onChange, onDelete }) => {
 
 export const PaymentSave: FC<TPaymentSave> = ({ image }) => {
 	return (
-		<div className="payment rounded-lg flex-auto md:!flex-1">
-			<div className="h-full mx-auto max-w-28">
+		<div className="payment flex-auto rounded-lg md:!flex-1">
+			<div className="mx-auto h-full max-w-28">
 				<img
-					className="w-full h-full object-cover"
+					className="h-full w-full object-cover"
 					src={image.url}
 					alt={image.alt}
 					width={image.width}

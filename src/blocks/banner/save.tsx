@@ -42,7 +42,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 
 	return (
 		<div {...blockProps}>
-			<div className="flex flex-col justify-between items-center md:!flex-row">
+			<div className="flex flex-col items-center justify-between md:!flex-row">
 				{logo.url && (
 					<a
 						href={domainLink.url}
@@ -50,7 +50,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 						rel={domainLink.openInNewTab ? "noopener noreferrer" : "noopener"}
 					>
 						<img
-							className="max-w-64 max-h-20"
+							className="max-h-20 max-w-64"
 							src={logo.url}
 							alt={logo.alt || domain}
 							width={logo.width}
@@ -58,7 +58,8 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 						/>
 					</a>
 				)}
-				<div className="flex justify-between mt-5 gap-2 md:!mt-0">
+
+				<div className="mt-5 flex justify-between gap-2 md:!mt-0">
 					<a
 						className="no-underline"
 						href={googleLink.url}
@@ -73,6 +74,7 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 							height="57"
 						/>
 					</a>
+
 					<a
 						className="no-underline"
 						href={appleLink.url}
@@ -92,12 +94,12 @@ const Save: FC<BlockSaveProps<IBannerBlockAttributes>> = ({ attributes }) => {
 
 			{bonusLabel && (
 				<a
-					className="no-underline block"
+					className="block no-underline"
 					href={bonusLink.url}
 					target={bonusLink.openInNewTab ? "_blank" : "_self"}
 					rel={bonusLink.openInNewTab ? "noopener noreferrer" : "noopener"}
 				>
-					<div className="bonus-button p-4 text-center rounded-xl md:!p-6">
+					<div className="bonus-button rounded-xl p-4 text-center md:!p-6">
 						<RichText.Content
 							tagName="p"
 							className="text-3xl font-bold md:!text-5xl"

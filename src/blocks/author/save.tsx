@@ -33,24 +33,27 @@ const Save: FC<BlockSaveProps<IAuthorBlockAttributes>> = ({ attributes }) => {
 		<div {...blockProps}>
 			<div className="avatar relative">
 				<div
-					className="border1 absolute opacity-30 rounded-full"
+					className="border1 absolute rounded-full opacity-30"
 					style={{ borderColor: avatarBorderColor }}
 				></div>
+
 				<div
-					className="border2 absolute opacity-20 rounded-full"
+					className="border2 absolute rounded-full opacity-20"
 					style={{ borderColor: avatarBorderColor }}
 				></div>
+
 				<img
 					src={author.avatar_urls?.["48"]}
 					alt={author.name}
 					width="48"
 					height="48"
-					className="w-[60px] !h-[60px] !max-w-none object-cover border-[5px] rounded-full"
+					className="!h-[60px] w-[60px] !max-w-none rounded-full border-[5px] object-cover"
 					style={{
 						borderColor: avatarBorderColor,
 					}}
 				/>
 			</div>
+
 			<RichText.Content
 				tagName="p"
 				className="ml-5 text-sm md:!ml-6 md:!text-base"

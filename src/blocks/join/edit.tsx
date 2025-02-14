@@ -3,7 +3,7 @@ import { useBlockProps, useInnerBlocksProps } from "@wordpress/block-editor";
 
 export default function Edit() {
 	const blockProps = useBlockProps({
-		className: "border-2 border-primary min-h-14",
+		className: "border-2 border-secondary min-h-14",
 		style: {
 			marginRight: 0,
 			marginLeft: 0,

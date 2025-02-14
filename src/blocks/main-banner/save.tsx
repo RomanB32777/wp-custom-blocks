@@ -29,7 +29,10 @@ const Save: FC<BlockSaveProps<IMainBannerBlockAttributes>> = ({
 	return (
 		<div {...blockProps}>
 			<div className="relative">
-				<div className="relative isolate py-16" style={{ backgroundColor }}>
+				<div
+					className="relative isolate py-12 lg:!py-16"
+					style={{ backgroundColor }}
+				>
 					{backgroundImage.url && (
 						<img
 							src={backgroundImage.url}
@@ -40,19 +43,19 @@ const Save: FC<BlockSaveProps<IMainBannerBlockAttributes>> = ({
 						/>
 					)}
 
-					<div className="relative flex gap-x-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-						<div className="flex-1 [&>*]:my-7">
+					<div className="relative mx-auto flex max-w-7xl gap-x-10 px-4 sm:px-6 lg:px-8">
+						<div className="flex-1 [&>*]:my-7 [&>*]:first:!mt-0 [&>*]:last:!mb-0">
 							<InnerBlocks.Content />
 						</div>
 
 						<div className="hidden flex-1 lg:!block">
-							<div className="h-full flex items-center lg:!justify-center">
+							<div className="flex h-full items-center lg:!justify-center">
 								<img
 									src={logoImage.url}
 									alt={logoImage.alt}
 									width={logoImage.width}
 									height={logoImage.height}
-									className="h-full w-full max-h-96 object-contain object-center lg:!max-w-none"
+									className="h-full max-h-96 w-full object-contain object-center lg:!max-w-none"
 								/>
 							</div>
 						</div>

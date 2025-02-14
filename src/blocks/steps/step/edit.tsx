@@ -89,7 +89,8 @@ const Edit: FC<BlockEditProps<IStepElementAttributes>> = ({
 
 			<div {...blockProps}>
 				<div className="line absolute top-0 h-full"></div>
-				<span className="number absolute text-base top-0 left-0 inline-block w-8 h-8 rounded-full p-1 font-semibold text-center">
+
+				<span className="number absolute left-0 top-0 inline-block h-8 w-8 rounded-full p-1 text-center text-base font-semibold">
 					{icon.url ? (
 						<img
 							src={icon.url}
@@ -101,22 +102,25 @@ const Edit: FC<BlockEditProps<IStepElementAttributes>> = ({
 						step
 					)}
 				</span>
+
 				<RichText
 					tagName="h5"
-					className="title font-bold text-base md:!text-xl"
+					className="title text-base font-bold md:!text-xl"
 					value={title}
 					onChange={(v) => setAttributes({ title: v })}
 					placeholder={__("step text..", "wp-custom-blocks")}
 				/>
+
 				<RichText
 					tagName="p"
 					className={classNames("description py-6 text-sm md:!text-lg", {
-						"border rounded-lg p-4": isOnlyText,
+						"rounded-lg border p-4": isOnlyText,
 					})}
 					value={description}
 					onChange={(v) => setAttributes({ description: v })}
 					placeholder={__("description..", "wp-custom-blocks")}
 				/>
+
 				{!isOnlyText && (
 					<div>
 						{photo.url ? (

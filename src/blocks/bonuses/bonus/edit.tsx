@@ -99,6 +99,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
 					</ToolbarGroup>
+
 					{linkPanel && (
 						<Popover
 							position="bottom right"
@@ -117,9 +118,9 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 			</BlockControls>
 
 			<div {...blockProps}>
-				<div className="relative h-full flex flex-col items-center justify-between">
+				<div className="relative flex h-full flex-col items-center justify-between">
 					{image.url ? (
-						<div className="overflow-hidden max-h-48 w-full rounded-xl">
+						<div className="max-h-48 w-full overflow-hidden rounded-xl">
 							<img
 								className="!h-full w-full object-cover object-center"
 								src={image.url}
@@ -148,7 +149,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 
 					<RichText
 						tagName="p"
-						className="title m-0 text-3xl font-semibold text-center"
+						className="title m-0 text-center text-3xl font-semibold"
 						value={title}
 						onChange={(v) => setAttributes({ title: v })}
 						placeholder={__("Title name..", "wp-custom-blocks")}
@@ -156,7 +157,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 					/>
 
 					<button
-						className="bonus-button relative rounded-xl py-5 px-10"
+						className="bonus-button relative rounded-xl px-10 py-5"
 						type="button"
 						aria-expanded="false"
 						style={{
@@ -165,7 +166,7 @@ const Edit: FC<BlockEditProps<IBonusElementAttributes>> = ({
 					>
 						<RichText
 							tagName="span"
-							className="button-text text-4xl font-black mx-auto"
+							className="button-text mx-auto text-4xl font-black"
 							value={buttonText}
 							onChange={(v) => setAttributes({ buttonText: v })}
 							placeholder={__("Button text..", "wp-custom-blocks")}

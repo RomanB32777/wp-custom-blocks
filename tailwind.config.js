@@ -1,5 +1,3 @@
-/** @type {import('tailwindcss').Config} */
-
 require("dotenv").config({ path: "./.env" });
 
 const {
@@ -26,6 +24,7 @@ const {
 
 const alternativeFonts = ["Arial", "sans-serif"];
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./src/**/*.{php,js,ts,tsx}", "./wp-custom-blocks.php"],
 	theme: {

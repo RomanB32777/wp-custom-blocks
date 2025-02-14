@@ -23,7 +23,7 @@ const Save: FC<BlockSaveProps<IStepsBlockAttributes>> = ({
 
 	return (
 		<div {...blockProps}>
-			<div className="divide-y divide-primary flex flex-col gap-4 md:!gap-6">
+			<div className="flex flex-col gap-4 divide-y divide-primary md:!gap-6">
 				{description && (
 					<RichText.Content
 						tagName="p"

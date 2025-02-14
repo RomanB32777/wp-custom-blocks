@@ -59,7 +59,7 @@ const Save: FC<BlockSaveProps<ITemplateBlockAttributes>> = ({ attributes }) => {
 		<div {...blockProps}>
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div className="my-10 sm:my-20">
-					<div className="flex justify-between items-center mb-8">
+					<div className="mb-8 flex items-center justify-between">
 						<RichText.Content
 							tagName={titleTag}
 							className="title"
@@ -74,15 +74,16 @@ const Save: FC<BlockSaveProps<ITemplateBlockAttributes>> = ({ attributes }) => {
 								rel={link.openInNewTab ? "noopener noreferrer" : "noopener"}
 								className="no-underline"
 							>
-								<div className="flex items-center cursor-pointer">
+								<div className="flex cursor-pointer items-center">
 									<RichText.Content
 										tagName="span"
-										className="hidden text-sm font-bold uppercase md:!inline-block md:mr-3"
+										className="hidden text-sm font-bold uppercase md:mr-3 md:!inline-block"
 										value={linkText}
 										style={{ color: linkTextColor }}
 									/>
+
 									<div
-										className="more-arrow w-6 h-6 rounded-full flex items-center justify-center bg-white-light"
+										className="more-arrow flex h-6 w-6 items-center justify-center rounded-full bg-white-light"
 										style={{
 											color: linkBtnArrowColor,
 											backgroundColor: linkBackgroundBtnColor,
@@ -108,7 +109,7 @@ const Save: FC<BlockSaveProps<ITemplateBlockAttributes>> = ({ attributes }) => {
 
 					<RichText.Content
 						tagName="p"
-						className="max-w-3xl text-base mb-6 md:mb-11"
+						className="mb-6 max-w-3xl text-base md:mb-11"
 						value={description}
 						style={{ color: descriptionColor }}
 					/>
@@ -131,20 +132,21 @@ const Save: FC<BlockSaveProps<ITemplateBlockAttributes>> = ({ attributes }) => {
 										<div className="swiper-wrapper">
 											<InnerBlocks.Content />
 										</div>
-										<div className="swiper-pagination [&>*]:mr-3 [&>*:last-child]:mr-0"></div>
+										<div className="swiper-pagination [&>*:last-child]:mr-0 [&>*]:mr-3"></div>
 									</>
 								) : (
 									<InnerBlocks.Content />
 								)}
 							</div>
 						</div>
+
 						{isEnableSlider && (
-							<div className="absolute -inset-x-16 hidden top-1/2 2xl:flex 2xl:justify-between">
+							<div className="absolute -inset-x-16 top-1/2 hidden 2xl:flex 2xl:justify-between">
 								<div
-									className={`group text-white rotate-180 arrow-left-${uniqueId}`}
+									className={`group rotate-180 text-white arrow-left-${uniqueId}`}
 								>
-									<div className="flex items-center cursor-pointer group-[.nav-disabled]:opacity-50 group-[.nav-disabled]:pointer-events-none">
-										<div className="more-arrow w-6 h-6 rounded-full flex items-center justify-center bg-primary">
+									<div className="flex cursor-pointer items-center group-[.nav-disabled]:pointer-events-none group-[.nav-disabled]:opacity-50">
+										<div className="more-arrow flex h-6 w-6 items-center justify-center rounded-full bg-primary">
 											<svg
 												width="6"
 												height="8"
@@ -160,9 +162,10 @@ const Save: FC<BlockSaveProps<ITemplateBlockAttributes>> = ({ attributes }) => {
 										</div>
 									</div>
 								</div>
+
 								<div className={`group text-white arrow-right-${uniqueId}`}>
-									<div className="flex items-center cursor-pointer group-[.nav-disabled]:opacity-50 group-[.nav-disabled]:pointer-events-none">
-										<div className="more-arrow w-6 h-6 rounded-full flex items-center justify-center bg-primary">
+									<div className="flex cursor-pointer items-center group-[.nav-disabled]:pointer-events-none group-[.nav-disabled]:opacity-50">
+										<div className="more-arrow flex h-6 w-6 items-center justify-center rounded-full bg-primary">
 											<svg
 												width="6"
 												height="8"

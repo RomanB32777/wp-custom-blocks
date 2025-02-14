@@ -22,8 +22,9 @@ const Save: FC<BlockSaveProps<IStepElementAttributes>> = ({ attributes }) => {
 	return (
 		<div {...blockProps}>
 			<div className="line absolute top-0 h-full"></div>
+
 			{step && (
-				<span className="number absolute text-base top-0 left-0 inline-block w-8 h-8 rounded-full p-1 font-semibold text-center">
+				<span className="number absolute left-0 top-0 inline-block h-8 w-8 rounded-full p-1 text-center text-base font-semibold">
 					{icon.url ? (
 						<img
 							src={icon.url}
@@ -36,22 +37,25 @@ const Save: FC<BlockSaveProps<IStepElementAttributes>> = ({ attributes }) => {
 					)}
 				</span>
 			)}
+
 			{title && (
 				<RichText.Content
 					tagName="h5"
-					className="title font-bold text-base md:!text-xl"
+					className="title text-base font-bold md:!text-xl"
 					value={title}
 				/>
 			)}
+
 			{description && (
 				<RichText.Content
 					tagName="p"
 					className={classNames("description py-6 text-sm md:!text-lg", {
-						"border rounded-lg p-4": isOnlyText,
+						"rounded-lg border p-4": isOnlyText,
 					})}
 					value={description}
 				/>
 			)}
+
 			{photo.url && !isOnlyText && (
 				<div className="photo">
 					<img

@@ -30,22 +30,24 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 	return (
 		<Fragment>
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
+
 			<div {...blockProps}>
 				<div
-					className="question group px-8 py-4 bg-white rounded-xl duration-200 cursor-pointer md:!px-4"
+					className="question group cursor-pointer rounded-xl bg-white p-4 duration-200"
 					data-question={index}
 				>
 					<div className="flex items-start justify-between">
 						<RichText
 							tagName="h3"
-							className="question-title text-lg font-medium basis-5/6 md:!text-2xl"
+							className="question-title basis-5/6 text-lg font-medium md:!text-2xl"
 							value={question}
 							onChange={(v) => setAttributes({ question: v })}
 							placeholder={__("Question..", "wp-custom-blocks")}
 							style={{ color: !isParentStyles ? questionColor : undefined }}
 						/>
-						<div className="flex justify-end basis-1/6">
-							<div className="arrow-wrapper duration-200 rotate-0">
+
+						<div className="flex basis-1/6 justify-end">
+							<div className="arrow-wrapper rotate-0 duration-200">
 								<div className="flex items-center p-2">
 									<div className="more-arrow">
 										<svg
@@ -65,9 +67,10 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 							</div>
 						</div>
 					</div>
+
 					<RichText
 						tagName="p"
-						className="question-content text-base mt-3 md:!text-lg mt:mb-6"
+						className="question-content mt:mb-6 mt-3 text-base md:!text-lg"
 						value={answer}
 						onChange={(v) => setAttributes({ answer: v })}
 						placeholder={__("Answer..", "wp-custom-blocks")}

@@ -42,6 +42,7 @@ const Inspector: FC<IInspectorProps<IFaqBlockAttributes>> = ({
 					onChange={() => setAttributes({ isOpenDefault: !isOpenDefault })}
 				/>
 				<CardDivider />
+
 				<ToggleControl
 					label={__("Ability to open multiple items", "wp-custom-blocks")}
 					checked={isOpenMultiple}

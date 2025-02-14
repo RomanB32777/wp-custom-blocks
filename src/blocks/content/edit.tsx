@@ -65,10 +65,10 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 			)}
 
 			<div {...blockProps}>
-				<div className="overflow-hidden basis-full w-full md:!basis-1/2 md:!w-auto">
+				<div className="w-full basis-full overflow-hidden md:!w-auto md:!basis-1/2">
 					{image.url ? (
 						<img
-							className="w-full object-cover object-center rounded-xl md:!rounded-3xl"
+							className="w-full rounded-xl object-cover object-center md:!rounded-3xl"
 							src={image.url}
 							alt={image.alt}
 							width={image.width}
@@ -93,7 +93,7 @@ const Edit: FC<BlockEditProps<IContentBlockAttributes>> = ({
 					)}
 				</div>
 
-				<div className="basis-full w-full md:!basis-1/2 md:!w-auto">
+				<div className="w-full basis-full md:!w-auto md:!basis-1/2">
 					<InnerBlocks />
 				</div>
 			</div>

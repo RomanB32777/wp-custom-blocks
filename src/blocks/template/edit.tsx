@@ -435,7 +435,7 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 				<div {...blockProps}>
 					<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 						<div className="my-10 sm:my-20">
-							<div className="flex justify-between items-center mb-8">
+							<div className="mb-8 flex items-center justify-between">
 								<RichText
 									tagName={titleTag}
 									className="title"
@@ -446,17 +446,17 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 								/>
 
 								{isWithLinkBlock && (
-									<div className="flex items-center cursor-pointer">
+									<div className="flex cursor-pointer items-center">
 										<RichText
 											tagName="span"
-											className="hidden text-sm font-bold uppercase md:!inline-block md:mr-3"
+											className="hidden text-sm font-bold uppercase md:mr-3 md:!inline-block"
 											value={linkText}
 											onChange={(v) => setAttributes({ linkText: v })}
 											placeholder={__("Link text..", "wp-custom-blocks")}
 											style={{ color: linkTextColor }}
 										/>
 										<div
-											className="more-arrow w-6 h-6 rounded-full flex items-center justify-center"
+											className="more-arrow flex h-6 w-6 items-center justify-center rounded-full"
 											style={{
 												color: linkBtnArrowColor,
 												background: linkBackgroundBtnColor,
@@ -481,7 +481,7 @@ const Edit: FC<BlockEditProps<ITemplateBlockAttributes>> = ({
 
 							<RichText
 								tagName="p"
-								className="max-w-3xl text-base mb-6 md:mb-11"
+								className="mb-6 max-w-3xl text-base md:mb-11"
 								value={description}
 								onChange={(v) => setAttributes({ description: v })}
 								placeholder={__("Block description..", "wp-custom-blocks")}

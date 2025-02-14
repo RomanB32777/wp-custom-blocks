@@ -321,7 +321,7 @@ const Edit: FC<BlockEditProps<IAvailableTableBlockAttributes>> = ({
 								return (
 									<tr
 										key={rowKey}
-										className={classNames("font-semibold text-base", {
+										className={classNames("text-base font-semibold", {
 											"border-4 border-red": selectedCeil?.rowId === rowKey,
 										})}
 									>

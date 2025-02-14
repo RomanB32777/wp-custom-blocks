@@ -104,6 +104,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
 					</ToolbarGroup>
+
 					{linkPanel && (
 						<Popover
 							position="bottom right"
@@ -125,7 +126,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 				<div className="group relative h-full">
 					<div
 						className={classNames(
-							"aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 h-full lg:aspect-none group-hover:opacity-75",
+							"aspect-h-1 aspect-w-1 lg:aspect-none h-full w-full overflow-hidden bg-gray-200 group-hover:opacity-75",
 							templateRounded
 						)}
 					>
@@ -150,15 +151,15 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 										width={52}
 										height={67}
 									/>
-									<div className="absolute left-0 bottom-0 flex items-center justify-center right-1 -top-1">
+									<div className="absolute -top-1 bottom-0 left-0 right-1 flex items-center justify-center">
 										<img src={crownIcon} alt="crown" width={21} height={18} />
 									</div>
 								</>
 							) : (
 								<>
 									<img src={flagImage} alt="flag alt" width={52} height={56} />
-									<div className="absolute left-0 bottom-0 flex items-center justify-center -top-1.5 right-1.5">
-										<p className="font-black text-2xl text-white">
+									<div className="absolute -top-1.5 bottom-0 left-0 right-1.5 flex items-center justify-center">
+										<p className="text-2xl font-black text-white">
 											{index + 1}
 										</p>
 									</div>
@@ -178,6 +179,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 									placeholder={__("Category name..", "wp-custom-blocks")}
 									style={{ color: categoryColor }}
 								/>
+
 								<RichText
 									tagName="p"
 									className="mb-6 text-base font-semibold"
@@ -189,14 +191,14 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 							</div>
 
 							<button
-								className="relative rounded-xl py-4 px-7 w-full"
+								className="relative w-full rounded-xl px-7 py-4"
 								type="button"
 								aria-expanded="false"
 								style={{ backgroundColor: buttonColor }}
 							>
 								<RichText
 									tagName="span"
-									className="text-base font-medium mx-auto"
+									className="mx-auto text-base font-medium"
 									value={buttonText}
 									onChange={(v) => setAttributes({ buttonText: v })}
 									placeholder={__("Button text..", "wp-custom-blocks")}
@@ -204,7 +206,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 								/>
 							</button>
 
-							<div className="text-center py-5">
+							<div className="py-5 text-center">
 								<div className="text-sm font-medium no-underline">
 									<RichText
 										tagName="span"

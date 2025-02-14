@@ -208,18 +208,21 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 							label={__("AppStore Link", "wp-custom-blocks")}
 							setAttributes={setAttributes}
 						/>
+
 						<LinkControl
 							link={googleLink}
 							linkName="googleLink"
 							label={__("Google Link", "wp-custom-blocks")}
 							setAttributes={setAttributes}
 						/>
+
 						<LinkControl
 							link={bonusLink}
 							linkName="bonusLink"
 							label={__("Button Link", "wp-custom-blocks")}
 							setAttributes={setAttributes}
 						/>
+
 						<LinkControl
 							link={domainLink}
 							linkName="domainLink"
@@ -231,11 +234,11 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 			</BlockControls>
 
 			<div {...blockProps}>
-				<div className="flex flex-col justify-between items-center md:!flex-row">
+				<div className="flex flex-col items-center justify-between md:!flex-row">
 					<div className="logo">
 						{logo.url ? (
 							<img
-								className="max-w-64 max-h-20"
+								className="max-h-20 max-w-64"
 								src={logo.url}
 								alt={logo.alt}
 								width={logo.width}
@@ -259,7 +262,8 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 							/>
 						)}
 					</div>
-					<div className="flex justify-between mt-5 gap-2 md:!mt-0">
+
+					<div className="mt-5 flex justify-between gap-2 md:!mt-0">
 						<img
 							className="max-h-14"
 							src={googlePlayImage}
@@ -267,6 +271,7 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 							width="190"
 							height="57"
 						/>
+
 						<img
 							className="max-h-14"
 							src={appStoreImage}
@@ -277,10 +282,10 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 					</div>
 				</div>
 
-				<div className="bonus-button p-4 text-center rounded-xl md:!p-6">
+				<div className="bonus-button rounded-xl p-4 text-center md:!p-6">
 					<RichText
 						tagName="p"
-						className="p-0 m-0 text-5xl font-bold md:!text-3xl"
+						className="m-0 p-0 text-5xl font-bold md:!text-3xl"
 						value={bonusLabel}
 						onChange={(v) => setAttributes({ bonusLabel: v })}
 						placeholder={__("Bonus button text..", "wp-custom-blocks")}
@@ -317,10 +322,10 @@ const Edit: FC<BlockEditProps<IBannerBlockAttributes>> = ({
 				</div>
 
 				<Button
-					aria-pressed="mixed"
-					variant="tertiary"
-					label="Add new payment"
 					icon="plus"
+					variant="tertiary"
+					aria-pressed="mixed"
+					label="Add new payment"
 					onClick={handleAddPayment}
 					showTooltip
 				/>

@@ -28,7 +28,7 @@ const Save: FC<BlockSaveProps<IProsConsBlockAttributes>> = ({ attributes }) => {
 			{title && (
 				<RichText.Content
 					tagName="h5"
-					className="text-2xl font-semibold mb-4 md:!mb-8"
+					className="mb-4 text-2xl font-semibold md:!mb-8"
 					value={title}
 					style={{
 						color: titleColor,

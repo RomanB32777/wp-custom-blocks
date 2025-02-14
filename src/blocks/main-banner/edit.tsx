@@ -59,12 +59,12 @@ const Edit: FC<BlockEditProps<IMainBannerBlockAttributes>> = ({
 								return (
 									<ToolbarButton
 										label={__("Edit background image", "wp-custom-blocks")}
-										onClick={open}
 										icon="cover-image"
 										placeholder={__(
 											"Edit background image",
 											"wp-custom-blocks"
 										)}
+										onClick={open}
 									/>
 								);
 							}}
@@ -83,9 +83,9 @@ const Edit: FC<BlockEditProps<IMainBannerBlockAttributes>> = ({
 								return (
 									<ToolbarButton
 										label={__("Edit logo image", "wp-custom-blocks")}
-										onClick={open}
 										icon="format-image"
 										placeholder={__("Edit logo image", "wp-custom-blocks")}
+										onClick={open}
 									/>
 								);
 							}}
@@ -96,7 +96,10 @@ const Edit: FC<BlockEditProps<IMainBannerBlockAttributes>> = ({
 
 			<div {...blockProps}>
 				<div className="relative">
-					<div className="relative isolate py-16" style={{ backgroundColor }}>
+					<div
+						className="relative isolate py-12 lg:!py-16"
+						style={{ backgroundColor }}
+					>
 						{backgroundImage.url && (
 							<img
 								src={backgroundImage.url}
@@ -107,17 +110,17 @@ const Edit: FC<BlockEditProps<IMainBannerBlockAttributes>> = ({
 							/>
 						)}
 
-						<div className="relative flex gap-x-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+						<div className="relative mx-auto flex max-w-7xl gap-x-10 px-4 sm:px-6 lg:px-8">
 							<div {...innerBlocksProps} />
 
 							<div className="hidden flex-1 lg:!block">
-								<div className="h-full flex items-center lg:!justify-center">
+								<div className="flex h-full items-center lg:!justify-center">
 									<img
 										src={logoImage.url}
 										alt={logoImage.alt}
 										width={logoImage.width}
 										height={logoImage.height}
-										className="h-full w-full max-h-96 object-contain object-center lg:!max-w-none"
+										className="h-full max-h-96 w-full object-contain object-center lg:!max-w-none"
 									/>
 								</div>
 							</div>

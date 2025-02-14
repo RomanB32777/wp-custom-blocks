@@ -214,6 +214,7 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 							placeholder={__("Add Link", "wp-custom-blocks")}
 						/>
 					</ToolbarGroup>
+
 					{linkPanel && (
 						<Popover
 							position="bottom right"
@@ -236,13 +237,13 @@ const Edit: FC<BlockEditProps<IBonusesBlockAttributes>> = ({
 
 				<div className="mt-6 text-center">
 					<button
-						className="link-button relative rounded-xl py-5 px-10 md:!rounded-3xl"
+						className="link-button relative rounded-xl px-10 py-5 md:!rounded-3xl"
 						type="button"
 						aria-expanded="false"
 					>
 						<RichText
 							tagName="span"
-							className="text-4xl font-black mx-auto"
+							className="mx-auto text-4xl font-black"
 							value={buttonText}
 							onChange={(v) => setAttributes({ buttonText: v })}
 							placeholder={__("Button text..", "wp-custom-blocks")}

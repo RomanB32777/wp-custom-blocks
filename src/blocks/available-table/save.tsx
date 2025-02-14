@@ -59,7 +59,7 @@ const Save: FC<BlockSaveProps<IAvailableTableBlockAttributes>> = ({
 						{Object.entries(rows).map(
 							([rowKey, rowValues], rowIndex, rowArr) => {
 								return (
-									<tr key={rowKey} className="font-semibold text-base">
+									<tr key={rowKey} className="text-base font-semibold">
 										{Object.values(rowValues).map((value, index, arr) => {
 											const isFirstCell = index === 0;
 											const isLastCell = index === arr.length - 1;
@@ -115,9 +115,9 @@ const Save: FC<BlockSaveProps<IAvailableTableBlockAttributes>> = ({
 												} else {
 													cellContent = (
 														<div className="flex justify-center">
-															<div className="min-w-6 min-h-6 w-6 h-6 overflow-hidden">
+															<div className="h-6 min-h-6 w-6 min-w-6 overflow-hidden">
 																<img
-																	className="!w-full !h-full"
+																	className="!h-full !w-full"
 																	src={cellIcon.url}
 																	alt={cellIcon.alt}
 																	width={cellIcon.width}

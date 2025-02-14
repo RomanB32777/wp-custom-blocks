@@ -23,6 +23,7 @@ const Save: FC<BlockSaveProps<IBonusesBlockAttributes>> = ({ attributes }) => {
 			<div className="inner-wrapper !grid">
 				<InnerBlocks.Content />
 			</div>
+
 			{Boolean(buttonText?.length) && (
 				<div className="mt-6 text-center">
 					<a
@@ -32,13 +33,13 @@ const Save: FC<BlockSaveProps<IBonusesBlockAttributes>> = ({ attributes }) => {
 						className="no-underline"
 					>
 						<button
-							className="link-button relative rounded-xl py-5 px-10 md:!rounded-3xl"
+							className="link-button relative rounded-xl px-10 py-5 md:!rounded-3xl"
 							type="button"
 							aria-expanded="false"
 						>
 							<RichText.Content
 								tagName="span"
-								className="text-4xl font-black mx-auto"
+								className="mx-auto text-4xl font-black"
 								value={buttonText}
 								style={{ color: buttonTextColor }}
 							/>
