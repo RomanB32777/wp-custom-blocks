@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import React, { useCallback, type FC } from "react";
 import classNames from "classnames";
 import {
 	BlockControls,
@@ -12,6 +12,7 @@ import { Button, ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import { Fragment, useEffect, useRef } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
+import type { IGetBlockStyleProps } from "@/types";
 import { hexToRgb } from "@/utils/hex-to-rgb";
 import { minifyCssStrings } from "@/utils/minify-css";
 
@@ -35,9 +36,6 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 		titleColor,
 		pros,
 		cons,
-		contentColor,
-		prosColor,
-		consColor,
 		prosIcon,
 		consIcon,
 	} = attributes;
@@ -50,14 +48,6 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 			"wp-custom-blocks-pros-cons font-inter bg-white rounded-xl py-6 px-4 md:!p-8 md:!rounded-3xl"
 		),
 	});
-
-	useEffect(() => {
-		if (!uniqueId) {
-			setAttributes({
-				uniqueId: "proc-cons-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId, uniqueId, setAttributes]);
 
 	const handleAddItem = (type: TProsCons) => () => {
 		const newKey = String(Math.random());
@@ -103,36 +93,56 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 
 	/**
 	 * Block All Styles
+	 * @param getBlockStyleProps
 	 */
-	const rgbProsColor = hexToRgb(prosColor.slice(1)).join(" ");
-	const rgbConsColor = hexToRgb(consColor.slice(1)).join(" ");
+	const getBlockStyleCss = useCallback(
+		(getBlockStyleProps?: IGetBlockStyleProps<IProsConsBlockAttributes>) => {
+			const { blockId = uniqueId, blockAttributes = attributes } =
+				getBlockStyleProps || {};
 
-	const blockStyleCss = `
-		.${uniqueId} .item .content {
-			color: ${contentColor};
-		}
+			const rgbProsColor = hexToRgb(blockAttributes.prosColor.slice(1)).join(
+				" "
+			);
+			const rgbConsColor = hexToRgb(blockAttributes.consColor.slice(1)).join(
+				" "
+			);
 
-		.${uniqueId} .item.pros {
-			background-color: rgb(${rgbProsColor} / 5%);
-			border-color: rgb(${rgbProsColor} / 30%);
-		}
+			return `
+			.${blockId} .item .content {
+				color: ${blockAttributes.contentColor};
+			}
 
-		.${uniqueId} .item.pros .icon {
-			background-color: ${prosColor};
-		}
+			.${blockId} .item.pros {
+				background-color: rgb(${rgbProsColor} / 5%);
+				border-color: rgb(${rgbProsColor} / 30%);
+			}
 
-		.${uniqueId} .item.cons {
-			background-color: rgb(${rgbConsColor} / 5%);
-			border-color: rgb(${rgbConsColor} / 30%);
-		}
+			.${blockId} .item.pros .icon {
+				background-color: ${blockAttributes.prosColor};
+			}
 
-		.${uniqueId} .item.cons .icon {
-			background-color: ${consColor};
-		}
-	`;
+			.${blockId} .item.cons {
+				background-color: rgb(${rgbConsColor} / 5%);
+				border-color: rgb(${rgbConsColor} / 30%);
+			}
+
+			.${blockId} .item.cons .icon {
+				background-color: ${blockAttributes.consColor};
+			}
+		`;
+		},
+		[uniqueId, attributes]
+	);
 
 	const handleChangeAttributes = (attrs: Partial<IProsConsBlockAttributes>) => {
-		const newStyleCss = minifyCssStrings(blockStyleCss);
+		const currBlockStyleCss = getBlockStyleCss({
+			blockAttributes: {
+				...attributes,
+				...attrs,
+			},
+		});
+
+		const newStyleCss = minifyCssStrings(currBlockStyleCss);
 
 		if (blockStyle !== newStyleCss) {
 			attrs.blockStyle = newStyleCss;
@@ -140,6 +150,21 @@ const Edit: FC<BlockEditProps<IProsConsBlockAttributes>> = ({
 
 		setAttributes(attrs);
 	};
+
+	useEffect(() => {
+		if (!uniqueId) {
+			const setUniqueId = "proc-cons-" + clientId.slice(0, 8);
+
+			setAttributes({
+				uniqueId: setUniqueId,
+				blockStyle: minifyCssStrings(
+					getBlockStyleCss({ blockId: setUniqueId })
+				),
+			});
+		}
+	}, [clientId, uniqueId, setAttributes, getBlockStyleCss]);
+
+	const blockStyleCss = getBlockStyleCss();
 
 	return (
 		<Fragment>

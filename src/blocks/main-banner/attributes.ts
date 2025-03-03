@@ -3,6 +3,7 @@ import type { IImageAttributes, TBlockAttributes } from "@/types";
 
 export interface IMainBannerBlockAttributes {
 	uniqueId: string;
+	blockStyle: string;
 	backgroundColor: string;
 	backgroundImage: IImageAttributes;
 	logoImage: IImageAttributes;
@@ -10,6 +11,9 @@ export interface IMainBannerBlockAttributes {
 
 export const attributes: TBlockAttributes<IMainBannerBlockAttributes> = {
 	uniqueId: {
+		type: "string",
+	},
+	blockStyle: {
 		type: "string",
 	},
 	backgroundColor: {

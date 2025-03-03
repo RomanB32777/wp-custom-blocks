@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import React, { useCallback, type FC } from "react";
 import classNames from "classnames";
 import { InnerBlocks, RichText, useBlockProps } from "@wordpress/block-editor";
 import type { BlockEditProps } from "@wordpress/blocks";
@@ -6,6 +6,7 @@ import { dispatch, select } from "@wordpress/data";
 import { Fragment, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
+import type { IGetBlockStyleProps } from "@/types";
 import { minifyCssStrings } from "@/utils/minify-css";
 
 import Inspector from "./inspector";
@@ -18,18 +19,8 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 	clientId,
 	setAttributes,
 }) => {
-	const {
-		uniqueId,
-		blockStyle,
-		description,
-		mainColor,
-		stepColor,
-		titleColor,
-		descriptionColor,
-		borderColor,
-		lineType,
-		isOnlyText,
-	} = attributes;
+	const { uniqueId, blockStyle, description, descriptionColor, isOnlyText } =
+		attributes;
 
 	const blockProps = useBlockProps({
 		className: classNames(
@@ -50,42 +41,49 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 		});
 	}, [childBlocks, isOnlyText]);
 
-	useEffect(() => {
-		if (!uniqueId) {
-			setAttributes({
-				uniqueId: "steps-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId, uniqueId, setAttributes]);
-
 	/**
 	 * Block All Styles
 	 */
-	const blockStyleCss = `
-		.${uniqueId} .step .number {
-			background-color: ${mainColor};
-		}
+	const getBlockStyleCss = useCallback(
+		(getBlockStyleProps?: IGetBlockStyleProps<IStepsBlockAttributes>) => {
+			const { blockId = uniqueId, blockAttributes = attributes } =
+				getBlockStyleProps || {};
 
-		.${uniqueId} .step .line {
-			border: 2px ${lineType} ${mainColor};
-		}
+			return `
+			.${blockId} .step .number {
+				background-color: ${blockAttributes.mainColor};
+			}
 
-		.${uniqueId} .step .number {
-			color: ${stepColor};
-		}
+			.${blockId} .step .line {
+				border: 2px ${blockAttributes.lineType} ${blockAttributes.mainColor};
+			}
 
-		.${uniqueId} .step .title {
-			color: ${titleColor};
-		}
+			.${blockId} .step .number {
+				color: ${blockAttributes.stepColor};
+			}
 
-		.${uniqueId} .step .description {
-			color: ${descriptionColor};
-			border-color: ${borderColor};
-		}
-	`;
+			.${blockId} .step .title {
+				color: ${blockAttributes.titleColor};
+			}
+
+			.${blockId} .step .description {
+				color: ${blockAttributes.descriptionColor};
+				border-color: ${blockAttributes.borderColor};
+			}
+		`;
+		},
+		[uniqueId, attributes]
+	);
 
 	const handleChangeAttributes = (attrs: Partial<IStepsBlockAttributes>) => {
-		const newStyleCss = minifyCssStrings(blockStyleCss);
+		const currBlockStyleCss = getBlockStyleCss({
+			blockAttributes: {
+				...attributes,
+				...attrs,
+			},
+		});
+
+		const newStyleCss = minifyCssStrings(currBlockStyleCss);
 
 		if (blockStyle !== newStyleCss) {
 			attrs.blockStyle = newStyleCss;
@@ -93,6 +91,21 @@ const Edit: FC<BlockEditProps<IStepsBlockAttributes>> = ({
 
 		setAttributes(attrs);
 	};
+
+	useEffect(() => {
+		if (!uniqueId) {
+			const setUniqueId = "steps-" + clientId.slice(0, 8);
+
+			setAttributes({
+				uniqueId: setUniqueId,
+				blockStyle: minifyCssStrings(
+					getBlockStyleCss({ blockId: setUniqueId })
+				),
+			});
+		}
+	}, [clientId, uniqueId, getBlockStyleCss, setAttributes]);
+
+	const blockStyleCss = getBlockStyleCss();
 
 	return (
 		<Fragment>

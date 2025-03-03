@@ -18,9 +18,9 @@ import Inspector from "./inspector";
 import type { ICardElementAttributes } from "./attributes";
 
 const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
+	clientId,
 	attributes,
 	setAttributes,
-	clientId,
 }) => {
 	const {
 		uniqueId,
@@ -110,7 +110,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 
 			<div {...blockProps}>
 				<div className="group relative h-full">
-					<div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-xl bg-gray-200 h-full md:!rounded-3xl lg:aspect-none">
+					<div className="aspect-h-1 aspect-w-1 lg:aspect-none h-full w-full overflow-hidden rounded-xl bg-gray-200 md:!rounded-3xl">
 						{image.url && (
 							<img
 								className="!h-full w-full object-cover object-center"
@@ -122,9 +122,9 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 						)}
 					</div>
 
-					<div className="absolute inset-0 rounded-xl flex justify-center items-center">
+					<div className="absolute inset-0 flex items-center justify-center rounded-xl">
 						<button
-							className="relative rounded-xl p-3 mx-3 min-w-28"
+							className="relative mx-3 min-w-28 rounded-xl p-3"
 							type="button"
 							aria-expanded="false"
 							style={{
@@ -133,7 +133,7 @@ const Edit: FC<BlockEditProps<ICardElementAttributes>> = ({
 						>
 							<RichText
 								tagName="span"
-								className="text-base font-black mx-auto"
+								className="mx-auto text-base font-black"
 								value={buttonText}
 								onChange={(v) => setAttributes({ buttonText: v })}
 								placeholder={__("Button text..", "wp-custom-blocks")}

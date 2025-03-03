@@ -44,7 +44,7 @@ const Save: FC<BlockSaveProps<IMainBannerBlockAttributes>> = ({
 					)}
 
 					<div className="relative mx-auto flex max-w-7xl gap-x-10 px-4 sm:px-6 lg:px-8">
-						<div className="flex-1 [&>*]:my-7 [&>*]:first:!mt-0 [&>*]:last:!mb-0">
+						<div className="flex-1 [&>*]:my-7 [&>*]:last:!mb-0">
 							<InnerBlocks.Content />
 						</div>
 

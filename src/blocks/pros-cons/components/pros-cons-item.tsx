@@ -27,14 +27,14 @@ export const ProsConsItem: FC<IProsConsItem> = ({
 	return (
 		<div
 			className={classNames(
-				"item flex items-center gap-3 border rounded-xl px-6 py-5 relative",
+				"item relative flex items-center gap-3 rounded-xl border px-6 py-5",
 				type
 			)}
 		>
 			{icon.url && (
-				<div className="icon min-w-5 min-h-5 w-5 h-5 p-1 rounded-full overflow-hidden">
+				<div className="icon h-5 min-h-5 w-5 min-w-5 overflow-hidden rounded-full p-1">
 					<img
-						className="!w-full !h-full"
+						className="!h-full !w-full"
 						src={icon.url}
 						alt={icon.alt}
 						width={icon.width}
@@ -42,7 +42,7 @@ export const ProsConsItem: FC<IProsConsItem> = ({
 					/>
 				</div>
 			)}
-			<div className="absolute top-2 right-2 z-10">
+			<div className="absolute right-2 top-2 z-10">
 				<ToolbarButton
 					variant="primary"
 					label={__("Delete", "wp-custom-blocks")}
@@ -70,14 +70,14 @@ export const ProsConsItemSave: FC<IProsConsItemSave> = ({
 	return (
 		<div
 			className={classNames(
-				"item flex items-center gap-3 border rounded-xl px-6 py-5 relative",
+				"item relative flex items-center gap-3 rounded-xl border px-6 py-5",
 				type
 			)}
 		>
 			{icon.url && (
-				<div className="icon min-w-5 min-h-5 w-5 h-5 p-1 rounded-full overflow-hidden">
+				<div className="icon h-5 min-h-5 w-5 min-w-5 overflow-hidden rounded-full p-1">
 					<img
-						className="!w-full !h-full"
+						className="!h-full !w-full"
 						src={icon.url}
 						alt={icon.alt}
 						width={icon.width}

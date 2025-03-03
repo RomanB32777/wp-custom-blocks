@@ -24,3 +24,8 @@ export interface IInspectorProps<T extends Record<keyof T, unknown>>
 }
 
 export type TBreakpoints = keyof typeof baseBreakpoints;
+
+export interface IGetBlockStyleProps<T extends object> {
+	blockId?: string;
+	blockAttributes?: T;
+}

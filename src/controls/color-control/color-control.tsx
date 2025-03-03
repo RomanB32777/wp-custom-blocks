@@ -83,7 +83,7 @@ export const ColorControl = <T extends Record<keyof T, unknown>>({
 			<FlexItem>
 				<button
 					disabled={disabled}
-					className={classNames(styles.indicator, "w-6 h-6")}
+					className={classNames(styles.indicator, "h-6 w-6")}
 					onClick={() => setColorPanel(true)}
 				>
 					<ColorIndicator colorValue={color} />
@@ -101,7 +101,7 @@ export const ColorControl = <T extends Record<keyof T, unknown>>({
 						/>
 						<div className="px-3 pb-3">
 							<label
-								className="label inline-block mb-2"
+								className="label mb-2 inline-block"
 								htmlFor="colors-palette"
 							>
 								{__("Colors Palette", "wp-custom-blocks")}

@@ -12,12 +12,13 @@ import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import { Fragment, useEffect } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 
+import Inspector from "./inspector";
 import type { IMainBannerBlockAttributes } from "./attributes";
 
 const Edit: FC<BlockEditProps<IMainBannerBlockAttributes>> = ({
 	attributes,
-	setAttributes,
 	clientId,
+	setAttributes,
 }) => {
 	const { uniqueId, backgroundColor, backgroundImage, logoImage } = attributes;
 
@@ -44,6 +45,8 @@ const Edit: FC<BlockEditProps<IMainBannerBlockAttributes>> = ({
 
 	return (
 		<Fragment>
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
+
 			<BlockControls controls={[]}>
 				<ToolbarGroup>
 					<MediaUploadCheck>
