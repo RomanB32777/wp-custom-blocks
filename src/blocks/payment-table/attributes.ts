@@ -7,37 +7,46 @@ export type TCellHTMLAttributes =
 	| ThHTMLAttributes<HTMLTableCellElement>
 	| TdHTMLAttributes<HTMLTableCellElement>;
 
-export interface IAvailableTableBlockAttributes {
+export interface ICellValues {
+	value: string;
+	icon?: IImageAttributes;
+}
+
+export interface ISelectedCeil {
+	colIndex: number | undefined;
+	rowIndex: number | undefined;
+	colId: string | undefined;
+	rowId: string | undefined;
+}
+
+export interface IPaymentTableBlockAttributes {
 	uniqueId: string;
-	blockStyle: string;
 	columns: Record<string, string>;
-	rows: Record<string, Record<string, string | boolean>>;
-	backgroundOddColor: string;
-	backgroundEvenColor: string;
+	rows: Record<string, Record<string, ICellValues>>;
 	borderRadius: number;
+	headBackgroundColor: string;
+	bodyBackgroundColor: string;
 	columnColor: string;
 	rowColor: string;
-	activeIcon: IImageAttributes;
-	inactiveIcon: IImageAttributes;
+	borderColor: string;
 }
 
 const columnKey = String(Math.random());
-const defaultColumns: IAvailableTableBlockAttributes["columns"] = {
-	[columnKey]: "",
+const defaultColumns: IPaymentTableBlockAttributes["columns"] = {
+	[columnKey]: "Method",
 };
 
 const rowKey = String(Math.random());
-const defaultRows: IAvailableTableBlockAttributes["rows"] = {
+const defaultRows: IPaymentTableBlockAttributes["rows"] = {
 	[rowKey]: {
-		[columnKey]: "",
+		[columnKey]: {
+			value: "",
+		},
 	},
 };
 
-export const attributes: TBlockAttributes<IAvailableTableBlockAttributes> = {
+export const attributes: TBlockAttributes<IPaymentTableBlockAttributes> = {
 	uniqueId: {
-		type: "string",
-	},
-	blockStyle: {
 		type: "string",
 	},
 	columns: {
@@ -48,17 +57,17 @@ export const attributes: TBlockAttributes<IAvailableTableBlockAttributes> = {
 		type: "object",
 		default: defaultRows,
 	},
-	backgroundOddColor: {
-		type: "string",
-		default: colors.primary.light,
-	},
-	backgroundEvenColor: {
-		type: "string",
-		default: colors.white.DEFAULT,
-	},
 	borderRadius: {
 		type: "number",
 		default: 8,
+	},
+	headBackgroundColor: {
+		type: "string",
+		default: colors.white.DEFAULT,
+	},
+	bodyBackgroundColor: {
+		type: "string",
+		default: colors.white.DEFAULT,
 	},
 	rowColor: {
 		type: "string",
@@ -68,13 +77,9 @@ export const attributes: TBlockAttributes<IAvailableTableBlockAttributes> = {
 		type: "string",
 		default: colors.dark.DEFAULT,
 	},
-	activeIcon: {
-		type: "object",
-		default: {},
-	},
-	inactiveIcon: {
-		type: "object",
-		default: {},
+	borderColor: {
+		type: "string",
+		default: colors.grizzly.dark,
 	},
 };
 

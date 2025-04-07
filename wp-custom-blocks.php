@@ -80,6 +80,7 @@ function blocks_init() {
 		'join',
 		'main-banner',
 		'available-table',
+		'payment-table',
 	);
 
 	foreach ( $blocks as $block => $sub_blocks ) {
