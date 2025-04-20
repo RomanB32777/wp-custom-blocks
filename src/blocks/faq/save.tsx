@@ -25,7 +25,7 @@ const Save: FC<BlockSaveProps<IFaqBlockAttributes>> = ({ attributes }) => {
 	return (
 		<div {...blockProps}>
 			<div className="wp-custom-blocks-questions questions" {...faqAttributes}>
-				<div className="flex flex-col gap-y-3">
+				<div className="faq flex flex-col gap-y-3">
 					<InnerBlocks.Content />
 				</div>
 			</div>

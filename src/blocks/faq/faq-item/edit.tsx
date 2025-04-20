@@ -39,8 +39,8 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 					<div className="flex items-start justify-between">
 						<RichText
 							tagName="h3"
-							className="question-title basis-5/6 text-lg font-medium md:!text-2xl"
 							value={question}
+							className="question-title basis-5/6 text-lg font-medium md:!text-2xl"
 							onChange={(v) => setAttributes({ question: v })}
 							placeholder={__("Question..", "wp-custom-blocks")}
 							style={{ color: !isParentStyles ? questionColor : undefined }}
@@ -70,10 +70,10 @@ const Edit: FC<BlockEditProps<IFaqItemElementAttributes>> = ({
 
 					<RichText
 						tagName="p"
-						className="question-content mt:mb-6 mt-3 text-base md:!text-lg"
 						value={answer}
 						onChange={(v) => setAttributes({ answer: v })}
 						placeholder={__("Answer..", "wp-custom-blocks")}
+						className="question-content mt:mb-6 mt-3 text-base md:!text-lg"
 						style={{ color: !isParentStyles ? answerColor : undefined }}
 					/>
 				</div>

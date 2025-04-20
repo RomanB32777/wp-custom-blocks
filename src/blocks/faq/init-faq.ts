@@ -1,3 +1,18 @@
+interface IFaqSchemaItem {
+	"@type": "Question";
+	name: string;
+	acceptedAnswer: {
+		"@type": "Answer";
+		text: string;
+	};
+}
+
+interface IFaqSchema {
+	"@context": "https://schema.org";
+	"@type": "FAQPage";
+	mainEntity: IFaqSchemaItem[];
+}
+
 const initFaq = (wrapper: HTMLDivElement) => {
 	if (!wrapper) {
 		return;
@@ -11,14 +26,25 @@ const initFaq = (wrapper: HTMLDivElement) => {
 	const questions = wrapper.querySelectorAll<HTMLDivElement>(".question");
 	const questionContents = wrapper.querySelectorAll(".question-content");
 
-	const changeStateOfQuestion = (questionEl: HTMLDivElement | null) => {
+	const getQuestionContent = (questionEl: HTMLDivElement | null) => {
 		if (!questionEl) {
-			return;
+			return {};
 		}
 
 		const title = questionEl.querySelector(".question-title");
 		const arrowWrapper = questionEl.querySelector(".arrow-wrapper");
 		const questionContent = questionEl.querySelector(".question-content");
+
+		return { title, arrowWrapper, questionContent };
+	};
+
+	const changeStateOfQuestion = (questionEl: HTMLDivElement | null) => {
+		if (!questionEl) {
+			return;
+		}
+
+		const { title, arrowWrapper, questionContent } =
+			getQuestionContent(questionEl);
 
 		if (arrowWrapper) {
 			arrowWrapper.classList.toggle("rotate-45");
@@ -54,8 +80,40 @@ const initFaq = (wrapper: HTMLDivElement) => {
 		}
 	};
 
-	if (questions.length && isOpenDefault) {
-		itemHandler(questions[0]);
+	if (questions.length) {
+		const scriptElement = document.createElement("script");
+
+		scriptElement.type = "application/ld+json";
+		scriptElement.className = "custom-faq-schema";
+
+		const faqData: IFaqSchema = {
+			"@context": "https://schema.org",
+			"@type": "FAQPage",
+			mainEntity: [],
+		};
+
+		questions.forEach((question) => {
+			const { title, questionContent } = getQuestionContent(question);
+
+			if (title && questionContent) {
+				faqData.mainEntity.push({
+					"@type": "Question",
+					name: title.textContent,
+					acceptedAnswer: {
+						"@type": "Answer",
+						text: questionContent.textContent,
+					},
+				});
+			}
+		});
+
+		scriptElement.textContent = JSON.stringify(faqData);
+
+		document.body.appendChild(scriptElement);
+
+		if (isOpenDefault) {
+			itemHandler(questions[0]);
+		}
 	}
 
 	questions.forEach((question) => {
