@@ -127,9 +127,9 @@ const Save: FC<BlockSaveProps<IPaymentTableBlockAttributes>> = ({
 												return (
 													<CellTag key={index} {...cellAttributes}>
 														{icon?.url ? (
-															<div className="mx-auto max-w-2xl">
+															<div className="mx-auto h-12 overflow-hidden">
 																<img
-																	className="mx-auto object-cover"
+																	className="mx-auto h-full w-auto object-cover object-center"
 																	src={icon.url}
 																	alt={icon.alt}
 																	width={icon.width}
